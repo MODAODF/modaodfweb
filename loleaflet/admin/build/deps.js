@@ -33,33 +33,9 @@ var deps = {
 		deps: ['AdminCore']
 	},
 
-	AdminSocketViewLog: {
-		src: ['src/AdminSocketViewLog.js'],
-		desc: 'View logs in the admin console.',
-		deps: ['AdminCore']
-	},
-
-	AdminSocketConfigSettings: {
-		src: ['src/AdminSocketConfigSettings.js'],
-		desc: 'Socket to handle Config settings from server',
-		deps: ['AdminCore']
-	},
-
-	AdminSocketPermissionSettings: {
-		src: ['src/AdminSocketPermissionSettings.js'],
-		desc: 'Socket to handle permission settings from server',
-		deps: ['AdminCore']
-	},
-
  	AdminSocketHistory: {
 		src: ['src/AdminSocketHistory.js'],
 		desc: 'Socket to query document history.',
-		deps: ['AdminCore']
-	},
-
-	AdminSocketSoftwareUpgrade: {
-		src: ['src/AdminSocketSoftwareUpgrade.js'],
-		desc: 'Socket to upgrade software.',
 		deps: ['AdminCore']
 	}
 };
