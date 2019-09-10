@@ -2241,7 +2241,7 @@ void lokit_main(
     SigUtil::setTerminationSignals();
 #endif
 
-    Util::setThreadName("oxoolkit");
+    Util::setThreadName("ndcodfwebkit");
 
     // Reinitialize logging when forked.
     const bool logToFile = std::getenv("LOOL_LOGFILE");
@@ -2328,7 +2328,7 @@ void lokit_main(
                 Path usrDestPath(jailPath, "usr");
                 File(usrDestPath).createDirectory();
                 std::string mountCommand =
-                    std::string("oxoolmount ") +
+                    std::string("ndcodfwebmount ") +
                     usrSrcPath.toString() +
                     std::string(" ") +
                     usrDestPath.toString();

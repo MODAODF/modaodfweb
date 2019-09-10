@@ -147,7 +147,7 @@ namespace Log
 
         if (logToFile)
         {
-            channel = static_cast<Poco::Channel*>(new FileChannel("oxoolwsd.log"));
+            channel = static_cast<Poco::Channel*>(new FileChannel("ndcodfweb.log"));
             for (const auto& pair : config)
             {
                 channel->setProperty(pair.first, pair.second);

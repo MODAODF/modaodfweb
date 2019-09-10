@@ -676,7 +676,7 @@ std::string LOOLWSD::ServerName;
 std::string LOOLWSD::FileServerRoot;
 std::string LOOLWSD::ServiceRoot;
 std::string LOOLWSD::LOKitVersion;
-std::string LOOLWSD::ConfigFile = LOOLWSD_CONFIGDIR "/oxoolwsd.xml";
+std::string LOOLWSD::ConfigFile = LOOLWSD_CONFIGDIR "/ndcodfweb.xml";
 std::string LOOLWSD::ConfigDir = LOOLWSD_CONFIGDIR "/conf.d";
 std::string LOOLWSD::LogLevel = "trace";
 bool LOOLWSD::AnonymizeFilenames = false;
@@ -737,7 +737,7 @@ void LOOLWSD::initialize(Application& self)
 #ifndef MOBILEAPP
     if (geteuid() == 0)
     {
-        throw std::runtime_error("Do not run as root. Please run as oxool user.");
+        throw std::runtime_error("Do not run as root. Please run as lool user.");
     }
 #endif
 
@@ -761,7 +761,7 @@ void LOOLWSD::initialize(Application& self)
             { "logging.anonymize.filenames", "false" },
             { "logging.anonymize.usernames", "false" },
             { "logging.color", "true" },
-            { "logging.file.property[0]", "oxoolwsd.log" },
+            { "logging.file.property[0]", "ndcodfweb.log" },
             { "logging.file.property[0][@name]", "path" },
             { "logging.file.property[1]", "never" },
             { "logging.file.property[1][@name]", "rotation" },
@@ -1045,8 +1045,8 @@ void LOOLWSD::initialize(Application& self)
 
     if (supportKeyString.empty())
     {
-        LOG_WRN("Support key not set, please use 'oxoolconfig set-support-key'.");
-        std::cerr << "Support key not set, please use 'oxoolconfig set-support-key'." << std::endl;
+        LOG_WRN("Support key not set, please use 'ndfodfwebconfig set-support-key'.");
+        std::cerr << "Support key not set, please use 'ndfodfwebconfig set-support-key'." << std::endl;
         LOOLWSD::OverrideWatermark = "Unsupported, the support key is missing.";
     }
     else
@@ -1055,8 +1055,8 @@ void LOOLWSD::initialize(Application& self)
 
         if (!key.verify())
         {
-            LOG_WRN("Invalid support key, please use 'oxoolconfig set-support-key'.");
-            std::cerr << "Invalid support key, please use 'oxoolconfig set-support-key'." << std::endl;
+            LOG_WRN("Invalid support key, please use 'ndfodfwebconfig set-support-key'.");
+            std::cerr << "Invalid support key, please use 'ndfodfwebconfig set-support-key'." << std::endl;
             LOOLWSD::OverrideWatermark = "Unsupported, the support key is invalid.";
         }
         else
@@ -1064,8 +1064,8 @@ void LOOLWSD::initialize(Application& self)
             int validDays =  key.validDaysRemaining();
             if (validDays <= 0)
             {
-                LOG_WRN("Your support key has expired, please ask for a new one, and use 'oxoolconfig set-support-key'.");
-                std::cerr << "Your support key has expired, please ask for a new one, and use 'oxoolconfig set-support-key'." << std::endl;
+                LOG_WRN("Your support key has expired, please ask for a new one, and use 'ndfodfwebconfig set-support-key'.");
+                std::cerr << "Your support key has expired, please ask for a new one, and use 'ndfodfwebconfig set-support-key'." << std::endl;
                 LOOLWSD::OverrideWatermark = "Unsupported, the support key has expired.";
             }
             else
@@ -1377,7 +1377,7 @@ bool LOOLWSD::checkAndRestoreForKit()
         if (!ShutdownRequestFlag && !TerminationFlag && !createForKit())
         {
             // Should never fail.
-            LOG_FTL("Failed to spawn oxoolforkit.");
+            LOG_FTL("Failed to spawn ndfodfwebforkit.");
             SigUtil::requestShutdown();
         }
     }
@@ -1543,7 +1543,7 @@ bool LOOLWSD::createForKit()
     args.push_back("-tt");
     args.push_back("-s");
     args.push_back("256");
-    args.push_back(Path(Application::instance().commandPath()).parent().toString() + "oxoolforkit");
+    args.push_back(Path(Application::instance().commandPath()).parent().toString() + "ndcodfwebforkit");
 #endif
     args.push_back("--losubpath=" + std::string(LO_JAIL_SUBPATH));
     args.push_back("--systemplate=" + SysTemplate);
@@ -1575,7 +1575,7 @@ bool LOOLWSD::createForKit()
 #ifdef STRACE_LOOLFORKIT
     std::string forKitPath = "strace";
 #else
-    std::string forKitPath = Path(Application::instance().commandPath()).parent().toString() + "oxoolforkit";
+    std::string forKitPath = Path(Application::instance().commandPath()).parent().toString() + "ndcodfwebforkit";
 #endif
 
     // Always reap first, in case we haven't done so yet.
@@ -3384,7 +3384,7 @@ int LOOLWSD::main(const std::vector<std::string>& /*args*/)
 
     UnitWSD::get().returnValue(returnValue);
 
-    LOG_INF("Process [oxoolwsd] finished.");
+    LOG_INF("Process [ndcodfweb] finished.");
 
 #ifdef MOBILEAPP
     fakeSocketDumpState();

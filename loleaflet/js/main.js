@@ -31,7 +31,7 @@ if (wopiSrc === '' && filePath === '' && !window.ThisIsAMobileApp) {
 if (host === '' && !window.ThisIsAMobileApp) {
 	vex.dialog.alert(errorMessages.emptyhosturl);
 }
-var brandProductName = 'OxOffice Online';
+var brandProductName = 'NDC ODF Web';
 global.brandProductName = brandProductName;
 // loleaflet.js accesses these globals
 // TODO: Get rid of these globals

@@ -118,12 +118,11 @@ bool ClientSession::_handleInput(const char *buffer, int length)
         }
 
         // Send LOOL version information
-        std::string version, hash, branch;
-        Util::getVersionInfo(version, hash, branch);
+        std::string version, hash;
+        Util::getVersionInfo(version, hash);
         std::string versionStr =
             "{ \"Version\": \"" + version + "\", " +
             "\"Hash\": \"" + hash + "\", " +
-            "\"Branch\": \"" + branch + "\", " +
             "\"Protocol\": \"" + GetProtocolVersion() + "\" }";
         sendTextFrame("loolserver " + versionStr);
         // Send LOKit version information

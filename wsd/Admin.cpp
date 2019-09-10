@@ -59,7 +59,7 @@ std::string ConfigFile =
 #else
     LOOLWSD_CONFIGDIR
 #endif
-    "/oxoolwsd.xml";
+    "/ndcodfweb.xml";
 
 std::string PermFile =
 #if ENABLE_DEBUG
@@ -276,12 +276,11 @@ void AdminSocketHandler::handleMessage(bool /* fin */, WSOpCode /* code */,
     else if (tokens[0] == "version")
     {
         // Send LOOL version information
-        std::string version, hash, branch;
-        Util::getVersionInfo(version, hash, branch);
+        std::string version, hash;
+        Util::getVersionInfo(version, hash);
         std::string versionStr =
             "{ \"Version\": \"" + version + "\", " +
-            "\"Hash\": \"" + hash + "\", " +
-            "\"Branch\": \"" + branch + "\" }";
+            "\"Hash\": \"" + hash + "\"}";
         sendTextFrame("loolserver " + versionStr);
         // Send LOKit version information
         sendTextFrame("lokitversion " + LOOLWSD::LOKitVersion);

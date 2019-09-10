@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.63])
 
-AC_INIT([oxool], [3.1.10], [develop@ossii.com.tw])
+AC_INIT([ndcodfweb], [1.0.1], [develop@ossii.com.tw])
 LT_INIT([shared, disable-static, dlopen])
 
 AM_INIT_AUTOMAKE([1.10 subdir-objects tar-pax -Wno-portability])
@@ -26,7 +26,7 @@ AC_SUBST([LOOLWSD_VERSION])
 AC_SUBST([LOOLWSD_VERSION_DIST])
 
 AC_DEFINE_UNQUOTED([LOOLWSD_VERSION_DIST],[["$LOOLWSD_VERSION_DIST"]],[dist number
- for oxool spec])
+ for ndcodfweb spec])
 
 AC_DEFINE_UNQUOTED([LOOLWSD_VERSION],[["$LOOLWSD_VERSION"]],[LibreOffice Online WebSocket server version])
 
@@ -39,10 +39,6 @@ fi
 AC_SUBST([LOOLWSD_VERSION_HASH])
 
 AC_DEFINE_UNQUOTED([LOOLWSD_VERSION_HASH],[["$LOOLWSD_VERSION_HASH"]],[LibreOffice Online git hash if present])
-
-LOOLWSD_BRANCH=`( cat dist_git_branch 2> /dev/null || git rev-parse --abbrev-ref HEAD 2> /dev/null )`
-AC_SUBST([LOOLWSD_BRANCH])
-AC_DEFINE_UNQUOTED([LOOLWSD_BRANCH], [["$LOOLWSD_BRANCH"]],[git branch name])
 
 AC_CONFIG_SRCDIR([wsd/LOOLWSD.cpp])
 
@@ -190,7 +186,7 @@ AS_IF([test "$enable_debug" = yes -a -n "$with_poco_libs"],
 ENABLE_DEBUG=
 LOOLWSD_LOGLEVEL="warning"
 LOOLWSD_LOG_TO_FILE="false"
-LOOLWSD_LOGFILE="/var/log/oxoolwsd.log"
+LOOLWSD_LOGFILE="/var/log/ndcodfweb.log"
 LOOLWSD_ANONYMIZE_FILENAMES=false
 LOOLWSD_ANONYMIZE_USERNAMES=false
 LOLEAFLET_LOGGING="false"
@@ -201,7 +197,7 @@ if test "$enable_debug" = "yes"; then
    ENABLE_DEBUG=true
    LOOLWSD_LOGLEVEL="trace"
    LOOLWSD_LOG_TO_FILE="true"
-   LOOLWSD_LOGFILE="/tmp/oxoolwsd.log"
+   LOOLWSD_LOGFILE="/tmp/ndcodfweb.log"
    LOOLWSD_ANONYMIZE_FILENAMES=false
    LOOLWSD_ANONYMIZE_USERNAMES=false
    LOLEAFLET_LOGGING="true"
@@ -214,7 +210,7 @@ AC_SUBST(LOOLWSD_LOGLEVEL)
 AC_SUBST(LOOLWSD_LOG_TO_FILE)
 AC_SUBST(LOLEAFLET_LOGGING)
 
-APP_NAME="OxOOL"
+APP_NAME="ndcodfweb"
 if test -n "$with_app_name"; then
    APP_NAME="$with_app_name"
 fi
@@ -643,7 +639,7 @@ fi
 AC_SUBST(ENABLE_SETCAP)
 
 AC_CONFIG_LINKS([discovery.xml:discovery.xml])
-AC_CONFIG_LINKS([oxoolkitconfig.xcu:oxoolkitconfig.xcu])
+AC_CONFIG_LINKS([ndcodfwebkitconfig.xcu:ndcodfwebkitconfig.xcu])
 AC_CONFIG_LINKS([loleaflet/package.json:loleaflet/package.json])
 AC_LINK_FILES([loleaflet/node_shrinkwrap], [loleaflet/node_shrinkwrap])
 
@@ -653,8 +649,8 @@ AC_CONFIG_FILES([Makefile
                  loleaflet/Makefile
                  extensions/Makefile
                  loleaflet/npm-shrinkwrap.json
-                 oxoolwsd.spec
-                 oxoolwsd.xml
+                 ndcodfweb.spec
+                 ndcodfweb.xml
                  debian/loolwsd.postinst])
 AC_OUTPUT
 
@@ -724,7 +720,7 @@ Configuration:
 
     \$ make # to compile"
 if test -n "$with_lo_path"; then
-echo "    \$ make run # to start oxloolwsd
+echo "    \$ make run # to start ndcodfweb
 "
 fi
       ])

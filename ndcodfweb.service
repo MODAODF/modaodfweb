@@ -1,10 +1,10 @@
 [Unit]
-Description=OxOffice Online WebSocket Daemon
+Description=NDC ODF Web WebSocket Daemon
 After=network.target
 
 [Service]
-EnvironmentFile=-/etc/sysconfig/oxoolwsd
-ExecStart=/usr/bin/oxoolwsd
+EnvironmentFile=-/etc/sysconfig/ndcodfweb
+ExecStart=/usr/bin/ndcodfweb
 User=lool
 KillMode=control-group
 Restart=always
