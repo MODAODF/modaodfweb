@@ -400,8 +400,9 @@ clang-tidy:
 # capabilities won't survive packaging anyway. Instead, handle it when
 # installing the RPM or Debian package.
 
-all-local: ndcodfwebforkit ndcodfwebmount @TILECACHE_PATH@ @JAILS_PATH@ $(SYSTEM_STAMP)
+all-local: ndcodfweb ndcodfwebforkit ndcodfwebmount @TILECACHE_PATH@ @JAILS_PATH@ $(SYSTEM_STAMP)
 if ENABLE_SETCAP
+	    sudo @SETCAP@ cap_net_bind_service=+ep ndcodfweb
 	    sudo @SETCAP@ cap_fowner,cap_mknod,cap_sys_chroot=ep ndcodfwebforkit
 	    sudo @SETCAP@ cap_sys_admin=ep ndcodfwebmount
 else
