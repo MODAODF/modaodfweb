@@ -12,9 +12,8 @@
 .vscode
 Makefile
 Makefile.in
-oxoolwsd.spec
-loolwsd.spec
-oxoolwsd.xml
+ndcodfweb.spec
+ndcodfweb.xml
 aclocal.m4
 autom4te.cache
 config.h
@@ -61,18 +60,18 @@ loleaflet/npm-shrinkwrap.json
 
 connect
 lokitclient
-oxoolwsd
-oxoolforkit
-oxoolmount
-oxoolmap
-oxoolconvert
-oxoolsocketdump
-oxoolstress
-oxoolconfig
+ndcodfweb
+ndcodfwebforkit
+ndcodfwebmount
+ndcodfwebmap
+ndcodfwebconvert
+ndcodfwebsocketdump
+ndcodfwebstress
+ndcodfwebconfig
 loolforkit-nocaps
 loadtest
 unittest
-oxoolwsd_fuzzer
+ndcodfweb_fuzzer
 clientnb
 
 # make tags
