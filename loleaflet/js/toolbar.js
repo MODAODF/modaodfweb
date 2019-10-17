@@ -329,6 +329,11 @@ function onClick(e, id, item, subItem) {
 	else if (id === 'searchBtn') {
 		toggleMobileSearchBar();
 	}
+	else if (item.id === 'commonsymboltable') {
+		if (symbolDialog !== undefined) {
+			$(symbolDialog).dialog('open');
+		}
+	}
 	else {
 		console.log('有 id 未處理 : ' + id)
 	}
