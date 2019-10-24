@@ -2346,7 +2346,7 @@ void lokit_main(
     SigUtil::setTerminationSignals();
 #endif
 
-    Util::setThreadName("ndcodfwebkit");
+    Util::setThreadName("kit_spare_" + Util::encodeId(spareKitId, 3));
 
     // Reinitialize logging when forked.
     const bool logToFile = std::getenv("LOOL_LOGFILE");
