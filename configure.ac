@@ -670,7 +670,7 @@ AC_CONFIG_FILES([Makefile
                  loleaflet/npm-shrinkwrap.json
                  ndcodfweb.spec
                  ndcodfweb.xml
-                 debian/loolwsd.postinst])
+                 debian/ndcodfweb.postinst])
 AC_OUTPUT
 
 AC_LANG_POP
