@@ -60,19 +60,19 @@ loleaflet/npm-shrinkwrap.json
 
 connect
 lokitclient
-ndcodfweb
-ndcodfwebforkit
-ndcodfwebmount
-ndcodfwebmap
-ndcodfwebconvert
-ndcodfwebsocketdump
-ndcodfwebstress
-ndcodfwebconfig
-loolforkit-nocaps
-loadtest
-unittest
-ndcodfweb_fuzzer
-clientnb
+/ndcodfweb
+/ndcodfwebforkit
+/ndcodfwebmount
+/ndcodfwebmap
+/ndcodfwebconvert
+/ndcodfwebsocketdump
+/ndcodfwebstress
+/ndcodfwebconfig
+/loolforkit-nocaps
+/loadtest
+/unittest
+/ndcodfweb_fuzzer
+/clientnb
 
 # make tags
 tags
