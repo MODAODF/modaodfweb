@@ -274,6 +274,7 @@ EXTRA_DIST = discovery.xml \
              debian/changelog \
              debian/control \
              debian/ndcodfweb.postinst \
+             debian/ndcodfweb.postrm \
              etc/key.pem \
              etc/cert.pem \
              etc/ca-chain.cert.pem \
