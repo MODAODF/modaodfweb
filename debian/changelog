@@ -1,3 +1,9 @@
+ndcodfweb (1.1.2-1) unstable; urgency=low
+
+  * 釋出 1.1.2-1
+
+ -- Firefly <firefly@ossii.com.tw>  Tue, 31 Dec 2019 11:59:00 +0800
+
 ndcodfweb (1.1.0-1) unstable; urgency=low
 
   * Initial release
