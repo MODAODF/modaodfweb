@@ -236,8 +236,7 @@ L.Control.Menubar = L.Control.extend({
 			{name: '.uno:HelpMenu', id: 'help', type: 'menu', menu: [
 				{name: _('Keyboard shortcuts'), id: 'keyboard-shortcuts', type: 'action', icon: '.uno:HelpIndex', hotkey: 'Ctel+Shift+?'},
 				{name: _('About'), id: 'about', type: 'action', icon: '.uno:About'}]
-			},
-			{name: _('Last modification'), id: 'last-mod', type: 'action', mobile: false, tablet: false}
+			}
 		],
 
 		presentation: [
@@ -333,8 +332,7 @@ L.Control.Menubar = L.Control.extend({
 			{name: '.uno:HelpMenu', id: 'help', type: 'menu', menu: [
 				{name: _('Keyboard shortcuts'), id: 'keyboard-shortcuts', type: 'action', icon: '.uno:HelpIndex', hotkey: 'Ctrl+Shift+?'},
 				{name: _('About'), id: 'about', type: 'action', icon: '.uno:About'}]
-			},
-			{name: _('Last modification'), id: 'last-mod', type: 'action', mobile: false, tablet: false}
+			}
 		],
 
 		spreadsheet: [
@@ -450,8 +448,7 @@ L.Control.Menubar = L.Control.extend({
 			{name: '.uno:HelpMenu', id: 'help', type: 'menu', menu: [
 				{name: _('Keyboard shortcuts'), id: 'keyboard-shortcuts', type: 'action', icon: '.uno:HelpIndex', hotkey: 'Ctrl+Shift+?'},
 				{name: _('About'), id: 'about', type: 'action', icon: '.uno:About'}]
-			},
-			{name: _('Last modification'), id: 'last-mod', type: 'action', mobile: false, tablet: false}
+			}
 		],
 
 		commandStates: {},
@@ -801,7 +798,7 @@ L.Control.Menubar = L.Control.extend({
 			this._map.showLOAboutDialog();
 		} else if (id === 'keyboard-shortcuts') {
 			this._map.showLOKeyboardHelp();
-		} else if (revHistoryEnabled && (id === 'rev-history' || id === 'last-mod')) {
+		} else if (revHistoryEnabled && (id === 'rev-history')) {
 			// if we are being loaded inside an iframe, ask
 			// our host to show revision history mode
 			this._map.fire('postMessage', {msgId: 'rev-history', args: {Deprecated: true}});
@@ -920,10 +917,6 @@ L.Control.Menubar = L.Control.extend({
 				if (!found)
 					continue;
 			}
-
-			/*if (this._map._permission === 'readonly' && menu[i].id === 'last-mod') {
-				continue;
-			}*/
 
 			if (menu[i].type === 'action') {
 				if ((menu[i].id === 'rev-history' && !revHistoryEnabled) ||
