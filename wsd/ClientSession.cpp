@@ -172,6 +172,7 @@ bool ClientSession::_handleInput(const char *buffer, int length)
              tokens[0] != "tilecombine" &&
              tokens[0] != "uno" &&
              tokens[0] != "getunostates" &&
+             tokens[0] != "runmacro" &&
              tokens[0] != "useractive" &&
              tokens[0] != "userinactive" &&
              tokens[0] != "paintwindow" &&
@@ -259,6 +260,10 @@ bool ClientSession::_handleInput(const char *buffer, int length)
         return sendCombinedTiles(buffer, length, tokens, docBroker);
     }
     else if (tokens[0] == "getunostates")
+    {
+        return forwardToChild(firstLine, docBroker);
+    }
+    else if (tokens[0] == "runmacro")
     {
         return forwardToChild(firstLine, docBroker);
     }
