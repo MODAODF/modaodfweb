@@ -91,3 +91,4 @@ pocoinclude-symlink
 pocolib-symlink
 ICU.dat
 Mobile/Mobile/Assets.xcassets/AppIcon.appiconset
+debian/oxool.postinst
