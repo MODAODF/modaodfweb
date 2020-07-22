@@ -58,7 +58,6 @@ mkdir -p %{buildroot}/var/lib/%{name}/templaterepo
 
 %files
 %{_bindir}/*
-/usr/share/fonts/SourceHan/*.ttc
 %dir /usr/share/%{name}
 /usr/share/%{name}/loleaflet
 /usr/share/%{name}/discovery.xml
@@ -76,7 +75,6 @@ mkdir -p %{buildroot}/var/lib/%{name}/templaterepo
 %config(noreplace) /etc/cron.d/%{name}.cron
 %config(noreplace) /etc/pam.d/%{name}
 %config(noreplace) %attr(640, lool, root) /etc/%{name}/%{name}.xml
-%config /etc/fonts/conf.d/50-oxool.conf
 %config /etc/%{name}/*.xcu
 %config(noreplace) /etc/%{name}/*.pem
 %config %attr(440, root, root) /etc/sudoers.d/lool
