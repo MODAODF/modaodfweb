@@ -2156,7 +2156,7 @@ private:
             {
                 handleRobotsTxtRequest(request);
             }
-            else if (reqPathSegs[1] == "templaterepo")
+            else if (reqPathSegs[1] == "templaterepo" && false)
             {
                 void* templaterepo_h;
                 TemplateRepo* _templaterepo;
