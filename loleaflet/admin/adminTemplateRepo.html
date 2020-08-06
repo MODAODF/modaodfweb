@@ -10,55 +10,6 @@
     var SocketMacIp = Admin.MacIp(host);
 </script>
 <style>
-    .material-switch>input[type="checkbox"] {
-        display: none;
-    }
-
-    .material-switch>label {
-        cursor: pointer;
-        height: 0px;
-        position: relative;
-        width: 32px;
-    }
-
-    .material-switch>label::before {
-        background: rgb(0, 0, 0);
-        box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-        border-radius: 8px;
-        content: '';
-        height: 12px;
-        margin-top: -8px;
-        position: absolute;
-        opacity: 0.3;
-        transition: all 0.1s ease-in-out;
-        width: 32px;
-    }
-
-    .material-switch>label::after {
-        background: rgb(255, 255, 255);
-        border-radius: 16px;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-        content: '';
-        height: 16px;
-        left: -4px;
-        margin-top: -6px;
-        position: absolute;
-        top: -4px;
-        transition: all 0.1s ease-in-out;
-        width: 16px;
-    }
-
-    .material-switch>input[type="checkbox"]:checked+label::before {
-        background: inherit;
-        opacity: 0.5;
-    }
-
-    .material-switch>input[type="checkbox"]:checked+label::after {
-        background: inherit;
-        left: 20px;
-    }
-</style>
-<style>
     tfoot input {
         width: 100%;
         padding: 3px;
@@ -168,6 +119,17 @@
     </form>
 </div>
 <script>
+    var getCookie = function (name) {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.indexOf(name) === 0) {
+                return cookie;
+            }
+        }
+
+        return '';
+    }
     $(document).ready(function () {
         $.ajax(
             {
@@ -175,6 +137,17 @@
             }).done(function (res) {
                 $("#license").html(res);
             });
+        if (getCookie('deftab') != '') {
+            var tabid = getCookie('deftab').split('=')[1];
+            if (tabid == '') {
+                $('.nav-tabs a[href="#a1"]').tab('show');
+            }
+            else {
+                if (Number(tabid.replace('#a', '')) > 4)
+                    tabid = '#a1';
+                $('.nav-tabs a[href="' + tabid + '"]').tab('show');
+            }
+        }
     });
 
     /*

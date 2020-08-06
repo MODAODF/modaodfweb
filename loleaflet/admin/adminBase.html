@@ -23,6 +23,18 @@
         <script>if (typeof brandProductName !== 'undefined') {l10nstrings.strProductName = brandProductName}</script>
         <script>document.title = l10nstrings.strProductName + ' - ' + l10nstrings.strAdminConsole</script>
         <script>
+            $(document).ready(function(){
+                // set the current activate navbar-item
+                var href = window.location.href;
+                var url = new URL(href);
+                var module = url.searchParams.get("module");
+                if (module === null)
+                {
+                    var token = href.split("/");
+                    var endpoint = token[token.length-1].split(".")[0];
+                    $("#" + endpoint).addClass("active");
+                }
+            });
             if (window.location.protocol == "https:") {
                 var host = 'wss://' + window.location.host + '%SERVICE_ROOT%/lool/adminws/';
             }
@@ -62,7 +74,7 @@
                         <li id="adminAnalytics">
                             <a href="adminAnalytics.html"><script>document.write(l10nstrings.strAnalytics)</script></a>
                         </li>
-                        <li>
+                        <li id="adminHistory">
                             <a href="adminHistory.html"><script>document.write(l10nstrings.strHistory)</script></a>
                         </li>
                         <li id="adminTemplateRepo">
