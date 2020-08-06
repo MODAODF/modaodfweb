@@ -26,7 +26,7 @@ using namespace Poco::Data::Keywords;
 
 TemplateRepoDB::TemplateRepoDB() {
 	max_mac = 10;
-	max_ip = 10;
+	max_ip = 1;
     Poco::Data::SQLite::Connector::registerConnector();
     setDbPath();
     // 初始化 Database
@@ -322,7 +322,7 @@ bool TemplateRepoDB::macIpReachLimit(std::string ftype)
 
     select.reset(session);
     session.close();
-    return max < curMax;
+    return max <= curMax;
 }
 
 /*

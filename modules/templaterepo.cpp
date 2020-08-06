@@ -766,7 +766,6 @@ std::string TemplateRepo::handleAdmin(std::string command)
     }
     else if(action == "add_mac_data" || action == "add_ip_data")
     {
-        // TODO check the limit amount of mac/ip here
         StringTokenizer data(dataString, ",", tokenOpts);
         result = action + " false";
         if(data[0] != "")
