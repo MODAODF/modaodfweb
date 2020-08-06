@@ -332,12 +332,6 @@ bool TemplateRepoDB::macIpReachLimit(std::string ftype)
  */
 bool TemplateRepoDB::validateMac(std::string macStr)
 {
-    if (macIpReachLimit("mac"))
-    {
-		std::cout << "mac 列表數量超過範圍!!!\n";
-        return false;
-    }
-
     const int tokenOpts = StringTokenizer::TOK_IGNORE_EMPTY |
                           StringTokenizer::TOK_TRIM;
 
@@ -382,12 +376,6 @@ bool TemplateRepoDB::validateIP(std::string clientAddress)
 {
     const int tokenOpts = StringTokenizer::TOK_IGNORE_EMPTY |
                           StringTokenizer::TOK_TRIM;
-
-    if (macIpReachLimit("ip"))
-    {
-		std::cout << ("ip 列表數量超過範圍!!!") << std::endl;
-        return false;
-    }
 
     if (isLocalhost(clientAddress))
         return true;
