@@ -676,6 +676,7 @@ AC_CONFIG_FILES([Makefile
                  loleaflet/Makefile
                  extensions/Makefile
                  fonts/Makefile
+                 fonts/00-ndcodfweb.conf
                  modules/Makefile
                  loleaflet/npm-shrinkwrap.json
                  ndcodfweb.spec
