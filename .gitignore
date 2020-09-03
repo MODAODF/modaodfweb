@@ -91,7 +91,20 @@ pocoinclude-symlink
 pocolib-symlink
 ICU.dat
 Mobile/Mobile/Assets.xcassets/AppIcon.appiconset
-debian/oxool.postinst
+debian/ndcodfweb.postinst
 
 #modules
 *.so
+
+# debian package
+debian/.debhelper/
+debian/files
+debian/ndcodfweb-dev.debhelper.log
+debian/ndcodfweb-dev.substvars
+debian/ndcodfweb-dev/
+debian/ndcodfweb.debhelper.log
+debian/ndcodfweb.postinst.debhelper
+debian/ndcodfweb.postrm.debhelper
+debian/ndcodfweb.prerm.debhelper
+debian/ndcodfweb.substvars
+debian/tmp/
