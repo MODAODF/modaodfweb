@@ -108,3 +108,4 @@ debian/ndcodfweb.postrm.debhelper
 debian/ndcodfweb.prerm.debhelper
 debian/ndcodfweb.substvars
 debian/tmp/
+fonts/00-ndcodfweb.conf
