@@ -407,7 +407,7 @@ clang-tidy:
 
 all-local: ndcodfweb ndcodfwebforkit ndcodfwebmount @TILECACHE_PATH@ @JAILS_PATH@ $(SYSTEM_STAMP)
 if ENABLE_SETCAP
-	    sudo @SETCAP@ cap_net_bind_service=+ep ndcodfweb
+	    sudo @SETCAP@ cap_dac_override,cap_net_bind_service=+ep ndcodfweb
 	    sudo @SETCAP@ cap_fowner,cap_mknod,cap_sys_chroot=ep ndcodfwebforkit
 	    sudo @SETCAP@ cap_sys_admin=ep ndcodfwebmount
 else
