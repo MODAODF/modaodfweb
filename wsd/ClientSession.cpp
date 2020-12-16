@@ -755,6 +755,10 @@ bool ClientSession::filterMessage(const std::string& message) const
                 allowed = true;
             }
         }
+        else if (tokens.count() > 1 && tokens[0] == "setpage")
+        {
+            allowed = true;
+        }
     }
 
     return allowed;
