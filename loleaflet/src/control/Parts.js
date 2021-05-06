@@ -2,6 +2,7 @@
 /*
  * Document parts switching and selecting handler
  */
+/* global $ */
 L.Map.include({
 	setPart: function (part, external, calledFromSetPartHandler) {
 		var docLayer = this._docLayer;
@@ -31,6 +32,14 @@ L.Map.include({
 			this._socket.sendMessage('resetselection');
 		}
 
+		// If this wasn't triggered from the server,
+		// then notify the server of the change.
+		if (!external) {
+			if (this.getDocType() === 'spreadsheet') {
+				$('.scroll-container').mCustomScrollbar('scrollTo','top');
+			}
+			this._socket.sendMessage('setclientpart part=' + docLayer._selectedPart);
+		}
 		this.fire('updateparts', {
 			selectedPart: docLayer._selectedPart,
 			selectedParts: docLayer._selectedParts,
@@ -38,11 +47,6 @@ L.Map.include({
 			docType: docLayer._docType
 		});
 
-		// If this wasn't triggered from the server,
-		// then notify the server of the change.
-		if (!external) {
-			this._socket.sendMessage('setclientpart part=' + docLayer._selectedPart);
-		}
 		docLayer.eachView(docLayer._viewCursors, docLayer._onUpdateViewCursor, docLayer);
 		docLayer.eachView(docLayer._cellViewCursors, docLayer._onUpdateCellViewCursor, docLayer);
 		docLayer.eachView(docLayer._graphicViewMarkers, docLayer._onUpdateGraphicViewSelection, docLayer);

@@ -2,7 +2,7 @@
 /*
  * Calc tile layer is used to display a spreadsheet document
  */
-
+/* global $ */
 L.CalcTileLayer = L.TileLayer.extend({
 	STD_EXTRA_WIDTH: 113, /* 2mm extra for optimal width,
 							  * 0.1986cm with TeX points,
@@ -225,7 +225,14 @@ L.CalcTileLayer = L.TileLayer.extend({
 			this._map.fire('updaterowcolumnheaders', {x: 0, y: this._map._getTopLeftPoint().y, offset: {x: 0, y: undefined}});
 			this._map._socket.sendMessage('commandvalues command=.uno:ViewAnnotationsPosition');
 		} else if (textMsg.startsWith('invalidateheader: all')) {
-			this._map.fire('updaterowcolumnheaders', {x: this._map._getTopLeftPoint().x, y: this._map._getTopLeftPoint().y, offset: {x: undefined, y: undefined}});
+			var mcs = $('.scroll-container')[0].mcs;
+			if (this._map.getDocType() === 'spreadsheet') {
+				$('.scroll-container').mCustomScrollbar('scrollTo','top');
+			}
+			this._map.fire('updaterowcolumnheaders', {x: 0, y: 0, offset: {x: undefined, y: undefined}});
+			if (this._map.getDocType() === 'spreadsheet') {
+				$('.scroll-container').mCustomScrollbar('scrollTo',{x:-mcs.left, y:-mcs.top});
+			}
 			this._map._socket.sendMessage('commandvalues command=.uno:ViewAnnotationsPosition');
 		} else {
 			L.TileLayer.prototype._onMessage.call(this, textMsg, img);
