@@ -109,7 +109,7 @@ public:
             form.addPart("data", new Poco::Net::FilePartSource(document));
             form.prepareSubmit(request);
 
-            // If this results in a Poco::Net::ConnectionRefusedException, oxoolwsd is not running.
+            // If this results in a Poco::Net::ConnectionRefusedException, ndcodfweb is not running.
             form.write(session->sendRequest(request));
         }
         catch (const Poco::Exception &e)

@@ -1,6 +1,6 @@
 
 
-LibreOfficeKit_includedir = $(includedir)/oxool/LibreOfficeKit
+LibreOfficeKit_includedir = $(includedir)/ndcodfweb/LibreOfficeKit
 
 LibreOfficeKit_include_HEADERS = \
 		LibreOfficeKitEnums.h	\

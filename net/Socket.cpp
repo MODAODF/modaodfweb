@@ -40,7 +40,7 @@ int SocketPoll::DefaultPollTimeoutMicroS = 5000 * 1000;
 std::atomic<bool> SocketPoll::InhibitThreadChecks(false);
 std::atomic<bool> Socket::InhibitThreadChecks(false);
 
-#define SOCKET_ABSTRACT_UNIX_NAME "0oxoolwsd-"
+#define SOCKET_ABSTRACT_UNIX_NAME "0ndcodfweb-"
 
 int Socket::createSocket(Socket::Type type)
 {
@@ -768,7 +768,7 @@ std::string LocalServerSocket::bind()
     std::string socketAbstractUnixName(SOCKET_ABSTRACT_UNIX_NAME);
     const char* snapInstanceName = std::getenv("SNAP_INSTANCE_NAME");
     if (snapInstanceName && snapInstanceName[0])
-        socketAbstractUnixName = std::string("0snap.") + snapInstanceName + ".oxoolwsd-";
+        socketAbstractUnixName = std::string("0snap.") + snapInstanceName + ".ndcodfweb-";
 
     do
     {

@@ -1,23 +1,77 @@
-oxool (3.2.5-1.master) unstable; urgency=low
+ndcodfweb (1.1.15-1) bionic; urgency=medium
 
-  * Release 3.2.5
+  * Bump package version to 1.1.15-1
 
- -- Firefly <firefly@ossii.com.tw>  Wed, 25 Mar 2020 15:08:33 +0800
+ -- Firefly <firefly@ossii.com.tw>  Wed, 07 Apr 2021 15:31:59 +0800
 
-oxool (3.2.4-1.master) unstable; urgency=low
+ndcodfweb (1.1.14-1) bionic; urgency=medium
 
-  * Release 3.2.4
+  * Bump package version to 1.1.14-1
 
- -- Firefly <firefly@ossii.com.tw>  Tue, 25 Feb 2020 12:55:45 +0800
+ -- firefly <firefly@ossii.com.tw>  Wed, 24 Feb 2021 17:58:40 +0800
 
-oxool (3.2.3-1.master) unstable; urgency=low
+ndcodfweb (1.1.13-1) bionic; urgency=medium
 
-  * Release 3.2.3
+  * Bump package version to 1.1.13-1
 
- -- Firefly <firefly@ossii.com.tw>  Mon, 03 Feb 2020 11:52:23 +0800
+ -- firefly <firefly@ossii.com.tw>  Thu, 03 Dec 2020 17:29:47 +0800
 
-oxool (3.2.2-1.master) unstable; urgency=low
+ndcodfweb (1.1.12-1) bionic; urgency=medium
+
+  * Bump package version to 1.1.12-1
+
+ -- firefly <firefly@ossii.com.tw>  Wed, 04 Nov 2020 09:55:04 +0800
+
+ndcodfweb (1.1.11-1) bionic; urgency=medium
+
+  * Bump package version to 1.1.11-1
+
+ -- firefly <firefly@ossii.com.tw>  Wed, 14 Oct 2020 14:43:50 +0800
+
+ndcodfweb (1.1.9-1.ubuntu) bionic; urgency=medium
+
+  * Release 1.1.9-1
+
+ -- tommy <tommy@tommy-VirtualBox>  Thu, 03 Sep 2020 15:34:59 +0800
+
+ndcodfweb (3.2.10-1.community) bionic; urgency=medium
+
+  * Bump package version to 3.2.10-1
+
+ -- Firefly <firefly@ossii.com.tw>  Fri, 28 Aug 2020 15:16:35 +0800
+
+ndcodfweb (3.2.9-1.community) bionic; urgency=medium
+
+  * Module SDK Implement
+
+ -- tommy <tommy.wu@ossii.com.tw>  Sun, 02 Aug 2020 01:20:07 +0800
+
+ndcodfweb (3.2.8-1.community) unstable; urgency=low
+
+  * Bump package version to 3.2.8-1
+
+ -- Firefly <firefly@ossii.com.tw>  Wed, 24 Jun 2020 16:06:10 +0800
+
+ndcodfweb (3.2.7-1.community) unstable; urgency=low
+
+  * Bump package version to 3.2.7-1
+
+ -- Firefly <firefly@ossii.com.tw>  Tue, 02 Jun 2020 12:20:33 +0800
+
+ndcodfweb (3.2.6-1.community) unstable; urgency=low
+
+  * Bump package version to 3.2.6-1
+
+ -- Firefly <firefly@ossii.com.tw>  Wed, 08 Apr 2020 15:49:13 +0800
+
+ndcodfweb (3.2.5-1.community) unstable; urgency=low
+
+  * Bump package version to 3.2.5-1
+
+ -- Firefly <firefly@ossii.com.tw>  Fri, 27 Mar 2020 13:23:23 +0800
+
+ndcodfweb (3.2.4-1.community) unstable; urgency=low
 
   * Initial release
 
- -- Firefly <firefly@ossii.com.tw>  Sat, 01 Feb 2020 16:01:57 +0800
+ -- Firefly <firefly@ossii.com.tw>  Wed, 18 Mar 2020 13:37:14 +0800

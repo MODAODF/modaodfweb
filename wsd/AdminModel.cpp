@@ -1049,10 +1049,10 @@ void PrintKitAggregateMetrics(std::ostringstream &oss, const char* name, const c
 
 void AdminModel::getMetrics(std::ostringstream &oss)
 {
-    oss << "oxoolwsd_count " << getPidsFromProcName(std::regex("oxoolwsd"), nullptr) << std::endl;
-    oss << "oxoolwsd_thread_count " << Util::getStatFromPid(getpid(), 19) << std::endl;
-    oss << "oxoolwsd_cpu_time_seconds " << Util::getCpuUsage(getpid()) / sysconf (_SC_CLK_TCK) << std::endl;
-    oss << "oxoolwsd_memory_used_bytes " << Util::getMemoryUsagePSS(getpid()) * 1024 << std::endl;
+    oss << "ndcodfweb_count " << getPidsFromProcName(std::regex("ndcodfweb"), nullptr) << std::endl;
+    oss << "ndcodfweb_thread_count " << Util::getStatFromPid(getpid(), 19) << std::endl;
+    oss << "ndcodfweb_cpu_time_seconds " << Util::getCpuUsage(getpid()) / sysconf (_SC_CLK_TCK) << std::endl;
+    oss << "ndcodfweb_memory_used_bytes " << Util::getMemoryUsagePSS(getpid()) * 1024 << std::endl;
     oss << std::endl;
 
     oss << "forkit_count " << getPidsFromProcName(std::regex("forkit"), nullptr) << std::endl;

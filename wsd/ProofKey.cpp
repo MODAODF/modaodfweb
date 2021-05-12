@@ -152,10 +152,10 @@ Proof::Proof()
             std::string msg = e.displayText() +
                 "\nNo proof-key will be present in discovery."
                 "\nIf you need to use WOPI security, generate an RSA key using this command:"
-                "\n    oxoolwsd-generate-proof-key"
+                "\n    ndcodfweb-generate-proof-key"
                 "\nor if your config dir is not /etc, you can run ssh-keygen manually:"
                 "\n    ssh-keygen -t rsa -N \"\" -m PEM -f \"" + keyPath + "\""
-                "\nNote: the proof_key file must be readable by the oxoolwsd process.";
+                "\nNote: the proof_key file must be readable by the ndcodfweb process.";
             LOG_WRN(msg);
         }
         catch (const Poco::Exception& e)

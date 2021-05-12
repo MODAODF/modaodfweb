@@ -286,7 +286,7 @@ namespace Log
     std::ostringstream oss_(Log::prefix<sizeof(b_) - 1>(b_, LVL), std::ostringstream::ate);        \
     oss_ << std::boolalpha << X;                                                                   \
     LOG_END(oss_, FILEP);                                                                          \
-    ((void)__android_log_print(ANDROID_LOG_DEBUG, "oxoolwsd", "%s %s", LVL, oss_.str().c_str()))
+    ((void)__android_log_print(ANDROID_LOG_DEBUG, "ndcodfweb", "%s %s", LVL, oss_.str().c_str()))
 
 #else
 

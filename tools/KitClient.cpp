@@ -52,7 +52,7 @@ protected:
     {
         if (args.size() != 2)
         {
-            logger().fatal("Usage: lokitclient /path/to/lo/installation/program /path/to/document");
+            logger().fatal("Usage: ndcodfwebkitclient /path/to/lo/installation/program /path/to/document");
             return EX_USAGE;
         }
 

@@ -39,12 +39,6 @@ var deps = {
 		deps: ['AdminCore']
 	},
 
-	AdminSocketConfigSettings: {
-		src: ['src/AdminSocketConfigSettings.js'],
-		desc: 'Socket to handle Config settings from server',
-		deps: ['AdminCore']
-	},
-
 	AdminSocketSoftwareUpgrade: {
 		src: ['src/AdminSocketSoftwareUpgrade.js'],
 		desc: 'Socket to upgrade software.',
@@ -56,12 +50,6 @@ var deps = {
 		desc: 'Socket to font manager.',
 		deps: ['AdminCore']
 	},
-
-	AdminSocketLicense: {
-		src: ['src/AdminSocketLicense.js'],
-		desc: 'Socket to license Info.',
-		deps: ['AdminCore']
-	}
 };
 
 if (typeof exports !== 'undefined') {

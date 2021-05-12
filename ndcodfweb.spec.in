@@ -1,4 +1,4 @@
-# spec file for package oxool
+# spec file for package ndcodfweb
 #
 # Copyright (c) 2015 OSSII
 #
@@ -7,16 +7,15 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 %define config_options --disable-debug --enable-ssl -with-max-documents=10240 --with-max-connections=10240
-%define loroot /opt/oxoffice
+%define loroot /opt/ndcodfsys
 
 Name:           @PACKAGE_NAME@
 Version:        @PACKAGE_VERSION@
-Release:        @LOOLWSD_VERSION_DIST@.@LOOLWSD_BRANCH@%{?dist}
+Release:        @LOOLWSD_VERSION_DIST@%{?dist}
 Vendor:         %{vendor}
-Summary:        OxOffice Online WebSocket Daemon for @LOOLWSD_BRANCH@
+Summary:        NDC ODF Online WebSocket Daemon
 License:        MPL
-Obsoletes:	oxoolwsd
-Source0:        @PACKAGE_NAME@-%{version}-@LOOLWSD_BRANCH@.tar.gz
+Source0:        @PACKAGE_NAME@-%{version}.tar.gz
 BuildRequires:  libcap-devel libpng-devel poco-devel >= 1.7.5
 BuildRequires:  freetype-devel >= 2.8 fontconfig-devel >= 2.12.6 gd-devel >= 2.0.30
 %if 0%{?fedora} || 0%{?rhel} >= 7
@@ -24,21 +23,15 @@ BuildRequires:  libpcap kernel-headers
 %endif
 Requires(post): coreutils grep sed cpio
 %if 0%{?fedora} || 0%{?rhel} >= 7
-# oxoolwsd dependencies
+# ndcodfweb dependencies
 Requires:       systemd expat keyutils-libs krb5-libs libattr libcap libcom_err libgcc libpng libselinux openssh-clients openssl-libs pcre xz-libs zlib unzip sudo expat fontconfig freetype libuuid bzip2-libs sudo
 Requires:       poco-crypto >= 1.7.5 poco-foundation >= 1.7.5 poco-json >= 1.7.5 poco-net >= 1.7.5 poco-netssl >= 1.7.5 poco-util >= 1.7.5 poco-xml >= 1.7.5
 %endif
 
 %description
 
-%package	devel
-Summary:	Files for build OxOffice Online Editor.
-Requires:	%{name} = %{version}
-%description	devel
-Files for build OxOffice Online Editor. 
-
 %prep
-%setup -q -n %{name}-%{version}-@LOOLWSD_BRANCH@
+%setup -q -n %{name}-%{version}
 
 %build
 %configure \
@@ -60,10 +53,10 @@ env BUILDING_FROM_RPMBUILD=yes make install DESTDIR=%{buildroot}
 rm -f %{buildroot}/%{_libdir}/*.la
 install -d -m 755 %{buildroot}/var/adm/fillup-templates
 %if 0%{?rhel}
-install -D -m 444 oxoolwsd.service %{buildroot}%{_unitdir}/oxoolwsd.service
+install -D -m 444 %{name}.service %{buildroot}%{_unitdir}/%{name}.service
 # systemd in RHEL 7 does not understand these options
 %if 0%{?rhel} <= 7
-sed -i "/^ReadWritePaths/d;/^ProtectControlGroups/d;/^ProtectSystem/d;/^CapabilityBoundingSet/d" %{buildroot}%{_unitdir}/oxoolwsd.service
+sed -i "/^ReadWritePaths/d;/^ProtectControlGroups/d;/^ProtectSystem/d;/^CapabilityBoundingSet/d" %{buildroot}%{_unitdir}/%{name}.service
 %endif
 %endif
 mkdir -p %{buildroot}/etc/pam.d
@@ -73,7 +66,6 @@ echo "account    required     pam_unix.so" >>  %{buildroot}/etc/pam.d/%{name}
 %files
 %defattr(-,root,root,-)
 %{_bindir}/*
-%{_libdir}/*.so.*
 %dir /usr/share/%{name}
 /usr/share/%{name}/loleaflet
 /usr/share/%{name}/discovery.xml
@@ -84,38 +76,32 @@ echo "account    required     pam_unix.so" >>  %{buildroot}/etc/pam.d/%{name}
 /etc/fonts/conf.d/*.conf
 %dir %attr(755, lool, root) /usr/share/fonts/%{name}
 %dir %attr(750, lool, root) /usr/share/%{name}/support
-/usr/share/%{name}/support/*
-%{_unitdir}/oxoolwsd.service
-%config(noreplace) /etc/sysconfig/oxoolwsd
+%{_unitdir}/%{name}.service
+%config(noreplace) /etc/sysconfig/%{name}
 
 %dir /etc/%{name}
 %dir /etc/%{name}/conf.d
 %dir %attr(750, lool, root) /var/lib/%{name}
 %dir %{_libdir}/%{name}
 %config(noreplace) /etc/pam.d/%{name}
-%config(noreplace) %attr(640, lool, root) /etc/%{name}/oxoolwsd.xml
-%config /etc/%{name}/oxoolkitconfig.xcu
+%config(noreplace) %attr(640, lool, root) /etc/%{name}/%{name}.xml
+%config /etc/%{name}/ndcodfwebkitconfig.xcu
 %config(noreplace) /etc/%{name}/*.pem
 %config %attr(440, root, root) /etc/sudoers.d/lool
 
 %doc README
 
-%files devel
-%{_includedir}/*
-%{_libdir}/*.so
-%{_libdir}/pkgconfig/*.pc
-
 %pre
 getent group lool >/dev/null || groupadd -r lool
-getent passwd lool >/dev/null || useradd -g lool -r lool -d /opt/oxool -s /bin/bash
+getent passwd lool >/dev/null || useradd -g lool -r lool -d /opt/%{name} -s /bin/bash
 
 %post
-setcap cap_dac_override,cap_net_bind_service=ep /usr/bin/oxoolwsd
-setcap cap_fowner,cap_mknod,cap_sys_chroot=ep /usr/bin/oxoolforkit
-setcap cap_sys_admin=ep /usr/bin/oxoolmount
+setcap cap_dac_override,cap_net_bind_service=ep /usr/bin/ndcodfweb
+setcap cap_fowner,cap_mknod,cap_sys_chroot=ep /usr/bin/ndcodfwebforkit
+setcap cap_sys_admin=ep /usr/bin/ndcodfwebmount
 
 %if 0%{?fedora} || 0%{?rhel} >= 7
-%systemd_post oxoolwsd.service
+%systemd_post %{name}.service
 %endif
 
 %triggerin -- expat fontconfig freetype freetype2 glibc glibc-locale kernel keyutils-libs krb5 krb5-libs libbz2-1 libcap libcap-ng libcap2 libexpat1 libfreetype6 libgcc libgcc_s1 libgcrypt libiscsi libpng libpng12 libpng12-0 libpng15-15 libpng16-16 libstdc++ libstdc++6 libuuid libuuid1 libz1 lsb nss-mdns nss-softokn-freebl pcre sssd sssd-client systemd-libs timezone tzdata zlib
@@ -123,8 +109,8 @@ setcap cap_sys_admin=ep /usr/bin/oxoolmount
 echo -ne "Triggered update of loolwsd systemplate..."
 
 %if 0%{?rhel} >= 7 || 0%{?suse_version} >= 1300
-systemctl is-active -q loolwsd && OXOOLWSD_IS_ACTIVE=1 || OXOOLWSD_IS_ACTIVE=0
-if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl stop oxoolwsd; fi
+systemctl is-active -q ndcodfweb && OXOOLWSD_IS_ACTIVE=1 || OXOOLWSD_IS_ACTIVE=0
+if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl stop ndcodfweb; fi
 %endif
 
 # Figure out where LO is installed, let's hope it is not a mount point
@@ -138,32 +124,32 @@ chown lool:lool ${loolparent}/%{name}
 chown lool:lool ${loolparent}/%{name}/child-roots
 
 fc-cache ${loroot}/share/fonts/truetype
-su lool -c "oxoolwsd-systemplate-setup ${loolparent}/%{name}/systemplate ${loroot} >/dev/null 2>&1"
-oxoolwsd-generate-proof-key >/dev/null 2>&1
+su lool -c "ndcodfweb-systemplate-setup ${loolparent}/%{name}/systemplate ${loroot} >/dev/null 2>&1"
+ndcodfweb-generate-proof-key >/dev/null 2>&1
 
 %if 0%{?rhel} || 0%{?suse_version}
-if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl start oxoolwsd; fi
+if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl start ndcodfweb; fi
 %endif
 
 echo "   Done."
 
 %preun
 %if 0%{?fedora} || 0%{?rhel} >= 7
-%systemd_preun oxoolwsd.service
+%systemd_preun %{name}.service
 %endif
 
 %postun
 arg="$1"
 fc-cache -f
 %if 0%{?fedora} || 0%{?rhel} >= 7
-%systemd_postun oxoolwsd.service
+%systemd_postun %{name}.service
 %endif
 
 # Real uninstall
 # 如果是1，表示是 upgrade，不需要刪除檔案
 if [ $arg = 0 ] ; then
     # log file
-    rm -f /var/log/oxoolwsd.log*
+    rm -f /var/log/ndcodfweb.log*
     # systemplate & child root
     loroot=%{loroot}
     loolparent=`cd ${loroot} && cd .. && /bin/pwd`

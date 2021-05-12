@@ -13,9 +13,8 @@
 .vscode
 Makefile
 Makefile.in
-oxoolwsd.spec
-oxoolwsd.xml
-oxool.pc
+ndcodfweb.spec
+ndcodfweb.xml
 aclocal.m4
 autom4te.cache
 config.h
@@ -62,19 +61,18 @@ loleaflet/node_modules
 loleaflet/npm-shrinkwrap.json
 
 connect
-lokitclient
-oxoolwsd
-oxoolforkit
-oxoolmount
-oxoolmap
-oxoolconvert
-oxoolsocketdump
-oxoolstress
-oxoolconfig
-loolforkit-nocaps
+ndcodfwebkitclient
+ndcodfweb
+ndcodfwebforkit
+ndcodfwebmount
+ndcodfwebmap
+ndcodfwebconvert
+ndcodfwebsocketdump
+ndcodfwebstress
+ndcodfwebconfig
 loadtest
 unittest
-oxoolwsd_fuzzer
+ndcodfweb_fuzzer
 clientnb
 
 # make tags
@@ -94,9 +92,9 @@ pocoinclude-symlink
 pocolib-symlink
 ICU.dat
 Mobile/Mobile/Assets.xcassets/AppIcon.appiconset
-debian/oxool.postinst
+debian/ndcodfweb.postinst
 support/authorizer
 support/signature
 support/users
-fonts/00-oxool.conf
-support/oxool.db
+fonts/00-ndcodfweb.conf
+support/ndcodfweb.db

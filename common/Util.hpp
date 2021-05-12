@@ -92,9 +92,9 @@ namespace Util
     void alertAllUsers(const std::string& msg);
 
     /// Send a 'error:' message with the specified cmd and kind parameters to all connected
-    /// clients. This function can be called either in oxoolwsd or oxoolkit processes, even if only
-    /// oxoolwsd obviously has contact with the actual clients; in oxoolkit it will be forwarded to
-    /// oxoolwsd for redistribution. (This function must be implemented separately in each program
+    /// clients. This function can be called either in ndcodfweb or ndcodfwebkit processes, even if only
+    /// ndcodfweb obviously has contact with the actual clients; in ndcodfweb it will be forwarded to
+    /// ndcodfweb for redistribution. (This function must be implemented separately in each program
     /// that uses it, it is not in Util.cpp.)
     void alertAllUsers(const std::string& cmd, const std::string& kind);
 #else

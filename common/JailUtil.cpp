@@ -28,20 +28,20 @@
 
 namespace JailUtil
 {
-bool oxoolmount(const std::string& arg, std::string source, std::string target)
+bool ndcodfwebmount(const std::string& arg, std::string source, std::string target)
 {
     source = Util::trim(source, '/');
     target = Util::trim(target, '/');
-    const std::string cmd = Poco::Path(Util::getApplicationPath(), "oxoolmount").toString() + ' '
+    const std::string cmd = Poco::Path(Util::getApplicationPath(), "ndcodfwebmount").toString() + ' '
                             + arg + ' ' + source + ' ' + target;
-    LOG_TRC("Executing oxoolmount command: " << cmd);
+    LOG_TRC("Executing ndcodfwebmount command: " << cmd);
     return !system(cmd.c_str());
 }
 
 bool bind(const std::string& source, const std::string& target)
 {
     Poco::File(target).createDirectory();
-    const bool res = oxoolmount("-b", source, target);
+    const bool res = ndcodfwebmount("-b", source, target);
     if (res)
         LOG_TRC("Bind-mounted [" << source << "] -> [" << target << "].");
     else
@@ -52,7 +52,7 @@ bool bind(const std::string& source, const std::string& target)
 bool remountReadonly(const std::string& source, const std::string& target)
 {
     Poco::File(target).createDirectory();
-    const bool res = oxoolmount("-r", source, target);
+    const bool res = ndcodfwebmount("-r", source, target);
     if (res)
         LOG_TRC("Mounted [" << source << "] -> [" << target << "] readonly.");
     else
@@ -63,7 +63,7 @@ bool remountReadonly(const std::string& source, const std::string& target)
 bool unmount(const std::string& target)
 {
     LOG_DBG("Unmounting [" << target << "].");
-    const bool res = oxoolmount("-u", "", target);
+    const bool res = ndcodfwebmount("-u", "", target);
     if (res)
         LOG_TRC("Unmounted [" << target << "] successfully.");
     else
@@ -73,7 +73,7 @@ bool unmount(const std::string& target)
 
 // This file signifies that we copied instead of mounted.
 // NOTE: jail cleanup helpers are called from forkit and
-// oxoolwsd, and they may have bind-mounting enabled, but the
+// ndcodfweb, and they may have bind-mounting enabled, but the
 // kit could have had it removed when falling back to copying.
 // In such cases, we cannot safely know whether the jail was
 // copied or not, since the bind envar will be present and
@@ -199,15 +199,15 @@ void setupJails(bool bindMount, const std::string& jailRoot, const std::string& 
             enableBindMounting();
             safeRemoveDir(target);
             LOG_INF("Enabling Bind-Mounting of jail contents for better performance per "
-                    "mount_jail_tree config in oxoolwsd.xml.");
+                    "mount_jail_tree config in ndcodfweb.xml.");
         }
         else
             LOG_ERR("Bind-Mounting fails and will be disabled for this run. To disable permanently "
-                    "set mount_jail_tree config entry in oxoolwsd.xml to false.");
+                    "set mount_jail_tree config entry in ndcodfweb.xml to false.");
     }
     else
         LOG_INF("Disabling Bind-Mounting of jail contents per "
-                "mount_jail_tree config in oxoolwsd.xml.");
+                "mount_jail_tree config in ndcodfweb.xml.");
 }
 
 // This is the second stage of setting up /dev/[u]random

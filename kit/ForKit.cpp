@@ -209,12 +209,12 @@ static bool haveCapability(cap_value_t capability)
     {
         if (cap_name)
         {
-            LOG_FTL("Capability " << cap_name << " is not set for the oxoolforkit program.");
+            LOG_FTL("Capability " << cap_name << " is not set for the ndcodfwebforkit program.");
             cap_free(cap_name);
         }
         else
         {
-            LOG_ERR("Capability " << capability << " is not set for the oxoolforkit program.");
+            LOG_ERR("Capability " << capability << " is not set for the ndcodfwebforkit program.");
         }
         return false;
     }
@@ -328,14 +328,14 @@ static int createLibreOfficeKit(const std::string& childRoot,
     // Used to label the spare kit instances
     static size_t spareKitId = 0;
     ++spareKitId;
-    LOG_DBG("Forking a oxoolkit process with jailId: " << jailId << " as spare oxoolkit #" << spareKitId << '.');
+    LOG_DBG("Forking a ndcodfwebkit process with jailId: " << jailId << " as spare ndcodfwebkit #" << spareKitId << '.');
 
     const pid_t pid = fork();
     if (!pid)
     {
         // Child
 
-        // Close the pipe from oxoolwsd
+        // Close the pipe from ndcodfweb
         close(0);
 
 #ifndef KIT_IN_PROCESS
@@ -417,9 +417,9 @@ void forkLibreOfficeKit(const std::string& childRoot,
 #ifndef KIT_IN_PROCESS
 static void printArgumentHelp()
 {
-    std::cout << "Usage: oxoolforkit [OPTION]..." << std::endl;
+    std::cout << "Usage: ndcodfwebforkit [OPTION]..." << std::endl;
     std::cout << "  Single-threaded process that spawns lok instances" << std::endl;
-    std::cout << "  Note: Running this standalone is not possible. It is spawned by oxoolwsd" << std::endl;
+    std::cout << "  Note: Running this standalone is not possible. It is spawned by ndcodfweb" << std::endl;
     std::cout << "        and is controlled via a pipe." << std::endl;
     std::cout << "" << std::endl;
 }
@@ -439,7 +439,7 @@ int main(int argc, char** argv)
         }
     }
 
-    if (checkLoolUser && !hasCorrectUID("oxoolforkit"))
+    if (checkLoolUser && !hasCorrectUID("ndcodfwebforkit"))
     {
         return EX_SOFTWARE;
     }
@@ -525,7 +525,7 @@ int main(int argc, char** argv)
         {
             std::string version, hash;
             Util::getVersionInfo(version, hash);
-            std::cout << "oxoolforkit version details: " << version << " - " << hash << std::endl;
+            std::cout << "ndcodfwebforkit version details: " << version << " - " << hash << std::endl;
             DisplayVersion = true;
         }
         else if (std::strstr(cmd, "--rlimits") == cmd)
@@ -600,7 +600,7 @@ int main(int argc, char** argv)
 
     if (!NoCapsForKit && !haveCorrectCapabilities())
     {
-        std::cerr << "FATAL: Capabilities are not set for the oxoolforkit program." << std::endl;
+        std::cerr << "FATAL: Capabilities are not set for the ndcodfwebforkit program." << std::endl;
         std::cerr << "Please make sure that the current partition was *not* mounted with the 'nosuid' option." << std::endl;
         std::cerr << "If you are on SLES11, please set 'file_caps=1' as kernel boot option." << std::endl << std::endl;
         return EX_SOFTWARE;

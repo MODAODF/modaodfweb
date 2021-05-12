@@ -34,7 +34,7 @@
  * loleaflet URI: used to load loleaflet.html and other static files.
  * Origin: the page where the document will be embedded.
  * Format:
- *  /loleaflet/<oxoolwsd-version-hash>/[path/]<filename>.<ext>[?WOPISrc=<encoded-document-URI>]
+ *  /loleaflet/<ndcodfweb-version-hash>/[path/]<filename>.<ext>[?WOPISrc=<encoded-document-URI>]
  * Identifier: /loleaflet/.
  * Examples:
  *  /loleaflet/49c225146/src/map/Clipboard.js

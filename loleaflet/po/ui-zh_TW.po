@@ -786,7 +786,7 @@ msgstr ""
 
 #: src/core/Socket.js:81
 msgid "Oops, there is a problem connecting to LibreOffice Online : "
-msgstr "糟糕，連接至 OxOffice Online 時發生問題："
+msgstr "糟糕，連接至 NDC ODF Web 時發生問題："
 
 #: src/core/Socket.js:276
 msgid "Unsupported server version."

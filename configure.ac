@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.63])
 
-AC_INIT([oxool], [master], [develop@ossii.com.tw])
+AC_INIT([ndcodfweb], [2.0.0], [develop@ossii.com.tw])
 LT_INIT([shared, disable-static, dlopen])
 
 AM_INIT_AUTOMAKE([1.10 foreign subdir-objects tar-pax -Wno-portability])
@@ -44,7 +44,7 @@ AC_SUBST([LOOLWSD_VERSION])
 AC_SUBST([LOOLWSD_VERSION_DIST])
 
 AC_DEFINE_UNQUOTED([LOOLWSD_VERSION_DIST],[["$LOOLWSD_VERSION_DIST"]],[dist number
- for oxool spec])
+ for ndcodfweb spec])
 
 AC_DEFINE_UNQUOTED([LOOLWSD_VERSION],[["$LOOLWSD_VERSION"]],[OxOffice Online WebSocket server version])
 
@@ -281,7 +281,7 @@ AC_ARG_WITH([max-documents],
 
 AC_ARG_ENABLE(welcome-message,
     AS_HELP_STRING([--enable-welcome-message],
-        [Enables welcome message on version update. Can be changed later in oxoolwsd.xml.])
+        [Enables welcome message on version update. Can be changed later in ndcodfweb.xml.])
 )
 
 AC_ARG_WITH([sanitizer],
@@ -317,7 +317,7 @@ ENABLE_DEBUG=false
 ENABLE_DEBUG_PROTOCOL=false
 LOOLWSD_LOGLEVEL="warning"
 LOOLWSD_LOG_TO_FILE="true"
-LOOLWSD_LOGFILE="/var/log/oxoolwsd.log"
+LOOLWSD_LOGFILE="/var/log/ndcodfweb.log"
 LOOLWSD_ANONYMIZE_USER_DATA=false
 LOLEAFLET_LOGGING="false"
 debug_msg="secure mode: product build"
@@ -328,7 +328,7 @@ if test "$enable_debug" = "yes"; then
    ENABLE_DEBUG_PROTOCOL=true
    LOOLWSD_LOGLEVEL="trace"
    LOOLWSD_LOG_TO_FILE="true"
-   LOOLWSD_LOGFILE="/tmp/oxoolwsd.log"
+   LOOLWSD_LOGFILE="/tmp/ndcodfweb.log"
    LOOLWSD_ANONYMIZE_USER_DATA=false
    LOLEAFLET_LOGGING="true"
    debug_msg="low security debugging mode"
@@ -1097,7 +1097,7 @@ fi
 AC_SUBST(ENABLE_SETCAP)
 
 AC_CONFIG_LINKS([discovery.xml:discovery.xml])
-AC_CONFIG_LINKS([oxoolkitconfig.xcu:oxoolkitconfig.xcu])
+AC_CONFIG_LINKS([ndcodfwebkitconfig.xcu:ndcodfwebkitconfig.xcu])
 AC_CONFIG_LINKS([loleaflet/package.json:loleaflet/package.json])
 AC_CONFIG_LINKS([cypress_test/package.json:cypress_test/package.json])
 AC_CONFIG_LINKS([cypress_test/cypress.json:cypress_test/cypress.json])
@@ -1172,16 +1172,12 @@ AC_CONFIG_FILES([Makefile
                  loleaflet/Makefile
                  extensions/Makefile
                  loleaflet/npm-shrinkwrap.json
-                 bundled/include/LibreOfficeKit/Makefile
-                 src/include/Makefile
-                 src/lib/Makefile
                  fonts/Makefile
-                 fonts/00-oxool.conf
+                 fonts/00-ndcodfweb.conf
                  support/Makefile
-                 oxoolwsd.spec
-                 oxoolwsd.xml
-                 oxool.pc
-                 debian/oxool.postinst])
+                 ndcodfweb.spec
+                 ndcodfweb.xml
+                 debian/ndcodfweb.postinst])
 
 if test "$enable_iosapp" = "yes"; then
     AC_CONFIG_FILES([ios/config.h
@@ -1268,7 +1264,7 @@ Configuration:
 
     \$ make # to compile"
 if test -n "$with_lo_path"; then
-echo "    \$ make run # to start oxoolwsd
+echo "    \$ make run # to start ndcodfweb
     \$ make sync-writer|calc|impress # to start browsersync with specified app
 "
 fi

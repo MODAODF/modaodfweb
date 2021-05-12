@@ -42,7 +42,7 @@ constexpr const char CAPABILITIES_END_POINT[] = "/hosting/capabilities";
 
 /// A shared threadname suffix in both the WSD and Kit processes
 /// is highly helpful for filtering the logs for the same document
-/// by simply grepping for this shared suffix+ID. e.g. 'grep "broker_123" oxoolwsd.log'
+/// by simply grepping for this shared suffix+ID. e.g. 'grep "broker_123" ndcodfweb.log'
 /// Unfortunately grepping for only "_123" would include more noise than desirable.
 /// This also makes the threadname symmetric and the entries aligned.
 /// The choice of "broker" as the suffix is historic: it implies the controller
@@ -60,7 +60,7 @@ constexpr const char CAPABILITIES_END_POINT[] = "/hosting/capabilities";
 /// The WOPI User-Agent.
 #define WOPI_AGENT_STRING "LOOLWSD WOPI Agent " LOOLWSD_VERSION
 
-// The client port number, both oxoolwsd and the kits have this.
+// The client port number, both ndcodfweb and the kits have this.
 extern int ClientPortNumber;
 extern std::string MasterLocation;
 

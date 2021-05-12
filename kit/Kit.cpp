@@ -420,7 +420,7 @@ namespace
 /// Manages the lifetime of a document.
 /// Technically, we can host multiple documents
 /// per process. But for security reasons don't.
-/// However, we could have a oxoolkit instance
+/// However, we could have a ndcodfwebkit instance
 /// per user or group of users (a trusted circle).
 class Document final : public DocumentManagerInterface
 {

@@ -1,5 +1,8 @@
 
 supportdir = $(pkgdatadir)/support
 
-dist_support_DATA = \
-	public.key
+install-data-local:
+	$(MKDIR_P) $(DESTDIR)$(supportdir)
+
+uninstall-local:
+	rmdir $(DESTDIR)$(supportdir)

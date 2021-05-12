@@ -32,7 +32,7 @@ if (wopiSrc === '' && filePath === '' && !window.ThisIsAMobileApp) {
 if (host === '' && !window.ThisIsAMobileApp) {
 	vex.dialog.alert(errorMessages.emptyhosturl);
 }
-var brandProductName = 'OxOffice Online';
+var brandProductName = 'NDC ODF Web';
 global.brandProductName = brandProductName;
 global.brandProductFAQURL = 'https://www.ossii.com.tw/';
 // loleaflet.js accesses these globals

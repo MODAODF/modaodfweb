@@ -7,7 +7,7 @@ define([_foreachq],[ifelse([$#],[3],[],[define([$1],[$4])$2[]$0([$1],[$2],shift(
 <!DOCTYPE html>
 <!-- saved from url=(0054)http://leafletjs.com/examples/quick-start-example.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>OxOffice Online Editor</title>
+<title>NDC ODF Web</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -138,7 +138,7 @@ ifelse(MOBILEAPP,[true],
 
     <!-- Remove if you don't want the About dialog -->
     <div id="about-dialog" style="display:none; text-align: center; user-select: text">
-      <h1 id="product-name">OxOffice Online</h1>
+      <h1 id="product-name">NDC ODF Web</h1>
       <hr/>
       <p id="product-string"></p>
       <h3>LOOLWSD</h3>

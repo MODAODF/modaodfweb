@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SUDO=''
-if [ ! -w "/etc/oxool" ]; then
+if [ ! -w "/etc/ndcodfweb" ]; then
     if (( $EUID != 0 )); then
         if hash sudo 2>/dev/null; then
             SUDO='sudo'
@@ -12,20 +12,20 @@ if [ ! -w "/etc/oxool" ]; then
     fi
 fi
 
-if [ -f /etc/oxool/proof_key ]; then
-    echo "/etc/oxool/proof_key exists already."
+if [ -f /etc/ndcodfweb/proof_key ]; then
+    echo "/etc/ndcodfweb/proof_key exists already."
     exit 0
 fi
 
 if hash ssh-keygen 2>/dev/null; then
-    $SUDO ssh-keygen -t rsa -N "" -m PEM -f /etc/oxool/proof_key
+    $SUDO ssh-keygen -t rsa -N "" -m PEM -f /etc/ndcodfweb/proof_key
     if [ $? -ne 0 ] ; then
         exit $?
 	fi
     if id -u lool >/dev/null 2>&1; then
-        $SUDO chown lool: /etc/oxool/proof_key
+        $SUDO chown lool: /etc/ndcodfweb/proof_key
     else
-        echo "User lool does not exist. Please reinstall oxool package, or in case of manual installation from source, create the lool user manually."
+        echo "User lool does not exist. Please reinstall ndcodfweb package, or in case of manual installation from source, create the lool user manually."
     fi
 else
 	echo "ssh-keygen command not found. Please install openssh client tools."

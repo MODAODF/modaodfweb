@@ -1,7 +1,5 @@
 ETAGS=ctags -e
 
-distdir = $(PACKAGE)-$(VERSION)-$(LOOLWSD_BRANCH)
-
 if ENABLE_MOBILEAPP
 
 if ENABLE_GTKAPP
@@ -12,29 +10,29 @@ endif
 
 else
 
-SUBDIRS = . test loleaflet cypress_test bundled/include/LibreOfficeKit src/include src/lib extensions fonts support
+SUBDIRS = . test loleaflet cypress_test extensions fonts support
 
 export ENABLE_DEBUG
 
 bin_PROGRAMS = \
-	oxoolforkit \
-	oxoolmount \
-	oxoolconvert oxoolconfig
+	ndcodfwebforkit \
+	ndcodfwebmount \
+	ndcodfwebconvert ndcodfwebconfig
 
 if ENABLE_LIBFUZZER
 else
-bin_PROGRAMS += oxoolwsd
+bin_PROGRAMS += ndcodfweb
 endif
 
-dist_bin_SCRIPTS = oxoolwsd-systemplate-setup \
-                   oxoolwsd-generate-proof-key
+dist_bin_SCRIPTS = ndcodfweb-systemplate-setup \
+                   ndcodfweb-generate-proof-key
 
-man_MANS = man/oxoolwsd.1 \
-           man/oxoolforkit.1 \
-           man/oxoolconvert.1 \
-           man/oxoolconfig.1 \
-           man/oxoolwsd-systemplate-setup.1 \
-           man/oxoolwsd-generate-proof-key.1
+man_MANS = man/ndcodfweb.1 \
+           man/ndcodfwebforkit.1 \
+           man/ndcodfwebconvert.1 \
+           man/ndcodfwebconfig.1 \
+           man/ndcodfweb-systemplate-setup.1 \
+           man/ndcodfweb-generate-proof-key.1
 
 dist_doc_DATA = wsd/README \
                 wsd/README.vars \
@@ -51,10 +49,7 @@ sudoersdir = ${sysconfdir}/sudoers.d
 sudoers_DATA = etc/sudoers.d/lool
 
 servicesysconfigdir = ${sysconfdir}/sysconfig
-servicesysconfig_DATA = etc/sysconfig/oxoolwsd
-
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = oxool.pc
+servicesysconfig_DATA = etc/sysconfig/ndcodfweb
 
 oxoolwsdconfigdir = @LOOLWSD_CONFIGDIR@
 
@@ -64,8 +59,8 @@ oxool_module_confdir = @LOOLWSD_MODULE_CONFIG_DIR@
 
 oxool_module_datadir = @LOOLWSD_MODULE_DATA_DIR@
 
-oxoolwsdconfig_DATA = oxoolwsd.xml \
-		     oxoolkitconfig.xcu \
+oxoolwsdconfig_DATA = ndcodfweb.xml \
+		     ndcodfwebkitconfig.xcu \
 		     etc/ca-chain.cert.pem \
 		     etc/cert.pem \
 		     etc/key.pem
@@ -84,17 +79,17 @@ if !ENABLE_DEBUG
 AM_CPPFLAGS += -DNDEBUG
 endif
 
-AM_LDFLAGS = -pthread -Wl,-E,-rpath,/snap/oxoolwsd/current/usr/lib -lpam $(ZLIB_LIBS)
+AM_LDFLAGS = -pthread -Wl,-E,-rpath,/snap/ndcodfweb/current/usr/lib -lpam $(ZLIB_LIBS)
 
 if ENABLE_SSL
 AM_LDFLAGS += -lssl -lcrypto
 else
-oxoolwsd_fuzzer_LDADD = -lssl -lcrypto
-oxoolwsd_LDADD = -lssl -lcrypto
-oxoolconfig_LDADD = -lssl -lcrypto
+ndcodfweb_fuzzer_LDADD = -lssl -lcrypto
+ndcodfweb_LDADD = -lssl -lcrypto
+ndcodfwebconfig_LDADD = -lssl -lcrypto
 endif
 
-oxoolwsd_fuzzer_CPPFLAGS = -DKIT_IN_PROCESS=1 -DFUZZER=1 -DTDOC=\"$(abs_top_srcdir)/test/data\" $(AM_CPPFLAGS)
+ndcodfweb_fuzzer_CPPFLAGS = -DKIT_IN_PROCESS=1 -DFUZZER=1 -DTDOC=\"$(abs_top_srcdir)/test/data\" $(AM_CPPFLAGS)
 
 AM_ETAGSFLAGS = --c++-kinds=+p --fields=+iaS --extra=+q -R --totals=yes --exclude=loleaflet *
 AM_CTAGSFLAGS = $(AM_ETAGSFLAGS)
@@ -121,7 +116,7 @@ endif
 
 shared_json = $(patsubst %.cpp,%.cmd,$(shared_sources))
 
-oxoolwsd_sources = common/Crypto.cpp \
+ndcodfweb_sources = common/Crypto.cpp \
                   wsd/Admin.cpp \
                   wsd/AdminModel.cpp \
                   wsd/Auth.cpp \
@@ -136,24 +131,24 @@ oxoolwsd_sources = common/Crypto.cpp \
                   wsd/TileCache.cpp \
                   wsd/ProofKey.cpp
 
-oxoolwsd_json = $(patsubst %.cpp,%.cmd,$(oxoolwsd_sources))
+ndcodfweb_json = $(patsubst %.cpp,%.cmd,$(ndcodfweb_sources))
 
-oxoolwsd_SOURCES = $(oxoolwsd_sources) \
+ndcodfweb_SOURCES = $(ndcodfweb_sources) \
                   $(shared_sources)
 
 noinst_PROGRAMS = clientnb \
                   connect \
-                  lokitclient \
-                  oxoolmap \
-                  oxoolstress \
-                  oxoolsocketdump
+                  ndcodfwebkitclient \
+                  ndcodfwebmap \
+                  ndcodfwebstress \
+                  ndcodfwebsocketdump
 
 if ENABLE_LIBFUZZER
 noinst_PROGRAMS += \
 		   admin_fuzzer \
 		   clientsession_fuzzer
 else
-noinst_PROGRAMS += oxoolwsd_fuzzer
+noinst_PROGRAMS += ndcodfweb_fuzzer
 endif
 
 connect_SOURCES = tools/Connect.cpp \
@@ -162,23 +157,23 @@ connect_SOURCES = tools/Connect.cpp \
                   common/StringVector.cpp \
                   common/Util.cpp
 
-lokitclient_SOURCES = common/Log.cpp \
+ndcodfwebkitclient_SOURCES = common/Log.cpp \
                       tools/KitClient.cpp \
                       common/Protocol.cpp \
                       common/StringVector.cpp \
                       common/Util.cpp
 
-oxoolforkit_sources = kit/ChildSession.cpp \
+ndcodfwebforkit_sources = kit/ChildSession.cpp \
                      kit/ForKit.cpp \
                      kit/Kit.cpp
 
-oxoolforkit_json = $(patsubst %.cpp,%.cmd,$(oxoolforkit_sources))
+ndcodfwebforkit_json = $(patsubst %.cpp,%.cmd,$(ndcodfwebforkit_sources))
 
-oxoolforkit_SOURCES = $(oxoolforkit_sources) \
+ndcodfwebforkit_SOURCES = $(ndcodfwebforkit_sources) \
                      $(shared_sources)
 
-oxoolwsd_fuzzer_SOURCES = $(oxoolwsd_sources) \
-                         $(oxoolforkit_sources) \
+ndcodfweb_fuzzer_SOURCES = $(ndcodfweb_sources) \
+                         $(ndcodfwebforkit_sources) \
                          $(shared_sources) \
                          kit/DummyLibreOfficeKit.cpp
 
@@ -186,8 +181,8 @@ admin_fuzzer_CPPFLAGS = \
 			-DKIT_IN_PROCESS=1 \
 			$(AM_CPPFLAGS)
 admin_fuzzer_SOURCES = \
-		       $(oxoolwsd_sources) \
-		       $(oxoolforkit_sources) \
+		       $(ndcodfweb_sources) \
+		       $(ndcodfwebforkit_sources) \
 		       $(shared_sources) \
 		       fuzzer/Admin.cpp
 admin_fuzzer_LDFLAGS = -fsanitize=fuzzer $(AM_LDFLAGS)
@@ -196,8 +191,8 @@ clientsession_fuzzer_CPPFLAGS = \
 				-DKIT_IN_PROCESS=1 \
 				$(AM_CPPFLAGS)
 clientsession_fuzzer_SOURCES = \
-			       $(oxoolwsd_sources) \
-			       $(oxoolforkit_sources) \
+			       $(ndcodfweb_sources) \
+			       $(ndcodfwebforkit_sources) \
 			       $(shared_sources) \
 			       fuzzer/ClientSession.cpp
 clientsession_fuzzer_LDFLAGS = -fsanitize=fuzzer $(AM_LDFLAGS)
@@ -207,26 +202,26 @@ clientnb_SOURCES = net/clientnb.cpp \
 		   common/StringVector.cpp \
                    common/Util.cpp
 
-oxoolmount_SOURCES = tools/mount.cpp
+ndcodfwebmount_SOURCES = tools/mount.cpp
 
-oxoolmap_SOURCES = tools/map.cpp
+ndcodfwebmap_SOURCES = tools/map.cpp
 
-oxoolconvert_SOURCES = tools/Tool.cpp
+ndcodfwebconvert_SOURCES = tools/Tool.cpp
 
-oxoolstress_CPPFLAGS = -DTDOC=\"$(abs_top_srcdir)/test/data\" ${include_paths}
-oxoolstress_SOURCES = tools/Stress.cpp \
+ndcodfwebstress_CPPFLAGS = -DTDOC=\"$(abs_top_srcdir)/test/data\" ${include_paths}
+ndcodfwebstress_SOURCES = tools/Stress.cpp \
                      common/Protocol.cpp \
                      common/StringVector.cpp \
                      common/Log.cpp \
 		     common/Util.cpp
 
-oxoolconfig_SOURCES = tools/Config.cpp \
+ndcodfwebconfig_SOURCES = tools/Config.cpp \
 		     common/Crypto.cpp \
 		     common/Log.cpp \
 		     common/StringVector.cpp \
 		     common/Util.cpp
 
-oxoolsocketdump_SOURCES = tools/WebSocketDump.cpp \
+ndcodfwebsocketdump_SOURCES = tools/WebSocketDump.cpp \
 			 $(shared_sources)
 
 wsd_headers = wsd/Admin.hpp \
@@ -293,6 +288,11 @@ kit_headers = kit/ChildSession.hpp \
               kit/Watermark.hpp
 
 noinst_HEADERS = $(wsd_headers) $(shared_headers) $(kit_headers) \
+                 bundled/include/LibreOfficeKit/LibreOfficeKit.h \
+                 bundled/include/LibreOfficeKit/LibreOfficeKit.hxx \
+                 bundled/include/LibreOfficeKit/LibreOfficeKitEnums.h \
+                 bundled/include/LibreOfficeKit/LibreOfficeKitInit.h \
+                 bundled/include/LibreOfficeKit/LibreOfficeKitTypes.h \
                  test/WopiTestServer.hpp \
                  test/countloolkits.hpp \
                  test/lokassert.hpp \
@@ -305,26 +305,26 @@ dist-hook:
 
 EXTRA_DIST = discovery.xml \
              favicon.ico \
-             oxoolkitconfig.xcu \
-             oxoolwsd.spec \
-             oxoolwsd.xml.in \
-             oxoolwsd.service \
+             ndcodfwebkitconfig.xcu \
+             ndcodfweb.spec \
+             ndcodfweb.xml.in \
+             ndcodfweb.service \
              debian/changelog \
              debian/compat \
              debian/control \
              debian/copyright \
-             debian/oxool.cron.d \
-             debian/oxool.postinst \
-             debian/oxool.postrm \
-             debian/oxool.preinst \
-             debian/oxool.service \
+             debian/ndcodfweb.cron.d \
+             debian/ndcodfweb.postinst \
+             debian/ndcodfweb.postrm \
+             debian/ndcodfweb.preinst \
+             debian/ndcodfweb.service \
              debian/rules \
              debian/source/format \
              etc/key.pem \
              etc/cert.pem \
              etc/ca-chain.cert.pem \
              etc/sudoers.d/lool \
-             etc/sysconfig/oxoolwsd \
+             etc/sysconfig/ndcodfweb \
              scripts/unocommands.py \
              $(man_MANS)
 
@@ -332,7 +332,7 @@ if ENABLE_LIBFUZZER
 CLEANUP_COMMAND=true
 else
 CLEANUP_COMMAND=true
-#CLEANUP_COMMAND=if test -s ./oxoolwsd; then echo "Cleaning up..." && ./oxoolwsd --disable-lool-user-checking --cleanup --o:logging.file[@enable]=false --o:logging.level=trace; fi
+#CLEANUP_COMMAND=if test -s ./ndcodfweb; then echo "Cleaning up..." && ./ndcodfweb --disable-lool-user-checking --cleanup --o:logging.file[@enable]=false --o:logging.level=trace; fi
 endif
 
 if HAVE_LO_PATH
@@ -342,7 +342,7 @@ CAPABILITIES = $(if @ENABLE_SETCAP@,true,false)
 RUN_GDB = $(if $(GDB_FRONTEND),$(GDB_FRONTEND),gdb --tui --args)
 
 if ENABLE_SETCAP
-SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_mknod,cap_sys_chroot=ep oxoolforkit && sudo @SETCAP@ cap_sys_admin=ep oxoolmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=+ep oxoolwsd
+SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_mknod,cap_sys_chroot=ep ndcodfwebforkit && sudo @SETCAP@ cap_sys_admin=ep ndcodfwebmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=+ep ndcodfweb
 else
 SET_CAPS_COMMAND=echo "Skipping capability setting"
 endif
@@ -350,16 +350,16 @@ endif
 if ENABLE_LIBFUZZER
 CLEANUP_DEPS=
 else
-CLEANUP_DEPS=oxoolwsd oxoolmount oxoolforkit
+CLEANUP_DEPS=ndcodfweb ndcodfwebmount ndcodfwebforkit
 endif
 
-# Build oxoolwsd and oxoolmount first, so we can cleanup before updating
+# Build ndcodfweb and ndcodfwebmount first, so we can cleanup before updating
 # the systemplate directory, which we can't rm if it's mounted.
-$(SYSTEM_STAMP): ${top_srcdir}/oxoolwsd-systemplate-setup $(CLEANUP_DEPS)
+$(SYSTEM_STAMP): ${top_srcdir}/ndcodfweb-systemplate-setup $(CLEANUP_DEPS)
 	$(SET_CAPS_COMMAND)
 	$(CLEANUP_COMMAND)
 	if test "z@SYSTEMPLATE_PATH@" != "z"; then rm -rf "@SYSTEMPLATE_PATH@" && \
-	${top_srcdir}/oxoolwsd-systemplate-setup "@SYSTEMPLATE_PATH@" "@LO_PATH@" && touch $@; fi
+	${top_srcdir}/ndcodfweb-systemplate-setup "@SYSTEMPLATE_PATH@" "@LO_PATH@" && touch $@; fi
 
 @JAILS_PATH@:
 	$(CLEANUP_COMMAND)
@@ -378,16 +378,16 @@ clean-local:
 	if test "z@SYSTEMPLATE_PATH@" != "z"; then rm -rf "@SYSTEMPLATE_PATH@"; fi
 
 run: all @JAILS_PATH@
-	@echo "Launching oxoolwsd"
+	@echo "Launching ndcodfweb"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	@echo
-	./oxoolwsd --o:sys_template_path="@SYSTEMPLATE_PATH@" \
+	./ndcodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:security.capabilities="$(CAPABILITIES)" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
-			  --config-file="$(abs_top_srcdir)/oxoolwsd.xml" \
+			  --config-file="$(abs_top_srcdir)/ndcodfweb.xml" \
 			  --o:file_server_root_path="$(abs_top_srcdir)" \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
 			  --o:ssl.key_file_path="$(abs_top_srcdir)/etc/key.pem" \
@@ -397,13 +397,13 @@ run: all @JAILS_PATH@
 
 if ENABLE_DEBUG
 run-one: all @JAILS_PATH@
-	@echo "Launching oxoolwsd"
+	@echo "Launching ndcodfweb"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	@echo
-	./oxoolwsd --o:sys_template_path="@SYSTEMPLATE_PATH@" \
+	./ndcodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:security.capabilities="$(CAPABILITIES)" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
@@ -424,15 +424,15 @@ sync-impress:
 	browser-sync start --config browsersync-config.js --startPath "loleaflet/96c23f663/loleaflet.html?file_path=file://$(abs_top_srcdir)/test/data/hello-world.odp"
 
 run-valgrind: all @JAILS_PATH@
-	@echo "Launching oxoolwsd under valgrind (but not forkit/oxoolkit, yet)"
+	@echo "Launching ndcodfweb under valgrind (but not forkit/ndcodfwebkit, yet)"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	valgrind --tool=memcheck --trace-children=no -v --read-var-info=yes \
-		./oxoolwsd --o:sys_template_path="@SYSTEMPLATE_PATH@" \
+		./ndcodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
-			  --config-file="$(abs_top_srcdir)/oxoolwsd.xml" \
+			  --config-file="$(abs_top_srcdir)/ndcodfweb.xml" \
 			  --o:file_server_root_path="$(abs_top_srcdir)" \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
 			  --o:ssl.key_file_path="$(abs_top_srcdir)/etc/key.pem" \
@@ -441,16 +441,16 @@ run-valgrind: all @JAILS_PATH@
 			  --o:logging.file[@enable]=false --o:logging.level=trace
 
 run-gdb: all @JAILS_PATH@
-	@echo "Launching oxoolwsd under gdb"
+	@echo "Launching ndcodfweb under gdb"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	$(RUN_GDB) \
-		./oxoolwsd --o:security.capabilities="false" \
+		./ndcodfweb --o:security.capabilities="false" \
 			  --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
-			  --config-file="$(abs_top_srcdir)/oxoolwsd.xml" \
+			  --config-file="$(abs_top_srcdir)/ndcodfweb.xml" \
 			  --o:file_server_root_path="$(abs_top_srcdir)" \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
 			  --o:ssl.key_file_path="$(abs_top_srcdir)/etc/key.pem" \
@@ -459,16 +459,16 @@ run-gdb: all @JAILS_PATH@
 			  --o:logging.file[@enable]=false --o:logging.level=error
 
 run-callgrind: all @JAILS_PATH@
-	@echo "Launching oxoolwsd under valgrind's callgrind"
+	@echo "Launching ndcodfweb under valgrind's callgrind"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	valgrind --tool=callgrind --simulate-cache=yes --dump-instr=yes --num-callers=50 --error-limit=no --trace-children=yes \
-		./oxoolwsd --o:security.capabilities="false" \
+		./ndcodfweb --o:security.capabilities="false" \
 			  --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
-			  --config-file="$(abs_top_srcdir)/oxoolwsd.xml" \
+			  --config-file="$(abs_top_srcdir)/ndcodfweb.xml" \
 			  --o:file_server_root_path="$(abs_top_srcdir)" \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
 			  --o:ssl.key_file_path="$(abs_top_srcdir)/etc/key.pem" \
@@ -477,16 +477,16 @@ run-callgrind: all @JAILS_PATH@
 			  --o:logging.file[@enable]=false --o:logging.level=error
 
 run-strace: all @JAILS_PATH@
-	@echo "Launching oxoolwsd under strace"
+	@echo "Launching ndcodfweb under strace"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	strace -o strace.log -f -tt -s 256 \
-		./oxoolwsd --o:security.capabilities="false" \
+		./ndcodfweb --o:security.capabilities="false" \
 			  --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
-			  --config-file="$(abs_top_srcdir)/oxoolwsd.xml" \
+			  --config-file="$(abs_top_srcdir)/ndcodfweb.xml" \
 			  --o:file_server_root_path="$(abs_top_srcdir)" \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
 			  --o:ssl.key_file_path="$(abs_top_srcdir)/etc/key.pem" \
@@ -505,10 +505,10 @@ endif
 if ENABLE_LIBFUZZER
 ALL_LOCAL_DEPS=
 else
-ALL_LOCAL_DEPS=oxoolwsd
+ALL_LOCAL_DEPS=ndcodfweb
 endif
 
-# After building oxoolforkit, set its capabilities as required. Do it
+# After building ndcodfwebforkit, set its capabilities as required. Do it
 # already after a plain 'make' to allow for testing without
 # installing. When building for packaging, no need for this, as the
 # capabilities won't survive packaging anyway. Instead, handle it when
@@ -544,7 +544,7 @@ CLANGXX_COMPILE_FLAGS=clang++ $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 
 JSON_COMPILE_FLAGS=$(subst ",\",$(subst \,\\,$(CLANGXX_COMPILE_FLAGS)))
 
-JSON_COMPILE_SRC = $(oxoolwsd_json) $(oxoolforkit_json) $(shared_json)
+JSON_COMPILE_SRC = $(ndcodfweb_json) $(ndcodfwebforkit_json) $(shared_json)
 
 $(eval $(call file_targets,$(JSON_COMPILE_SRC)))
 

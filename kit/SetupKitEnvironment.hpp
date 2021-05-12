@@ -24,11 +24,11 @@ inline void setupKitEnvironment(const std::string& userInterface)
         "sharedext:${${BRAND_BASE_DIR}/program/lounorc:SHARED_EXTENSIONS_USER}/registry/com.sun.star.comp.deployment.configuration.PackageRegistryBackend/configmgr.ini "
         "userext:${${BRAND_BASE_DIR}/program/lounorc:UNO_USER_PACKAGES_CACHE}/registry/com.sun.star.comp.deployment.configuration.PackageRegistryBackend/configmgr.ini "
 #ifdef IOS
-        "user:*${BRAND_BASE_DIR}/oxoolkitconfig.xcu "
+        "user:*${BRAND_BASE_DIR}/ndcodfwebkitconfig.xcu "
 #elif ENABLE_DEBUG && !defined(ANDROID) // '*' denotes non-writable.
-        "user:*file://" DEBUG_ABSSRCDIR "/oxoolkitconfig.xcu "
+        "user:*file://" DEBUG_ABSSRCDIR "/ndcodfwebkitconfig.xcu "
 #else
-        "user:*file://" LOOLWSD_CONFIGDIR "/oxoolkitconfig.xcu "
+        "user:*file://" LOOLWSD_CONFIGDIR "/ndcodfwebkitconfig.xcu "
 #endif
         );
     ::setenv("CONFIGURATION_LAYERS", layers.c_str(),
@@ -51,7 +51,7 @@ inline void setupKitEnvironment(const std::string& userInterface)
 
 //    options += ":sc_no_grid_bg"; // leave this disabled for now, merged-cells needs more work.
 
-    options += ":sc_print_twips_msgs";
+    //options += ":sc_print_twips_msgs";
 
     ::setenv("SAL_LOK_OPTIONS", options.c_str(), 0);
 }

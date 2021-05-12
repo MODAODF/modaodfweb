@@ -122,13 +122,13 @@ var AdminSocketGlobalFunction = AdminSocketBase.extend({
 			textMsg = '';
 		}
 
-		// 原來的帳號密碼與 oxoolwsd.xml 不符
+		// 原來的帳號密碼與 ndcodfweb.xml 不符
 		if (textMsg.startsWith('ConfigAuthWrong'))
 		{
 			alert(_('The account or password is inconsistent with the system!'));
 			GlobalFunctionCheckAccountPassword();
 		}
-		// 原來的帳號密碼與 oxoolwsd.xml 一致
+		// 原來的帳號密碼與 ndcodfweb.xml 一致
 		else if (textMsg.startsWith('ConfigAuthOk'))
 		{
 			GlobalFunctionChangeAccountPassword();
