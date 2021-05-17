@@ -30,9 +30,6 @@ L.dialog.Action = {
 		case 'saveas': // 另存新檔
 			map.fire('postMessage', {msgId: 'UI_SaveAs'});
 			break;
-		case 'saveaspassword': // 另存新檔
-			map.fire('postMessage', {msgId: 'UI_SaveAsPassword'});
-			break;
 		case 'shareas': // 分享
 			map.fire('postMessage', {msgId: 'UI_Share'});
 			break;
@@ -40,7 +37,7 @@ L.dialog.Action = {
 			map.print();
 			break;
 		case 'insertgraphic': // 插入電腦圖片
-			L.dialog.run('InsertImage');
+			L.DomUtil.get('insertgraphic').click();
 			break;
 		case 'insertgraphicremote': // 插入雲端圖片
 			map.fire('postMessage', {msgId: 'UI_InsertGraphic'});
@@ -144,9 +141,6 @@ L.dialog.Action = {
 			break;
 		case 'downloadas-rtf': // 下載 rtf
 			map.downloadAs(fileName + '.rtf', 'rtf');
-			break;
-		case 'downloadas-epub': // 下載 EPUB
-			map.downloadAs(fileName + '.epub', 'epub');
 			break;
 		case 'downloadas-odt': // 下載 odt
 			map.downloadAs(fileName + '.odt', 'odt');
