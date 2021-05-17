@@ -111,56 +111,6 @@ L.Control.Tabs = L.Control.extend({
 					}).bind(this)
 				} ,
 				'sep01': '----',
-				'Protect': { // 保護工作表
-					name: _UNO('.uno:Protect', 'spreadsheet', true),
-					disabled: function(/*key, opt*/) {
-						// 透過 WOPI 編輯，且不是檔案擁有者的話，就不能執行保護/解除保護工作表
-						if (map.options.wopi && !map['wopi'].DocumentOwner) {
-							return true;
-						}
-						return false;
-					}.bind(this),
-					callback: (function() {
-						var pInfo = map.getPartProperty(); // 該工作表資料
-						// 工作表有保護
-						if (pInfo && pInfo.protected === '1') {
-							var args = {
-								Protect: {
-									type: 'boolean',
-									value: false
-								}
-							}
-							// 有密碼
-							if (pInfo.protectedWithPass === '1') {
-								L.dialog.prompt({
-									title: _('Unprotect sheet'),
-									icon: 'information',
-									message: _('Password'),
-									password: true,
-									callback: function(data) {
-										console.debug('password = ' + data);
-										args.PassWord = {
-											type: 'string',
-											value: data
-										},
-										map.sendUnoCommand('.uno:OxProtect', args);
-									}
-								});
-							// 沒有密碼的話就直接解除保護
-							} else {
-								map.sendUnoCommand('.uno:OxProtect', args);
-							}
-						} else {
-							// TODO: 實作外部載入保護工作表 dialog
-							L.dialog.run('ProtectTable');
-						}
-					}).bind(this),
-					icon: (function(opt, $itemElement, itemKey, item) {
-						item.checktype = 'checkmark';
-						item.checked = this._isProtedted();
-						return this._map.contextMenuIcon($itemElement, itemKey, item);
-					}).bind(this)
-				},
 				'Hide': { // 隱藏工作表
 					name: _UNO('.uno:Hide', 'spreadsheet', true),
 					callback: (function() {
@@ -182,29 +132,6 @@ L.Control.Tabs = L.Control.extend({
 					disabled: (function() {
 						// 沒有隱藏的工作表才能執行
 						return !this._map.hasAnyHiddenPart();
-					}).bind(this),
-					icon: (function(opt, $itemElement, itemKey, item) {
-						return this._map.contextMenuIcon($itemElement, itemKey, item);
-					}).bind(this)
-				},
-				'BackgroundColor': { // 設定標籤色彩
-					name: _UNO('.uno:TabBgColor', 'spreadsheet', true),
-					callback: (function() {
-						map.fire('executeDialog', {dialog: 'SetTabBgColor'});
-					}).bind(this),
-					disabled: (function() {
-						// 保護狀態示
-						return this._isProtedted();
-					}).bind(this),
-					icon: (function(opt, $itemElement, itemKey, item) {
-						return this._map.contextMenuIcon($itemElement, itemKey, item);
-					}).bind(this)
-				},
-				'sep02': '----',
-				'ToggleSheetGrid': { // 切換檢視格線
-					name: _UNO('.uno:ToggleSheetGrid', 'spreadsheet', true),
-					callback: (function() {
-						map.sendUnoCommand('.uno:ToggleSheetGrid');
 					}).bind(this),
 					icon: (function(opt, $itemElement, itemKey, item) {
 						return this._map.contextMenuIcon($itemElement, itemKey, item);

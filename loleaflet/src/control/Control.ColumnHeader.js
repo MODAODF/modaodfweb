@@ -77,28 +77,6 @@ L.Control.ColumnHeader = L.Control.Header.extend({
 				this._updateColumnHeader();
 			}.bind(this),
 			items: {
-				'.uno:Cut': {
-					name: _UNO('.uno:Cut', 'spreadsheet'),
-					icon: function(opt, $itemElement, itemKey, item) {
-						return map.contextMenuIcon($itemElement, itemKey, item);
-					}
-				},
-				'.uno:Copy': {
-					name: _UNO('.uno:Copy', 'spreadsheet'),
-					icon: function(opt, $itemElement, itemKey, item) {
-						return map.contextMenuIcon($itemElement, itemKey, item);
-					}
-				},
-				'.uno:Paste': {
-					name: _UNO('.uno:Paste', 'spreadsheet'),
-					icon: function(opt, $itemElement, itemKey, item) {
-						return map.contextMenuIcon($itemElement, itemKey, item);
-					},
-					visible: function(key/*, opt*/) {
-						return stateHandler.getItemProperty(key).enabled;
-					},
-				},
-				'sep01': '----',
 				'.uno:InsertColumnsBefore': {
 					name: _UNO('.uno:InsertColumnsBefore', 'spreadsheet'),
 					icon: function(opt, $itemElement, itemKey, item) {
@@ -126,25 +104,6 @@ L.Control.ColumnHeader = L.Control.Header.extend({
 						return !stateHandler.getItemProperty(key).enabled;
 					}
 				},
-				'dialog:DeleteCell': {
-					name: _UNO('.uno:Delete', 'spreadsheet'),
-					icon: function(opt, $itemElement, itemKey, item) {
-						return map.contextMenuIcon($itemElement, itemKey, item);
-					},
-					disabled: function(/*key, opt, e*/) {
-						return !stateHandler.getItemProperty('.uno:Delete').enabled;
-					}
-				},
-				'sep02': '----',
-				'dialog:ColumnWidth': {
-					name: _UNO('.uno:ColumnWidth', 'spreadsheet'),
-					icon: function(opt, $itemElement, itemKey, item) {
-						return map.contextMenuIcon($itemElement, itemKey, item);
-					},
-					disabled: function(/*key, opt, e*/) {
-						return !stateHandler.getItemProperty('.uno:SetOptimalColumnWidth').enabled;
-					}
-				},
 				'.uno:SetOptimalColumnWidth': {
 					name: _UNO('.uno:SetOptimalColumnWidth', 'spreadsheet'),
 					callback: function() {
@@ -152,9 +111,6 @@ L.Control.ColumnHeader = L.Control.Header.extend({
 					},
 					icon: function(opt, $itemElement, itemKey, item) {
 						return map.contextMenuIcon($itemElement, itemKey, item);
-					},
-					disabled: function(key/*, opt, e*/) {
-						return !stateHandler.getItemProperty(key).enabled;
 					}
 				},
 				'sep03': '----',
@@ -162,30 +118,14 @@ L.Control.ColumnHeader = L.Control.Header.extend({
 					name: _UNO('.uno:HideColumn', 'spreadsheet'),
 					icon: function(opt, $itemElement, itemKey, item) {
 						return map.contextMenuIcon($itemElement, itemKey, item);
-					},
-					disabled: function(key/*, opt, e*/) {
-						return !stateHandler.getItemProperty(key).enabled;
 					}
 				},
 				'.uno:ShowColumn': {
 					name: _UNO('.uno:ShowColumn', 'spreadsheet'),
 					icon: function(opt, $itemElement, itemKey, item) {
 						return map.contextMenuIcon($itemElement, itemKey, item);
-					},
-					disabled: function(key/*, opt, e*/) {
-						return !stateHandler.getItemProperty(key).enabled;
 					}
-				},
-				'sep04': '----',
-				'.uno:FormatCellDialog': {
-					name: _UNO('.uno:FormatCellDialog', 'spreadsheet'),
-					icon: function(opt, $itemElement, itemKey, item) {
-						return map.contextMenuIcon($itemElement, itemKey, item);
-					},
-					disabled: function(key/*, opt, e*/) {
-						return !stateHandler.getItemProperty(key).enabled;
-					}
-				},
+				}
 			}
 		});
 	},
