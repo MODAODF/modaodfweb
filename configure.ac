@@ -58,7 +58,7 @@ AC_SUBST([LOOLWSD_VERSION_HASH])
 
 AC_DEFINE_UNQUOTED([LOOLWSD_VERSION_HASH],[["$LOOLWSD_VERSION_HASH"]],[OxOffice Online git hash if present])
 
-LOOLWSD_BRANCH=`( cat dist_git_branch 2> /dev/null || git rev-parse --abbrev-ref HEAD 2> /dev/null )`
+LOOLWSD_BRANCH=`( cat dist_git_branch 2> /dev/null || git rev-parse --abbrev-ref HEAD 2> /dev/null ) | cut -d '-' -f 1`
 AC_SUBST([LOOLWSD_BRANCH])
 AC_DEFINE_UNQUOTED([LOOLWSD_BRANCH], [["$LOOLWSD_BRANCH"]],[git branch name])
 
@@ -1166,9 +1166,7 @@ fi
 AM_CONDITIONAL([ENABLE_CYPRESS], [$ENABLE_CYPRESS])
 
 AC_CONFIG_FILES([Makefile
-                 cypress_test/Makefile
                  gtk/Makefile
-                 test/Makefile
                  loleaflet/Makefile
                  extensions/Makefile
                  modules/Makefile
