@@ -63,6 +63,11 @@ mkdir -p %{buildroot}/etc/pam.d
 echo "auth       required     pam_unix.so" > %{buildroot}/etc/pam.d/%{name}
 echo "account    required     pam_unix.so" >>  %{buildroot}/etc/pam.d/%{name}
 
+mkdir -p %{buildroot}/etc/%{name}/conf.d/templaterepo/
+%__install modules/templaterepo.xml %{buildroot}/etc/%{name}/conf.d/templaterepo/templaterepo.xml
+mkdir -p %{buildroot}/etc/%{name}/conf.d/mergeodf/
+%__install modules/mergeodf.xml %{buildroot}/etc/%{name}/conf.d/mergeodf/mergeodf.xml
+
 %files
 %defattr(-,root,root,-)
 %{_bindir}/*
@@ -90,6 +95,18 @@ echo "account    required     pam_unix.so" >>  %{buildroot}/etc/pam.d/%{name}
 %config %attr(440, root, root) /etc/sudoers.d/lool
 
 %doc README
+
+# templaterepo
+%{_libdir}/libtemplaterepo.so
+%{_libdir}/libtemplaterepo.so.?
+%{_libdir}/libtemplaterepo.so.?.?.?
+/etc/%{name}/conf.d/templaterepo/templaterepo.xml
+
+# mergeodf
+%{_libdir}/libmergeodf.so
+%{_libdir}/libmergeodf.so.?
+%{_libdir}/libmergeodf.so.?.?.?
+/etc/%{name}/conf.d/mergeodf/mergeodf.xml
 
 %pre
 getent group lool >/dev/null || groupadd -r lool
@@ -131,6 +148,13 @@ ndcodfweb-generate-proof-key >/dev/null 2>&1
 if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl start ndcodfweb; fi
 %endif
 
+touch /var/log/templaterepo.log && chown lool:lool /var/log/templaterepo.log
+touch /var/log/mergeodf.log && chown lool:lool /var/log/mergeodf.log
+mkdir -p /var/lib/%{name}/templaterepo/templates
+chown -R lool:lool /var/lib/%{name}/templaterepo
+mkdir -p /var/lib/%{name}/mergeodf/templates
+chown -R lool:lool /var/lib/%{name}/mergeodf
+
 echo "   Done."
 
 %preun
@@ -150,6 +174,8 @@ fc-cache -f
 if [ $arg = 0 ] ; then
     # log file
     rm -f /var/log/ndcodfweb.log*
+    rm -f /var/log/templaterepo.log*
+    rm -f /var/log/mergeodf.log*
     # systemplate & child root
     loroot=%{loroot}
     loolparent=`cd ${loroot} && cd .. && /bin/pwd`

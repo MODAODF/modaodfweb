@@ -21,18 +21,6 @@
         </script>
         <script>
             $(document).ready(function(){
-                // Generate module list
-                var module_list = []; //{{MODULE_LIST}};
-                if (module_list)
-                {
-                    for (module in module_list)
-                    {
-                        var a_template = `<li id="${module_list[module]}"><a class="text-primary" href="${module_list[module]}">${module_list[module]}</a></li>`;
-                        $("#module_list").after(a_template);
-                    }
-
-                }
-
                 // set the current activate navbar-item
                 var href = window.location.href;
                 var url = new URL(href);
@@ -43,6 +31,7 @@
                     var endpoint = token[token.length-1].split(".")[0];
                     $("#" + endpoint).addClass("active");
                 }
+
                 Admin.GlobalFunction(host);
             });
         </script>
@@ -76,6 +65,12 @@
                         </li>
                         <li id="adminViewLog">
                             <a href="adminViewLog.html">檢視日誌</a>
+                        </li>
+                        <li id="adminTemplateRepo">
+                            <a href="adminTemplateRepo.html">範本中心</a>
+                        </li>
+                        <li id="adminMergeODF">
+                            <a href="adminMergeODF.html">報表範本API</a>
                         </li>
                         <li id="adminSoftwareUpgrade">
                             <a href="adminSoftwareUpgrade.html">軟體升級</a>

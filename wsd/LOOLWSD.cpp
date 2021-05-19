@@ -152,6 +152,11 @@ using Poco::Net::PartHandler;
 #endif
 #endif
 
+//Modules
+#include <dlfcn.h>
+#include "modules/templaterepo.h"
+#include "modules/mergeodf.h"
+
 using namespace LOOLProtocol;
 
 using Poco::DirectoryIterator;
@@ -2512,7 +2517,76 @@ private:
             else if (requestDetails.equals(RequestDetails::Field::Type, "lool") &&
                      requestDetails.equals(2, "ws") && requestDetails.isWebSocket())
                 handleClientWsUpgrade(request, requestDetails, disposition, socket);
+            else if (requestDetails.equals(1, "templaterepo"))
+            {
+                void* templaterepo_h;
+                TemplateRepo* _templaterepo;
+                _templaterepo = 0;
+#if ENABLE_DEBUG
+                templaterepo_h = dlopen("./libtemplaterepo.so", RTLD_LAZY);
+                std::cout << "local\n" ;
+#else
+                templaterepo_h = dlopen("libtemplaterepo.so", RTLD_LAZY);
+#endif
 
+                if (templaterepo_h)
+                {
+                    TemplateRepo* (*create)();
+                    create = (TemplateRepo* (*)())dlsym(templaterepo_h, "create_object");
+                    _templaterepo = (TemplateRepo*)create();
+
+                    _templaterepo->handleRequest(_socket, message, request, disposition);
+                    _module_exit_application = _templaterepo->exit_application;
+                }
+                else
+                {
+                    std::cout << "[ModuleLib] Load libtemplaterepo.so fail" << std::endl;
+                    // Bad request.
+                    std::ostringstream oss;
+                    oss << "HTTP/1.1 400\r\n"
+                        << "Date: " << Poco::DateTimeFormatter::format(Poco::Timestamp(), Poco::DateTimeFormat::HTTP_FORMAT) << "\r\n"
+                        << "User-Agent: LOOLWSD WOPI Agent\r\n"
+                        << "Content-Length: 0\r\n"
+                        << "\r\n";
+                    socket->send(oss.str());
+                    socket->shutdown();
+                }
+            }
+            else if (requestDetails.equals(1, "mergeodf"))
+            {
+                void* mergeodf_h;
+                MergeODF* _mergeodf;
+                _mergeodf = 0;
+#if ENABLE_DEBUG
+                mergeodf_h = dlopen("./libmergeodf.so", RTLD_LAZY);
+#else
+                mergeodf_h = dlopen("libmergeodf.so", RTLD_LAZY);
+#endif
+
+                if (mergeodf_h)
+                {
+                    std::cout << "[ModuleLib] Load libmergeodf.so success" << std::endl;
+                    MergeODF* (*create)();
+                    create = (MergeODF* (*)())dlsym(mergeodf_h, "create_object");
+                    _mergeodf = (MergeODF*)create();
+
+                    _mergeodf->handleRequest(_socket, message, request, disposition);
+                    _module_exit_application = _mergeodf->exit_application;
+                }
+                else
+                {
+                    std::cout << "[ModuleLib] Load libmergeodf.so fail" << std::endl;
+                    // Bad request.
+                    std::ostringstream oss;
+                    oss << "HTTP/1.1 400\r\n"
+                        << "Date: " << Poco::DateTimeFormatter::format(Poco::Timestamp(), Poco::DateTimeFormat::HTTP_FORMAT) << "\r\n"
+                        << "User-Agent: LOOLWSD WOPI Agent\r\n"
+                        << "Content-Length: 0\r\n"
+                        << "\r\n";
+                    socket->send(oss.str());
+                    socket->shutdown();
+                }
+            }
             else if (!requestDetails.isWebSocket() && requestDetails.equals(RequestDetails::Field::Type, "lool"))
             {
                 // All post requests have url prefix 'lool'.
@@ -2520,6 +2594,7 @@ private:
             }
             else
             {
+                std::cout << "test\n";
                 LOG_ERR("Unknown resource: " << requestDetails.toString());
 
                 // Bad request.
@@ -2599,6 +2674,18 @@ private:
 
     void performWrites() override
     {
+    }
+
+    //For modules leave
+    void onDisconnect() override
+    {
+        if (_module_exit_application)
+        {
+            std::cout << "close fork process" << std::endl;
+            auto socket = _socket.lock();
+            socket->closeConnection();
+            _exit(Application::EXIT_SOFTWARE);
+        }
     }
 
 #if !MOBILEAPP
@@ -3583,6 +3670,9 @@ private:
 
     /// Cache for static files, to avoid reading and processing from disk.
     static std::map<std::string, std::string> StaticFileContentCache;
+
+    /// This is for module application exit the fork process
+    bool _module_exit_application = false;
 };
 
 std::map<std::string, std::string> ClientRequestDispatcher::StaticFileContentCache;

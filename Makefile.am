@@ -10,7 +10,7 @@ endif
 
 else
 
-SUBDIRS = . test loleaflet cypress_test extensions fonts support
+SUBDIRS = . test loleaflet cypress_test extensions fonts support modules
 
 export ENABLE_DEBUG
 
@@ -326,7 +326,8 @@ EXTRA_DIST = discovery.xml \
              etc/sudoers.d/lool \
              etc/sysconfig/ndcodfweb \
              scripts/unocommands.py \
-             $(man_MANS)
+             $(man_MANS) \
+			 modules
 
 if ENABLE_LIBFUZZER
 CLEANUP_COMMAND=true
@@ -383,6 +384,8 @@ run: all @JAILS_PATH@
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
+	@cp $(abs_top_srcdir)/modules/.libs/libtemplaterepo.so.0.0.0 $(abs_top_srcdir)/libtemplaterepo.so
+	@cp $(abs_top_srcdir)/modules/.libs/libmergeodf.so.0.0.0 $(abs_top_srcdir)/libmergeodf.so
 	@echo
 	./ndcodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:security.capabilities="$(CAPABILITIES)" \

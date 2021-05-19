@@ -91,7 +91,8 @@ LOLEAFLET_CSS =\
 	$(builddir)/node_modules/spectrum-colorpicker2/dist/spectrum.css \
 	$(srcdir)/css/menubar.css \
 	$(builddir)/fonts/font-awesome.min.css \
-	$(builddir)/node_modules/jquery-ui/jquery-ui.css
+	$(builddir)/node_modules/jquery-ui/jquery-ui.css \
+	$(srcdir)/css/datatables.min.css
 
 LOLEAFLET_CSS_DST = $(foreach file,$(LOLEAFLET_CSS),$(builddir)/dist/$(notdir $(file)))
 LOLEAFLET_CSS_M4 = $(strip $(foreach file,$(LOLEAFLET_CSS),$(notdir $(file))))
@@ -134,7 +135,8 @@ PLUGINS_JS =\
 	w2ui-1.5.rc1.js \
 	toolbar.js \
 	screenwatermark.js \
-	main.js
+	main.js \
+	datatables.min.js
 
 PLUGINS_JS_SRC = $(shell find $(srcdir)/js -name '*.js')
 PLUGINS_JS_DST = $(patsubst $(srcdir)/js/%.js,$(builddir)/dist/%.js,$(PLUGINS_JS_SRC))
@@ -171,8 +173,16 @@ build-loleaflet: | $(LOLEAFLET_L10N_DST) \
 	$(builddir)/dist/fonts/fontawesome-webfont.woff2 \
 	$(builddir)/dist/bundle.css \
 	$(builddir)/dist/bundle.js \
+	$(builddir)/dist/datatables.min.js \
+	$(builddir)/dist/datatables.min.css \
 	$(builddir)/dist/loleaflet.html
 	@echo "build loleaflet completed"
+
+$(builddir)/dist/datatables.min.js:
+	cp $(srcdir)/js/datatables.min.js $(builddir)/dist/datatables.min.js
+
+$(builddir)/dist/datatables.min.css:
+	cp $(srcdir)/css/datatables.min.css $(builddir)/dist/datatables.min.css
 
 $(builddir)/dist/admin-bundle.js: $(LOLEAFLET_ADMIN_DST) \
 	$(LOLEAFLET_PREFIX)/dist/admin-src.js

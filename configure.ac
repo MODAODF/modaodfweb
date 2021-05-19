@@ -971,7 +971,7 @@ else
 fi
 AC_SUBST(ENABLE_SUPPORT_KEY)
 
-LIBS="$LIBS -lPocoNetSSL${POCO_DEBUG_SUFFIX} -lPocoNet${POCO_DEBUG_SUFFIX} -lPocoUtil${POCO_DEBUG_SUFFIX} -lPocoJSON${POCO_DEBUG_SUFFIX} -lPocoXML${POCO_DEBUG_SUFFIX} -lPocoFoundation${POCO_DEBUG_SUFFIX} -lPocoCrypto${POCO_DEBUG_SUFFIX}"
+LIBS="$LIBS -lPocoNetSSL${POCO_DEBUG_SUFFIX} -lPocoNet${POCO_DEBUG_SUFFIX} -lPocoUtil${POCO_DEBUG_SUFFIX} -lPocoJSON${POCO_DEBUG_SUFFIX} -lPocoXML${POCO_DEBUG_SUFFIX} -lPocoFoundation${POCO_DEBUG_SUFFIX} -lPocoCrypto${POCO_DEBUG_SUFFIX} -lPocoDataSQLite${POCO_DEBUG_SUFFIX} -lPocoZip${POCO_DEBUG_SUFFIX} -lPocoData${POCO_DEBUG_SUFFIX}"
 
 AS_IF([test "$ENABLE_SSL" = "true"],
       [LIBS="$LIBS -lssl -lcrypto"])
@@ -1171,6 +1171,7 @@ AC_CONFIG_FILES([Makefile
                  test/Makefile
                  loleaflet/Makefile
                  extensions/Makefile
+                 modules/Makefile
                  loleaflet/npm-shrinkwrap.json
                  fonts/Makefile
                  fonts/00-ndcodfweb.conf

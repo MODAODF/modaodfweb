@@ -36,6 +36,11 @@
 
 #include <common/SigUtil.hpp>
 
+//Modules
+#include <dlfcn.h>
+#include "modules/templaterepo.h"
+#include "modules/mergeodf.h"
+
 using namespace LOOLProtocol;
 
 using Poco::Net::HTTPResponse;
@@ -289,6 +294,61 @@ void AdminSocketHandler::handleMessage(const std::vector<char> &payload)
         }
         // Let's send back the current log levels in return. So the user can be sure of the values.
         sendTextFrame("channel_list " + _admin->getChannelLogLevels());
+    }
+    // For Module admin
+    else if (tokens.equals(0, "module") && tokens.equals(1, "templaterepo"))
+    {
+        std::string moduleName = tokens[1];
+        void* templaterepo_h;
+        TemplateRepo* _templaterepo;
+        _templaterepo = 0;
+#if ENABLE_DEBUG
+        templaterepo_h = dlopen("./libtemplaterepo.so", RTLD_NOW);
+#else
+        templaterepo_h = dlopen("libtemplaterepo.so", RTLD_LAZY);
+#endif
+        if (templaterepo_h)
+        {
+            std::cout << "[admin] Load libtemplaterepo.so success" << std::endl;
+            TemplateRepo* (*create)();
+            create = (TemplateRepo* (*)())dlsym(templaterepo_h, "create_object");
+            _templaterepo = (TemplateRepo*)create();
+
+            std::string result = _templaterepo->handleAdmin(firstLine);
+            sendTextFrame(result);
+        }
+        else
+        {
+            std::cout << "[admin] Load libtemplaterepo.so fail" << std::endl;
+            sendTextFrame("No such module");
+        }
+    }
+    else if (tokens.equals(0, "module") && tokens.equals(1, "mergeodf"))
+    {
+        std::string moduleName = tokens[1];
+        void* mergeodf_h;
+        MergeODF* _mergeodf;
+        _mergeodf = 0;
+#if ENABLE_DEBUG
+        mergeodf_h = dlopen("./libmergeodf.so", RTLD_NOW);
+#else
+        mergeodf_h = dlopen("libmergeodf.so", RTLD_LAZY);
+#endif
+        if (mergeodf_h)
+        {
+            std::cout << "[admin] Load libmergeodf.so success" << std::endl;
+            MergeODF* (*create)();
+            create = (MergeODF* (*)())dlsym(mergeodf_h, "create_object");
+            _mergeodf = (MergeODF*)create();
+
+            std::string result = _mergeodf->handleAdmin(firstLine);
+            sendTextFrame(result);
+        }
+        else
+        {
+            std::cout << "[admin] Load libmergeodf.so fail" << std::endl;
+            sendTextFrame("No such module");
+        }
     }
 }
 

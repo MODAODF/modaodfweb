@@ -1,0 +1,177 @@
+<script>
+    if (window.location.protocol == "https:") {
+        host = 'wss://' + window.location.host + '%SERVICE_ROOT%/lool/adminws/'
+    }
+    else {
+        host = 'ws://' + window.location.host + '%SERVICE_ROOT%/lool/adminws/'
+    }
+
+    var MacIp = Admin.MacIp(host);
+    var templaterepoSocket = Admin.Templaterepo(host);
+</script>
+<style>
+    tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
+    hr {
+        border-top: 3px double #8c8b8b;
+    }
+</style>
+<ul class="nav nav-tabs">
+    <li role="presentation" class=""><a data-toggle="tab" href="#a1" class="tabctl">模組概覽</a></li>
+    <li role="presentation" class=""><a data-toggle="tab" href="#a2" class="tabctl">用戶端裝置 MAC 管理</a></li>
+    <li role="presentation" class=""><a data-toggle="tab" href="#a3" class="tabctl">範本來源 IP 管理</a></li>
+</ul>
+<div class="tab-content" style="height: 100%;">
+    <!--******************************API 資訊******************************-->
+    <div id="a1" class="tab-pane" style="width: 50%;">
+        <div class="fluid-container">
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><strong>API</strong></div>
+                    <div class="panel-body">
+                        <p>此 API 需搭配範本中心插件來使用</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><strong>API 使用方法</strong></div>
+                    <div class="panel-body">
+                        <ol>
+                            <li>透 ODFAPI 管理網站上傳範本中心</li>
+                            <li>在用戶端安裝範本中心插件</li>
+                            <li>同步管理中心的範本</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><strong>示意圖</strong></div>
+                    <div class="panel-body">
+                        <img class="img-responsive" src="/loleaflet/%VERSION%/images/templaterepo.png"></img>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--******************************Mac addr******************************-->
+    <div id="a2" class="tab-pane" style="width: 60%;">
+        <span>目前筆數： <span class="recordProgress"></span></span>
+        <hr>
+        <form id="macForm" role="form" ctype="mac">
+            <div class="form-group">
+                <label>Mac address:</label>
+                <input type="text" class="form-control" name="macip" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>描述:</label>
+                <input type="text" class="form-control" name="desc" placeholder="">
+            </div>
+            <button type="submit" class="btn btn-default">新增</button>
+            <hr />
+        </form>
+    </div>
+    <!--******************************Ip addr******************************-->
+    <div id="a3" class="tab-pane" style="width: 60%;">
+        <span>目前筆數： <span class="recordProgress"></span></span>
+        <hr>
+        <form id="ipForm" role="form" ctype="ip">
+            <div class="form-group">
+                <label>IP address:</label>
+                <input type="text" class="form-control" name="macip" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>描述:</label>
+                <input type="text" class="form-control" name="desc" placeholder="">
+            </div>
+            <button type="submit" class="btn btn-default">新增</button>
+            <hr />
+        </form>
+    </div>
+</div>
+
+<!-- template for mac/ip address list -->
+<div class="maciptempl" style="display: none;">
+    <form class="form-inline moddelmacForm" role="form">
+        <div class="form-group">
+            <label class="macipno"></label>
+            <input type="text" class="form-control" name="macip" placeholder="">
+        </div>
+        <div class="form-group">
+            <label>描述</label>
+            <input type="text" class="form-control" name="desc" placeholder="">
+        </div>
+        <input type="hidden" name="rec_id" value="" />
+        <input type="hidden" name="type" value="" />
+        <button name="mod_macip" type="submit" class="btn btn-default">修改</button>
+        <button name="del_macip" type="submit" class="btn btn-default">刪除</button>
+    </form>
+</div>
+<script>
+    var getCookie = function (name) {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.indexOf(name) === 0) {
+                return cookie;
+            }
+        }
+
+        return '';
+    }
+    $(document).ready(function () {
+        if (getCookie('deftab') != '') {
+            var tabid = getCookie('deftab').split('=')[1];
+            if (tabid == '') {
+                $('.nav-tabs a[href="#a1"]').tab('show');
+            }
+            else {
+                if (Number(tabid.replace("#a", "")) > $(".tabctl").length)
+                    tabid = '#a1';
+                $('.nav-tabs a[href="' + tabid + '"]').tab('show');
+            }
+        }
+    });
+
+    /*
+     * 產生 mac/ip address 列表
+     */
+    function makeMacIpColumns(formId, data, type) {
+        var idx = 1;
+        var list = data['list'];
+        var maxinum = data['max'];
+
+        // 超過筆數不能新增
+        if (list.length >= maxinum) {
+            $(formid).find('button[type=submit]').prop('disabled', true);
+        }
+        // 目前筆數/總筆數
+        progress = list.length + '/' + maxinum;
+        $(formid).parent().find('.recordProgress').text(progress);
+        for (var col in list) {
+            var line = $('.maciptempl').children().clone()
+                .removeClass('maciptempl');
+            // fill data
+            line.find('.macipno').html(idx);
+            line.find('input[name=macip]').val(list[col].macip);
+            line.find('input[name=rec_id]').val(list[col].rec_id);
+            line.find('input[name=desc]').val(list[col].desc);
+            // ctype: mac|ip
+            line.find('button[name=mod_macip]').attr('ctype', type);
+            line.find('button[name=del_macip]').attr('ctype', type);
+            line.show();
+            $(formId).parent().append(line);
+
+            idx++;
+        }
+    }
+    /* 記憶選取的 tab　位置: 重開網頁以此為依據 */
+    $('.nav-tabs a').click(function () {
+        document.cookie = 'deftab=' + this.hash;
+    });
+</script>
