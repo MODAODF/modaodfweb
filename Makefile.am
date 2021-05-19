@@ -10,7 +10,7 @@ endif
 
 else
 
-SUBDIRS = . test loleaflet cypress_test extensions fonts support modules
+SUBDIRS = . loleaflet extensions fonts support modules
 
 export ENABLE_DEBUG
 
