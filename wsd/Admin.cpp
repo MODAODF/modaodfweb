@@ -40,6 +40,7 @@
 #include <dlfcn.h>
 #include "modules/templaterepo.h"
 #include "modules/mergeodf.h"
+#include "modules/tbl2sc.h"
 
 using namespace LOOLProtocol;
 
@@ -347,6 +348,33 @@ void AdminSocketHandler::handleMessage(const std::vector<char> &payload)
         else
         {
             std::cout << "[admin] Load libmergeodf.so fail" << std::endl;
+            sendTextFrame("No such module");
+        }
+    }
+    else if (tokens.equals(0, "module") && tokens.equals(1, "tbl2sc"))
+    {
+        std::string moduleName = tokens[1];
+        void* tbl2sc_h;
+        Tbl2SC* _tbl2sc;
+        _tbl2sc = 0;
+#if ENABLE_DEBUG
+        tbl2sc_h = dlopen("./libtbl2sc.so", RTLD_NOW);
+#else
+        tbl2sc_h = dlopen("libtbl2sc.so", RTLD_LAZY);
+#endif
+        if (tbl2sc_h)
+        {
+            std::cout << "[admin] Load libtbl2sc.so success" << std::endl;
+            Tbl2SC* (*create)();
+            create = (Tbl2SC* (*)())dlsym(tbl2sc_h, "create_object");
+            _tbl2sc = (Tbl2SC*)create();
+
+            std::string result = _tbl2sc->handleAdmin(firstLine);
+            sendTextFrame(result);
+        }
+        else
+        {
+            std::cout << "[admin] Load libtbl2sc.so fail" << std::endl;
             sendTextFrame("No such module");
         }
     }

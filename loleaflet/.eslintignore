@@ -10,5 +10,6 @@
 **/admin/src/AdminSocketMacIp.js
 **/admin/src/AdminSocketMergeODF.js
 **/admin/src/AdminSocketTemplateRepo.js
+**/admin/src/AdminSocketTbl2sc.js
 **/js/datatables.min.js
 **/css/datatables.min.css

@@ -67,6 +67,8 @@ mkdir -p %{buildroot}/etc/%{name}/conf.d/templaterepo/
 %__install modules/templaterepo.xml %{buildroot}/etc/%{name}/conf.d/templaterepo/templaterepo.xml
 mkdir -p %{buildroot}/etc/%{name}/conf.d/mergeodf/
 %__install modules/mergeodf.xml %{buildroot}/etc/%{name}/conf.d/mergeodf/mergeodf.xml
+mkdir -p %{buildroot}/etc/%{name}/conf.d/tbl2sc/
+%__install modules/tbl2sc.xml %{buildroot}/etc/%{name}/conf.d/tbl2sc/tbl2sc.xml
 
 %files
 %defattr(-,root,root,-)
@@ -107,6 +109,12 @@ mkdir -p %{buildroot}/etc/%{name}/conf.d/mergeodf/
 %{_libdir}/libmergeodf.so.?
 %{_libdir}/libmergeodf.so.?.?.?
 /etc/%{name}/conf.d/mergeodf/mergeodf.xml
+
+# tbl2sc
+%{_libdir}/libtbl2sc.so
+%{_libdir}/libtbl2sc.so.?
+%{_libdir}/libtbl2sc.so.?.?.?
+/etc/%{name}/conf.d/tbl2sc/tbl2sc.xml
 
 %pre
 getent group lool >/dev/null || groupadd -r lool
@@ -150,10 +158,13 @@ if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl start ndcodfweb; fi
 
 touch /var/log/templaterepo.log && chown lool:lool /var/log/templaterepo.log
 touch /var/log/mergeodf.log && chown lool:lool /var/log/mergeodf.log
+touch /var/log/tbl2sc.log && chown lool:lool /var/log/tbl2sc.log
 mkdir -p /var/lib/%{name}/templaterepo/templates
 chown -R lool:lool /var/lib/%{name}/templaterepo
 mkdir -p /var/lib/%{name}/mergeodf/templates
 chown -R lool:lool /var/lib/%{name}/mergeodf
+mkdir -p /var/lib/%{name}/tbl2sc
+chown -R lool:lool /var/lib/%{name}/tbl2sc
 
 echo "   Done."
 
@@ -176,11 +187,12 @@ if [ $arg = 0 ] ; then
     rm -f /var/log/ndcodfweb.log*
     rm -f /var/log/templaterepo.log*
     rm -f /var/log/mergeodf.log*
+    rm -f /var/log/tbl2sc.log*
     # systemplate & child root
     loroot=%{loroot}
     loolparent=`cd ${loroot} && cd .. && /bin/pwd`
     rm -rf ${loolparent}/%{name}/*
 fi
- 
+
 
 %changelog

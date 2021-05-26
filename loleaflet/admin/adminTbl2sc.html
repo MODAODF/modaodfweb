@@ -1,0 +1,314 @@
+<link rel="stylesheet" type="text/css" href="/loleaflet/%VERSION%/datatables.min.css" />
+<script type="text/javascript" src="/loleaflet/%VERSION%/datatables.min.js"></script>
+<script>
+    if (window.location.protocol == "https:") {
+        host = 'wss://' + window.location.host + '%SERVICE_ROOT%/lool/adminws/'
+    }
+    else {
+        host = 'ws://' + window.location.host + '%SERVICE_ROOT%/lool/adminws/'
+    }
+
+    var tbl2scSocket = Admin.Tbl2sc(host);
+</script>
+<style>
+    .material-switch>input[type="checkbox"] {
+        display: none;
+    }
+
+    .material-switch>label {
+        cursor: pointer;
+        height: 0px;
+        position: relative;
+        width: 32px;
+    }
+
+    .material-switch>label::before {
+        background: rgb(0, 0, 0);
+        box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        content: '';
+        height: 12px;
+        margin-top: -8px;
+        position: absolute;
+        opacity: 0.3;
+        transition: all 0.1s ease-in-out;
+        width: 32px;
+    }
+
+    .material-switch>label::after {
+        background: rgb(255, 255, 255);
+        border-radius: 16px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        content: '';
+        height: 16px;
+        left: -4px;
+        margin-top: -6px;
+        position: absolute;
+        top: -4px;
+        transition: all 0.1s ease-in-out;
+        width: 16px;
+    }
+
+    .material-switch>input[type="checkbox"]:checked+label::before {
+        background: inherit;
+        opacity: 0.5;
+    }
+
+    .material-switch>input[type="checkbox"]:checked+label::after {
+        background: inherit;
+        left: 20px;
+    }
+</style>
+<style>
+    tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
+    hr {
+        border-top: 3px double #8c8b8b;
+    }
+</style>
+<ul class="nav nav-tabs">
+    <li role="presentation" class=""><a data-toggle="tab" href="#a1" class="tabctl">API 測試</a></li>
+    <li role="presentation" class=""><a data-toggle="tab" href="#a2" class="tabctl">模組概覽</a></li>
+    <li role="presentation" class=""><a data-toggle="tab" href="#a4" class="tabctl">轉檔紀錄</a></li>
+</ul>
+<div class="tab-content" style="height: 100%;">
+    <!--******************************API 測試******************************-->
+    <div id="a1" class="tab-pane" style="width: 50%;">
+        <div class="fluid-container">
+            <h3>HTML Table</h3>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Number of Sales</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Jan</th>
+                        <td>105</td>
+                        <td>$15,000.00</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Feb</th>
+                        <td>95</td>
+                        <td>$12,000.00</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Mar</th>
+                        <td>150</td>
+                        <td>$20,000.00</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Apr</th>
+                        <td>50</td>
+                        <td>$30,000.00</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">May</th>
+                        <td>80</td>
+                        <td>$15,000.00</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Jun</th>
+                        <td>110</td>
+                        <td>$22,000.00</td>
+                    </tr>
+                    <tr id="endtable">
+                        <th colspan="2" scope="row">Grand Total</th>
+                        <td>$114,000.00</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="dir-tbl2sc" class="btn btn-primary">
+                把 table 傳給 tbl2sc 進行轉換, 直接下載
+            </button>
+        </div>
+    </div>
+    <!--******************************API 資訊******************************-->
+    <div id="a2" class="tab-pane" style="width: 50%;">
+        <div class="fluid-container">
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><strong>API</strong></div>
+                    <div class="panel-body">
+                        <ul>
+                            <li>http://<script>document.write(window.location.host);</script>/lool/tbl2sc
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <h3>API 使用方法 </h3>
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><strong>API 使用方法</strong></div>
+                    <div class="panel-body">
+                        <ol>
+                            <li>取得 HTML Table tag</li>
+                            <li>將取得 tag 當作文字呼叫 API 來轉換成試算表</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><strong>示意圖</strong></div>
+                    <div class="panel-body">
+                        <img class="img-responsive" src="/loleaflet/%VERSION%/images/tbl2sc.png"></img>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--******************************設定檔管理******************************-->
+    <div id="a3" class="tab-pane" style="width: 100%;">
+        <div class="fluid-container">
+            <form class="form-horizontal" id="mainform">
+                <div class="panel-group">
+                    <!-- 一般設定 -->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading"><strong>一般設定</strong></div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="database.db_path">Tbl2sc 資料庫位置</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="database.db_path">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="logging.log_file">Logging 檔案</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" id="logging.log_file">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div><button class="btn btn-info pull-right" id="saveConfig" disabled><strong>更新設定</strong></button></div>
+        </div>
+    </div>
+    <!-- Logging -->
+    <div id="a4" class="tab-pane">
+        <br>
+        <button class="btn btn-warning" id="Pause">暫停</button>
+        <br>
+        <br>
+        <table id="logging_table" class="table table-bordered table-hover" style="width:100%">
+            <thead>
+                <tr class="bg-primary">
+                    <th>狀態</th>
+                    <th>日期</th>
+                    <th>來源 IP</th>
+                    <th>標題</th>
+                </tr>
+            </thead>
+            <tbody id="logging_content">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>狀態</th>
+                    <th>日期</th>
+                    <th>來源 IP</th>
+                    <th>標題</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<script>
+    var getCookie = function (name) {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.indexOf(name) === 0) {
+                return cookie;
+            }
+        }
+
+        return '';
+    }
+    var loggingTable;
+    $(document).ready(function () {
+        // 修改 XML Config 設定
+
+        loggingTable = $("#logging_table").DataTable();
+        $('#logging_table tfoot th').each(function () {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+        });
+        loggingTable.columns().every(function () {
+            var that = this;
+            $('input', this.footer()).on('keyup change clear', function () {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+        if (getCookie('deftab') != '') {
+            var tabid = getCookie('deftab').split('=')[1];
+            if (tabid == '') {
+                $('.nav-tabs a[href="#a1"]').tab('show');
+            }
+            else {
+                if (Number(tabid.replace("#a", "")) > $(".tabctl").length)
+                    tabid = '#a1';
+                $('.nav-tabs a[href="' + tabid + '"]').tab('show');
+            }
+        }
+    });
+
+    /* 記憶選取的 tab　位置: 重開網頁以此為依據 */
+    $('.nav-tabs a').click(function () {
+        document.cookie = 'deftab=' + this.hash;
+    });
+</script>
+<script>
+    // 網頁直接下載
+    $("#dir-tbl2sc").on("click", function tbl2sc() {
+        var tableStr = document.getElementsByTagName("table")[0].outerHTML;
+        url = "http://" + window.location.host + "/lool/tbl2sc"
+        formData = ""
+        jsonData = {
+            "title": "tbl2sc測試範例",
+            "content": tableStr,
+            "format": "ods"
+        }
+        for (xxx in jsonData) {
+            formData += xxx
+            formData += "="
+            formData += jsonData[xxx]
+            formData += "&"
+        }
+        fetch(url, {
+            method: 'POST', // or 'PUT'
+            body: formData,
+            headers: new Headers({
+                'Content-Type': 'application/x-www-form-urlencoded'
+            })
+        }).then(function (response) {
+            return response.blob()
+        }).then(function deal(myBlob) {
+
+            var objectURL = window.webkitURL.createObjectURL(myBlob);
+            let a = document.createElement('a')
+            a.download = 'tbl2sc測試範例.ods'
+            a.href = objectURL
+            document.body.appendChild(a)
+            a.click()
+            a.remove()
+        })
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', response));
+    });
+
+</script>

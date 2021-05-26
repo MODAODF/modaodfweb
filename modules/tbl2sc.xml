@@ -1,0 +1,8 @@
+<config>
+    <database>
+        <db_path type="string">/var/lib/ndcodfweb/tbl2sc/tbl2sc.sqlite</db_path>
+    </database>
+    <logging>
+        <log_file type="string">/tmp/tbl2sc.log</log_file>
+    </logging>
+</config>

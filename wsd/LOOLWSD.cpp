@@ -156,6 +156,7 @@ using Poco::Net::PartHandler;
 #include <dlfcn.h>
 #include "modules/templaterepo.h"
 #include "modules/mergeodf.h"
+#include "modules/tbl2sc.h"
 
 using namespace LOOLProtocol;
 
@@ -2576,6 +2577,40 @@ private:
                 else
                 {
                     std::cout << "[ModuleLib] Load libmergeodf.so fail" << std::endl;
+                    // Bad request.
+                    std::ostringstream oss;
+                    oss << "HTTP/1.1 400\r\n"
+                        << "Date: " << Poco::DateTimeFormatter::format(Poco::Timestamp(), Poco::DateTimeFormat::HTTP_FORMAT) << "\r\n"
+                        << "User-Agent: LOOLWSD WOPI Agent\r\n"
+                        << "Content-Length: 0\r\n"
+                        << "\r\n";
+                    socket->send(oss.str());
+                    socket->shutdown();
+                }
+            }
+            else if (requestDetails.equals(1, "tbl2sc"))
+            {
+                void* tbl2sc_h;
+                Tbl2SC* _tbl2sc;
+                _tbl2sc = 0;
+#if ENABLE_DEBUG
+                tbl2sc_h = dlopen("./libtbl2sc.so", RTLD_LAZY);
+#else
+                tbl2sc_h = dlopen("libtbl2sc.so", RTLD_LAZY);
+#endif
+                if (tbl2sc_h)
+                {
+                    std::cout << "[ModuleLib] Load libtbl2sc.so success" << std::endl;
+                    Tbl2SC* (*create)();
+                    create = (Tbl2SC* (*)())dlsym(tbl2sc_h, "create_object");
+                    _tbl2sc = (Tbl2SC*)create();
+
+                    _tbl2sc->handleRequest(_socket, message, request, disposition);
+                    _module_exit_application = _tbl2sc->exit_application;
+                }
+                else
+                {
+                    std::cout << "[ModuleLib] Load libtbl2sc.so fail" << std::endl;
                     // Bad request.
                     std::ostringstream oss;
                     oss << "HTTP/1.1 400\r\n"

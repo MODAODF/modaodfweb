@@ -1,4 +1,4 @@
-lib_LTLIBRARIES = libtemplaterepo.la libmergeodf.la
+lib_LTLIBRARIES = libtemplaterepo.la libmergeodf.la libtbl2sc.la
 
 lib_path = $(abs_top_srcdir)
 AM_CPPFLAGS = -I$(lib_path) \
@@ -20,3 +20,6 @@ libmergeodf_la_SOURCES = mergeodf.cpp \
 						 mergeodf_parser.cpp \
 						 mergeodf_access_db.cpp \
 						 mergeodf_logging_db.cpp
+
+libtbl2sc_la_SOURCES = tbl2sc.cpp \
+						tbl2sc_logging_db.cpp
