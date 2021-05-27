@@ -68,6 +68,11 @@ var AdminSocketMacIp= Admin.SocketBase.extend({
                     var recid = this.form.elements['rec_id'].value;
                     var macip = this.form.elements['macip'].value;
                     var desc = this.form.elements['desc'].value;
+                    var jsonData = {
+                        'recid' : recid,
+                        'macip' : macip,
+                        'desc'  : desc
+                    }
                     if (macip === '') {
                         alert('請輸入 Mac/IP address');
                         return;
@@ -79,9 +84,7 @@ var AdminSocketMacIp= Admin.SocketBase.extend({
                     if (forIP) {
                         command += 'set_ip';
                     }
-                    command += ' ' + recid;
-                    command += ',' + macip;
-                    command += ',' + desc;
+                    command += ' ' + JSON.stringify(jsonData);
                     socketSettings.send(command);
                     //this.form.submit();
                 });
@@ -112,6 +115,11 @@ var AdminSocketMacIp= Admin.SocketBase.extend({
                     e.preventDefault();
                     var macip = this.elements['macip'].value.trim();
                     var desc = this.elements['desc'].value.trim();
+                    var jsonData = {
+                        'macip' : macip,
+                        'desc'  : desc
+                    }
+
                     if (macip === '') {
                         alert('請輸入 Mac/IP address');
                         return;
@@ -123,8 +131,7 @@ var AdminSocketMacIp= Admin.SocketBase.extend({
                     if (forIP) {
                         command += 'add_ip_data';
                     }
-                    command += ' ' + macip;
-                    command += ',' + desc;
+                    command += ' ' + JSON.stringify(jsonData);
                     socketSettings.send(command);
                     //this.submit();
                 });

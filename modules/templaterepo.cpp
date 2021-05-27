@@ -817,7 +817,6 @@ std::string TemplateRepo::handleAdmin(std::string command)
     std::string result = "Module Loss return";
     std::string action = tokens[2];
     std::string dataString = tokens.count() >= 4 ? tokens[3] : "";
-
     if (action == "getLog")
     {
         std::cout << "getLog\n";
@@ -839,14 +838,29 @@ std::string TemplateRepo::handleAdmin(std::string command)
     }
     else if (action == "add_mac_data" || action == "add_ip_data")
     {
-        StringTokenizer data(dataString, ",", tokenOpts);
+        Poco::JSON::Object::Ptr object;
         result = action + " false";
-        if (data[0] != "")
+        if (JsonUtil::parseJSON(command, object))
+        {
+            std::string desc  = object->get("desc");
+            std::string macip = object->get("macip");
+            std::string sourceType = action == "add_mac_data" ? "mac" : "ip";
+            TemplateRepoDB *cdb = new TemplateRepoDB();
+            if (!cdb->macIpReachLimit(sourceType))
+                if (cdb->newMacIp(macip, desc, sourceType))
+                    result = action + " true";
+        }
+        StringTokenizer data(dataString, ",", tokenOpts);
+        if (data[0] != "" && false)
         {
             std::string desc = "";
             std::string sourceType = action == "add_mac_data" ? "mac" : "ip";
             if (data.count() >= 2)
-                desc = data[1];
+            {
+                StringTokenizer descData(command, ",", tokenOpts);
+                desc = descData[1];
+            }
+            std::cout << "data count: " << data.count() << "\n";
             TemplateRepoDB *cdb = new TemplateRepoDB();
             if (!cdb->macIpReachLimit(sourceType))
                 if (cdb->newMacIp(data[0], desc, sourceType))
@@ -855,14 +869,28 @@ std::string TemplateRepo::handleAdmin(std::string command)
     }
     else if (action == "set_ip" || action == "set_mac")
     {
+        Poco::JSON::Object::Ptr object;
+        result = action + " false";
+        if (JsonUtil::parseJSON(command, object))
+        {
+            std::string desc  = object->get("desc");
+            std::string macip = object->get("macip");
+            std::string recid = object->get("recid");
+            TemplateRepoDB *cdb = new TemplateRepoDB();
+            if (cdb->editMacIp(recid, macip, desc))
+                result = action + " true";
+        }
+
         StringTokenizer data(dataString, ",", tokenOpts);
         std::string desc = "";
-        result = action + " false";
-        if (data.count() >= 2 && data[0] != "" && data[1] != "")
+        if (data.count() >= 2 && data[0] != "" && data[1] != "" && false)
         {
             TemplateRepoDB *cdb = new TemplateRepoDB();
             if (data.count() >= 3)
-                desc = data[2];
+            {
+                StringTokenizer descData(command, ",", tokenOpts);
+                desc = descData[2];
+            }
             if (cdb->editMacIp(data[0], data[1], desc))
                 result = action + " true";
         }
