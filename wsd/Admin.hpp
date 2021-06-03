@@ -17,24 +17,6 @@
 #include "net/WebSocketHandler.hpp"
 #include "LOOLWSD.hpp"
 
-// Added by Firefly <firefly@ossii.com.tw>
-#include <Poco/Util/XMLConfiguration.h>
-#include <Poco/Dynamic/Var.h>
-#include <Poco/JSON/JSON.h>
-#include <Poco/JSON/Object.h>
-#include <Poco/JSON/Parser.h>
-#include <Poco/TemporaryFile.h>
-#include <common/JsonUtil.hpp>
-using Poco::Util::XMLConfiguration;
-using Poco::TemporaryFile;
-class oxoolConfig final: public XMLConfiguration
-{
-public:
-    oxoolConfig()
-        {}
-};
-//-------- End of Firefly added
-
 class Admin;
 
 /// Handle admin client's Websocket requests & replies.
@@ -67,16 +49,6 @@ private:
     Admin* _admin;
     int _sessionId;
     bool _isAuthenticated;
-    // Added by Firefly <firefly@ossii.com.tw>
-    // 軟體升級用
-    TemporaryFile* _temporaryFile;
-    std::ofstream* _upgradeFile;
-    std::string _upgradeFileName;
-    size_t _upgradeFileSize; // 檔案大小
-    size_t _totalReceived; // 已收到的檔案大小
-    bool upgradeSoftware(const std::string& command); // 軟體升級作業
-    //-------------------------------------------
-
 };
 
 class MemoryStatsTask;
@@ -135,7 +107,7 @@ public:
 
     std::string getChannelLogLevels();
 
-    void setChannelLogLevel(const std::string& _channelName, std::string _level);
+    void setChannelLogLevel(const std::string& channelName, std::string level);
 
     std::string getLogLines();
 
