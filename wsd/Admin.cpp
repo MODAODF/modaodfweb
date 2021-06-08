@@ -110,7 +110,10 @@ const std::string scanFontDir()
 void makeFontCach()
 {
     std::string fontCacheCmd = "fc-cache -f -r \"" + fontsDir + "\"";
-    system(fontCacheCmd.c_str());
+    if (system(fontCacheCmd.c_str()))
+    {
+        /* do nothing */
+    }
 }
 }
 
@@ -758,7 +761,7 @@ void AdminSocketHandler::handleMessage(const std::vector<char> &payload)
         }
 
         // 回到之前的工作目錄
-        chdir(currentPath.c_str());
+        if (chdir(currentPath.c_str())) {/* do nothing */};
         _receiveFile.deleteWorkDir(); // 砍掉工作暫存目錄
         sendTextFrame("upgradeSuccess");
     }
