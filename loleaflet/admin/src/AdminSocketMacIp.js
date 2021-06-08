@@ -4,7 +4,7 @@
     */
 /* global vex $ AdminSocketBase Admin */
 
-var AdminSocketMacIp= Admin.SocketBase.extend({
+var AdminSocketMacIp = AdminSocketBase.extend({
     constructor: function(host) {
         this.base(host);
         this._init();

@@ -3,7 +3,7 @@
 	View logs in the admin console.
 */
 /* global vex $ AdminSocketBase Admin */
-var AdminSocketMergeODF = Admin.SocketBase.extend({
+var AdminSocketMergeODF = AdminSocketBase.extend({
 	constructor: function(host) {
 		this.base(host);
 	},
