@@ -3,7 +3,7 @@
  * L.Control.Tabs is used to switch sheets in Calc
  */
 
-/* global $ _ _UNO */
+/* global $ vex _ _UNO */
 L.Control.Tabs = L.Control.extend({
 	onAdd: function(map) {
 		map.on('updatepermission', this._onUpdatePermission, this);
@@ -64,19 +64,19 @@ L.Control.Tabs = L.Control.extend({
 				}
 			}).bind(this),
 			items: {
-				'InsertColumnsAfter': { // 之前插入工作表
+				'InsertColumnsAfter': {
 					name: _('Insert sheet before this'),
 					icon: (function(opt, $itemElement, itemKey, item) {
 						return this._map.contextMenuIcon($itemElement, itemKey, item);
 					}).bind(this)
 				},
-				'InsertColumnsBefore': { // 之後插入工作表
+				'InsertColumnsBefore': {
 					name: _('Insert sheet after this'),
 					icon: (function(opt, $itemElement, itemKey, item) {
 						return this._map.contextMenuIcon($itemElement, itemKey, item);
 					}).bind(this)
 				},
-				'DuplicatePage': { // 移動複製工作表
+				'DuplicatePage': {
 					name: _UNO('.uno:Move', 'spreadsheet', true),
 					callback: (function() {
 						map.fire('executeDialog', {dialog: 'MoveTable'});
@@ -85,46 +85,30 @@ L.Control.Tabs = L.Control.extend({
 						return this._map.contextMenuIcon($itemElement, itemKey, item);
 					}).bind(this)
 				},
-				'DeleteTable': { // 刪除工作表
+				'DeleteTable': {
 					name: _UNO('.uno:Remove', 'spreadsheet', true),
 					callback: (function(/*key, options*/) {
 						map.fire('executeDialog', {dialog: 'RemoveTable'});
 					}).bind(this),
 					disabled: (function() {
-						// 只有一個工作表顯示，或該工作表被保護就不能執行
-						return (map.getNumberOfVisibleParts() === 1 || this._isProtedted());
+						// 只有一個工作表顯示
+						return (map.getNumberOfVisibleParts() === 1);
 					}).bind(this),
 					icon: (function(opt, $itemElement, itemKey, item) {
 						return this._map.contextMenuIcon($itemElement, itemKey, item);
 					}).bind(this)
 				 },
-				'DBTableRename': { // 重新命名工作表
+				'DBTableRename': {
 					name: _UNO('.uno:RenameTable', 'spreadsheet', true),
 					callback: (function(/*key, options*/) {
 						map.fire('executeDialog', {dialog: 'RenameTable'});
-					}).bind(this),
-					disabled: (function() {
-						return this._isProtedted(); // 被保護
 					}).bind(this),
 					icon: (function(opt, $itemElement, itemKey, item) {
 						return this._map.contextMenuIcon($itemElement, itemKey, item);
 					}).bind(this)
 				} ,
 				'sep01': '----',
-				'Hide': { // 隱藏工作表
-					name: _UNO('.uno:Hide', 'spreadsheet', true),
-					callback: (function() {
-						map.hidePage();
-					}).bind(this),
-					disabled: (function() {
-						// 只有一個工作表
-						return map.getNumberOfVisibleParts() === 1;
-					}).bind(this),
-					icon: (function(opt, $itemElement, itemKey, item) {
-						return this._map.contextMenuIcon($itemElement, itemKey, item);
-					}).bind(this)
-				},
-				'Show': { // 顯示工作表
+				'Show': {
 					name: _UNO('.uno:Show', 'spreadsheet', true),
 					callback: (function() {
 						map.fire('executeDialog', {dialog: 'ShowTable'});
@@ -136,9 +120,97 @@ L.Control.Tabs = L.Control.extend({
 					icon: (function(opt, $itemElement, itemKey, item) {
 						return this._map.contextMenuIcon($itemElement, itemKey, item);
 					}).bind(this)
+				},
+				'Hide': {
+					name: _UNO('.uno:Hide', 'spreadsheet', true),
+					callback: (function() {
+						map.hidePage();
+					}).bind(this),
+					disabled: (function() {
+						// 只有一個工作表
+						return map.getNumberOfVisibleParts() === 1;
+					}).bind(this),
+					icon: (function(opt, $itemElement, itemKey, item) {
+						return this._map.contextMenuIcon($itemElement, itemKey, item);
+					}).bind(this)
 				}
 			},
 			zIndex: 1000
+		});
+	},
+
+	_showPage: function () {
+		var map = this._map;
+		if (!map.hasAnyHiddenPart()) {
+			return;
+		}
+		var hiddenNames = map.getHiddenPartNames().split(',');
+		var sels = '<div style="height:200px; overflow-y:auto; overflow-y:none; padding: 5px; border:1px #bbbbbb solid">';
+		for (var i=0 ; i < hiddenNames.length ; i++) {
+			sels += '<input type="checkbox" name="' + hiddenNames[i] + '" ' +
+					'value="' + hiddenNames[i] + '">' + hiddenNames[i] + '<br>';
+		}
+		vex.dialog.open({
+			message: _('Hidden Sheets'),
+			input: sels,
+			buttons: [
+				$.extend({}, vex.dialog.buttons.YES, { text: _('OK') }),
+				$.extend({}, vex.dialog.buttons.NO, { text: _('Cancel') })
+			],
+			callback: function(data) {
+				for (var sheet in data) {
+					map.showPage(sheet);
+				}
+			}
+		});
+	},
+
+	_movePart: function () {
+		var map = this._map;
+		var partNames = map._docLayer._partNames;
+		var currPart = map.getCurrentPartNumber();
+		var options = '';
+		for (var i = 0 ; i < partNames.length ; i++) {
+			if (!map.isHiddenPart(i)) {
+				options += '<option value="' + (i+1) + '">' + partNames[i] + '</option>';
+			}
+		}
+		options += '<option value="32767">' + _('- move to end position -') + '</option>';
+		vex.dialog.open({
+			message: _UNO('.uno:Move', 'spreadsheet', true),
+			input: [
+				'<div><input type="radio" id="movepart" name="copypart" value="false" checked><label for="movepart"> ' + _('Move') + '</label>&emsp;&emsp;&emsp;&emsp;' +
+				'<input type="radio" id="copypart" name="copypart" value="true"><label for="copypart"> ' + _('Copy') + '</label></div>',
+				'<div><b>' + _('Insert before') + '</b></div>',
+				'<select name="moveTo" size="10" style="font-size:16px; width: 100%;">' + options + '</select>'
+			],
+			callback: function (data) {
+				if (data !== undefined) {
+					// 移動或複製
+					var copy = (data.copypart === 'true');
+					var pos = data.moveTo;
+					if (pos === undefined) {
+						pos = currPart + 2;
+						if (pos > partNames.length)
+							pos = 32767; // 最後
+					}
+					var params = {
+						'DocName': {
+							'type': 'string',
+							'value': map.getDocName()
+						},
+						'Index': {
+							'type': 'long',
+							'value': pos
+						},
+						'Copy': {
+							'type': 'boolean',
+							'value': copy
+						}
+					}
+					map.sendUnoCommand('.uno:Move', params);
+				}
+			}
 		});
 	},
 
@@ -190,10 +262,8 @@ L.Control.Tabs = L.Control.extend({
 						}
 					}(i).bind(this));
 
-					var txtNode = document.createTextNode(e.partNames[i]);
-					tab.appendChild(txtNode);
+					tab.textContent = e.partNames[i];
 					tab.id = id;
-					this._setTabInfo(i, tab);
 
 					L.DomEvent
 						.on(tab, 'click', L.DomEvent.stopPropagation)
@@ -204,17 +274,10 @@ L.Control.Tabs = L.Control.extend({
 				}
 			}
 			for (var key in this._spreadsheetTabs) {
-				var part = parseInt(key.match(/\d+/g)[0]);
+				var part =  parseInt(key.match(/\d+/g)[0]);
 				L.DomUtil.removeClass(this._spreadsheetTabs[key], 'spreadsheet-tab-selected');
 				if (part === selectedPart) {
 					L.DomUtil.addClass(this._spreadsheetTabs[key], 'spreadsheet-tab-selected');
-					var pInfo = this._map.getPartProperty(part); // 讀取工作表屬性
-					if (pInfo !== undefined) {
-						var bgColor = this._convertToHtmlColor(pInfo.bgColor);
-						if (bgColor !== '') {
-							$(this._spreadsheetTabs[key]).css('border-bottom-color', bgColor);
-						}
-					}
 				}
 			}
 
@@ -243,51 +306,10 @@ L.Control.Tabs = L.Control.extend({
 	},
 
 	_setPart: function (e) {
-		var part = e.target.id.match(/\d+/g)[0];
+		var part =  e.target.id.match(/\d+/g)[0];
 		if (part !== null) {
 			this._map.setPart(parseInt(part), /*external:*/ false, /*calledFromSetPartHandler:*/ true);
 		}
-	},
-
-	// 設定工作表標籤(未選擇)
-	_setTabInfo: function(idx, tab) {
-		var pInfo = this._map.getPartProperty(idx);
-		if (pInfo !== undefined) {
-			// 設定標籤背景及文字顏色
-			var bgColor = this._convertToHtmlColor(pInfo.bgColor);
-			if (bgColor !== '') {
-				var linearColor = '(#f8f8f8,' + bgColor + ')'; // 背景層漸
-				$(tab).css({
-					'background-color': bgColor,
-					'background': 'linear-gradient' + linearColor,
-					'color': pInfo.bgIsDark === '1' ? '#ffffff' : '#000000'
-				});
-			}
-			// 工作表是否保護
-			if (pInfo.protected === '1') {
-				var span = L.DomUtil.create('span', 'spreadsheet-tab-protected', tab);
-				tab.insertBefore(span, tab.firstChild);
-			}
-		}
-	},
-
-	// 檢查工作表是否被保護
-	_isProtedted: function(idx) {
-		var isProtected = false
-		var partInfo = this._map.getPartProperty(idx);
-
-		if (partInfo !== undefined) {
-			isProtected = partInfo.protected === '1';
-		}
-		return isProtected;
-	},
-
-	_convertToHtmlColor: function(color) {
-		if (color === '-1') {
-			return '';
-		}
-		var sColor = parseInt(color).toString(16);
-		return '#' + '0'.repeat(6 - sColor.length) + sColor; // 不足六碼前面補0
 	},
 
 	// 捲動選取的標籤到可視區內
