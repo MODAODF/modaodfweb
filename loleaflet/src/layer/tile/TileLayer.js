@@ -2,7 +2,7 @@
 /*
  * L.TileLayer is used for standard xyz-numbered tile layers.
  */
-/* global $ _ Uint8ClampedArray Uint8Array vex */
+/* global $ _ Uint8ClampedArray Uint8Array */
 // Implement String::startsWith which is non-portable (Firefox only, it seems)
 // See http://stackoverflow.com/questions/646628/how-to-check-if-a-string-startswith-another-string#4579228
 
@@ -473,9 +473,6 @@ L.TileLayer = L.GridLayer.extend({
 		else if (textMsg.startsWith('shapeselectioncontent:')) {
 			this._onShapeSelectionContent(textMsg);
 		}
-		else if (textMsg.startsWith('graphicselectioncontent:')) {
-			this._onGraphicSelectionContent(textMsg);
-		}
 		else if (textMsg.startsWith('graphicselection:')) {
 			this._onGraphicSelectionMsg(textMsg);
 		}
@@ -855,58 +852,6 @@ L.TileLayer = L.GridLayer.extend({
 		}
 	},
 
-	_onGraphicSelectionContent: function(textMsg) {
-		// 沒有被選取的圖片(不太可能)就結束
-		if (!this._graphicMarker) {
-			return;
-		}
-
-		textMsg = textMsg.substring('graphicselectioncontent:'.length + 1);
-		var json = JSON.parse(textMsg);
-		var byteString = atob(json.data); // json.data 是 base64encode 後的圖片資料
-
-		switch (json.id) {
-		case 'edit': // 編輯圖片
-			// // 是否是 drawio 可編輯的圖表
-			if (json.type === 'svg') {
-				var svgDoc = this._graphicMarker.parseSVG(byteString);
-				var svgContent = svgDoc.getElementsByTagName('svg')[0].getAttribute('content');
-				// svg 有 content 這個 attrib 且內容開頭是 '<mxfile'，
-				// 就把 content 送給 drawio 編輯
-				if (svgContent && svgContent.startsWith('<mxfile')) {
-					L.dialog.run('DiagramEditor', {
-						xml: svgContent, /* 或 svg: svgString 亦可，svgContent 資料比較小 */
-					});
-					return;
-				}
-			}
-
-			L.dialog.alert({
-				message: _('This type of picture editing is not yet supported.') + '(' + json.type + ')',
-				icon: 'error'
-			});
-			break;
-		case 'export': // 匯出圖片
-			// wopi 禁止匯出檔案行為
-			if (this._map['wopi'].HideExportOption) {
-				return;
-			}
-			// 轉換資料到 byte array
-			var byteArray = new Uint8Array(byteString.length);
-			for (var i = 0; i < byteString.length ; i++) {
-				byteArray[i] = byteString.charCodeAt(i);
-			}
-			var blob = new Blob([byteArray], {type: 'octet/stream'});
-			var link = L.DomUtil.create('a', '', document.body);
-			link.style = 'display: none';
-			link.href = window.URL.createObjectURL(blob);
-			link.download = _('unnamed') + '.' + json.type;
-			link.click();
-			L.DomUtil.remove(link);
-			break;
-		}
-	},
-
 	_resetSelectionRanges: function() {
 		this._graphicSelectionTwips = new L.Bounds(new L.Point(0, 0), new L.Point(0, 0));
 		this._graphicSelection = new L.LatLngBounds(new L.LatLng(0, 0), new L.LatLng(0, 0));
@@ -1067,7 +1012,6 @@ L.TileLayer = L.GridLayer.extend({
 			var vCursorHeight = height < 285 ? height : 285; // 虛擬游標高度
 			var offsetCur = new L.Point(top, vCursorHeight);
 			var bottomRightTwipsCur = topLeftTwips.add(offsetCur);
-
 			this._visibleCursor = new L.LatLngBounds(
 				this._twipsToLatLng(topLeftTwips, this._map.getZoom()),
 				this._twipsToLatLng(bottomRightTwipsCur, this._map.getZoom())
@@ -3162,64 +3106,9 @@ L.TileLayer = L.GridLayer.extend({
 
 	_onFileLoadFunc: function(file) {
 		var socket = this._map._socket;
-		return function (e) {
-			if (file.type !== 'image/svg+xml') {
-				vex.dialog.confirm({
-					message: _('Do you want to compress the image? (Except SVG File)'),
-					callback: function(e) {
-						if (e) {
-							var compressRatio = 1, // 圖片壓縮比例
-							imgNewWidth = 400, // 圖片新寬度
-							img = new Image(),
-							canvas = document.createElement('canvas'),
-							context = canvas.getContext('2d'),
-							fileReader, dataUrl;
-							fileReader = new FileReader();
-							fileReader.onload = function (evt) {
-								dataUrl = evt.target.result,
-								img.src = dataUrl;
-							};
-							fileReader.readAsDataURL(file);
-
-							// 圖片載入後
-							img.onload = function () {
-								var width = this.width, // 圖片原始寬度
-								height = this.height, // 圖片原始高度
-								imgNewHeight = imgNewWidth * height / width;// 圖片新高度
-
-								// 使用 canvas 調整圖片寬高
-								canvas.width = imgNewWidth;
-								canvas.height = imgNewHeight;
-								context.clearRect(0, 0, imgNewWidth, imgNewHeight);
-
-								// 調整圖片尺寸
-								context.drawImage(img, 0, 0, imgNewWidth, imgNewHeight);
-
-								// canvas 轉換為 blob 格式、上傳
-								canvas.toBlob(function (blob) {
-									var reader = new FileReader();
-									reader.readAsDataURL(blob);
-									reader.onloadend = function () {
-										var base64data = reader.result.split(',')[1];
-										socket.sendMessage('insertpicture data='+ base64data);
-									}
-								}, 'image/jpeg', compressRatio);
-							}
-						} else {
-							var reader = new FileReader();
-							reader.readAsDataURL(file);
-							reader.onloadend = function () {
-								var base64data = reader.result.split(',')[1];
-								socket.sendMessage('insertpicture data='+ base64data);
-							}
-						}
-					}
-				});
-				return;
-			} else {
-				var blob = new Blob(['paste mimetype=' + file.type + '\n', e.target.result]);
-				socket.sendMessage(blob);
-			}
+		return function(e) {
+			var blob = new Blob(['paste mimetype=' + file.type + '\n', e.target.result]);
+			socket.sendMessage(blob);
 		};
 	},
 
