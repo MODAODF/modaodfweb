@@ -34,10 +34,9 @@ var AdminSocketTemplaterepo = AdminSocketBase.extend({
         }
     },
 
-	onSocketClose: function()
-	{
+	onSocketClose: function() {
 		clearInterval(this._intervalId);
-        console.log("Close socket");
+        this.base.call(this);
 	}
 });
 
