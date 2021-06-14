@@ -109,7 +109,7 @@ const std::string scanFontDir()
 // 利用 fc-cache 重建 oxool 管理的字型目錄
 void makeFontCach()
 {
-    std::string fontCacheCmd = "fc-cache -f -r \"" + fontsDir + "\"";
+    std::string fontCacheCmd = "fc-cache \"" + fontsDir + "\"";
     if (system(fontCacheCmd.c_str()))
     {
         /* do nothing */
@@ -775,7 +775,6 @@ void AdminSocketHandler::handleMessage(const std::vector<char> &payload)
         font.copyTo(fontsDir);
         font.copyTo(sysTemplateFontsDir);
         _receiveFile.deleteWorkDir(); // 砍掉工作暫存目錄
-        makeFontCach(); // 重建 font cache
         sendTextFrame("installFontSuccess");
     }
     // 刪除字型
@@ -797,8 +796,12 @@ void AdminSocketHandler::handleMessage(const std::vector<char> &payload)
         {
             tempFont.remove();
         }
-        makeFontCach(); // 重建 font cache
         sendTextFrame("deleteFontSuccess");
+    }
+    // 重建 font cache
+    else if (tokens.equals(0, "makeFontCach") && tokens.size() == 1)
+    {
+        makeFontCach(); // 重建 font cache
     }
     else
     {
