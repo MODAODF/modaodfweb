@@ -966,6 +966,7 @@ void LOOLWSD::initialize(Application& self)
             { "security.capabilities", "true" },
             { "security.seccomp", "true" },
             { "server_name", "" },
+            { "client_port_number", "9980" },
             { "ssl.ca_file_path", LOOLWSD_CONFIGDIR "/ca-chain.cert.pem" },
             { "ssl.cert_file_path", LOOLWSD_CONFIGDIR "/cert.pem" },
             { "ssl.enable", "true" },
@@ -1083,6 +1084,9 @@ void LOOLWSD::initialize(Application& self)
 
     ServerName = config().getString("server_name");
     LOG_INF("Initializing ndcodfweb server [" << ServerName << "].");
+
+    ClientPortNumber = config().getUInt("client_port_number", DEFAULT_CLIENT_PORT_NUMBER);
+    LOG_INF("Initializing ndcodfweb client port : " << ClientPortNumber);
 
     // Get anonymization settings.
 #if LOOLWSD_ANONYMIZE_USER_DATA
