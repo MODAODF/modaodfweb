@@ -10,11 +10,13 @@
         border-top: 3px double #8c8b8b;
     }
 </style>
-<ul class="nav nav-tabs">
-    <li role="presentation" class=""><a data-toggle="tab" href="#a1" class="tabctl">模組概覽</a></li>
-    <li role="presentation" class=""><a data-toggle="tab" href="#a2" class="tabctl">用戶端裝置 MAC 管理</a></li>
-    <li role="presentation" class=""><a data-toggle="tab" href="#a3" class="tabctl">範本來源 IP 管理</a></li>
-</ul>
+<nav>
+    <div class="nav nav-tabs" role="tablist">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#a1" type="button" role="tab" aria-selected="true" _="">模組概覽</button>
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#a2" type="button" role="tab" aria-selected="false" _="">用戶端裝置 MAC 管理</button>
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#a3" type="button" role="tab" aria-selected="false" _="">範本來源 IP 管理</button>
+    </div>
+</nav>
 <div class="tab-content" style="height: 100%;">
     <!--******************************API 資訊******************************-->
     <div id="a1" class="tab-pane" style="width: 50%;">

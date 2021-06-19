@@ -12,10 +12,12 @@
         border-top: 3px double #8c8b8b;
     }
 </style>
-<ul class="nav nav-tabs">
-    <li role="presentation" class=""><a data-toggle="tab" href="#a1" class="tabctl">模組概覽</a></li>
-    <li role="presentation" class=""><a data-toggle="tab" href="#a2" class="tabctl">轉檔紀錄</a></li>
-</ul>
+<nav>
+    <div class="nav nav-tabs" role="tablist">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#a1" type="button" role="tab" aria-selected="true" _="">模組概覽</button>
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#a2" type="button" role="tab" aria-selected="false" _="">轉檔紀錄</button>
+    </div>
+</nav>
 <div class="tab-content" style="height: 100%;">
     <!--******************************API 資訊******************************-->
     <div id="a1" class="tab-pane" style="width: 50%;">
@@ -26,23 +28,23 @@
                     <div class="panel-body">
                         <p>API 文件 (doc-id 需搭配 ODFAPI 管理網站取得)</p>
                         <ul>
-                            <li>http://
-                                <script>document.write(window.location.host);</script>/lool/mergeodf/api
+                            <li>
+                                <script>document.write(window.location.protocol + '//' + window.location.host + '/lool/mergeodf/api')</script>
                             </li>
-                            <li>http://
-                                <script>document.write(window.location.host);</script>/lool/mergeodf/yaml
+                            <li>
+                                <script>document.write(window.location.protocol + '//' + window.location.host + '/lool/mergeodf/yaml')</script>
                             </li>
-                            <li>http://
-                                <script>document.write(window.location.host);</script>/lool/mergeodf/doc-id/api
+                            <li>
+                                <script>document.write(window.location.protocol + '//' + window.location.host + '/lool/mergeodf/doc-id/api')</script>
                             </li>
-                            <li>http://
-                                <script>document.write(window.location.host);</script>/lool/mergeodf/doc-id/yaml
+                            <li>
+                                <script>document.write(window.location.protocol + '//' + window.location.host + '/lool/mergeodf/doc-id/yaml')</script>
                             </li>
                         </ul>
                         <p>範本生成</p>
                         <ul>
-                            <li>http://
-                                <script>document.write(window.location.host);</script>/lool/mergeodf/doc-id
+                            <li>
+                                <script>document.write(window.location.protocol + '//' + window.location.host + '/lool/mergeodf/doc-id')</script>
                             </li>
                         </ul>
                     </div>
