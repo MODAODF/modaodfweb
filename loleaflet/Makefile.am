@@ -50,7 +50,7 @@ LOLEAFLET_DRAW_CSS_SRC = $(shell find $(srcdir)/plugins/draw-$(DRAW_VERSION)/dis
 LOLEAFLET_HTML_SRC = $(shell find $(srcdir)/html -name '*.html')
 LOLEAFLET_HTML_DST = $(patsubst $(srcdir)/html/%.html,$(builddir)/dist/%.html,$(LOLEAFLET_HTML_SRC))
 
-LOLEAFLET_ADMIN_SRC = $(shell find $(srcdir)/admin -name '*.html' -or -name '*.css' -or -name '*.ttf' -or -name '*.woff*' -or -name 'OFL.txt' -or -name '*.svg' -or -name '*.min.js')
+LOLEAFLET_ADMIN_SRC = $(shell find $(srcdir)/admin -name '*.html' -or -name '*.css' -or -name '*.ttf' -or -name '*.woff*' -or -name 'OFL.txt' -or -name '*.svg' -or -name '*.png' -or -name '*.min.js')
 LOLEAFLET_ADMIN_ALL = $(shell find $(srcdir)/admin -name '*')
 LOLEAFLET_ADMIN_DST = $(patsubst $(srcdir)/admin/%,$(builddir)/dist/admin/%,$(LOLEAFLET_ADMIN_SRC))
 
@@ -91,8 +91,7 @@ LOLEAFLET_CSS =\
 	$(builddir)/node_modules/spectrum-colorpicker2/dist/spectrum.css \
 	$(srcdir)/css/menubar.css \
 	$(builddir)/fonts/font-awesome.min.css \
-	$(builddir)/node_modules/jquery-ui/jquery-ui.css \
-	$(srcdir)/css/datatables.min.css
+	$(builddir)/node_modules/jquery-ui/jquery-ui.css 
 
 LOLEAFLET_CSS_DST = $(foreach file,$(LOLEAFLET_CSS),$(builddir)/dist/$(notdir $(file)))
 LOLEAFLET_CSS_M4 = $(strip $(foreach file,$(LOLEAFLET_CSS),$(notdir $(file))))
@@ -134,8 +133,7 @@ PLUGINS_JS =\
 	jquery.mCustomScrollbar.js \
 	w2ui-1.5.rc1.js \
 	toolbar.js \
-	main.js \
-	datatables.min.js
+	main.js 
 
 PLUGINS_JS_SRC = $(shell find $(srcdir)/js -name '*.js')
 PLUGINS_JS_DST = $(patsubst $(srcdir)/js/%.js,$(builddir)/dist/%.js,$(PLUGINS_JS_SRC))
@@ -172,16 +170,8 @@ build-loleaflet: | $(LOLEAFLET_L10N_DST) \
 	$(builddir)/dist/fonts/fontawesome-webfont.woff2 \
 	$(builddir)/dist/bundle.css \
 	$(builddir)/dist/bundle.js \
-	$(builddir)/dist/datatables.min.js \
-	$(builddir)/dist/datatables.min.css \
 	$(builddir)/dist/loleaflet.html
 	@echo "build loleaflet completed"
-
-$(builddir)/dist/datatables.min.js:
-	cp $(srcdir)/js/datatables.min.js $(builddir)/dist/datatables.min.js
-
-$(builddir)/dist/datatables.min.css:
-	cp $(srcdir)/css/datatables.min.css $(builddir)/dist/datatables.min.css
 
 $(builddir)/dist/admin-bundle.js: $(LOLEAFLET_ADMIN_DST) \
 	$(LOLEAFLET_PREFIX)/dist/admin-src.js
