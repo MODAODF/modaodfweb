@@ -37,8 +37,8 @@ L.Control.ColumnHeader = L.Control.Header.extend({
 		this._setCanvasWidth();
 		this._setCanvasHeight();
 
-		var scale = L.getDpiScaleFactor();
-		this._canvasContext.scale(scale, scale);
+		this._scale = L.getDpiScaleFactor();
+		this._canvasContext.scale(this._scale, this._scale);
 
 		this._headerHeight = this._canvasHeight;
 		L.Control.Header.colHeaderHeight = this._canvasHeight;
@@ -187,8 +187,7 @@ L.Control.ColumnHeader = L.Control.Header.extend({
 			return;
 
 		ctx.save();
-		var scale = L.getDpiScaleFactor();
-		ctx.scale(scale, scale);
+		ctx.scale(this._scale, this._scale);
 		ctx.translate(this._position + this._startOffset, 0);
 		// background gradient
 		var selectionBackgroundGradient = null;
@@ -254,8 +253,7 @@ L.Control.ColumnHeader = L.Control.Header.extend({
 		var height = group.endPos - group.startPos;
 
 		ctx.save();
-		var scale = L.getDpiScaleFactor();
-		ctx.scale(scale, scale);
+		ctx.scale(this._scale, this._scale);
 
 		ctx.translate(this._position + this._startOffset, 0);
 		// clip mask
@@ -304,13 +302,12 @@ L.Control.ColumnHeader = L.Control.Header.extend({
 		var ctx = this._cornerCanvasContext;
 		var ctrlHeadSize = this._groupHeadSize;
 		var levelSpacing = this._levelSpacing;
-		var scale = L.getDpiScaleFactor();
 
 		var startOrt = levelSpacing + (ctrlHeadSize + levelSpacing) * level;
-		var startPar = this._cornerCanvas.width / scale - (ctrlHeadSize + (L.Control.Header.rowHeaderWidth - ctrlHeadSize) / 2);
+		var startPar = this._cornerCanvas.width / this._scale - (ctrlHeadSize + (L.Control.Header.rowHeaderWidth - ctrlHeadSize) / 2);
 
 		ctx.save();
-		ctx.scale(scale, scale);
+		ctx.scale(this._scale, this._scale);
 		ctx.fillStyle = this._hoverColor;
 		ctx.fillRect(startPar, startOrt, ctrlHeadSize, ctrlHeadSize);
 		ctx.strokeStyle = 'black';
@@ -347,9 +344,10 @@ L.Control.ColumnHeader = L.Control.Header.extend({
 
 	viewRowColumnHeaders: function (e) {
 		if (e.data.columns && e.data.columns.length > 0) {
-			var dpiScale = L.getDpiScaleFactor();
+			var zoom = this._map.getZoom();
+			var zoomScale = 1.0 / this._map.getZoomScale(zoom, 10);
 			for (var i=0 ; i < e.data.columns.length ; i++) {
-				e.data.columns[i].size = parseInt((e.data.columns[i].size * 15) / dpiScale);
+				e.data.columns[i].size = Math.floor(e.data.columns[i].size * (15 / this._scale) * zoomScale);
 			}
 			this.fillColumns(e.data.columns, e.data.columnGroups, e.converter, e.context);
 		}
@@ -508,8 +506,7 @@ L.Control.ColumnHeader = L.Control.Header.extend({
 			return;
 		}
 
-		var scale = L.getDpiScaleFactor();
-		var rowOutlineWidth = this._cornerCanvas.width / scale - L.Control.Header.rowHeaderWidth - this._borderWidth;
+		var rowOutlineWidth = this._cornerCanvas.width / this._scale - L.Control.Header.rowHeaderWidth - this._borderWidth;
 		if (pos.x <= rowOutlineWidth) {
 			// empty rectangle on the left select all
 			this._map.sendUnoCommand('.uno:SelectAll');
