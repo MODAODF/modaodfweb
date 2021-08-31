@@ -248,68 +248,7 @@ void Session::parseDocOptions(const StringVector& tokens, int& part, std::string
 
 std::string Session::getConvertedWatermarkText()
 {
-    std::string retString = getWatermarkText();
-
-    // 使用者 ID ${id}
-    Poco::replaceInPlace(retString, std::string("${id}"), getUserId());
-    // 使用者名稱 ${name}
-    Poco::replaceInPlace(retString, std::string("${name}"), getUserName());
-    // 使用者時區 ${timezone}
-    Poco::replaceInPlace(retString, std::string("${timezone}"), getTimezone());
-
-    // 使用者 IP ${ip}
-    std::string ip = getClientAddr();
-    if (Util::startsWith(ip, "::ffff:"))
-    {
-        ip = ip.substr(7);
-    }
-    else if (ip == "::1")
-    {
-        ip = "127.0.0.1";
-    }
-    Poco::replaceInPlace(retString, std::string("${ip}"), ip);
-
-    // 系統時間加上客戶端時區偏移值，就是客戶端目前時間
-    Poco::DateTime clientDateTime(Poco::Timestamp() + Poco::Timespan(getTimezoneOffset() * 60 * -1, 0));
-
-    // 日期 ${yyyy-mm-dd}
-    Poco::replaceInPlace(retString, std::string("${yyyy-mm-dd}"),
-                         Poco::DateTimeFormatter::format(clientDateTime, "%Y-%n-%e"));
-    // 日期 ${mm-dd-yyyy}
-    Poco::replaceInPlace(retString, std::string("${mm-dd-yyyy}"),
-                         Poco::DateTimeFormatter::format(clientDateTime, "%n-%e-%Y"));
-    // 日期 ${dd-mm-yyyy}
-    Poco::replaceInPlace(retString, std::string("${dd-mm-yyyy}"),
-                         Poco::DateTimeFormatter::format(clientDateTime, "%e-%n-%Y"));
-
-    // 日期 ${yyyy/mm/dd}
-    Poco::replaceInPlace(retString, std::string("${yyyy/mm/dd}"),
-                         Poco::DateTimeFormatter::format(clientDateTime, "%Y/%n/%e"));
-    // 日期 ${mm/dd/yyyy}
-    Poco::replaceInPlace(retString, std::string("${mm/dd/yyyy}"),
-                         Poco::DateTimeFormatter::format(clientDateTime, "%n/%e/%Y"));
-    // 日期 ${dd/mm/yyyy}
-    Poco::replaceInPlace(retString, std::string("${dd/mm/yyyy}"),
-                         Poco::DateTimeFormatter::format(clientDateTime, "%e/%n/%Y"));
-
-    // 日期 ${yyyy.mm.dd}
-    Poco::replaceInPlace(retString, std::string("${yyyy.mm.dd}"),
-                         Poco::DateTimeFormatter::format(clientDateTime, "%Y.%n.%e"));
-    // 日期 ${mm.dd.yyyy}
-    Poco::replaceInPlace(retString, std::string("${mm.dd.yyyy}"),
-                         Poco::DateTimeFormatter::format(clientDateTime, "%n.%e.%Y"));
-    // 日期 ${dd.mm.yyyy}
-    Poco::replaceInPlace(retString, std::string("${dd.mm.yyyy}"),
-                         Poco::DateTimeFormatter::format(clientDateTime, "%e.%n.%Y"));
-
-    // 24小時格式時間 ${time}
-    Poco::replaceInPlace(retString, std::string("${time}"),
-                         Poco::DateTimeFormatter::format(clientDateTime, "%H:%M"));
-    // 12小時格式時間 ${ampm}
-    Poco::replaceInPlace(retString, std::string("${ampm}"),
-                         Poco::DateTimeFormatter::format(clientDateTime, "%h:%M %a"));
-
-    return retString;
+    return _watermarkText;
 }
 
 void Session::disconnect()
