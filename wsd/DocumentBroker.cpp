@@ -614,11 +614,11 @@ bool DocumentBroker::load(const std::shared_ptr<ClientSession>& session, const s
     // Added by Firefly <firefly@ossii.com.tw>
     // 預先讀取 oxoolwsd.xml 的浮水印設定
     // 編即時顯示？
-    session->setWatermarkWhenEditing(LOOLWSD::getConfigValue<bool>("watermark.editing", false));
+    session->setWatermarkWhenEditing(LOOLWSD::getConfigValue<bool>("watermark[@enable]", false));
     // 列印或匯出 PDF 時顯示？
-    session->setWatermarkWhenPrinting(LOOLWSD::getConfigValue<bool>("watermark.printing", false));
-    // 其中之一啟用時，讀取浮水印詳細設定
-    if (session->watermarkWhenEditing() || session->watermarkWhenPrinting())
+    session->setWatermarkWhenPrinting(session->watermarkWhenEditing());
+    // 啟用時，讀取浮水印詳細設定
+    if (session->watermarkWhenEditing())
     {
         // 取得浮水印文字
         session->setWatermarkText(LOOLWSD::getConfigValue<std::string>("watermark.text", ""));
@@ -626,21 +626,11 @@ bool DocumentBroker::load(const std::shared_ptr<ClientSession>& session, const s
         session->setWatermarkOpacity(LOOLWSD::getConfigValue<double>("watermark.opacity", 0.0));
 
         // 以下為字型相關設定
-        session->getWatermarkFont().set("familyname", LOOLWSD::getConfigValue<std::string>("watermark.font", "Carlito"));
+        session->getWatermarkFont().set("familyname", "Carlito");
         // 角度
         session->getWatermarkFont().set("angle", LOOLWSD::getConfigValue<int>("watermark.angle", 45));
         // 顏色
-        session->getWatermarkFont().set("color", LOOLWSD::getConfigValue<std::string>("watermark.color", "#000000"));
-        // 粗體
-        session->getWatermarkFont().set("bold", LOOLWSD::getConfigValue<bool>("watermark.bold", false));
-        // 斜體
-        session->getWatermarkFont().set("italic", LOOLWSD::getConfigValue<bool>("watermark.italic", false));
-        // 浮雕
-        session->getWatermarkFont().set("relief", LOOLWSD::getConfigValue<std::string>("watermark.relief", ""));
-        // 中空字
-        session->getWatermarkFont().set("outline", LOOLWSD::getConfigValue<bool>("watermark.outline", false));
-        // 陰影字
-        session->getWatermarkFont().set("shadow", LOOLWSD::getConfigValue<bool>("watermark.shadow", false));
+        session->getWatermarkFont().set("color", "#000000");
     }
 
     // Call the storage specific fileinfo functions
@@ -732,37 +722,22 @@ bool DocumentBroker::load(const std::shared_ptr<ClientSession>& session, const s
             if (info->has("watermark") && info->isObject("watermark"))
             {
                 // 強制關閉編輯和列印使用浮水印
-                session->setWatermarkWhenEditing(false);
-                session->setWatermarkWhenPrinting(false);
+                session->setWatermarkWhenEditing(true);
+                session->setWatermarkWhenPrinting(true);
 
                 Poco::JSON::Object::Ptr watermark = info->getObject("watermark");
-
-                // 是否在編輯顯示
-                session->setWatermarkWhenEditing(watermark->optValue<bool>("editing", false));
-                // 是否在列印或匯出 PDF 顯示
-                session->setWatermarkWhenPrinting(watermark->optValue<bool>("printing", false));
 
                 // 設定透明度
                 double opacity = watermark->optValue<double>("opacity", 0.2);
                 session->setWatermarkOpacity((opacity > 0 && opacity < 1.0) ? opacity : 0.2);
                 // 字型名稱
-                session->getWatermarkFont().set("familyname", watermark->optValue<std::string>("familyname", "Carlito"));
+                session->getWatermarkFont().set("familyname", "Carlito");
+                // 顏色
+                session->getWatermarkFont().set("color", "#000000");
                 // 角度，預設為 45°
                 int angle = watermark->optValue<int>("angle", 45);
-                // 飽正在合法範圍內
+                // 保證在合法範圍內
                 session->getWatermarkFont().set("angle",(angle < 0 || angle > 360) ? 45 : angle);
-                // 顏色
-                session->getWatermarkFont().set("color", watermark->optValue<std::string>("color", "#000000"));
-                // 粗體
-                session->getWatermarkFont().set("bold", watermark->optValue<bool>("bold", false));
-                // 斜體
-                session->getWatermarkFont().set("italic", watermark->optValue<bool>("italic", false));
-                // 浮雕
-                session->getWatermarkFont().set("relief", watermark->optValue<std::string>("relief", ""));
-                // 中空字
-                session->getWatermarkFont().set("outline", watermark->optValue<bool>("outline", false));
-                // 陰影字
-                session->getWatermarkFont().set("shadow", watermark->optValue<bool>("shadow", false));
                 // 設定浮水印文字
                 if (watermark->has("text"))
                 {
