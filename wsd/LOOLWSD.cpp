@@ -142,6 +142,12 @@ using Poco::Net::PartHandler;
 
 #include <ServerSocket.hpp>
 
+//Modules
+#include <dlfcn.h>
+#include "modules/templaterepo.h"
+#include "modules/mergeodf.h"
+#include "modules/tbl2sc.h"
+
 #if MOBILEAPP
 #ifdef IOS
 #include "ios.h"
@@ -151,12 +157,6 @@ using Poco::Net::PartHandler;
 #include "androidapp.hpp"
 #endif
 #endif
-
-//Modules
-#include <dlfcn.h>
-#include "modules/templaterepo.h"
-#include "modules/mergeodf.h"
-#include "modules/tbl2sc.h"
 
 using namespace LOOLProtocol;
 
