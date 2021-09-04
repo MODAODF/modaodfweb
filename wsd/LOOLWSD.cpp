@@ -158,6 +158,10 @@ using Poco::Net::PartHandler;
 #endif
 #endif
 
+#if ENABLE_OSSII_PRODUCT
+#include "OssiiProduct.hpp"
+#endif
+
 using namespace LOOLProtocol;
 
 using Poco::DirectoryIterator;
@@ -233,10 +237,13 @@ static int SimulatedLatencyMs = 0;
 
 #endif
 
+#if ENABLE_OSSII_PRODUCT
+OssiiProduct LOOLWSD::Product;
+#endif
+
 namespace
 {
 
-#if ENABLE_SUPPORT_KEY
 inline void shutdownLimitReached(const std::shared_ptr<ProtocolHandlerInterface>& proto)
 {
     if (!proto)
@@ -258,7 +265,6 @@ inline void shutdownLimitReached(const std::shared_ptr<ProtocolHandlerInterface>
         LOG_ERR("Error while shutting down socket on reaching limit: " << ex.what());
     }
 }
-#endif
 
 #if !MOBILEAPP
 /// Internal implementation to alert all clients
@@ -1385,6 +1391,10 @@ void LOOLWSD::initialize(Application& self)
 
     StorageBase::initialize();
 
+#if ENABLE_OSSII_PRODUCT
+    LOOLWSD::Product.initialize();
+#endif
+
 #if !MOBILEAPP
     ServerApplication::initialize(self);
 
@@ -1420,7 +1430,12 @@ void LOOLWSD::initialize(Application& self)
                   << adminURI << '\n'
                   << getServiceURI(LOOLWSD_TEST_METRICS, true) << '\n'
                   << getServiceURI("/hosting/capabilities") << '\n'
-                  << getServiceURI("/hosting/discovery") << '\n';
+                  << getServiceURI("/hosting/discovery") << '\n'
+                  << std::endl;
+
+#if ENABLE_OSSII_PRODUCT
+    LOOLWSD::Product.showURI();
+#endif
 
     std::cerr << std::endl;
 #endif
@@ -2437,6 +2452,15 @@ private:
                 FileServerRequestHandler::handleRequest(request, requestDetails, message, socket);
                 socket->shutdown();
             }
+#if ENABLE_OSSII_PRODUCT
+            // OssiiProduct user manager api(/oxool/usermgr)
+            else if (requestDetails.equals(RequestDetails::Field::Type, "oxool") &&
+                     requestDetails.equals(1, "usermgr"))
+            {
+                LOOLWSD::Product.handleRequest(request, socket);
+                socket->shutdown();
+            }
+#endif
             else if (requestDetails.equals(RequestDetails::Field::Type, "lool") &&
                      requestDetails.equals(1, "adminws"))
             {
@@ -3442,10 +3466,8 @@ private:
             if (LOOLWSD::NumConnections >= LOOLWSD::MaxConnections)
             {
                 LOG_INF("Limit on maximum number of connections of " << LOOLWSD::MaxConnections << " reached.");
-#if ENABLE_SUPPORT_KEY
                 shutdownLimitReached(ws);
                 return;
-#endif
             }
 
             LOG_INF("URL [" << url << "].");
