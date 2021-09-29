@@ -684,6 +684,47 @@ L.Map.include({
 		this.sendUnoCommand('.uno:EnterString ', command);
 	},
 
+	/**
+	 * 翻譯指定 DOM 內所有 element 有指定的 attribute
+	 */
+	translationElement: function(DOM) {
+		// 需要找出的 attributes
+		var trAttrs = ['_', '_UNO', 'title', 'placeholder'];
+		DOM.querySelectorAll('[' + trAttrs.join('],[') + ']').forEach(function(el) {
+			for (var idx in trAttrs) {
+				var attrName = trAttrs[idx]
+				if (el.hasAttribute(attrName)) {
+					// 讀取該 attribute 字串
+					var origStr = el.getAttribute(attrName);
+					// 翻譯結果
+					var l10nStr = '';
+					switch (attrName) {
+					case '_':
+					case 'title':
+					case 'placeholder':
+						l10nStr = _(origStr);
+						break;
+					case '_UNO':
+						l10nStr = _UNO(origStr);
+						break;
+					default:
+						break;
+					}
+					// 替代原來的字串
+					if (attrName === 'title' || attrName === 'placeholder') {
+						el.setAttribute('title', l10nStr);
+					// 把翻譯結果插到該 element 的結尾
+					} else if (attrName === '_' || attrName === '_UNO') {
+						el.insertBefore(document.createTextNode(l10nStr), null);
+					}
+					if (origStr === l10nStr) {
+						console.debug('warning! "' + origStr + '" may not be translation.');
+					}
+				}
+			}
+		}.bind(this));
+	},
+
 	renderFont: function (fontName) {
 		this._socket.sendMessage('renderfont font=' + window.encodeURIComponent(fontName));
 	},
