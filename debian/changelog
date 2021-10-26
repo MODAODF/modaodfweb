@@ -1,3 +1,9 @@
+ndcodfweb (2.0.2-1) bionic; urgency=medium
+
+  * Bump package version to 2.0.2-1
+
+ -- Firefly <firefly@ossii.com.tw>  Tue, 26 Oct 2021 16:57:36 +0800
+
 ndcodfweb (2.0.1-1) bionic; urgency=medium
 
   * Bump package version to 2.0.1-1
