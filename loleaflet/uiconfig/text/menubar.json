@@ -163,6 +163,13 @@
 						"id": ".uno:RejectAllTrackedChanges"
 					}
 				]
+			},
+			{
+				"type": "--"
+			},
+			{
+				"id": ".uno:EditDoc",
+				"hotkey": "Ctrl+Shift+M"
 			}
 		]
 	},
