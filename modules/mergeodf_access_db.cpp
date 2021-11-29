@@ -18,6 +18,43 @@ using namespace Poco::Data::Keywords;
 AccessDB::AccessDB()
 {
     Poco::Data::SQLite::Connector::registerConnector();
+    // 初始化 Database
+    Poco::Data::Session session("SQLite", dbfile);
+    Statement select(session);
+    std::string init_sql = R"MULTILINE(
+    CREATE TABLE merge_templates (
+            rec_id int ,
+            uid int ,
+            cid int ,
+            title TEXT,
+            desc text ,
+            endpt text UNIQUE,
+            docname text ,
+            extname text ,
+            uptime text 
+            );
+    CREATE TABLE logging (
+                rec_id      integer primary key,
+                status      text NOT NULL,
+                to_pdf      text NOT NULL,
+                source_ip   text NOT NULL,
+                file_name   text NOT NULL,
+                file_ext    text NOT NULL,
+                cost        text NOT NULL,
+                timestamp   text NOT NULL
+            );
+    CREATE TABLE summary (api TEXT PRIMARY KEY NOT NULL UNIQUE, accessTimes INTEGER NOT NULL);
+    CREATE TABLE access (api text not null, status text not null, ts timestamp DEFAULT CURRENT_TIMESTAMP);
+    CREATE INDEX query on access (api, status);
+        )MULTILINE";
+    select << init_sql;
+    while (!select.done())
+    {
+        select.execute();
+        break;
+    }
+    select.reset(session);
+    session.close();
 }
 AccessDB::~AccessDB() {
     Poco::Data::SQLite::Connector::unregisterConnector();
