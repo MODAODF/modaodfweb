@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.63])
 
-AC_INIT([ndcodfweb], [2.0.4], [develop@ossii.com.tw])
+AC_INIT([ndcodfweb], [2.0.5], [develop@ossii.com.tw])
 LT_INIT([shared, disable-static, dlopen])
 
 AM_INIT_AUTOMAKE([1.10 foreign subdir-objects tar-pax -Wno-portability])
@@ -35,7 +35,7 @@ fi
 AC_SUBST(ANDROID_PACKAGE_VERSIONCODE)
 
 LOOLWSD_VERSION="$LOOLWSD_VERSION_MAJOR.$LOOLWSD_VERSION_MINOR.$LOOLWSD_VERSION_MICRO"
-LOOLWSD_VERSION_DIST=2
+LOOLWSD_VERSION_DIST=1
 
 AC_SUBST([LOOLWSD_VERSION_MAJOR])
 AC_SUBST([LOOLWSD_VERSION_MINOR])

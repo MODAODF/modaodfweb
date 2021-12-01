@@ -1,3 +1,9 @@
+ndcodfweb (2.0.5-1) bionic; urgency=medium
+
+  * Bump package version to 2.0.5-1
+
+ -- alantom <alan.tang@ossii.com.tw>  Wed, 01 Dec 2021 15:48:07 +0800
+
 ndcodfweb (2.0.4-1) bionic; urgency=medium
 
   * Bump package version to 2.0.4-1
