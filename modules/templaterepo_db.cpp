@@ -19,6 +19,7 @@
 using Poco::Data::Statement;
 using Poco::StringTokenizer;
 using Poco::Data::RecordSet;
+using Poco::toUpper;
 using namespace Poco::Data::Keywords;
 
 TemplateRepoDB::TemplateRepoDB() {
@@ -341,9 +342,10 @@ bool TemplateRepoDB::validateMac(std::string macStr)
     {
         int count;
         auto mac = tokens[idx];
+        mac = toUpper(mac);
         std::cout<<"mac:"<<mac<<std::endl;
         select << "SELECT COUNT(*) FROM maciplist \
-                    WHERE macip=? AND ftype='mac'",
+                    WHERE macip=UPPER(?) AND ftype='mac'",
                         into(count), use(mac);
         try
         {
