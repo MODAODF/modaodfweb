@@ -1,0 +1,27 @@
+.TH LOOLCONFIG "1" "May 2018" "ndcodfwebconfig" "User Commands"
+.SH NAME
+ndcodfwebconfig \- Configuration tool for NDC ODF Web.
+.SH SYNOPSYS
+ndcodfwebconfig COMMAND [OPTIONS]
+.SH OPTIONS
+Some options make sense only with a specific command.
+.PP
+.SS "Commands:"
+.PP
+set\-admin\-password
+.PP
+set <key> <value>
+.PP
+update\-system\-template
+.SS "Options:"
+\fB\-h\fR, \fB\-\-help\fR                Show this usage information.
+.PP
+\fB\-\-config\-file\fR=\fIpath\fR        Specify configuration file path manually.
+.PP
+\fB\-\-pwd\-salt\-length\fR=\fInumber\fR  Length of the salt to use to hash password [set\-admin\-password].
+.PP
+\fB\-\-pwd\-iterations\fR=\fInumber\fR   Number of iterations to do in PKDBF2 password hashing [set\-admin\-password].
+.PP
+\fB\-\-pwd\-hash\-length\fR=\fInumber\fR  Length of password hash to generate [set\-admin\-password].
+.SH "SEE ALSO"
+ndcodfwebforkit(1), ndcodfwebconvert(1), ndcodfweb(1), ndcodfweb-systemplate-setup(1), ndcodfweb-generate-proof-key(1)
