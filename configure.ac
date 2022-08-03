@@ -769,7 +769,7 @@ AS_IF([test -n "$with_compiler_plugins"],
 LOOLWSD_CONFIGDIR=${sysconfdir}/${PACKAGE}
 AC_SUBST(LOOLWSD_CONFIGDIR)
 
-LOOLWSD_DATADIR=${datadir}/${PACKAGE}
+LOOLWSD_DATADIR=${prefix}/share/${PACKAGE}
 AC_SUBST(LOOLWSD_DATADIR)
 
 if test "$enable_debug" = "yes"; then
