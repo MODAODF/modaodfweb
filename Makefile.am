@@ -286,7 +286,7 @@ CAPABILITIES = $(if @ENABLE_SETCAP@,true,false)
 RUN_GDB = $(if $(GDB_FRONTEND),$(GDB_FRONTEND),gdb --tui --args)
 
 if ENABLE_SETCAP
-SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_mknod,cap_sys_chroot=ep ndcodfwebforkit && sudo @SETCAP@ cap_sys_admin=ep ndcodfwebmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=+ep ndcodfweb
+SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep ndcodfwebforkit && sudo @SETCAP@ cap_sys_admin=ep ndcodfwebmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=+ep ndcodfweb
 else
 SET_CAPS_COMMAND=echo "Skipping capability setting"
 endif
