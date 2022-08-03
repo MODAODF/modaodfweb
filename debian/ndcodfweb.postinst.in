@@ -32,8 +32,7 @@ case "$1" in
 	@PACKAGE_NAME@-generate-proof-key >/dev/null 2>&1
     cat << EOF > /etc/apt/apt.conf.d/25@PACKAGE_NAME@
 // Rebuild systemplate of @PACKAGE_NAME@
-DPkg::Post-Invoke { "echo Updating @PACKAGE_NAME@ systemplate;@PACKAGE_NAME@-systemplate-setup
- /opt/@PACKAGE_NAME@/systemplate @LO_PATH@ >/dev/null 2>&1 || true"; };
+DPkg::Post-Invoke { "echo Updating @PACKAGE_NAME@ systemplate;@PACKAGE_NAME@-systemplate-setup /opt/@PACKAGE_NAME@/systemplate @LO_PATH@ >/dev/null 2>&1 || true"; };
 EOF
 	;;
 
