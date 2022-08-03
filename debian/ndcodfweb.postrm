@@ -2,6 +2,8 @@
 
 set -e
 
+rm -f /etc/apt/apt.conf.d/25ndcodfweb
+
 case "$1" in
     remove)
 	rm -f /var/log/ndcodfweb.log

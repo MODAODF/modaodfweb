@@ -3,6 +3,8 @@
 set -e
 
 # Stop any running ndcodfweb process
-service ndcodfweb stop 2>&1 /dev/null || true
+if [ -d /run/systemd/system ]; then
+    deb-systemd-invoke stop ndcodfweb.service >/dev/null || true
+fi
 
 #DEBHELPER#

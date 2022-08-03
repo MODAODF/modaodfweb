@@ -1,5 +1,5 @@
 [Unit]
-Description=NDC ODF Web WebSocket Daemon
+Description=NDC ODF WebSocket Daemon
 After=network.target
 
 [Service]
@@ -13,12 +13,12 @@ Restart=always
 LimitNOFILE=infinity:infinity
 
 ProtectSystem=strict
-ReadWritePaths=/opt/ndcodfweb
+ReadWritePaths=/opt/ndcodfweb /var/log
 
 ProtectHome=yes
 PrivateTmp=yes
 ProtectControlGroups=yes
-CapabilityBoundingSet=CAP_FOWNER CAP_MKNOD CAP_SYS_CHROOT
+CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_NET_BIND_SERVICE CAP_FOWNER CAP_CHOWN CAP_MKNOD CAP_SYS_CHROOT CAP_SYS_ADMIN
 
 [Install]
 WantedBy=multi-user.target

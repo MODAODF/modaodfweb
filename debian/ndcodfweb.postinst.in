@@ -4,21 +4,18 @@ set -e
 
 case "$1" in
     configure)
-	setcap cap_net_bind_service=+ep /usr/bin/@PACKAGE_NAME@wsd || true
-	setcap cap_fowner,cap_mknod,cap_sys_chroot=ep /usr/bin/@PACKAGE_NAME@forkit || true
+	setcap cap_net_bind_service=+ep /usr/bin/@PACKAGE_NAME@ || true
+	setcap cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep /usr/bin/@PACKAGE_NAME@forkit || true
 	setcap cap_sys_admin=ep /usr/bin/@PACKAGE_NAME@mount || true
 
 	fc-cache -f
 
 	adduser --quiet --system --group --home /opt/@PACKAGE_NAME@ lool
 
-	mkdir -p /var/cache/@PACKAGE_NAME@ && chown lool:lool /var/cache/@PACKAGE_NAME@
-	rm -rf /var/cache/@PACKAGE_NAME@/*
+	touch /var/log/@PACKAGE_NAME@.log && chown lool:lool /var/log/@PACKAGE_NAME@.log
 
-	touch /var/log/@PACKAGE_NAME@wsd.log && chown lool:lool /var/log/@PACKAGE_NAME@wsd.log
-
-	chown lool:root /etc/@PACKAGE_NAME@/@PACKAGE_NAME@wsd.xml
-	chmod 640 /etc/@PACKAGE_NAME@/@PACKAGE_NAME@wsd.xml
+	chown lool:root /etc/@PACKAGE_NAME@/@PACKAGE_NAME@.xml
+	chmod 640 /etc/@PACKAGE_NAME@/@PACKAGE_NAME@.xml
 
 	# We assume that the LibreOffice to be used is built TDF-style
 	# and installs in @LO_PATH@, and that /opt/@PACKAGE_NAME@ is
@@ -31,10 +28,13 @@ case "$1" in
 
 	fc-cache @LO_PATH@/share/fonts/truetype
 
-	# rm -f /etc/systemd/system/@PACKAGE_NAME@wsd.service || true
-	# ln -fs /lib/systemd/system/@PACKAGE_NAME@wsd.service /etc/systemd/system || true
-
-	su lool --shell=/bin/sh -c "@PACKAGE_NAME@wsd-systemplate-setup /opt/@PACKAGE_NAME@/systemplate @LO_PATH@ >/dev/null 2>&1"
+	@PACKAGE_NAME@-systemplate-setup /opt/@PACKAGE_NAME@/systemplate @LO_PATH@ >/dev/null 2>&1
+	@PACKAGE_NAME@-generate-proof-key >/dev/null 2>&1
+    cat << EOF > /etc/apt/apt.conf.d/25@PACKAGE_NAME@
+// Rebuild systemplate of @PACKAGE_NAME@
+DPkg::Post-Invoke { "echo Updating @PACKAGE_NAME@ systemplate;@PACKAGE_NAME@-systemplate-setup
+ /opt/@PACKAGE_NAME@/systemplate @LO_PATH@ >/dev/null 2>&1 || true"; };
+EOF
 	;;
 
 esac
