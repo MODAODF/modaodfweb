@@ -459,6 +459,8 @@ AC_SUBST(VEREIGN_URL)
 
 # Test for build environment
 
+CXXFLAGS="$CXXFLAGS -Wall -Wextra -Wshadow"
+
 CFLAGS="$CFLAGS -Wall -Wextra"
 
 AC_MSG_CHECKING([whether to turn warnings to errors])
@@ -507,6 +509,8 @@ if test "$HAVE_CXXSTD" = TRUE; then
 else
     AC_MSG_ERROR(no)
 fi
+
+CXXFLAGS="$CXXFLAGS $CXXFLAGS_CXXSTD"
 
 STD_FILESYSTEM=
 if test "$CXXFLAGS_CXXSTD" = "-std=c++17" ; then
