@@ -866,7 +866,7 @@ L.Control.Menubar = L.Control.extend({
 		} else if (id === 'feedback' && this._map.feedback) {
 			this._map.feedback.showFeedbackDialog();
 		} else if (id === 'report-an-issue') {
-			window.open('https://github.com/NDCODF/modaodfweb-3/issues', '_blank');
+			window.open('https://github.com/MODAODF/modaodfweb-3/issues', '_blank');
 		} else if (id === 'inserthyperlink') {
 			this._map.showHyperlinkDialog();
 		} else if (L.Params.revHistoryEnabled && (id === 'rev-history' || id === 'Rev-History' || id === 'last-mod')) {

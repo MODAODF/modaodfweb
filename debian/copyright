@@ -1,7 +1,7 @@
 Format-Specification: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=135
 Name: modaodfweb
 Maintainer: Firefly <firefly@ossii.com.tw>
-Source: https://github.com/NDCODF/modaodfweb
+Source: https://github.com/MODAODF/modaodfweb
 
 Copyright: 2022 OSS Integral Institute Co., Ltd. <develop@ossii.com.tw>
 License: MPL-2
