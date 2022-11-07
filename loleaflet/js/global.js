@@ -14,7 +14,7 @@ window.app = {
 
 	// Added by Firefly <firefly@ossii.com.tw>
 	// 預設產品相關資訊
-	global.brandProductName = 'NDC ODF Web';
+	global.brandProductName = 'MODA ODF Web';
 	global.brandProductURL = 'https://www.ossii.com.tw/product';
 	global.brandProductFAQURL = 'https://www.facebook.com/OSSIITW/';
 	//------------------------------------------------------

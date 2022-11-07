@@ -1,5 +1,5 @@
 [Unit]
-Description=NDC ODF WebSocket Daemon
+Description=MODA ODF WebSocket Daemon
 After=network.target
 
 [Service]

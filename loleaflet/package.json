@@ -1,7 +1,7 @@
 {
   "name": "ndcodfweb",
   "version": "0.8.0-dev",
-  "description": "NDC ODF Web front-end",
+  "description": "MODA ODF Web front-end",
   "devDependencies": {
     "@braintree/sanitize-url": "6.0.0",
     "@types/mocha": "8.2.0",
@@ -44,7 +44,7 @@
     "oxool",
     "OxOffice",
     "ndcodfweb",
-    "NDC ODF Application Tools v3"
+    "MODA ODF Application Tools v3"
   ],
   "license": "BSD-2-Clause",
   "dependencies": {

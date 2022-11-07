@@ -1,5 +1,5 @@
 ## Path:	Network/Remote access/NDCODFWEB
-## Description:	NDC ODF WebSocket Daemon settings
+## Description:	MODA ODF WebSocket Daemon settings
 ## Type:	string
 ## Default: ""
 ## ServiceRestart:  ndcodfweb

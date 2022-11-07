@@ -103,7 +103,7 @@ void Config::displayHelp()
     HelpFormatter helpFormatter(options());
     helpFormatter.setCommand(commandName());
     helpFormatter.setUsage("COMMAND [OPTIONS]");
-    helpFormatter.setHeader("ndcodfwebconfig - Configuration tool for NDC ODF Web.\n"
+    helpFormatter.setHeader("ndcodfwebconfig - Configuration tool for MODA ODF Web.\n"
                             "\n"
                             "Some options make sense only with a specific command.\n\n"
                             "Options:");

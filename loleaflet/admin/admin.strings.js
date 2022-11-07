@@ -2,7 +2,7 @@
 /* Stringtable for Admin Console User Interface */
 /* global _ _UNO */
 var l10nstrings = {
-	productName: 'NDC ODF Web',
+	productName: 'MODA ODF Web',
 	/**
 	 * 找出整頁中，含有 _="字串" 的 DOM，把該 DOM 的 innerHTML 改成 _("字串") 的值
 	 */
