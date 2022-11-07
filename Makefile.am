@@ -1,6 +1,6 @@
 ETAGS=ctags -e
 
-SUBDIRS = . modules loleaflet extensions fonts support
+SUBDIRS = src . loleaflet extensions fonts support
 
 export ENABLE_DEBUG
 
@@ -38,9 +38,12 @@ sudoers_DATA = etc/sudoers.d/lool
 servicesysconfigdir = ${sysconfdir}/sysconfig
 servicesysconfig_DATA = etc/sysconfig/ndcodfweb
 
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = modaodfweb.pc
+
 ndcodfwebconfigdir = @LOOLWSD_CONFIGDIR@
 
-ndcodfweb_modulesdir = @LOOLWSD_MODULES_DIR@
+ndcodfweb_modulesdir = @LOOLWSD_MODULE_DIR@
 
 ndcodfweb_module_confdir = @LOOLWSD_MODULE_CONFIG_DIR@
 
@@ -55,11 +58,11 @@ ndcodfwebconfig_DATA = ndcodfweb.xml \
 ACLOCAL_AMFLAGS = -I m4
 
 # quick and easy for now.
-include_paths = -I${top_srcdir}/common -I${top_srcdir}/net -I${top_srcdir}/wsd -I${top_srcdir}/kit ${ZLIB_CFLAGS} ${FONTCONFIG_CFLAGS}
+include_paths = -I${top_srcdir}/common -I${top_srcdir}/net -I${top_srcdir}/wsd -I${top_srcdir}/kit -I${top_srcdir}/src/include ${ZLIB_CFLAGS} ${FONTCONFIG_CFLAGS}
 
 AM_CPPFLAGS = -pthread -DLOOLWSD_DATADIR='"@LOOLWSD_DATADIR@"' \
 	      -DLOOLWSD_CONFIGDIR='"@LOOLWSD_CONFIGDIR@"' \
-	      -DDEBUG_ABSSRCDIR='"@abs_srcdir@"' \
+	      -DDEBUG_ABSSRCDIR='"@abs_top_builddir@"' \
 	      ${include_paths}
 
 if !ENABLE_DEBUG
@@ -72,7 +75,6 @@ if ENABLE_SSL
 AM_LDFLAGS += -lssl -lcrypto
 else
 ndcodfweb_LDADD = -lssl -lcrypto
-ndcodfwebconfig_LDADD = -lssl -lcrypto
 endif
 
 AM_ETAGSFLAGS = --c++-kinds=+p --fields=+iaS --extra=+q -R --totals=yes --exclude=loleaflet *
@@ -119,6 +121,8 @@ ndcodfweb_json = $(patsubst %.cpp,%.cmd,$(ndcodfweb_sources))
 
 ndcodfweb_SOURCES = $(ndcodfweb_sources) \
                   $(shared_sources)
+
+ndcodfweb_LDADD = $(top_builddir)/src/lib/libOxOOL.la
 
 noinst_PROGRAMS = clientnb \
                   connect \
@@ -250,6 +254,7 @@ dist-hook:
 	git log -1 --format=%h > $(distdir)/dist_git_hash 2> /dev/null || rm $(distdir)/dist_git_hash
 	git rev-parse --abbrev-ref HEAD | cut -d '-' -f 1 > $(distdir)/dist_git_branch 2> /dev/null || rm $(distdir)/dist_git_branch
 	( if test -f dist_project; then mv dist_project $(distdir); fi ) || rm $(distdir)/dist_project
+	cp -aR bundled $(distdir)/
 
 EXTRA_DIST = discovery.xml \
              favicon.ico \
@@ -257,11 +262,11 @@ EXTRA_DIST = discovery.xml \
              ndcodfweb.spec \
              ndcodfweb.xml.in \
              ndcodfweb.service \
-             bundled/* \
              debian/changelog \
              debian/compat \
              debian/control \
              debian/copyright \
+             debian/oxool.cron.d \
              debian/ndcodfweb.postinst \
              debian/ndcodfweb.postrm \
              debian/ndcodfweb.preinst \
@@ -286,7 +291,7 @@ CAPABILITIES = $(if @ENABLE_SETCAP@,true,false)
 RUN_GDB = $(if $(GDB_FRONTEND),$(GDB_FRONTEND),gdb --tui --args)
 
 if ENABLE_SETCAP
-SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep ndcodfwebforkit && sudo @SETCAP@ cap_sys_admin=ep ndcodfwebmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=+ep ndcodfweb
+SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep oxoolforkit && sudo @SETCAP@ cap_sys_admin=ep oxoolmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=+ep .libs/ndcodfweb
 else
 SET_CAPS_COMMAND=echo "Skipping capability setting"
 endif
@@ -456,12 +461,12 @@ all-local: $(ALL_LOCAL_DEPS) @JAILS_PATH@ $(SYSTEM_STAMP)
 build-nocheck: all-am
 
 install-data-local:
-	$(MKDIR_P) $(DESTDIR)$(LOOLWSD_MODULES_DIR)
+	$(MKDIR_P) $(DESTDIR)$(LOOLWSD_MODULE_DIR)
 	$(MKDIR_P) $(DESTDIR)$(LOOLWSD_MODULE_CONFIG_DIR)
 	$(MKDIR_P) $(DESTDIR)$(LOOLWSD_MODULE_DATA_DIR)
 
 uninstall-local:
-	rmdir $(DESTDIR)$(LOOLWSD_MODULES_DIR)
+	rmdir $(DESTDIR)$(LOOLWSD_MODULE_DIR)
 	rmdir $(DESTDIR)$(LOOLWSD_MODULE_CONFIG_DIR)
 	rmdir $(DESTDIR)$(LOOLWSD_MODULE_DATA_DIR)
 

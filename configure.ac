@@ -459,8 +459,6 @@ AC_SUBST(VEREIGN_URL)
 
 # Test for build environment
 
-CXXFLAGS="$CXXFLAGS -Wall -Wextra -Wshadow"
-
 CFLAGS="$CFLAGS -Wall -Wextra"
 
 AC_MSG_CHECKING([whether to turn warnings to errors])
@@ -781,20 +779,16 @@ LOOLWSD_DATADIR=${prefix}/share/${PACKAGE}
 AC_SUBST(LOOLWSD_DATADIR)
 
 if test "$enable_debug" = "yes"; then
-    ABS_DIR=`pwd`
-    LOOLWSD_LOG_DIR="/tmp"
-    LOOLWSD_MODULES_DIR="${ABS_DIR}/modules/.libs"
-    LOOLWSD_MODULE_CONFIG_DIR="${ABS_DIR}/modules"
-    LOOLWSD_MODULE_DATA_DIR="${ABS_DIR}/modules/runTimeData"
+modules_dir="`pwd`/src/modules"
+LOOLWSD_MODULE_DIR="${modules_dir}"
+LOOLWSD_MODULE_CONFIG_DIR="${modules_dir}"
+LOOLWSD_MODULE_DATA_DIR="${modules_dir}"
 else
-    LOOLWSD_LOG_DIR=/var/log
-    LOOLWSD_MODULES_DIR=${libdir}/${PACKAGE}
-    LOOLWSD_MODULE_CONFIG_DIR=${sysconfdir}/${PACKAGE}/conf.d
-    LOOLWSD_MODULE_DATA_DIR=/var/lib/${PACKAGE}
+LOOLWSD_MODULE_DIR=${libdir}/${PACKAGE}
+LOOLWSD_MODULE_CONFIG_DIR=${sysconfdir}/${PACKAGE}/conf.d
+LOOLWSD_MODULE_DATA_DIR=${prefix}/share/${PACKAGE}/modules
 fi
-
-AC_SUBST(LOOLWSD_LOG_DIR)
-AC_SUBST(LOOLWSD_MODULES_DIR)
+AC_SUBST(LOOLWSD_MODULE_DIR)
 AC_SUBST(LOOLWSD_MODULE_CONFIG_DIR)
 AC_SUBST(LOOLWSD_MODULE_DATA_DIR)
 
@@ -829,11 +823,23 @@ AC_SUBST(APP_HAS_BRANDING)
 
 AC_CHECK_FUNCS(ppoll)
 
+
+# The src directory is the OxOOL common object and development kit,
+# Search all Makefile.am and *.in files under it,
+# Avoid recording one by one.
+AC_CONFIG_FILES(m4_esyscmd_s([
+find src/ -type f -name "Makefile.am" -or -name "OxOOL.h.in" |
+while read file
+do
+    DIRNAME=`dirname "$file"`
+    FILENAME=$(basename -- "$file")
+    EXTENSION="${FILENAME##*.}"
+    FILENAME="${FILENAME%.*}"
+    echo "${DIRNAME}/${FILENAME}"
+done
+                            ]))
+
 AC_CONFIG_FILES([Makefile
-                 modules/Makefile
-                 modules/templaterepo.xml
-                 modules/mergeodf.xml
-                 modules/tbl2sc.xml
                  loleaflet/Makefile
                  loleaflet/npm-shrinkwrap.json
                  extensions/Makefile
@@ -842,6 +848,7 @@ AC_CONFIG_FILES([Makefile
                  support/Makefile
                  ndcodfweb.spec
                  ndcodfweb.xml
+                 modaodfweb.pc
                  debian/ndcodfweb.postinst])
 
 AC_CONFIG_FILES([test/run_unit.sh],[chmod +x test/run_unit.sh])
