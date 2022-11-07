@@ -62,13 +62,13 @@ public:
     unsigned getPwdHashLength() const { return _pwdHashLength; }
 };
 
-// Config tool to change ndcodfweb configuration (ndcodfweb.xml)
+// Config tool to change modaodfweb configuration (modaodfweb.xml)
 class Config: public Application
 {
     // Display help information on the console
     void displayHelp();
 
-    LoolConfig _ndcodfwebConfig;
+    LoolConfig _modaodfwebConfig;
 
     AdminConfig _adminConfig;
 
@@ -91,7 +91,7 @@ std::string Config::ConfigFile =
 #else
     LOOLWSD_CONFIGDIR
 #endif
-    "/ndcodfweb.xml";
+    "/modaodfweb.xml";
 
 std::string Config::SupportKeyString;
 bool Config::SupportKeyStringProvided = false;
@@ -103,7 +103,7 @@ void Config::displayHelp()
     HelpFormatter helpFormatter(options());
     helpFormatter.setCommand(commandName());
     helpFormatter.setUsage("COMMAND [OPTIONS]");
-    helpFormatter.setHeader("ndcodfwebconfig - Configuration tool for MODA ODF Web.\n"
+    helpFormatter.setHeader("modaodfwebconfig - Configuration tool for MODA ODF Web.\n"
                             "\n"
                             "Some options make sense only with a specific command.\n\n"
                             "Options:");
@@ -226,7 +226,7 @@ int Config::main(const std::vector<std::string>& args)
 
     int retval = EX_OK;
     bool changed = false;
-    _ndcodfwebConfig.load(ConfigFile);
+    _modaodfwebConfig.load(ConfigFile);
 
     if (args[0] == "set-admin-password")
     {
@@ -291,14 +291,14 @@ int Config::main(const std::vector<std::string>& args)
         std::stringstream pwdConfigValue("pbkdf2.sha512.", std::ios_base::in | std::ios_base::out | std::ios_base::ate);
         pwdConfigValue << std::to_string(_adminConfig.getPwdIterations()) << '.';
         pwdConfigValue << saltHash << '.' << passwordHash;
-        _ndcodfwebConfig.setString("admin_console.username", adminUser);
-        _ndcodfwebConfig.setString("admin_console.secure_password[@desc]",
+        _modaodfwebConfig.setString("admin_console.username", adminUser);
+        _modaodfwebConfig.setString("admin_console.secure_password[@desc]",
                               "Salt and password hash combination generated using PBKDF2 with SHA512 digest.");
-        _ndcodfwebConfig.setString("admin_console.secure_password", pwdConfigValue.str());
+        _modaodfwebConfig.setString("admin_console.secure_password", pwdConfigValue.str());
 
         changed = true;
 #else
-        std::cerr << "This application was compiled with old OpenSSL. Operation not supported. You can use plain text password in /etc/ndcodfweb/ndcodfweb.xml." << std::endl;
+        std::cerr << "This application was compiled with old OpenSSL. Operation not supported. You can use plain text password in /etc/modaodfweb/modaodfweb.xml." << std::endl;
         return EX_UNAVAILABLE;
 #endif
     }
@@ -326,7 +326,7 @@ int Config::main(const std::vector<std::string>& args)
                 else
                 {
                     std::cerr << "Valid for " << validDays << " days - setting to config\n";
-                    _ndcodfwebConfig.setString("support_key", supportKeyString);
+                    _modaodfwebConfig.setString("support_key", supportKeyString);
                     changed = true;
                 }
             }
@@ -334,7 +334,7 @@ int Config::main(const std::vector<std::string>& args)
         else
         {
             std::cerr << "Removing empty support key\n";
-            _ndcodfwebConfig.remove("support_key");
+            _modaodfwebConfig.remove("support_key");
             changed = true;
         }
     }
@@ -345,12 +345,12 @@ int Config::main(const std::vector<std::string>& args)
         {
             // args[1] = key
             // args[2] = value
-            if (_ndcodfwebConfig.has(args[1]))
+            if (_modaodfwebConfig.has(args[1]))
             {
-                const std::string val = _ndcodfwebConfig.getString(args[1]);
+                const std::string val = _modaodfwebConfig.getString(args[1]);
                 std::cout << "Previous value found in config file: \""  << val << '"' << std::endl;
                 std::cout << "Changing value to: \"" << args[2] << '"' << std::endl;
-                _ndcodfwebConfig.setString(args[1], args[2]);
+                _modaodfwebConfig.setString(args[1], args[2]);
                 changed = true;
             }
             else
@@ -364,7 +364,7 @@ int Config::main(const std::vector<std::string>& args)
     }
     else if (args[0] == "update-system-template")
     {
-        const char command[] = "ndcodfweb-systemplate-setup /opt/ndcodfweb/systemplate " LO_PATH " >/dev/null 2>&1";
+        const char command[] = "modaodfweb-systemplate-setup /opt/modaodfweb/systemplate " LO_PATH " >/dev/null 2>&1";
         std::cout << "Running the following command:" << std::endl
                   << command << std::endl;
 
@@ -376,7 +376,7 @@ int Config::main(const std::vector<std::string>& args)
     {
         if (!AnonymizationSaltProvided)
         {
-            const std::string val = _ndcodfwebConfig.getString("logging.anonymize.anonymization_salt");
+            const std::string val = _modaodfwebConfig.getString("logging.anonymize.anonymization_salt");
             AnonymizationSalt = std::stoull(val);
             std::cout << "Anonymization Salt: [" << AnonymizationSalt << "]." << std::endl;
         }
@@ -395,7 +395,7 @@ int Config::main(const std::vector<std::string>& args)
     if (changed)
     {
         std::cout << "Saving configuration to : " << ConfigFile << " ..." << std::endl;
-        _ndcodfwebConfig.save(ConfigFile);
+        _modaodfwebConfig.save(ConfigFile);
         std::cout << "Saved" << std::endl;
     }
 

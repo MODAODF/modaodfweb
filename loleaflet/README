@@ -75,23 +75,23 @@ Running
 
 To see an example:
 
-* run ndcodfweb, like:
+* run modaodfweb, like:
 
-    ./ndcodfweb --o:sys_template_path=${SYSTEMPLATE} --o:child_root_path=${ROOTFORJAILS}
+    ./modaodfweb --o:sys_template_path=${SYSTEMPLATE} --o:child_root_path=${ROOTFORJAILS}
 
-Note that this will, by default, set the ndcodfweb's file server's root to the parent directory of ndcodfweb,
+Note that this will, by default, set the modaodfweb's file server's root to the parent directory of modaodfweb,
 which means you can access all the files in browser using /loleaflet/ path. It is advised to set
 file_server_root_path manually for more control. See wsd/README for more information.
 
-* open dist/loleaflet.html through ndcodfweb's fileserver
+* open dist/loleaflet.html through modaodfweb's fileserver
 
     https://localhost:9980/loleaflet/dist/loleaflet.html?file_path=file:///PATH/TO_DOC&host=wss://localhost:9980
 
 and you should see the document in the browser.
 Note that accessing local storage is disabled by default for security reasons. You need to explicitly enable it
-with the --o:storage.filesystem[@allow]=true option of ndcodfweb. In case anything goes wrong, check the ndcodfweb console for
+with the --o:storage.filesystem[@allow]=true option of modaodfweb. In case anything goes wrong, check the modaodfweb console for
 the debugging output. You might be asked to confirm the certificate if you are using self-signed certificate
-for ndcodfweb.
+for modaodfweb.
 
 Development
 -----------
@@ -119,16 +119,16 @@ browser-sync start --config browsersync-config.js --startPath "loleaflet/96c23f6
 Admin Panel
 -----------
 
-You can do live monitoring of all the user sessions running on ndcodfweb instance. To access the admin
-console you need to ask for admin.html file from ndcodfweb which resides in dist/admin/admin.html.
+You can do live monitoring of all the user sessions running on modaodfweb instance. To access the admin
+console you need to ask for admin.html file from modaodfweb which resides in dist/admin/admin.html.
 
 For example:
 
     https://localhost:9980/loleaflet/dist/admin/admin.html
 
-It will ask for username and password which is set by the admin_console options of ndcodfweb. For example you can
+It will ask for username and password which is set by the admin_console options of modaodfweb. For example you can
 pass --o:admin_console.username=admin --o:admin_console.password=admin in command line, or set these values in
-ndcodfweb.xml. After entering the correct password you should be able to monitor the live documents opened, total
+modaodfweb.xml. After entering the correct password you should be able to monitor the live documents opened, total
 users, memory consumption, document URLs with number of users viewing that document etc. You can also kill the
 documents directly from the panel which would result in closing the socket connection to the respective document.
 
@@ -220,10 +220,10 @@ Parts (like slides in presentation, or sheets in spreadsheets):
 Statusindicator (when the document is loading):
     - events
         map.on('statusindicator', function (e) {}) where:
-            + e.statusType = 'start' | 'setvalue' | 'finish' | 'ndcodfwebloaded' | 'alltilesloaded'
+            + e.statusType = 'start' | 'setvalue' | 'finish' | 'modaodfwebloaded' | 'alltilesloaded'
             + e.value == a value from 0 to 100 indicating the status
               if the statusType is 'setvalue
-            + 'ndcodfwebloaded' is fired when the JS code is initialized and the document
+            + 'modaodfwebloaded' is fired when the JS code is initialized and the document
                 load request is sent and we're waiting for the tiles
             + 'alltilesloaded' is fired when all newly requested (empty tiles) have been loaded
                 it is not fired during pre-fetching and during editing

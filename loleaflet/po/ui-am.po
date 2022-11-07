@@ -2591,7 +2591,7 @@ msgstr "በ ሰርቨሩ ላይ ምንም የ ቀረ ባዶ ቦታ የለም: �
 #: src/errormessages.js:14
 #, fuzzy
 msgid ""
-"The host URL is empty. The ndcodfweb server is probably misconfigured, "
+"The host URL is empty. The modaodfweb server is probably misconfigured, "
 "please contact the administrator."
 msgstr ""
 "የ ጋባዥ URL ባዶ ነው: የ coolwsd ሰርቨር ምናልባት በ ትክክል አልተሰናዳ ይሆናል: እባክዎን አስተዳዳሪውን ያማክሩ"
@@ -3172,7 +3172,7 @@ msgid "Collabora Online Welcome"
 msgstr ""
 
 #: welcome/welcome.html+html.body.div.div.div.div.h1:26
-msgid "Explore The New %ndcodfwebVersion"
+msgid "Explore The New %modaodfwebVersion"
 msgstr ""
 
 #: welcome/welcome.html+html.body.div.div.div.div.h2:27

@@ -2582,7 +2582,7 @@ msgstr "Betelt a tárhely a kiszolgálón. Értesítse a rendszergazdát."
 #: src/errormessages.js:14
 #, fuzzy
 msgid ""
-"The host URL is empty. The ndcodfweb server is probably misconfigured, "
+"The host URL is empty. The modaodfweb server is probably misconfigured, "
 "please contact the administrator."
 msgstr ""
 "A host URL üres. A coolwsd kiszolgáló valószínűleg nincs jól konfigurálva. "
@@ -3215,7 +3215,7 @@ msgstr "Üdvözli a Collabora Online"
 
 #: welcome/welcome.html+html.body.div.div.div.div.h1:26
 #, fuzzy
-msgid "Explore The New %ndcodfwebVersion"
+msgid "Explore The New %modaodfwebVersion"
 msgstr "Fedezze fel az új %coolVersion-t"
 
 #: welcome/welcome.html+html.body.div.div.div.div.h2:27

@@ -2595,7 +2595,7 @@ msgstr ""
 #: src/errormessages.js:14
 #, fuzzy
 msgid ""
-"The host URL is empty. The ndcodfweb server is probably misconfigured, "
+"The host URL is empty. The modaodfweb server is probably misconfigured, "
 "please contact the administrator."
 msgstr ""
 "L'URL del servidor és buit. Probablement el servidor coolwsd està mal "
@@ -3201,7 +3201,7 @@ msgid "Collabora Online Welcome"
 msgstr ""
 
 #: welcome/welcome.html+html.body.div.div.div.div.h1:26
-msgid "Explore The New %ndcodfwebVersion"
+msgid "Explore The New %modaodfwebVersion"
 msgstr ""
 
 #: welcome/welcome.html+html.body.div.div.div.div.h2:27

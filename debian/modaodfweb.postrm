@@ -2,13 +2,13 @@
 
 set -e
 
-rm -f /etc/apt/apt.conf.d/25ndcodfweb
+rm -f /etc/apt/apt.conf.d/25modaodfweb
 
 case "$1" in
     remove)
-	rm -f /var/log/ndcodfweb.log
-	rm -fr /var/cache/ndcodfweb
-	rm -fr /opt/ndcodfweb
+	rm -f /var/log/modaodfweb.log
+	rm -fr /var/cache/modaodfweb
+	rm -fr /opt/modaodfweb
 	;;
 
 esac

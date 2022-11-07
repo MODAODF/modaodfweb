@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SUDO=''
-if [ ! -w "/etc/ndcodfweb" ]; then
+if [ ! -w "/etc/modaodfweb" ]; then
     if (( $EUID != 0 )); then
         if hash sudo 2>/dev/null; then
             SUDO='sudo'
@@ -12,20 +12,20 @@ if [ ! -w "/etc/ndcodfweb" ]; then
     fi
 fi
 
-if [ -f /etc/ndcodfweb/proof_key ]; then
-    echo "/etc/ndcodfweb/proof_key exists already."
+if [ -f /etc/modaodfweb/proof_key ]; then
+    echo "/etc/modaodfweb/proof_key exists already."
     exit 0
 fi
 
 if hash ssh-keygen 2>/dev/null; then
-    $SUDO ssh-keygen -t rsa -N "" -m PEM -f /etc/ndcodfweb/proof_key
+    $SUDO ssh-keygen -t rsa -N "" -m PEM -f /etc/modaodfweb/proof_key
     if [ $? -ne 0 ] ; then
         exit $?
 	fi
     if id -u lool >/dev/null 2>&1; then
-        $SUDO chown lool: /etc/ndcodfweb/proof_key
+        $SUDO chown lool: /etc/modaodfweb/proof_key
     else
-        echo "User lool does not exist. Please reinstall ndcodfweb package, or in case of manual installation from source, create the lool user manually."
+        echo "User lool does not exist. Please reinstall modaodfweb package, or in case of manual installation from source, create the lool user manually."
     fi
 else
 	echo "ssh-keygen command not found. Please install openssh client tools."

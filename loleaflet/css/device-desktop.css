@@ -13,12 +13,12 @@
 	margin-left: -20px !important;
 }
 
-#ndcodfweb-version span:before,
+#modaodfweb-version span:before,
 #lokit-version > span:before {
 	content: ' (';
 	white-space: pre;
 }
-#ndcodfweb-version span:after,
+#modaodfweb-version span:after,
 #lokit-version > span:after {
 	content: ')';
 }

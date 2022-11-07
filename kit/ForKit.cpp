@@ -208,12 +208,12 @@ static bool haveCapability(cap_value_t capability)
     {
         if (cap_name)
         {
-            LOG_FTL("Capability " << cap_name << " is not set for the ndcodfwebforkit program.");
+            LOG_FTL("Capability " << cap_name << " is not set for the modaodfwebforkit program.");
             cap_free(cap_name);
         }
         else
         {
-            LOG_ERR("Capability " << capability << " is not set for the ndcodfwebforkit program.");
+            LOG_ERR("Capability " << capability << " is not set for the modaodfwebforkit program.");
         }
         return false;
     }
@@ -327,14 +327,14 @@ static int createLibreOfficeKit(const std::string& childRoot,
     // Used to label the spare kit instances
     static size_t spareKitId = 0;
     ++spareKitId;
-    LOG_DBG("Forking a ndcodfwebkit process with jailId: " << jailId << " as spare ndcodfwebkit #" << spareKitId << '.');
+    LOG_DBG("Forking a modaodfwebkit process with jailId: " << jailId << " as spare modaodfwebkit #" << spareKitId << '.');
 
     const pid_t pid = fork();
     if (!pid)
     {
         // Child
 
-        // Close the pipe from ndcodfweb
+        // Close the pipe from modaodfweb
         close(0);
 
 #ifndef KIT_IN_PROCESS
@@ -416,9 +416,9 @@ void forkLibreOfficeKit(const std::string& childRoot,
 #ifndef KIT_IN_PROCESS
 static void printArgumentHelp()
 {
-    std::cout << "Usage: ndcodfwebforkit [OPTION]..." << std::endl;
+    std::cout << "Usage: modaodfwebforkit [OPTION]..." << std::endl;
     std::cout << "  Single-threaded process that spawns lok instances" << std::endl;
-    std::cout << "  Note: Running this standalone is not possible. It is spawned by ndcodfweb" << std::endl;
+    std::cout << "  Note: Running this standalone is not possible. It is spawned by modaodfweb" << std::endl;
     std::cout << "        and is controlled via a pipe." << std::endl;
     std::cout << "" << std::endl;
 }
@@ -438,7 +438,7 @@ int main(int argc, char** argv)
         }
     }
 
-    if (checkLoolUser && !hasCorrectUID("ndcodfwebforkit"))
+    if (checkLoolUser && !hasCorrectUID("modaodfwebforkit"))
     {
         return EX_SOFTWARE;
     }
@@ -525,7 +525,7 @@ int main(int argc, char** argv)
         {
             std::string version, hash;
             Util::getVersionInfo(version, hash);
-            std::cout << "ndcodfwebforkit version details: " << version << " - " << hash << std::endl;
+            std::cout << "modaodfwebforkit version details: " << version << " - " << hash << std::endl;
             DisplayVersion = true;
         }
         else if (std::strstr(cmd, "--rlimits") == cmd)
@@ -609,7 +609,7 @@ int main(int argc, char** argv)
 
     if (!NoCapsForKit && !haveCorrectCapabilities())
     {
-        std::cerr << "FATAL: Capabilities are not set for the ndcodfwebforkit program." << std::endl;
+        std::cerr << "FATAL: Capabilities are not set for the modaodfwebforkit program." << std::endl;
         std::cerr << "Please make sure that the current partition was *not* mounted with the 'nosuid' option." << std::endl;
         std::cerr << "If you are on SLES11, please set 'file_caps=1' as kernel boot option." << std::endl << std::endl;
         return EX_SOFTWARE;

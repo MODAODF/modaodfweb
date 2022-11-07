@@ -1,4 +1,4 @@
-# spec file for package ndcodfweb
+# spec file for package modaodfweb
 #
 # Copyright (c) 2015 OSSII
 #
@@ -31,7 +31,7 @@ BuildRequires:  libpcap kernel-headers python3-polib python3-lxml
 
 Requires:       ndcodfsys ndcodfsys-ure ndcodfsyslib-core ndcodfsyslib-writer ndcodfsyslib-impress ndcodfsyslib-graphicfilter ndcodfsyslib-en-US ndcodfsyslib-calc ndcodfsyslib-ooofonts ndcodfsyslib-images ndcodfsyslib-draw ndcodfsyslib-extension-pdf-import ndcodfsyslib-ooolinguistic ndcodfsyslib-math
 Requires(post): coreutils grep sed cpio
-# ndcodfweb dependencies
+# modaodfweb dependencies
 Requires:       systemd expat keyutils-libs krb5-libs libattr libcap libcom_err libgcc libpng libselinux openssh-clients openssl-libs pcre xz-libs zlib unzip sudo fontconfig freetype libuuid bzip2-libs
 Requires:       poco-crypto >= 1.7.5 poco-data >= 1.7.5 poco-encodings >= 1.7.5 poco-foundation >= 1.7.5 poco-json >= 1.7.5 poco-mongodb >= 1.7.5 poco-mysql >= 1.7.5 poco-net >= 1.7.5 poco-netssl >= 1.7.5 poco-odbc >= 1.7.5 poco-pagecompiler >= 1.7.5 poco-sqlite >= 1.7.5 poco-util >= 1.7.5 poco-xml >= 1.7.5 poco-zip >= 1.7.5
 
@@ -73,10 +73,10 @@ rm -f %{buildroot}/%{_libdir}/*.la
 rm -f %{buildroot}/%{_libdir}/@PACKAGE_NAME@/*.la
 install -d -m 755 %{buildroot}/var/adm/fillup-templates
 %if 0%{?rhel}
-install -D -m 444 ndcodfweb.service %{buildroot}%{_unitdir}/ndcodfweb.service
+install -D -m 444 modaodfweb.service %{buildroot}%{_unitdir}/modaodfweb.service
 # systemd in RHEL 7 does not understand these options
 %if 0%{?rhel} <= 7
-sed -i "/^ReadWritePaths/d;/^ProtectControlGroups/d;/^ProtectSystem/d" %{buildroot}%{_unitdir}/ndcodfweb.service
+sed -i "/^ReadWritePaths/d;/^ProtectControlGroups/d;/^ProtectSystem/d" %{buildroot}%{_unitdir}/modaodfweb.service
 %endif
 %endif
 mkdir -p %{buildroot}/etc/pam.d
@@ -98,15 +98,15 @@ echo "account    required     pam_unix.so" >>  %{buildroot}/etc/pam.d/%{name}
 /etc/fonts/conf.d/*.conf
 %dir %attr(755, lool, root) /usr/share/fonts/%{name}
 %dir %attr(750, lool, root) /usr/share/%{name}/support
-%{_unitdir}/ndcodfweb.service
-%config(noreplace) /etc/sysconfig/ndcodfweb
+%{_unitdir}/modaodfweb.service
+%config(noreplace) /etc/sysconfig/modaodfweb
 
 %dir /etc/%{name}
 %dir /etc/%{name}/conf.d
 %dir %{_libdir}/%{name}
 %config(noreplace) /etc/pam.d/%{name}
-%config(noreplace) %attr(640, lool, root) /etc/%{name}/ndcodfweb.xml
-%config /etc/%{name}/ndcodfwebkitconfig.xcu
+%config(noreplace) %attr(640, lool, root) /etc/%{name}/modaodfweb.xml
+%config /etc/%{name}/modaodfwebkitconfig.xcu
 %config(noreplace) /etc/%{name}/*.pem
 %config %attr(440, root, root) /etc/sudoers.d/lool
 
@@ -121,24 +121,24 @@ echo "account    required     pam_unix.so" >>  %{buildroot}/etc/pam.d/%{name}
 
 %pre
 getent group lool >/dev/null || groupadd -r lool
-getent passwd lool >/dev/null || useradd -g lool -r lool -d /opt/ndcodfweb -s /bin/bash
+getent passwd lool >/dev/null || useradd -g lool -r lool -d /opt/modaodfweb -s /bin/bash
 
 %post
-setcap cap_dac_override,cap_net_bind_service=ep /usr/bin/ndcodfweb
-setcap cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep /usr/bin/ndcodfwebforkit
-setcap cap_sys_admin=ep /usr/bin/ndcodfwebmount
+setcap cap_dac_override,cap_net_bind_service=ep /usr/bin/modaodfweb
+setcap cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep /usr/bin/modaodfwebforkit
+setcap cap_sys_admin=ep /usr/bin/modaodfwebmount
 
 %if 0%{?fedora} || 0%{?rhel} >= 7
-%systemd_post ndcodfweb.service
+%systemd_post modaodfweb.service
 %endif
 
 %triggerin -- expat fontconfig freetype freetype2 glibc glibc-locale kernel keyutils-libs krb5 krb5-libs libbz2-1 libcap libcap-ng libcap2 libexpat1 libfreetype6 libgcc libgcc_s1 libgcrypt libiscsi libpng libpng12 libpng12-0 libpng15-15 libpng16-16 libstdc++ libstdc++6 libuuid libuuid1 libz1 lsb nss-mdns nss-softokn-freebl pcre sssd sssd-client systemd-libs timezone tzdata zlib
 
-echo -ne "Triggered update of ndcodfweb systemplate..."
+echo -ne "Triggered update of modaodfweb systemplate..."
 
 %if 0%{?rhel} >= 7 || 0%{?suse_version} >= 1300
-systemctl is-active -q ndcodfweb && OXOOLWSD_IS_ACTIVE=1 || OXOOLWSD_IS_ACTIVE=0
-if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl stop ndcodfweb; fi
+systemctl is-active -q modaodfweb && OXOOLWSD_IS_ACTIVE=1 || OXOOLWSD_IS_ACTIVE=0
+if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl stop modaodfweb; fi
 %endif
 
 # Figure out where LO is installed, let's hope it is not a mount point
@@ -152,32 +152,32 @@ chown lool:lool ${loolparent}/%{name}
 chown lool:lool ${loolparent}/%{name}/child-roots
 
 fc-cache ${loroot}/share/fonts/truetype
-su lool -c "ndcodfweb-systemplate-setup ${loolparent}/%{name}/systemplate ${loroot} >/dev/null 2>&1"
-ndcodfweb-generate-proof-key >/dev/null 2>&1
+su lool -c "modaodfweb-systemplate-setup ${loolparent}/%{name}/systemplate ${loroot} >/dev/null 2>&1"
+modaodfweb-generate-proof-key >/dev/null 2>&1
 
 %if 0%{?rhel} || 0%{?suse_version}
-if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl start ndcodfweb; fi
+if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl start modaodfweb; fi
 %endif
 
 echo "   Done."
 
 %preun
 %if 0%{?fedora} || 0%{?rhel} >= 7
-%systemd_preun ndcodfweb.service
+%systemd_preun modaodfweb.service
 %endif
 
 %postun
 arg="$1"
 fc-cache -f
 %if 0%{?fedora} || 0%{?rhel} >= 7
-%systemd_postun ndcodfweb.service
+%systemd_postun modaodfweb.service
 %endif
 
 # Real uninstall
 # 如果是1，表示是 upgrade，不需要刪除檔案
 if [ $arg = 0 ] ; then
     # log file
-    rm -f /var/log/ndcodfweb.log*
+    rm -f /var/log/modaodfweb.log*
     # systemplate & child root
     loroot=%{loroot}
     loolparent=`cd ${loroot} && cd .. && /bin/pwd`

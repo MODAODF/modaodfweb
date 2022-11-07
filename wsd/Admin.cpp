@@ -116,7 +116,7 @@ const std::string scanFontDir()
     return jsonStr;
 }
 
-// 利用 fc-cache 重建 ndcodfweb 管理的字型目錄
+// 利用 fc-cache 重建 modaodfweb 管理的字型目錄
 void makeFontCache()
 {
     std::string fontCacheCmd = "fc-cache -f \"" + fontsDir + "\"";
@@ -591,7 +591,7 @@ void AdminSocketHandler::handleMessage(const std::vector<char> &payload)
         sendTextFrame("channel_list " + _admin->getChannelLogLevels());
     }
     // Added by Firefly <firefly@ossii.com.tw>
-    // 檢查管理帳號密碼是否與 ndcodfweb.xml 中的一致
+    // 檢查管理帳號密碼是否與 modaodfweb.xml 中的一致
     // 格式: isConfigAuthOk <帳號> <密碼>
     else if (tokens.equals(0, "isConfigAuthOk") && tokens.size() == 3)
     {
@@ -823,9 +823,9 @@ void AdminSocketHandler::handleMessage(const std::vector<char> &payload)
     {
         sendTextFrame("fontList: " + scanFontDir());
     }
-    // 安裝上傳的字型檔案到 ndcodfweb 管理的字型目錄及 systemplate/
+    // 安裝上傳的字型檔案到 modaodfweb 管理的字型目錄及 systemplate/
     // oxool 管理的字型目錄是 /usr/share/fonts/oxool
-    // ndcodfweb 管理的字型目錄是 /usr/share/fonts/ndcodfweb
+    // modaodfweb 管理的字型目錄是 /usr/share/fonts/modaodfweb
     else if (tokens.equals(0, "installFont") && tokens.size() == 1)
     {
         const std::string sysTemplateFontsDir = LOOLWSD::SysTemplate + "/usr/share/fonts/" PACKAGE_NAME;
@@ -863,7 +863,7 @@ void AdminSocketHandler::handleMessage(const std::vector<char> &payload)
     {
         makeFontCache(); // 重建 font cache
     }
-    // 從 ndcodfweb.xml 讀取指定的內容
+    // 從 modaodfweb.xml 讀取指定的內容
     else if (tokens.equals(0, "getConfig") && tokens.size() > 1)
     {
         OxoolConfig config;
@@ -923,7 +923,7 @@ void AdminSocketHandler::handleMessage(const std::vector<char> &payload)
         json.stringify(oss);
         sendTextFrame("settings " + oss.str());
     }
-    // 把資料存入 ndcodfweb.xml
+    // 把資料存入 modaodfweb.xml
     // 指令格式為 setConfig <encodeURI 過的 Json 字串>
     else if (tokens.equals(0, "setConfig") && tokens.size() == 2)
     {

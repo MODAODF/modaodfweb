@@ -60,7 +60,7 @@ void FileDB::setDbPath()
 #if ENABLE_DEBUG
     dbfile = std::string(DEV_DIR) + "/runTimeData/templaterepo.sqlite";
 #else
-    auto previewConf = new Poco::Util::XMLConfiguration("/etc/ndcodfweb/conf.d/templaterepo/templaterepo.xml");
+    auto previewConf = new Poco::Util::XMLConfiguration("/etc/modaodfweb/conf.d/templaterepo/templaterepo.xml");
     dbfile = previewConf->getString("template.db_path", "");
 #endif
     std::cout<<"db: "<<dbfile<<std::endl;

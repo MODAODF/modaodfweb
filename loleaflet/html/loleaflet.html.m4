@@ -273,12 +273,12 @@ m4_ifelse(MOBILEAPP,[true],
         </div>
         <div id="about-dialog-info-container">
           <div id="about-dialog-info">
-            <div id="ndcodfweb-version-label"></div>
-            <div style="margin-inline-end: auto;"><div id="ndcodfweb-version" dir="ltr"></div></div>
+            <div id="modaodfweb-version-label"></div>
+            <div style="margin-inline-end: auto;"><div id="modaodfweb-version" dir="ltr"></div></div>
             <div class="spacer"></div>
             <div id="lokit-version-label"></div>
             <div style="margin-inline-end: auto;"><div id="lokit-version" dir="ltr"></div></div>
-            m4_ifelse(MOBILEAPP,[],[<div id="served-by"><span id="served-by-label"></span>&nbsp;<span id="os-info"></span>&nbsp;<wbr><span id="ndcodfweb-id"></span></div>],[<p></p>])
+            m4_ifelse(MOBILEAPP,[],[<div id="served-by"><span id="served-by-label"></span>&nbsp;<span id="os-info"></span>&nbsp;<wbr><span id="modaodfweb-id"></span></div>],[<p></p>])
             <div id="slow-proxy"></div>
             <p style="margin-inline-end: auto;"><span dir="ltr">Copyright © _YEAR_, VENDOR.</span></p>
           </div>
@@ -299,7 +299,7 @@ m4_ifelse(MOBILEAPP,[true],
       window.accessTokenTTL = '';
       window.accessHeader = '';
       window.postMessageOriginExt = '';
-      window.ndcodfwebLogging = 'true';
+      window.modaodfwebLogging = 'true';
       window.enableWelcomeMessage = false;
       window.enableWelcomeMessageButton = false;
       window.outOfFocusTimeoutSecs = 1000000;
@@ -318,8 +318,8 @@ m4_ifelse(MOBILEAPP,[true],
       window.accessTokenTTL = '%ACCESS_TOKEN_TTL%';
       window.accessHeader = '%ACCESS_HEADER%';
       window.postMessageOriginExt = '%POSTMESSAGE_ORIGIN%';
-      window.ndcodfwebLogging = '%OXLEAFLET_LOGGING%';
-      window.ndcodfwebVersion = '%LOOLWSD_VERSION%';
+      window.modaodfwebLogging = '%OXLEAFLET_LOGGING%';
+      window.modaodfwebVersion = '%LOOLWSD_VERSION%';
       window.enableWelcomeMessage = %ENABLE_WELCOME_MSG%;
       window.enableWelcomeMessageButton = %ENABLE_WELCOME_MSG_BTN%;
       window.userInterfaceMode = '%USER_INTERFACE_MODE%';

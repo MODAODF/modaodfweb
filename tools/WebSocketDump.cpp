@@ -244,7 +244,7 @@ int main (int argc, char **argv)
                     std::map<std::string, std::string>());
 
     LoolConfig config;
-    config.load("ndcodfweb.xml");
+    config.load("modaodfweb.xml");
 
     // read the port & ssl support
     int port = 9042;

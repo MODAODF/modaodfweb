@@ -40,20 +40,20 @@ let ssl_args = [
 if (ssl_flag === 'true')
 	args = [...args, ...ssl_args];
 
-const ndcodfweb = spawn(`${top_builddir}/ndcodfweb`, args);
+const modaodfweb = spawn(`${top_builddir}/modaodfweb`, args);
 
 if (debug)
 {
-	ndcodfweb.stdout.on('data', (data) => {
+	modaodfweb.stdout.on('data', (data) => {
 		console.log(`stdout: ${data}`);
 	});
-	ndcodfweb.stderr.on('data', (data) => {
+	modaodfweb.stderr.on('data', (data) => {
 		console.error(`stderr: ${data}`);
 	});
 }
 
-ndcodfweb.on('exit', (code) => {
-	console.log(`ndcodfweb process exited with code ${code}`);
+modaodfweb.on('exit', (code) => {
+	console.log(`modaodfweb process exited with code ${code}`);
 });
 
 console.log('\nTest running - connect to:\n\n\t' +
@@ -81,7 +81,7 @@ if(single_view !== "true") {
 function vacuumCleaner(kill, message, code) {
 		console.log(message);
 		childNodes.forEach(n => n.kill(kill));
-		ndcodfweb.kill(kill);
+		modaodfweb.kill(kill);
 		console.log(`Process exited with code ${code}`);
 }
 
@@ -124,7 +124,7 @@ function parseStats(content) {
 }
 
 function dumpMemoryUse() {
-	var url = 'https://admin:admin@localhost:' + port + '/ndcodfweb/getMetrics/';
+	var url = 'https://admin:admin@localhost:' + port + '/modaodfweb/getMetrics/';
 	console.log('Fetching stats from ' + url);
 	var req = https.request(
 		url,

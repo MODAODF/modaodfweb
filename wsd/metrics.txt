@@ -5,16 +5,16 @@ which can be found here: https://prometheus.io/docs/instrumenting/exposition_for
 GLOBAL
 
     global_host_system_memory_bytes - Total host system memory in bytes.
-    global_memory_available_bytes – Memory available to our application in bytes. This is equal to global_host_system_memory_bytes * memproportion where memproportion represents the maximum percentage of system memory consumed by all of the LibreOffice Online, after which we start cleaning up idle documents. This parameter can be setup in ndcodfweb.xml.
-    global_memory_used_bytes – Total memory usage: PSS(ndcodfweb) + RSS(forkit) + Private_Dirty(all assigned ndcodfwebkits).
+    global_memory_available_bytes – Memory available to our application in bytes. This is equal to global_host_system_memory_bytes * memproportion where memproportion represents the maximum percentage of system memory consumed by all of the LibreOffice Online, after which we start cleaning up idle documents. This parameter can be setup in modaodfweb.xml.
+    global_memory_used_bytes – Total memory usage: PSS(modaodfweb) + RSS(forkit) + Private_Dirty(all assigned modaodfwebkits).
     global_memory_free_bytes - global_memory_available_bytes - global_memory_used_bytes
 
 LOOLWSD
 
-    ndcodfweb_count – number of running ndcodfweb processes.
-    ndcodfweb_thread_count – number of threads in the current ndcodfweb process.
-    ndcodfweb_cpu_time_seconds – the CPU usage by current ndcodfweb process.
-    ndcodfweb_memory_used_bytes – the memory used by current ndcodfweb process: PSS(ndcodfweb).
+    modaodfweb_count – number of running modaodfweb processes.
+    modaodfweb_thread_count – number of threads in the current modaodfweb process.
+    modaodfweb_cpu_time_seconds – the CPU usage by current modaodfweb process.
+    modaodfweb_memory_used_bytes – the memory used by current modaodfweb process: PSS(modaodfweb).
 
 FORKIT
 

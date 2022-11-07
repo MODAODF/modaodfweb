@@ -713,7 +713,7 @@ $(abs_srcdir)/admin/jsconfig.json:
 
 jsconfig: $(abs_srcdir)/jsconfig.json $(abs_srcdir)/admin/jsconfig.json
 
-SSL_FLAG = `xmllint --xpath 'string(/config/ssl/enable)' $(abs_top_builddir)/ndcodfweb.xml`
+SSL_FLAG = `xmllint --xpath 'string(/config/ssl/enable)' $(abs_top_builddir)/modaodfweb.xml`
 
 # the delay (in miliseconds) between each emulated key stroke for each view
 typing_speed=100

@@ -2,5 +2,5 @@
 ## Description:	MODA ODF WebSocket Daemon settings
 ## Type:	string
 ## Default: ""
-## ServiceRestart:  ndcodfweb
+## ServiceRestart:  modaodfweb
 #

@@ -57,7 +57,7 @@ void LogDB::setDbPath()
 #if ENABLE_DEBUG
     dbfile = std::string(DEV_DIR) + "/runTimeData/mergeodf.sqlite";
 #else
-    auto mergeodfConf = new Poco::Util::XMLConfiguration("/etc/ndcodfweb/conf.d/mergeodf/mergeodf.xml");
+    auto mergeodfConf = new Poco::Util::XMLConfiguration("/etc/modaodfweb/conf.d/mergeodf/mergeodf.xml");
     dbfile = mergeodfConf->getString("database.db_path", "");
 #endif
 }

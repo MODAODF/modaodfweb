@@ -3,8 +3,8 @@ Description=MODA ODF WebSocket Daemon
 After=network.target
 
 [Service]
-EnvironmentFile=-/etc/sysconfig/ndcodfweb
-ExecStart=/usr/bin/ndcodfweb
+EnvironmentFile=-/etc/sysconfig/modaodfweb
+ExecStart=/usr/bin/modaodfweb
 KillSignal=SIGINT
 TimeoutStopSec=120
 User=lool
@@ -13,7 +13,7 @@ Restart=always
 LimitNOFILE=infinity:infinity
 
 #ProtectSystem=strict
-#ReadWritePaths=/etc/ndcodfweb /usr/share/fonts/ndcodfweb /opt/ndcodfweb /var/log
+#ReadWritePaths=/etc/modaodfweb /usr/share/fonts/modaodfweb /opt/modaodfweb /var/log
 
 ProtectHome=yes
 PrivateTmp=yes

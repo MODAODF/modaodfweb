@@ -73,7 +73,7 @@ std::list<std::string> templLists(bool isBasename)
 #if ENABLE_DEBUG
     std::string template_dir = std::string(DEV_DIR) + "/runTimeData/mergeodf/";
 #else
-    auto mergeodfconf = new Poco::Util::XMLConfiguration("/etc/ndcodfweb/conf.d/mergeodf/mergeodf.xml");
+    auto mergeodfconf = new Poco::Util::XMLConfiguration("/etc/modaodfweb/conf.d/mergeodf/mergeodf.xml");
     std::string template_dir = mergeodfconf->getString("template.dir_path", "");
 #endif
     Poco::Glob::glob(template_dir + "*.ot[ts]", files);
@@ -196,7 +196,7 @@ MergeODF::MergeODF()
 #if ENABLE_DEBUG
     ConfigFile = std::string(DEV_DIR) + "/mergeodf.xml";
 #else
-    ConfigFile = "/etc/ndcodfweb/conf.d/mergeodf/mergeodf.xml";
+    ConfigFile = "/etc/modaodfweb/conf.d/mergeodf/mergeodf.xml";
 #endif
     startStamp = std::chrono::steady_clock::now();
     xml_config = new Poco::Util::XMLConfiguration(ConfigFile);
@@ -1054,7 +1054,7 @@ void MergeODF::handleRequest(std::weak_ptr<StreamSocket> _socket,
 #if ENABLE_DEBUG
             template_dir = std::string(DEV_DIR) + "/runTimeData/mergeodf/";
 #else
-            auto mergeodfconf = new Poco::Util::XMLConfiguration("/etc/ndcodfweb/conf.d/mergeodf/mergeodf.xml");
+            auto mergeodfconf = new Poco::Util::XMLConfiguration("/etc/modaodfweb/conf.d/mergeodf/mergeodf.xml");
             template_dir = mergeodfconf->getString("template.dir_path", "");
 #endif
             if (method == HTTPRequest::HTTP_GET && reqPathSegs.size()==2)

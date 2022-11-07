@@ -613,7 +613,7 @@ bool DocumentBroker::load(const std::shared_ptr<ClientSession>& session, const s
     assert(_storage != nullptr);
 
     // Added by Firefly <firefly@ossii.com.tw>
-    // 預先讀取 ndcodfweb.xml 的浮水印設定
+    // 預先讀取 modaodfweb.xml 的浮水印設定
     // 編即時顯示？
     session->setWatermarkWhenEditing(LOOLWSD::getConfigValue<bool>("watermark.editing", false));
     // 列印或匯出 PDF 時顯示？
@@ -1600,7 +1600,7 @@ size_t DocumentBroker::addSessionInternal(const std::shared_ptr<ClientSession>& 
     {
         LOG_ERR("Out of storage while loading document with URI [" << session->getPublicUri().toString() << "].");
 
-        // We use the same message as is sent when some of ndcodfweb's own locations are full,
+        // We use the same message as is sent when some of modaodfweb's own locations are full,
         // even if in this case it might be a totally different location (file system, or
         // some other type of storage somewhere). This message is not sent to all clients,
         // though, just to all sessions of this document.

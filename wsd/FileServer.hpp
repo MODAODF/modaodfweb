@@ -42,7 +42,7 @@ public:
     static bool isAdminLoggedIn(const Poco::Net::HTTPRequest& request, Poco::Net::HTTPResponse& response);
 
     /// Added by Firefly <firefly@ossii.com.tw>
-    /// 檢查管理帳號及密碼是否與 ndcodfweb.xml 中的相符
+    /// 檢查管理帳號及密碼是否與 modaodfweb.xml 中的相符
     static bool isConfigAuthMatch(const std::string& userProvidedUsr,
                                   const std::string& userProvidedPwd);
 

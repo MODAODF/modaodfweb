@@ -5,21 +5,21 @@ SUBDIRS = src . loleaflet extensions fonts support
 export ENABLE_DEBUG
 
 bin_PROGRAMS = \
-	ndcodfwebforkit \
-	ndcodfwebmount \
-	ndcodfwebconvert ndcodfwebconfig
+	modaodfwebforkit \
+	modaodfwebmount \
+	modaodfwebconvert modaodfwebconfig
 
-bin_PROGRAMS += ndcodfweb
+bin_PROGRAMS += modaodfweb
 
-dist_bin_SCRIPTS = ndcodfweb-systemplate-setup \
-                   ndcodfweb-generate-proof-key
+dist_bin_SCRIPTS = modaodfweb-systemplate-setup \
+                   modaodfweb-generate-proof-key
 
-man_MANS = man/ndcodfweb.1 \
-           man/ndcodfwebforkit.1 \
-           man/ndcodfwebconvert.1 \
-           man/ndcodfwebconfig.1 \
-           man/ndcodfweb-systemplate-setup.1 \
-           man/ndcodfweb-generate-proof-key.1
+man_MANS = man/modaodfweb.1 \
+           man/modaodfwebforkit.1 \
+           man/modaodfwebconvert.1 \
+           man/modaodfwebconfig.1 \
+           man/modaodfweb-systemplate-setup.1 \
+           man/modaodfweb-generate-proof-key.1
 
 dist_doc_DATA = wsd/README \
                 wsd/README.vars \
@@ -27,30 +27,30 @@ dist_doc_DATA = wsd/README \
                 wsd/reference.md \
                 wsd/metrics.txt
 
-ndcodfwebdatadir = @LOOLWSD_DATADIR@
+modaodfwebdatadir = @LOOLWSD_DATADIR@
 
-ndcodfwebdata_DATA = discovery.xml \
+modaodfwebdata_DATA = discovery.xml \
                    favicon.ico
 
 sudoersdir = ${sysconfdir}/sudoers.d
 sudoers_DATA = etc/sudoers.d/lool
 
 servicesysconfigdir = ${sysconfdir}/sysconfig
-servicesysconfig_DATA = etc/sysconfig/ndcodfweb
+servicesysconfig_DATA = etc/sysconfig/modaodfweb
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = modaodfweb.pc
 
-ndcodfwebconfigdir = @LOOLWSD_CONFIGDIR@
+modaodfwebconfigdir = @LOOLWSD_CONFIGDIR@
 
-ndcodfweb_modulesdir = @LOOLWSD_MODULE_DIR@
+modaodfweb_modulesdir = @LOOLWSD_MODULE_DIR@
 
-ndcodfweb_module_confdir = @LOOLWSD_MODULE_CONFIG_DIR@
+modaodfweb_module_confdir = @LOOLWSD_MODULE_CONFIG_DIR@
 
-ndcodfweb_module_datadir = @LOOLWSD_MODULE_DATA_DIR@
+modaodfweb_module_datadir = @LOOLWSD_MODULE_DATA_DIR@
 
-ndcodfwebconfig_DATA = ndcodfweb.xml \
-		     ndcodfwebkitconfig.xcu \
+modaodfwebconfig_DATA = modaodfweb.xml \
+		     modaodfwebkitconfig.xcu \
 		     etc/ca-chain.cert.pem \
 		     etc/cert.pem \
 		     etc/key.pem
@@ -69,12 +69,12 @@ if !ENABLE_DEBUG
 AM_CPPFLAGS += -DNDEBUG
 endif
 
-AM_LDFLAGS = -pthread -Wl,-E,-rpath,/snap/ndcodfweb/current/usr/lib -lpam $(ZLIB_LIBS) ${FONTCONFIG_LIBS}
+AM_LDFLAGS = -pthread -Wl,-E,-rpath,/snap/modaodfweb/current/usr/lib -lpam $(ZLIB_LIBS) ${FONTCONFIG_LIBS}
 
 if ENABLE_SSL
 AM_LDFLAGS += -lssl -lcrypto
 else
-ndcodfweb_LDADD = -lssl -lcrypto
+modaodfweb_LDADD = -lssl -lcrypto
 endif
 
 AM_ETAGSFLAGS = --c++-kinds=+p --fields=+iaS --extra=+q -R --totals=yes --exclude=loleaflet *
@@ -102,7 +102,7 @@ endif
 
 shared_json = $(patsubst %.cpp,%.cmd,$(shared_sources))
 
-ndcodfweb_sources = common/Crypto.cpp \
+modaodfweb_sources = common/Crypto.cpp \
                   wsd/Admin.cpp \
                   wsd/AdminModel.cpp \
                   wsd/Auth.cpp \
@@ -117,19 +117,19 @@ ndcodfweb_sources = common/Crypto.cpp \
                   wsd/TileCache.cpp \
                   wsd/ProofKey.cpp
 
-ndcodfweb_json = $(patsubst %.cpp,%.cmd,$(ndcodfweb_sources))
+modaodfweb_json = $(patsubst %.cpp,%.cmd,$(modaodfweb_sources))
 
-ndcodfweb_SOURCES = $(ndcodfweb_sources) \
+modaodfweb_SOURCES = $(modaodfweb_sources) \
                   $(shared_sources)
 
-ndcodfweb_LDADD = $(top_builddir)/src/lib/libOxOOL.la
+modaodfweb_LDADD = $(top_builddir)/src/lib/libOxOOL.la
 
 noinst_PROGRAMS = clientnb \
                   connect \
                   lokitclient \
-                  ndcodfwebmap \
-                  ndcodfwebstress \
-                  ndcodfwebsocketdump
+                  modaodfwebmap \
+                  modaodfwebstress \
+                  modaodfwebsocketdump
 
 connect_SOURCES = tools/Connect.cpp \
                   common/Log.cpp \
@@ -143,13 +143,13 @@ lokitclient_SOURCES = common/Log.cpp \
                       common/StringVector.cpp \
                       common/Util.cpp
 
-ndcodfwebforkit_sources = kit/ChildSession.cpp \
+modaodfwebforkit_sources = kit/ChildSession.cpp \
                      kit/ForKit.cpp \
                      kit/Kit.cpp
 
-ndcodfwebforkit_json = $(patsubst %.cpp,%.cmd,$(ndcodfwebforkit_sources))
+modaodfwebforkit_json = $(patsubst %.cpp,%.cmd,$(modaodfwebforkit_sources))
 
-ndcodfwebforkit_SOURCES = $(ndcodfwebforkit_sources) \
+modaodfwebforkit_SOURCES = $(modaodfwebforkit_sources) \
                      $(shared_sources)
 
 clientnb_SOURCES = net/clientnb.cpp \
@@ -157,26 +157,26 @@ clientnb_SOURCES = net/clientnb.cpp \
 		   common/StringVector.cpp \
                    common/Util.cpp
 
-ndcodfwebmount_SOURCES = tools/mount.cpp
+modaodfwebmount_SOURCES = tools/mount.cpp
 
-ndcodfwebmap_SOURCES = tools/map.cpp
+modaodfwebmap_SOURCES = tools/map.cpp
 
-ndcodfwebconvert_SOURCES = tools/Tool.cpp
+modaodfwebconvert_SOURCES = tools/Tool.cpp
 
-ndcodfwebstress_CPPFLAGS = -DTDOC=\"$(abs_top_srcdir)/test/data\" ${include_paths}
-ndcodfwebstress_SOURCES = tools/Stress.cpp \
+modaodfwebstress_CPPFLAGS = -DTDOC=\"$(abs_top_srcdir)/test/data\" ${include_paths}
+modaodfwebstress_SOURCES = tools/Stress.cpp \
                      common/Protocol.cpp \
                      common/StringVector.cpp \
                      common/Log.cpp \
 		     common/Util.cpp
 
-ndcodfwebconfig_SOURCES = tools/Config.cpp \
+modaodfwebconfig_SOURCES = tools/Config.cpp \
 		     common/Crypto.cpp \
 		     common/Log.cpp \
 		     common/StringVector.cpp \
 		     common/Util.cpp
 
-ndcodfwebsocketdump_SOURCES = tools/WebSocketDump.cpp \
+modaodfwebsocketdump_SOURCES = tools/WebSocketDump.cpp \
 			 $(shared_sources)
 
 wsd_headers = wsd/Admin.hpp \
@@ -258,30 +258,30 @@ dist-hook:
 
 EXTRA_DIST = discovery.xml \
              favicon.ico \
-             ndcodfwebkitconfig.xcu \
-             ndcodfweb.spec \
-             ndcodfweb.xml.in \
-             ndcodfweb.service \
+             modaodfwebkitconfig.xcu \
+             modaodfweb.spec \
+             modaodfweb.xml.in \
+             modaodfweb.service \
              debian/changelog \
              debian/compat \
              debian/control \
              debian/copyright \
-             debian/ndcodfweb.postinst \
-             debian/ndcodfweb.postrm \
-             debian/ndcodfweb.preinst \
-             debian/ndcodfweb.service \
+             debian/modaodfweb.postinst \
+             debian/modaodfweb.postrm \
+             debian/modaodfweb.preinst \
+             debian/modaodfweb.service \
              debian/rules \
              debian/source/format \
              etc/key.pem \
              etc/cert.pem \
              etc/ca-chain.cert.pem \
              etc/sudoers.d/lool \
-             etc/sysconfig/ndcodfweb \
+             etc/sysconfig/modaodfweb \
              scripts/unocommands.py \
              $(man_MANS)
 
 CLEANUP_COMMAND=true
-#CLEANUP_COMMAND=if test -s ./ndcodfweb; then echo "Cleaning up..." && ./ndcodfweb --disable-lool-user-checking --cleanup --o:logging.file[@enable]=false --o:logging.level=trace; fi
+#CLEANUP_COMMAND=if test -s ./modaodfweb; then echo "Cleaning up..." && ./modaodfweb --disable-lool-user-checking --cleanup --o:logging.file[@enable]=false --o:logging.level=trace; fi
 
 if HAVE_LO_PATH
 
@@ -290,20 +290,20 @@ CAPABILITIES = $(if @ENABLE_SETCAP@,true,false)
 RUN_GDB = $(if $(GDB_FRONTEND),$(GDB_FRONTEND),gdb --tui --args)
 
 if ENABLE_SETCAP
-SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep ndcodfwebforkit && sudo @SETCAP@ cap_sys_admin=ep ndcodfwebmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=+ep .libs/ndcodfweb
+SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep modaodfwebforkit && sudo @SETCAP@ cap_sys_admin=ep modaodfwebmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=+ep .libs/modaodfweb
 else
 SET_CAPS_COMMAND=echo "Skipping capability setting"
 endif
 
-CLEANUP_DEPS=ndcodfweb ndcodfwebmount ndcodfwebforkit
+CLEANUP_DEPS=modaodfweb modaodfwebmount modaodfwebforkit
 
-# Build ndcodfweb and ndcodfwebmount first, so we can cleanup before updating
+# Build modaodfweb and modaodfwebmount first, so we can cleanup before updating
 # the systemplate directory, which we can't rm if it's mounted.
-$(SYSTEM_STAMP): ${top_srcdir}/ndcodfweb-systemplate-setup $(CLEANUP_DEPS)
+$(SYSTEM_STAMP): ${top_srcdir}/modaodfweb-systemplate-setup $(CLEANUP_DEPS)
 	$(SET_CAPS_COMMAND)
 	$(CLEANUP_COMMAND)
 	if test "z@SYSTEMPLATE_PATH@" != "z"; then rm -rf "@SYSTEMPLATE_PATH@" && \
-	${top_srcdir}/ndcodfweb-systemplate-setup "@SYSTEMPLATE_PATH@" "@LO_PATH@" && touch $@; fi
+	${top_srcdir}/modaodfweb-systemplate-setup "@SYSTEMPLATE_PATH@" "@LO_PATH@" && touch $@; fi
 
 @JAILS_PATH@:
 	$(CLEANUP_COMMAND)
@@ -322,16 +322,16 @@ clean-local:
 	if test "z@SYSTEMPLATE_PATH@" != "z"; then rm -rf "@SYSTEMPLATE_PATH@"; fi
 
 run: all @JAILS_PATH@
-	@echo "Launching ndcodfweb"
+	@echo "Launching modaodfweb"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	@echo
-	./ndcodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
+	./modaodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:security.capabilities="$(CAPABILITIES)" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
-			  --config-file="$(abs_top_srcdir)/ndcodfweb.xml" \
+			  --config-file="$(abs_top_srcdir)/modaodfweb.xml" \
 			  --o:file_server_root_path="$(abs_top_srcdir)" \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
 			  --o:ssl.key_file_path="$(abs_top_srcdir)/etc/key.pem" \
@@ -341,13 +341,13 @@ run: all @JAILS_PATH@
 
 if ENABLE_DEBUG
 run-one: all @JAILS_PATH@
-	@echo "Launching ndcodfweb"
+	@echo "Launching modaodfweb"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	@echo
-	./ndcodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
+	./modaodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:security.capabilities="$(CAPABILITIES)" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
@@ -368,15 +368,15 @@ sync-impress:
 	browser-sync start --config browsersync-config.js --startPath "loleaflet/96c23f663/loleaflet.html?file_path=file://$(abs_top_srcdir)/test/data/hello-world.odp"
 
 run-valgrind: all @JAILS_PATH@
-	@echo "Launching ndcodfweb under valgrind (but not forkit/ndcodfwebkit, yet)"
+	@echo "Launching modaodfweb under valgrind (but not forkit/modaodfwebkit, yet)"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	valgrind --tool=memcheck --trace-children=no -v --read-var-info=yes \
-		./ndcodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
+		./modaodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
-			  --config-file="$(abs_top_srcdir)/ndcodfweb.xml" \
+			  --config-file="$(abs_top_srcdir)/modaodfweb.xml" \
 			  --o:file_server_root_path="$(abs_top_srcdir)" \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
 			  --o:ssl.key_file_path="$(abs_top_srcdir)/etc/key.pem" \
@@ -385,16 +385,16 @@ run-valgrind: all @JAILS_PATH@
 			  --o:logging.file[@enable]=false --o:logging.level=trace
 
 run-gdb: all @JAILS_PATH@
-	@echo "Launching ndcodfweb under gdb"
+	@echo "Launching modaodfweb under gdb"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	$(RUN_GDB) \
-		./ndcodfweb --o:security.capabilities="false" \
+		./modaodfweb --o:security.capabilities="false" \
 			  --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
-			  --config-file="$(abs_top_srcdir)/ndcodfweb.xml" \
+			  --config-file="$(abs_top_srcdir)/modaodfweb.xml" \
 			  --o:file_server_root_path="$(abs_top_srcdir)" \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
 			  --o:ssl.key_file_path="$(abs_top_srcdir)/etc/key.pem" \
@@ -403,16 +403,16 @@ run-gdb: all @JAILS_PATH@
 			  --o:logging.file[@enable]=false --o:logging.level=error
 
 run-callgrind: all @JAILS_PATH@
-	@echo "Launching ndcodfweb under valgrind's callgrind"
+	@echo "Launching modaodfweb under valgrind's callgrind"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	valgrind --tool=callgrind --simulate-cache=yes --dump-instr=yes --num-callers=50 --error-limit=no --trace-children=yes \
-		./ndcodfweb --o:security.capabilities="false" \
+		./modaodfweb --o:security.capabilities="false" \
 			  --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
-			  --config-file="$(abs_top_srcdir)/ndcodfweb.xml" \
+			  --config-file="$(abs_top_srcdir)/modaodfweb.xml" \
 			  --o:file_server_root_path="$(abs_top_srcdir)" \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
 			  --o:ssl.key_file_path="$(abs_top_srcdir)/etc/key.pem" \
@@ -421,16 +421,16 @@ run-callgrind: all @JAILS_PATH@
 			  --o:logging.file[@enable]=false --o:logging.level=error
 
 run-strace: all @JAILS_PATH@
-	@echo "Launching ndcodfweb under strace"
+	@echo "Launching modaodfweb under strace"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	strace -o strace.log -f -tt -s 256 \
-		./ndcodfweb --o:security.capabilities="false" \
+		./modaodfweb --o:security.capabilities="false" \
 			  --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
-			  --config-file="$(abs_top_srcdir)/ndcodfweb.xml" \
+			  --config-file="$(abs_top_srcdir)/modaodfweb.xml" \
 			  --o:file_server_root_path="$(abs_top_srcdir)" \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
 			  --o:ssl.key_file_path="$(abs_top_srcdir)/etc/key.pem" \
@@ -446,9 +446,9 @@ endif
 
 .PHONY: cleanup
 
-ALL_LOCAL_DEPS=ndcodfweb
+ALL_LOCAL_DEPS=modaodfweb
 
-# After building ndcodfwebforkit, set its capabilities as required. Do it
+# After building modaodfwebforkit, set its capabilities as required. Do it
 # already after a plain 'make' to allow for testing without
 # installing. When building for packaging, no need for this, as the
 # capabilities won't survive packaging anyway. Instead, handle it when
@@ -483,7 +483,7 @@ CLANGXX_COMPILE_FLAGS=clang++ $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 
 JSON_COMPILE_FLAGS=$(subst ",\",$(subst \,\\,$(CLANGXX_COMPILE_FLAGS)))
 
-JSON_COMPILE_SRC = $(ndcodfweb_json) $(ndcodfwebforkit_json) $(shared_json)
+JSON_COMPILE_SRC = $(modaodfweb_json) $(modaodfwebforkit_json) $(shared_json)
 
 $(eval $(call file_targets,$(JSON_COMPILE_SRC)))
 

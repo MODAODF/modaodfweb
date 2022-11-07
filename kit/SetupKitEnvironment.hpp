@@ -24,11 +24,11 @@ inline void setupKitEnvironment(const std::string& userInterface)
         "sharedext:${${BRAND_BASE_DIR}/program/lounorc:SHARED_EXTENSIONS_USER}/registry/com.sun.star.comp.deployment.configuration.PackageRegistryBackend/configmgr.ini "
         "userext:${${BRAND_BASE_DIR}/program/lounorc:UNO_USER_PACKAGES_CACHE}/registry/com.sun.star.comp.deployment.configuration.PackageRegistryBackend/configmgr.ini "
 #ifdef IOS
-        "user:*${BRAND_BASE_DIR}/ndcodfwebkitconfig.xcu "
+        "user:*${BRAND_BASE_DIR}/modaodfwebkitconfig.xcu "
 #elif ENABLE_DEBUG && !defined(ANDROID) // '*' denotes non-writable.
-        "user:*file://" DEBUG_ABSSRCDIR "/ndcodfwebkitconfig.xcu "
+        "user:*file://" DEBUG_ABSSRCDIR "/modaodfwebkitconfig.xcu "
 #else
-        "user:*file://" LOOLWSD_CONFIGDIR "/ndcodfwebkitconfig.xcu "
+        "user:*file://" LOOLWSD_CONFIGDIR "/modaodfwebkitconfig.xcu "
 #endif
         );
     ::setenv("CONFIGURATION_LAYERS", layers.c_str(),

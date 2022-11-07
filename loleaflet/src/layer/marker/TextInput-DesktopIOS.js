@@ -370,7 +370,7 @@ L.TextInputDesktopIOS = L.Layer.extend({
 		}
 	},
 
-	// Sends the given (UTF-8) string of text to ndcodfweb, as IME (text composition)
+	// Sends the given (UTF-8) string of text to modaodfweb, as IME (text composition)
 	// messages
 	_sendText: function(text, type) {
 		var inputType = type !== undefined ? ' type=' + type : '';

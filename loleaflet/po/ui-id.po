@@ -2587,7 +2587,7 @@ msgstr ""
 #: src/errormessages.js:14
 #, fuzzy
 msgid ""
-"The host URL is empty. The ndcodfweb server is probably misconfigured, "
+"The host URL is empty. The modaodfweb server is probably misconfigured, "
 "please contact the administrator."
 msgstr ""
 "URL host kosong. Server coolwsd mungkin salah konfigurasi, harap hubungi "
@@ -3216,7 +3216,7 @@ msgstr "Selamat Datang di Collabora Online"
 
 #: welcome/welcome.html+html.body.div.div.div.div.h1:26
 #, fuzzy
-msgid "Explore The New %ndcodfwebVersion"
+msgid "Explore The New %modaodfwebVersion"
 msgstr "Jelajahi %coolVersion baru"
 
 #: welcome/welcome.html+html.body.div.div.div.div.h2:27

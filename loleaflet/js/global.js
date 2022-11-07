@@ -77,7 +77,7 @@ window.app = {
 		}
 	};
 
-	global.setLogging(global.ndcodfwebLogging == 'true');
+	global.setLogging(global.modaodfwebLogging == 'true');
 
 	global.getParameterByName = function (name) {
 		name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');

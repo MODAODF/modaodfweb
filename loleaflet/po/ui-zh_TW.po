@@ -2497,9 +2497,9 @@ msgstr "伺服器上已無剩餘磁碟空間，請聯絡伺服器管理員才得
 
 #: src/errormessages.js:14
 msgid ""
-"The host URL is empty. The ndcodfweb server is probably misconfigured, "
+"The host URL is empty. The modaodfweb server is probably misconfigured, "
 "please contact the administrator."
-msgstr "主機 URL 空白。ndcodfweb 伺服器可能設定錯誤，請聯絡管理員。"
+msgstr "主機 URL 空白。modaodfweb 伺服器可能設定錯誤，請聯絡管理員。"
 
 #: src/errormessages.js:15
 msgid ""
@@ -3094,7 +3094,7 @@ msgid "OxOffice Online Welcome"
 msgstr ""
 
 #: welcome/welcome.html+html.body.div.div.div.div.h1:26
-msgid "Explore The New %ndcodfwebVersion"
+msgid "Explore The New %modaodfwebVersion"
 msgstr ""
 
 #: welcome/welcome.html+html.body.div.div.div.div.h2:27

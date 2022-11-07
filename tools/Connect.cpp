@@ -124,7 +124,7 @@ private:
     LOOLWebSocket& _ws;
 };
 
-/// Program for interactive or scripted testing of a ndcodfweb server.
+/// Program for interactive or scripted testing of a modaodfweb server.
 class Connect: public Poco::Util::Application
 {
 public:

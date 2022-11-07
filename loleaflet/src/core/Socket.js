@@ -531,19 +531,19 @@ app.definitions.Socket = L.Class.extend({
 				}
 			}
 
-			$('#ndcodfweb-version-label').text(_('OXOOLWSD version:'));
+			$('#modaodfweb-version-label').text(_('OXOOLWSD version:'));
 			var h = this.WSDServer.Hash;
 			if (parseInt(h,16).toString(16) === h.toLowerCase().replace(/^0+/, '')) {
-				$('#ndcodfweb-version').html(this.WSDServer.Version + ' <span>git hash:&nbsp;' + h + '</span>');
+				$('#modaodfweb-version').html(this.WSDServer.Version + ' <span>git hash:&nbsp;' + h + '</span>');
 			}
 			else {
-				$('#ndcodfweb-version').text(this.WSDServer.Version);
+				$('#modaodfweb-version').text(this.WSDServer.Version);
 			}
 
 			if (!window.ThisIsAMobileApp) {
 				var idUri = window.makeHttpUrl('/hosting/discovery');
 				$('#served-by-label').text(_('Served by:'));
-				$('#ndcodfweb-id').html('<a target="_blank" href="' + idUri + '">' + this.WSDServer.Id + '</a>');
+				$('#modaodfweb-id').html('<a target="_blank" href="' + idUri + '">' + this.WSDServer.Id + '</a>');
 			}
 
 			// TODO: For now we expect perfect match in protocol versions
@@ -1712,7 +1712,7 @@ app.definitions.Socket = L.Class.extend({
 		// as directed by the SAL_LOG environment variable, and
 		// 2) all warnings on plus SAL_INFO for sc.
 		//
-		// (Note that ndcodfweb sets the SAL_LOG environment variable
+		// (Note that modaodfweb sets the SAL_LOG environment variable
 		// to "-WARN-INFO", i.e. the default is that nothing is
 		// logged from core.)
 

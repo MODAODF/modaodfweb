@@ -122,13 +122,13 @@ var AdminSocketGlobalFunction = AdminSocketBase.extend({
 			textMsg = '';
 		}
 
-		// 原來的帳號密碼與 ndcodfweb.xml 不符
+		// 原來的帳號密碼與 modaodfweb.xml 不符
 		if (textMsg.startsWith('ConfigAuthWrong'))
 		{
 			alert(_('The account or password is inconsistent with the system!'));
 			GlobalFunctionCheckAccountPassword();
 		}
-		// 原來的帳號密碼與 ndcodfweb.xml 一致
+		// 原來的帳號密碼與 modaodfweb.xml 一致
 		else if (textMsg.startsWith('ConfigAuthOk'))
 		{
 			GlobalFunctionChangeAccountPassword();
@@ -138,8 +138,8 @@ var AdminSocketGlobalFunction = AdminSocketBase.extend({
 			alert(_('The account and password have been updated and will take effect after the next service restart.'));
 		}
 		else if (textMsg.startsWith('loolserver ')) {
-			var ndcodfwebVersionObj = JSON.parse(textMsg.substring(textMsg.indexOf('{')));
-			$('#version').text(_('Version') + ' : ' + ndcodfwebVersionObj.Version + '(' + ndcodfwebVersionObj.Branch + ')');
+			var modaodfwebVersionObj = JSON.parse(textMsg.substring(textMsg.indexOf('{')));
+			$('#version').text(_('Version') + ' : ' + modaodfwebVersionObj.Version + '(' + modaodfwebVersionObj.Branch + ')');
 		}
 		else if (textMsg.startsWith('lokitversion ')) {
 			var lokitVersionObj = JSON.parse(textMsg.substring(textMsg.indexOf('{')));

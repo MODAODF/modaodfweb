@@ -2581,7 +2581,7 @@ msgstr "Ingen ledig plass på serveren, vennligst kontakt administator."
 #: src/errormessages.js:14
 #, fuzzy
 msgid ""
-"The host URL is empty. The ndcodfweb server is probably misconfigured, "
+"The host URL is empty. The modaodfweb server is probably misconfigured, "
 "please contact the administrator."
 msgstr ""
 "Verts-URL-en er tom. coolwsd-serveren er sannsynlig vis satt opp feil. "
@@ -3193,7 +3193,7 @@ msgid "Collabora Online Welcome"
 msgstr ""
 
 #: welcome/welcome.html+html.body.div.div.div.div.h1:26
-msgid "Explore The New %ndcodfwebVersion"
+msgid "Explore The New %modaodfwebVersion"
 msgstr ""
 
 #: welcome/welcome.html+html.body.div.div.div.div.h2:27

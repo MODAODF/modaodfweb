@@ -676,7 +676,7 @@ L.TextInput = L.Layer.extend({
 			this._emptyArea();
 	},
 
-	// Sends the given (UTF-8) string of text to ndcodfweb, as IME (text composition)
+	// Sends the given (UTF-8) string of text to modaodfweb, as IME (text composition)
 	// messages
 	_sendText: function(text) {
 		if (false) {
@@ -689,7 +689,7 @@ L.TextInput = L.Layer.extend({
 			s = s + ']';
 			window.app.console.log('L.TextInput._sendText: ' + s);
 		}
-		this._fancyLog('send-text-to-ndcodfweb', text);
+		this._fancyLog('send-text-to-modaodfweb', text);
 
 		// MSIE/Edge cannot compare a string to "\n" for whatever reason,
 		// so compare charcode as well
@@ -823,7 +823,7 @@ L.TextInput = L.Layer.extend({
 	_removeTextContent: function(before, after) {
 		window.app.console.log('Remove ' + before + ' before, and ' + after + ' after');
 
-		/// TODO: rename the event to 'removetextcontent' as soon as ndcodfweb supports it
+		/// TODO: rename the event to 'removetextcontent' as soon as modaodfweb supports it
 		/// TODO: Ask Marco about it
 		app.socket.sendMessage(
 			'removetextcontext id=' +

@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.63])
 
-AC_INIT([ndcodfweb], [3.0.2], [develop@ossii.com.tw])
+AC_INIT([modaodfweb], [3.0.2], [develop@ossii.com.tw])
 LT_INIT([shared, disable-static, dlopen])
 
 AM_INIT_AUTOMAKE([1.10 foreign subdir-objects tar-pax -Wno-portability])
@@ -27,7 +27,7 @@ AC_SUBST([LOOLWSD_VERSION])
 AC_SUBST([LOOLWSD_VERSION_DIST])
 
 AC_DEFINE_UNQUOTED([LOOLWSD_VERSION_DIST],[["$LOOLWSD_VERSION_DIST"]],[dist number
- for ndcodfweb spec])
+ for modaodfweb spec])
 
 AC_DEFINE_UNQUOTED([LOOLWSD_VERSION],[["$LOOLWSD_VERSION"]],[OxOffice Online WebSocket server version])
 
@@ -211,7 +211,7 @@ AC_ARG_WITH([feedback-location],
 
 AC_ARG_ENABLE(welcome-message,
     AS_HELP_STRING([--enable-welcome-message],
-        [Enables welcome message on version update. Can be changed later in ndcodfweb.xml.])
+        [Enables welcome message on version update. Can be changed later in modaodfweb.xml.])
 )
 
 AC_ARG_ENABLE(feedback,
@@ -250,8 +250,8 @@ ENABLE_DEBUG_PROTOCOL=false
 ENABLE_BUNDLE=true
 LOOLWSD_LOGLEVEL="warning"
 LOOLWSD_LOG_TO_FILE="true"
-LOOLWSD_LOGFILE="/var/log/ndcodfweb.log"
-OXOOLWSD_TRACEEVENTFILE="/var/log/ndcodfweb.trace.json"
+LOOLWSD_LOGFILE="/var/log/modaodfweb.log"
+OXOOLWSD_TRACEEVENTFILE="/var/log/modaodfweb.trace.json"
 LOOLWSD_ANONYMIZE_USER_DATA=false
 LOLEAFLET_LOGGING="false"
 debug_msg="secure mode: product build"
@@ -262,8 +262,8 @@ if test "$enable_debug" = "yes"; then
    ENABLE_DEBUG_PROTOCOL=true
    LOOLWSD_LOGLEVEL="trace"
    LOOLWSD_LOG_TO_FILE="true"
-   LOOLWSD_LOGFILE="/tmp/ndcodfweb.log"
-   OXOOLWSD_TRACEEVENTFILE="/tmp/ndcodfweb.trace.json"
+   LOOLWSD_LOGFILE="/tmp/modaodfweb.log"
+   OXOOLWSD_TRACEEVENTFILE="/tmp/modaodfweb.trace.json"
    LOOLWSD_ANONYMIZE_USER_DATA=false
    LOLEAFLET_LOGGING="true"
    debug_msg="low security debugging mode"
@@ -805,7 +805,7 @@ fi
 AC_SUBST(ENABLE_SETCAP)
 
 AC_CONFIG_LINKS([discovery.xml:discovery.xml])
-AC_CONFIG_LINKS([ndcodfwebkitconfig.xcu:ndcodfwebkitconfig.xcu])
+AC_CONFIG_LINKS([modaodfwebkitconfig.xcu:modaodfwebkitconfig.xcu])
 AC_CONFIG_LINKS([loleaflet/package.json:loleaflet/package.json])
 AC_LINK_FILES([loleaflet/archived-packages], [loleaflet/archived-packages])
 
@@ -844,12 +844,12 @@ AC_CONFIG_FILES([Makefile
                  loleaflet/npm-shrinkwrap.json
                  extensions/Makefile
                  fonts/Makefile
-                 fonts/00-ndcodfweb.conf
+                 fonts/00-modaodfweb.conf
                  support/Makefile
-                 ndcodfweb.spec
-                 ndcodfweb.xml
+                 modaodfweb.spec
+                 modaodfweb.xml
                  modaodfweb.pc
-                 debian/ndcodfweb.postinst])
+                 debian/modaodfweb.postinst])
 
 AC_CONFIG_FILES([test/run_unit.sh],[chmod +x test/run_unit.sh])
 
@@ -872,7 +872,7 @@ Configuration:
 
     \$ make # to compile"
 if test -n "$with_lo_path"; then
-echo "    \$ make run # to start ndcodfweb
+echo "    \$ make run # to start modaodfweb
     \$ make sync-writer|calc|impress # to start browsersync with specified app
 "
 fi

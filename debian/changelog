@@ -1,16 +1,16 @@
-ndcodfweb (3.0.2-1) unstable; urgency=low
+modaodfweb (3.0.2-1) unstable; urgency=low
 
   * Bump package version to 3.0.2-1
 
  -- Firefly <firefly@ossii.com.tw>  Tue, 30 Aug 2022 16:30:00 +0800
 
-ndcodfweb (3.0.1-1) unstable; urgency=low
+modaodfweb (3.0.1-1) unstable; urgency=low
 
   * Bump package version to 3.0.1-1
 
  -- Firefly <firefly@ossii.com.tw>  Wed, 03 Aug 2022 16:12:42 +0800
 
-ndcodfweb (3.0.0-1) unstable; urgency=low
+modaodfweb (3.0.0-1) unstable; urgency=low
 
   * Initial release
 

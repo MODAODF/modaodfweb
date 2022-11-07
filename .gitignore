@@ -15,8 +15,8 @@
 **/.cache
 Makefile
 Makefile.in
-ndcodfweb.spec
-ndcodfweb.xml
+modaodfweb.spec
+modaodfweb.xml
 aclocal.m4
 autom4te.cache
 config.h
@@ -64,18 +64,18 @@ loleaflet/npm-shrinkwrap.json
 
 connect
 lokitclient
-ndcodfweb
-ndcodfwebforkit
-ndcodfwebmount
-ndcodfwebmap
-ndcodfwebconvert
-ndcodfwebsocketdump
-ndcodfwebstress
-ndcodfwebconfig
-ndcodfwebforkit-nocaps
+modaodfweb
+modaodfwebforkit
+modaodfwebmount
+modaodfwebmap
+modaodfwebconvert
+modaodfwebsocketdump
+modaodfwebstress
+modaodfwebconfig
+modaodfwebforkit-nocaps
 loadtest
 unittest
-ndcodfweb_fuzzer
+modaodfweb_fuzzer
 clientnb
 
 modules/*.xml
@@ -97,9 +97,9 @@ pocoinclude-symlink
 pocolib-symlink
 ICU.dat
 Mobile/Mobile/Assets.xcassets/AppIcon.appiconset
-debian/ndcodfweb.postinst
+debian/modaodfweb.postinst
 support/authorizer
 support/signature
 support/users
-fonts/00-ndcodfweb.conf
-ndcodfweb-*.tar.gz
+fonts/00-modaodfweb.conf
+modaodfweb-*.tar.gz

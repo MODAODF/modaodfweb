@@ -33,7 +33,7 @@ int main(int argc, char** argv)
 {
     const char* program = argv[0];
 
-    if (!hasCorrectUID("ndcodfwebmount"))
+    if (!hasCorrectUID("modaodfwebmount"))
     {
         fprintf(stderr, "%s: incorrect UID.", program);
         return 1;

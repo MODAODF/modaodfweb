@@ -116,7 +116,7 @@ TemplateRepo::TemplateRepo()
 #if ENABLE_DEBUG
     ConfigFile = std::string(DEV_DIR) + "/templaterepo.xml";
 #else
-    ConfigFile = "/etc/ndcodfweb/conf.d/templaterepo/templaterepo.xml";
+    ConfigFile = "/etc/modaodfweb/conf.d/templaterepo/templaterepo.xml";
 #endif
     xml_config = new Poco::Util::XMLConfiguration(ConfigFile);
     startStamp = std::chrono::steady_clock::now();

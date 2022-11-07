@@ -261,7 +261,7 @@ L.Map.Keyboard = L.Handler.extend({
 	},
 
 	// _handleKeyEvent - checks if the given keyboard event shall trigger
-	// a message to ndcodfweb, and calls the given keyEventFn(type, charcode, keycode)
+	// a message to modaodfweb, and calls the given keyEventFn(type, charcode, keycode)
 	// callback if so.
 	// Called from _onKeyDown
 	_handleKeyEvent: function (ev, keyEventFn) {

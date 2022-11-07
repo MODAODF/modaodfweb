@@ -2580,7 +2580,7 @@ msgstr ""
 #: src/errormessages.js:14
 #, fuzzy
 msgid ""
-"The host URL is empty. The ndcodfweb server is probably misconfigured, "
+"The host URL is empty. The modaodfweb server is probably misconfigured, "
 "please contact the administrator."
 msgstr ""
 "Máy chủ URL trống. Máy chủ coolwsd có thể được định cấu hình sai, vui lòng "
@@ -3208,7 +3208,7 @@ msgstr ""
 
 #: welcome/welcome.html+html.body.div.div.div.div.h1:26
 #, fuzzy
-msgid "Explore The New %ndcodfwebVersion"
+msgid "Explore The New %modaodfwebVersion"
 msgstr "Khám phá phiên bản %coolVersion mới"
 
 #: welcome/welcome.html+html.body.div.div.div.div.h2:27

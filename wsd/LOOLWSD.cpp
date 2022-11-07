@@ -18,7 +18,7 @@
 #define LOOLWSD_TEST_ADMIN_CONSOLE "/loleaflet/dist/admin/admin.html"
 
 /* Default loleaflet UI used in for monitoring URI */
-#define LOOLWSD_TEST_METRICS "/ndcodfweb/getMetrics"
+#define LOOLWSD_TEST_METRICS "/modaodfweb/getMetrics"
 
 /* Default loleaflet UI used in the start test URI */
 #define LOOLWSD_TEST_LOLEAFLET_UI "/loleaflet/" LOOLWSD_VERSION_HASH "/loleaflet.html"
@@ -31,7 +31,7 @@
 /* Default ciphers used, when not specified otherwise */
 #define DEFAULT_CIPHER_SET "ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH"
 
-// This is the main source for the ndcodfweb program. LOOL uses several ndcodfweb processes: one main
+// This is the main source for the modaodfweb program. LOOL uses several modaodfweb processes: one main
 // parent process that listens on the TCP port and accepts connections from LOOL clients, and a
 // number of child processes, each which handles a viewing (editing) session for one document.
 
@@ -758,7 +758,7 @@ std::string LOOLWSD::SSLPrivateKeyPassword;
 std::string LOOLWSD::WelcomeFilesRoot;
 std::string LOOLWSD::ServiceRoot;
 std::string LOOLWSD::LOKitVersion;
-std::string LOOLWSD::ConfigFile = LOOLWSD_CONFIGDIR "/ndcodfweb.xml";
+std::string LOOLWSD::ConfigFile = LOOLWSD_CONFIGDIR "/modaodfweb.xml";
 std::string LOOLWSD::ConfigDir = LOOLWSD_CONFIGDIR "/conf.d";
 bool LOOLWSD::EnableTraceEventLogging = false;
 FILE *LOOLWSD::TraceEventFile = NULL;
@@ -871,7 +871,7 @@ void ForKitProcWSHandler::handleMessage(const std::vector<char> &data)
         if (count >= 0)
         {
             Admin::instance().addSegFaultCount(count);
-            LOG_INF(count << " ndcodfwebkit processes crashed with segmentation fault.");
+            LOG_INF(count << " modaodfwebkit processes crashed with segmentation fault.");
         }
         else
         {
@@ -930,7 +930,7 @@ void LOOLWSD::initialize(Application& self)
             { "logging.anonymize.usernames", "false" }, // Deprecated.
             // { "logging.anonymize.anonymize_user_data", "false" }, // Do not set to fallback on filename/username.
             { "logging.color", "true" },
-            { "logging.file.property[0]", "ndcodfweb.log" },
+            { "logging.file.property[0]", "modaodfweb.log" },
             { "logging.file.property[0][@name]", "path" },
             { "logging.file.property[1]", "never" },
             { "logging.file.property[1][@name]", "rotation" },
@@ -1136,10 +1136,10 @@ void LOOLWSD::initialize(Application& self)
     }
 
     ServerName = config().getString("server_name");
-    LOG_INF("Initializing ndcodfweb server [" << ServerName << "].");
+    LOG_INF("Initializing modaodfweb server [" << ServerName << "].");
 
     ClientPortNumber = config().getUInt("client_port_number", DEFAULT_CLIENT_PORT_NUMBER);
-    LOG_INF("Initializing ndcodfweb client port : " << ClientPortNumber);
+    LOG_INF("Initializing modaodfweb client port : " << ClientPortNumber);
 
     // Get anonymization settings.
 #if LOOLWSD_ANONYMIZE_USER_DATA
@@ -1181,11 +1181,11 @@ void LOOLWSD::initialize(Application& self)
         else
         {
             static const char failure[] = "Anonymization and trace-level logging are incompatible. "
-                "Please reduce logging level to debug or lower in ndcodfweb.xml to prevent leaking sensitive user data.";
+                "Please reduce logging level to debug or lower in modaodfweb.xml to prevent leaking sensitive user data.";
             LOG_FTL(failure);
             std::cerr << '\n' << failure << std::endl;
 #if ENABLE_DEBUG
-            std::cerr << "\nIf you have used 'make run', edit ndcodfweb.xml and make sure you have removed "
+            std::cerr << "\nIf you have used 'make run', edit modaodfweb.xml and make sure you have removed "
                          "'--o:logging.level=trace' from the command line in Makefile.am.\n" << std::endl;
 #endif
             Log::shutdown();
@@ -1226,7 +1226,7 @@ void LOOLWSD::initialize(Application& self)
             LOG_WRN("Invalid listen address: " << listen << ". Falling back to default: 'any'" );
     }
 
-    // Prefix for the ndcodfweb pages; should not end with a '/'
+    // Prefix for the modaodfweb pages; should not end with a '/'
     ServiceRoot = getPathFromConfig("net.service_root");
     while (ServiceRoot.length() > 0 && ServiceRoot[ServiceRoot.length() - 1] == '/')
         ServiceRoot.pop_back();
@@ -1403,8 +1403,8 @@ void LOOLWSD::initialize(Application& self)
 
     if (supportKeyString.empty())
     {
-        LOG_WRN("Support key not set, please use 'ndcodfwebconfig set-support-key'.");
-        std::cerr << "Support key not set, please use 'ndcodfwebconfig set-support-key'." << std::endl;
+        LOG_WRN("Support key not set, please use 'modaodfwebconfig set-support-key'.");
+        std::cerr << "Support key not set, please use 'modaodfwebconfig set-support-key'." << std::endl;
         LOOLWSD::OverrideWatermark = "Unsupported, the support key is missing.";
     }
     else
@@ -1413,8 +1413,8 @@ void LOOLWSD::initialize(Application& self)
 
         if (!key.verify())
         {
-            LOG_WRN("Invalid support key, please use 'ndcodfwebconfig set-support-key'.");
-            std::cerr << "Invalid support key, please use 'ndcodfwebconfig set-support-key'." << std::endl;
+            LOG_WRN("Invalid support key, please use 'modaodfwebconfig set-support-key'.");
+            std::cerr << "Invalid support key, please use 'modaodfwebconfig set-support-key'." << std::endl;
             LOOLWSD::OverrideWatermark = "Unsupported, the support key is invalid.";
         }
         else
@@ -1422,8 +1422,8 @@ void LOOLWSD::initialize(Application& self)
             int validDays =  key.validDaysRemaining();
             if (validDays <= 0)
             {
-                LOG_WRN("Your support key has expired, please ask for a new one, and use 'ndcodfwebconfig set-support-key'.");
-                std::cerr << "Your support key has expired, please ask for a new one, and use 'ndcodfwebconfig set-support-key'." << std::endl;
+                LOG_WRN("Your support key has expired, please ask for a new one, and use 'modaodfwebconfig set-support-key'.");
+                std::cerr << "Your support key has expired, please ask for a new one, and use 'modaodfwebconfig set-support-key'." << std::endl;
                 LOOLWSD::OverrideWatermark = "Unsupported, the support key has expired.";
             }
             else
@@ -1668,7 +1668,7 @@ void LOOLWSD::defineOptions(OptionSet& optionSet)
                         .required(false)
                         .repeatable(false));
 
-    optionSet.addOption(Option("disable-lool-user-checking", "", "Don't check whether ndcodfweb is running under the user 'lool'.  NOTE: This is insecure, use only when you know what you are doing!")
+    optionSet.addOption(Option("disable-lool-user-checking", "", "Don't check whether modaodfweb is running under the user 'lool'.  NOTE: This is insecure, use only when you know what you are doing!")
                         .required(false)
                         .repeatable(false));
 
@@ -1818,7 +1818,7 @@ bool LOOLWSD::checkAndRestoreForKit()
         if (!SigUtil::getShutdownRequestFlag() && !SigUtil::getTerminationFlag() && !createForKit())
         {
             // Should never fail.
-            LOG_FTL("Failed to spawn ndcodfwebforkit.");
+            LOG_FTL("Failed to spawn modaodfwebforkit.");
             SigUtil::requestShutdown();
         }
     }
@@ -1993,7 +1993,7 @@ bool LOOLWSD::createForKit()
     args.push_back("-tt");
     args.push_back("-s");
     args.push_back("256");
-    args.push_back(Path(Application::instance().commandPath()).parent().toString() + "ndcodfwebforkit");
+    args.push_back(Path(Application::instance().commandPath()).parent().toString() + "modaodfwebforkit");
 #endif
     args.push_back("--losubpath=" + std::string(LO_JAIL_SUBPATH));
     args.push_back("--systemplate=" + SysTemplate);
@@ -2036,9 +2036,9 @@ bool LOOLWSD::createForKit()
     std::string forKitPath = "strace";
 #else
 #if ENABLE_DEBUG
-    std::string forKitPath = DEBUG_ABSSRCDIR "/ndcodfwebforkit";
+    std::string forKitPath = DEBUG_ABSSRCDIR "/modaodfwebforkit";
 #else
-    std::string forKitPath = Path(Application::instance().commandPath()).parent().toString() + "ndcodfwebforkit";
+    std::string forKitPath = Path(Application::instance().commandPath()).parent().toString() + "modaodfwebforkit";
 #endif
 #endif
 
@@ -2588,7 +2588,7 @@ private:
                 }
 
             }
-            else if (requestDetails.equals(RequestDetails::Field::Type, "ndcodfweb") &&
+            else if (requestDetails.equals(RequestDetails::Field::Type, "modaodfweb") &&
                      requestDetails.equals(1, "getMetrics"))
             {
                 // See metrics.txt
@@ -4129,7 +4129,7 @@ int LOOLWSD::innerMain()
 #endif
 
 #if !MOBILEAPP
-    // We use the same option set for both parent and child ndcodfweb,
+    // We use the same option set for both parent and child modaodfweb,
     // so must check options required in the parent (but not in the
     // child) separately now. Also check for options that are
     // meaningless for the parent.
@@ -4390,7 +4390,7 @@ int LOOLWSD::main(const std::vector<std::string>& /*args*/)
 
     UnitWSD::get().returnValue(returnValue);
 
-    LOG_INF("Process [ndcodfweb] finished.");
+    LOG_INF("Process [modaodfweb] finished.");
     return returnValue;
 }
 

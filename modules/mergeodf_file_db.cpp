@@ -62,7 +62,7 @@ void FileDB::setDbPath()
 #if ENABLE_DEBUG
     dbfile = std::string(DEV_DIR) + "/runTimeData/mergeodf.sqlite";
 #else
-    auto previewConf = new Poco::Util::XMLConfiguration("/etc/ndcodfweb/conf.d/mergeodf/mergeodf.xml");
+    auto previewConf = new Poco::Util::XMLConfiguration("/etc/modaodfweb/conf.d/mergeodf/mergeodf.xml");
     dbfile = previewConf->getString("template.db_path", "");
 #endif
 }

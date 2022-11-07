@@ -43,8 +43,8 @@ L.Map.Infobar = L.Handler.extend({
 	},
 
 	onInfobar: function (e) {
-		if (e && e.ndcodfweb_version) {
-			var latestVersion = e.ndcodfweb_version.split('.');
+		if (e && e.modaodfweb_version) {
+			var latestVersion = e.modaodfweb_version.split('.');
 			var currentVersion = app.socket.WSDServer.Version.split('.');
 			var snackbarMessage = _('Your MODA ODF Web needs updating. Version %0 is available.');
 			var length = Math.max(latestVersion.length, currentVersion.length);

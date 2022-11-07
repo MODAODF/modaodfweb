@@ -374,7 +374,7 @@ bool ClientSession::_handleInput(const char *buffer, int length)
                 static bool warnedOnce = false;
                 if (!warnedOnce)
                 {
-                    LOG_WRN("For some reason the _performanceCounterEpoch is still zero, ignoring TRACEEVENT from ndcodfweb as the timestamp would be garbage");
+                    LOG_WRN("For some reason the _performanceCounterEpoch is still zero, ignoring TRACEEVENT from modaodfweb as the timestamp would be garbage");
                     warnedOnce = true;
                 }
                 return false;
@@ -383,7 +383,7 @@ bool ClientSession::_handleInput(const char *buffer, int length)
                 static bool warnedOnce = false;
                 if (!warnedOnce)
                 {
-                    LOG_WRN("For some reason the _performanceCounterEpoch is bogus, ignoring TRACEEVENT from ndcodfweb as the timestamp would be garbage");
+                    LOG_WRN("For some reason the _performanceCounterEpoch is bogus, ignoring TRACEEVENT from modaodfweb as the timestamp would be garbage");
                     warnedOnce = true;
                 }
                 return false;
@@ -522,7 +522,7 @@ bool ClientSession::_handleInput(const char *buffer, int length)
         sendTextFrame("lokitversion " + LOOLWSD::LOKitVersion);
 
         // If Trace Event generation and logging is enabled (whether it can be turned on), tell it
-        // to ndcodfweb
+        // to modaodfweb
         if (LOOLWSD::EnableTraceEventLogging)
             sendTextFrame("enabletraceeventlogging yes");
 

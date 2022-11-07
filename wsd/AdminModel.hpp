@@ -321,7 +321,7 @@ public:
     std::string query(const std::string& command);
     std::string getAllHistory() const;
 
-    /// Returns memory consumed by all active ndcodfwebkit processes
+    /// Returns memory consumed by all active modaodfwebkit processes
     unsigned getKitsMemoryUsage();
     size_t getKitsJiffies();
 

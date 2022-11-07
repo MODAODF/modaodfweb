@@ -2564,7 +2564,7 @@ msgstr "לא נשאר מקום פנוי בשרת, נא ליצור קשר עם ה
 #: src/errormessages.js:14
 #, fuzzy
 msgid ""
-"The host URL is empty. The ndcodfweb server is probably misconfigured, "
+"The host URL is empty. The modaodfweb server is probably misconfigured, "
 "please contact the administrator."
 msgstr ""
 "כתובת המארח ריקה. יתכן כי שרת ה־coolwsd אינו מוגדר נכון, נא ליצור קשר עם "
@@ -3173,7 +3173,7 @@ msgstr "ברוך בואך אל Collabora Online"
 
 #: welcome/welcome.html+html.body.div.div.div.div.h1:26
 #, fuzzy
-msgid "Explore The New %ndcodfwebVersion"
+msgid "Explore The New %modaodfwebVersion"
 msgstr "הנה החידושים ב־%coolVersion החדשה"
 
 #: welcome/welcome.html+html.body.div.div.div.div.h2:27

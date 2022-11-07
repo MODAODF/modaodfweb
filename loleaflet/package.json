@@ -1,5 +1,5 @@
 {
-  "name": "ndcodfweb",
+  "name": "modaodfweb",
   "version": "0.8.0-dev",
   "description": "MODA ODF Web front-end",
   "devDependencies": {
@@ -36,14 +36,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NDCODF/ndcodfweb-3.git"
+    "url": "https://github.com/NDCODF/modaodfweb-3.git"
   },
   "keywords": [
     "office",
     "libreoffice",
     "oxool",
     "OxOffice",
-    "ndcodfweb",
+    "modaodfweb",
     "MODA ODF Application Tools v3"
   ],
   "license": "BSD-2-Clause",

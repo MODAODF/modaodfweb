@@ -82,7 +82,7 @@ bool isPamAuthOk(const std::string& userProvidedUsr, const std::string& userProv
 
     localConversation.appdata_ptr = const_cast<char *>(userProvidedPwd.c_str());
 
-    retval = pam_start("ndcodfweb", userProvidedUsr.c_str(), &localConversation, &localAuthHandle);
+    retval = pam_start("modaodfweb", userProvidedUsr.c_str(), &localConversation, &localAuthHandle);
 
     if (retval != PAM_SUCCESS)
     {
@@ -117,7 +117,7 @@ bool isPamAuthOk(const std::string& userProvidedUsr, const std::string& userProv
     return true;
 }
 
-/// Check for user / password set in ndcodfweb.xml.
+/// Check for user / password set in modaodfweb.xml.
 bool isConfigAuthOk(const std::string& userProvidedUsr, const std::string& userProvidedPwd)
 {
     const auto& config = Application::instance().config();
@@ -135,7 +135,7 @@ bool isConfigAuthOk(const std::string& userProvidedUsr, const std::string& userP
         return false;
     }
 
-    const char useLoolconfig[] = " Use ndcodfwebconfig to configure the admin password.";
+    const char useLoolconfig[] = " Use modaodfwebconfig to configure the admin password.";
 
     // do we have secure_password?
     if (config.has("admin_console.secure_password"))
@@ -266,7 +266,7 @@ bool FileServerRequestHandler::isAdminLoggedIn(const HTTPRequest& request,
 }
 
 /// Added by Firefly <firefly@ossii.com.tw>
-/// 檢查管理帳號及密碼是否與 ndcodfweb.xml 中的相符
+/// 檢查管理帳號及密碼是否與 modaodfweb.xml 中的相符
 bool FileServerRequestHandler::isConfigAuthMatch(const std::string& userProvidedUsr,
                                                  const std::string& userProvidedPwd)
 {
@@ -462,7 +462,7 @@ void FileServerRequestHandler::handleRequest(const HTTPRequest& request,
             if (std::getenv("LOOL_SERVE_FROM_FS"))
             {
                 // Useful to not serve from memory sometimes especially during loleaflet development
-                // Avoids having to restart ndcodfweb everytime you make a change in loleaflet
+                // Avoids having to restart modaodfweb everytime you make a change in loleaflet
                 const std::string filePath = Poco::Path(LOOLWSD::FileServerRoot, relPath).absolute().toString();
                 HttpHelper::sendFileAndShutdown(socket, filePath, mimeType, &response, noCache);
                 return;
@@ -896,7 +896,7 @@ void FileServerRequestHandler::preprocessFile(const HTTPRequest& request,
            "font-src 'self' data:; "
            "object-src 'self' blob:; ";
 
-    // Frame ancestors: Allow ndcodfweb host, wopi host and anything configured.
+    // Frame ancestors: Allow modaodfweb host, wopi host and anything configured.
     std::string configFrameAncestor = config.getString("net.frame_ancestors", "");
     std::string frameAncestors = configFrameAncestor;
     Poco::URI uriHost(cnxDetails.getWebSocketUrl());

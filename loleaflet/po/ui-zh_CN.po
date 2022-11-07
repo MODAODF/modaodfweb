@@ -2560,7 +2560,7 @@ msgstr "服务器磁盘空间不足，请联系服务器管理员。"
 #: src/errormessages.js:14
 #, fuzzy
 msgid ""
-"The host URL is empty. The ndcodfweb server is probably misconfigured, "
+"The host URL is empty. The modaodfweb server is probably misconfigured, "
 "please contact the administrator."
 msgstr "主机URL为空。coolwsd服务器的配置可能不正确，请联系管理员。"
 
@@ -3131,7 +3131,7 @@ msgid "Collabora Online Welcome"
 msgstr ""
 
 #: welcome/welcome.html+html.body.div.div.div.div.h1:26
-msgid "Explore The New %ndcodfwebVersion"
+msgid "Explore The New %modaodfwebVersion"
 msgstr ""
 
 #: welcome/welcome.html+html.body.div.div.div.div.h2:27

@@ -2,7 +2,7 @@
 export MAX_CONCURRENCY=4
 AUTOMAKE_OPTION = serial-tests
 
-# unittest: tests that run a captive ndcodfweb as part of themselves.
+# unittest: tests that run a captive modaodfweb as part of themselves.
 check_PROGRAMS = fakesockettest
 
 noinst_PROGRAMS = fakesockettest unittest
@@ -198,7 +198,7 @@ SYSTEM_STAMP =
 endif
 
 CLEANUP_COMMAND=true
-#CLEANUP_COMMAND=if test -s ../ndcodfweb; then echo "Cleaning up..." && ../ndcodfweb --disable-lool-user-checking --cleanup --o:logging.file[@enable]=false --o:logging.level=trace; fi
+#CLEANUP_COMMAND=if test -s ../modaodfweb; then echo "Cleaning up..." && ../modaodfweb --disable-lool-user-checking --cleanup --o:logging.file[@enable]=false --o:logging.level=trace; fi
 
 if HAVE_LO_PATH
 check-local:

@@ -31,7 +31,7 @@ AccessDB::AccessDB()
             endpt text UNIQUE,
             docname text ,
             extname text ,
-            uptime text 
+            uptime text
             );
     CREATE TABLE logging (
                 rec_id      integer primary key,
@@ -68,13 +68,13 @@ void AccessDB::setDbPath()
     dbfile = std::string(DEV_DIR) + "/runTimeData/mergeodf.sqlite";
 #else
     //dbfile = MODULES_DATA_DIR + "mergeodf/mergeodf.sqlite";
-    auto mergeodfConf = new Poco::Util::XMLConfiguration("/etc/ndcodfweb/conf.d/mergeodf/mergeodf.xml");
+    auto mergeodfConf = new Poco::Util::XMLConfiguration("/etc/modaodfweb/conf.d/mergeodf/mergeodf.xml");
     dbfile = mergeodfConf->getString("database.db_path", "");
 #endif
     std::cout<<"log_db: "<< dbfile << std::endl;
 }
 
-// This function is for old ndcodfapi to ndcodfweb-2
+// This function is for old ndcodfapi to modaodfweb-2
 void AccessDB::changeTable()
 {
     Poco::Data::Session session("SQLite", dbfile);
