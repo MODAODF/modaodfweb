@@ -104,3 +104,4 @@ support/users
 fonts/00-modaodfweb.conf
 modaodfweb-*.tar.gz
 modaodfweb.pc
+src/include/OxOOL/OxOOL.h
