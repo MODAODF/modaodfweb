@@ -128,7 +128,7 @@ L.Map.include({
 
 	_officeVersion: {}, // 後端 Office 版本資訊
 
-	_isOxOffice: false, // 預設後端 Office 非 OxOffice 或 ndcodfsys
+	_isOxOffice: false, // 預設後端 Office 非 OxOffice 或 modaodfsys
 
 	// 支援匯出的格式
 	_exportFormats: {
@@ -329,7 +329,7 @@ L.Map.include({
 			this._officeVersion = version;
 
 		if (this._officeVersion.ProductName === 'OxOffice' ||
-			this._officeVersion.ProductName === 'ndcodfsys') {
+			this._officeVersion.ProductName === 'modaodfsys') {
 			this._isOxOffice = true;
 		}
 	},

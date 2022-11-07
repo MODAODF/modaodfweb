@@ -558,14 +558,14 @@ AS_IF([test -n "$LOKIT_PATH"],
 lokit_msg="$LOKIT_PATH"
 
 AS_IF([test "$ENABLE_IOSAPP" != "true" -a "$ENABLE_ANDROIDAPP" != "true" -a "$enable_fuzzers" != "yes"],
-      [AC_MSG_CHECKING([for ndcodfsys path])
+      [AC_MSG_CHECKING([for modaodfsys path])
       if test -n "$with_lo_path"; then
           # strip trailing '/' from LO_PATH, 'ln -s' with such path will otherwise fail
           LO_PATH="${with_lo_path%/}"
           AC_MSG_RESULT([found])
       else
-          LO_PATH="/opt/ndcodfsys"
-          AC_MSG_RESULT([default(/opt/ndcodfsys)])
+          LO_PATH="/opt/modaodfsys"
+          AC_MSG_RESULT([default(/opt/modaodfsys)])
       fi
       ])
 
