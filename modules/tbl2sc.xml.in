@@ -1,8 +1,0 @@
-<config>
-    <database>
-        <db_path type="string">@LOOLWSD_MODULE_DATA_DIR@/tbl2sc/tbl2sc.sqlite</db_path>
-    </database>
-    <logging>
-        <log_file type="string">@LOOLWSD_LOG_DIR@/tbl2sc.log</log_file>
-    </logging>
-</config>

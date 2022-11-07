@@ -1,9 +1,0 @@
-*.ods
-*.odp
-*.odt
-*.ots
-*.otp
-*.ott
-.libs
-*.la
-*.sqlite

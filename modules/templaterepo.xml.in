@@ -1,9 +1,0 @@
-<config>
-    <template>
-        <dir_path type="string">@LOOLWSD_MODULE_DATA_DIR@/templaterepo/templates/</dir_path>
-        <db_path type="string">@LOOLWSD_MODULE_DATA_DIR@/templaterepo/templaterepo.sqlite</db_path>
-    </template>
-    <logging>
-		<log_file type="string">@LOOLWSD_LOG_DIR@/templaterepo.log</log_file>
-    </logging>
-</config>
