@@ -2036,7 +2036,7 @@ bool LOOLWSD::createForKit()
     std::string forKitPath = "strace";
 #else
 #if ENABLE_DEBUG
-    std::string forKitPath = DEBUG_ABSSRCDIR "/oxoolforkit";
+    std::string forKitPath = DEBUG_ABSSRCDIR "/ndcodfwebforkit";
 #else
     std::string forKitPath = Path(Application::instance().commandPath()).parent().toString() + "ndcodfwebforkit";
 #endif
