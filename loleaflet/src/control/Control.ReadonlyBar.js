@@ -121,7 +121,7 @@ L.Control.ReadonlyBar = L.Control.extend({
 			'id': 'about',
 			'type': 'toolitem',
 			'icon': 'res:About',
-			'text': _('About OxOffice Online'),
+			'text': _('About'),
 			'command': 'about'
 		});
 

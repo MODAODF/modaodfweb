@@ -365,7 +365,7 @@ AC_SUBST(APP_NAME)
 VENDOR=
 AC_MSG_CHECKING([for vendor])
 if test -z "$with_vendor" -o "$with_vendor" = "no"; then
-    VENDOR="OSS Integral Institute Co., Ltd"
+    VENDOR="Ministry of Digital Affairs"
 
     if test -z "$VENDOR"; then
         VENDOR="$USER"
