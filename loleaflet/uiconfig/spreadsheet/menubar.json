@@ -694,6 +694,11 @@
 				"type": "--"
 			},
 			{
+				"id": "HyperlinkQRCode",
+				"icon": ".uno:InsertQrCode",
+				"name": "Share link QR Code"
+			},
+			{
 				"id": ".uno:HyperlinkDialog",
 				"comment": "替代指令",
 				"hotkey": "Ctrl+K"

@@ -732,6 +732,11 @@
 				"type": "--"
 			},
 			{
+				"id": "HyperlinkQRCode",
+				"icon": ".uno:InsertQrCode",
+				"name": "Share link QR Code"
+			},
+			{
 				"id": ".uno:HyperlinkDialog",
 				"hotkey": "Ctrl+K"
 			},

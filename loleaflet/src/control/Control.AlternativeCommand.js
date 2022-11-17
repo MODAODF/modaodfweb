@@ -319,13 +319,43 @@ L.Control.AlternativeCommand = L.Control.extend({
 		 * impress: 從第一張投影片開始播放
 		 */
 		'.uno:Presentation': function() {
-			this._map.fire('fullscreen');
+			L.dialog.confirm({
+				icon: 'information',
+				message: _('Create a QR Code for hyperlinks (if any) in the document.'),
+				callback: function(ans) {
+					// 如果需要製作超連結 QR Codes
+					if (ans) {
+						// 1. 如果檔案有修改過，要先存檔
+						if (this._map._everModified) {
+							this._map.save(true, true);
+						}
+						// 2. 呼叫製作超連結 QR Code 巨集
+						this._map.sendUnoCommand('macro:///QRcodePrint.QRcodePrint.QRcodeRun()');
+					}
+					this._map.fire('fullscreen');
+				}.bind(this)
+			});
 		},
 		/**
 		 * impress: 從目前投影片開始播放
 		 */
 		'.uno:PresentationCurrentSlide': function() {
-			this._map.fire('fullscreen', {startSlideNumber: this._map.getCurrentPartNumber()});
+			L.dialog.confirm({
+				icon: 'information',
+				message: _('Create a QR code for hyperlinks (if any) in the document.'),
+				callback: function(ans) {
+					// 如果需要製作超連結 QR Codes
+					if (ans) {
+						// 1. 如果檔案有修改過，要先存檔
+						if (this._map._everModified) {
+							this._map.save(true, true);
+						}
+						// 2. 呼叫製作超連結 QR Code 巨集
+						this._map.sendUnoCommand('macro:///QRcodePrint.QRcodePrint.QRcodeRun()');
+					}
+					this._map.fire('fullscreen', {startSlideNumber: this._map.getCurrentPartNumber()});
+				}.bind(this)
+			});
 		},
 		/**
 		 * impress: 新增投影片
@@ -358,6 +388,29 @@ L.Control.AlternativeCommand = L.Control.extend({
 		*/
 		'insertgraphicremote': function() {
 			this._map.fire('postMessage', {msgId: 'UI_InsertGraphic'});
+		},
+		/**
+		 * 插入分享連結 QR code
+		 */
+		'HyperlinkQRCode': function(/* e */) {
+			var docURL = window.docURL;
+			var wopiIdx = docURL.indexOf('wopi');
+			if (wopiIdx > 0) {
+				var pathSeg = docURL.split('/'); // 把文件路徑切成陣列
+
+				var baseURL = docURL.substr(0, wopiIdx - 1);
+				var fileId = pathSeg[pathSeg.length -1]; // 最後一個是 file ID
+				var accessToken = window.accessToken; // access token 被放在 window 物件
+
+				// 取得分享網址的連結(回應 json)
+				// 不使用
+				// var urlLink = baseURL + '/share/url/' + fileId + '?access_token=' + accessToken;
+
+				// 取得分享網址的 QR code(回應 png)
+				var qrcodeLink = baseURL + '/share/qrcode/' + fileId + '?access_token=' + accessToken;
+
+				this._map.insertURL(qrcodeLink);
+			}
 		},
 		/**
 		 * 顯示線上說明
