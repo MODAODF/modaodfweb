@@ -63,8 +63,12 @@ L.Control.MobileTopBar = L.Control.extend({
 				applyDocType: 'all', applyPermission: 'all'
 			},
 			{	// impress: 投影
-				type: 'button', id: 'fullscreen-' + docType, img: 'fullscreen-presentation', hint: _UNO('.uno:FullScreen', docType),
+				type: 'button', id: 'fullscreen-' + docType, img: 'fullscreen-presentation',
 				applyDocType: {presentation: true}, applyPermission: 'all'
+			},
+			{	// 下載爲 PDF
+				type: 'button', id: 'downloadas-pdf', img: 'downloadas-pdf',
+				applyDocType: 'all', applyPermission: 'all',
 			},
 			{	// 使用者列表
 				type: 'drop', id: 'userlist', img: 'users', hidden: true, html: L.control.createUserListWidget()
@@ -151,6 +155,9 @@ L.Control.MobileTopBar = L.Control.extend({
 		else if (id === 'fullscreen-presentation') {
 			// Call global onClick handler
 			window.onClick(e, id, item);
+		}
+		else if (id === 'downloadas-pdf') {
+			this.map.executeAllowedCommand(id);
 		}
 		else if (id === 'mobile_wizard') {
 			if (window.mobileWizard) {
