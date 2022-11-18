@@ -321,15 +321,15 @@ L.Control.AlternativeCommand = L.Control.extend({
 		'.uno:Presentation': function() {
 			L.dialog.confirm({
 				icon: 'information',
-				message: _('Create a QR Code for hyperlinks (if any) in the document.'),
+				message: _('Create a QR code for hyperlinks (if any) in the document.'),
 				callback: function(ans) {
-					// 如果需要製作超連結 QR Codes
+					// 如果需要製作超連結 QR codes
 					if (ans) {
 						// 1. 如果檔案有修改過，要先存檔
 						if (this._map._everModified) {
 							this._map.save(true, true);
 						}
-						// 2. 呼叫製作超連結 QR Code 巨集
+						// 2. 呼叫製作超連結 QR code 巨集
 						this._map.sendUnoCommand('macro:///QRcodePrint.QRcodePrint.QRcodeRun()');
 					}
 					this._map.fire('fullscreen');
@@ -344,13 +344,13 @@ L.Control.AlternativeCommand = L.Control.extend({
 				icon: 'information',
 				message: _('Create a QR code for hyperlinks (if any) in the document.'),
 				callback: function(ans) {
-					// 如果需要製作超連結 QR Codes
+					// 如果需要製作超連結 QR codes
 					if (ans) {
 						// 1. 如果檔案有修改過，要先存檔
 						if (this._map._everModified) {
 							this._map.save(true, true);
 						}
-						// 2. 呼叫製作超連結 QR Code 巨集
+						// 2. 呼叫製作超連結 QR code 巨集
 						this._map.sendUnoCommand('macro:///QRcodePrint.QRcodePrint.QRcodeRun()');
 					}
 					this._map.fire('fullscreen', {startSlideNumber: this._map.getCurrentPartNumber()});

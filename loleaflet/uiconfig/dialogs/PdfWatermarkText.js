@@ -16,7 +16,7 @@ L.dialog.PdfWatermarkText = {
 		_('Use screen watermark'), // 採用螢幕浮水印
 		_('If no needed, please leave it blank.'), // 如果不需要，請保持空白
 		_('Direction'), // 方向
-		// 替文件中的超連結(如果有的話)製作 QR Code.
+		// 替文件中的超連結(如果有的話)製作 QR code.
 		_('Create a QR code for hyperlinks (if any) in the document.'),
 	],
 
@@ -39,7 +39,7 @@ L.dialog.PdfWatermarkText = {
 			'</fieldset>';
 		this._dialog.innerHTML +=
 			'<input type="checkbox" id="' + this._hyperlinkQRCode + '" name="hyperlinkQRCode">' +
-			'<label for="' + this._hyperlinkQRCode + '" _="Create a QR Code for hyperlinks (if any) in the document."></label>';
+			'<label for="' + this._hyperlinkQRCode + '" _="Create a QR code for hyperlinks (if any) in the document."></label>';
 
 		this._map.translationElement(this._dialog);
 
@@ -116,14 +116,14 @@ L.dialog.PdfWatermarkText = {
 
 	needInsertQRCode: function() {
 		var isNeed = document.getElementById(this._hyperlinkQRCode).checked;
-		// 如果需要製作超連結 QR Codes
+		// 如果需要製作超連結 QR codes
 		if (isNeed) {
 			// 1. 如果檔案有修改過，要先存檔
 			if (this._map._everModified) {
 				this._map.save(true, true);
 			}
 
-			// 2. 呼叫製作超連結 QR Code 巨集
+			// 2. 呼叫製作超連結 QR code 巨集
 			this._map.sendUnoCommand('macro:///QRcodePrint.QRcodePrint.QRcodeRun()');
 		}
 	},
