@@ -11,7 +11,22 @@ TYPESCRIPT_JS_DIR = $(builddir)/typescript_js
 
 export NODE_PATH=$(abs_builddir)/node_module
 
+if !ENABLE_MOBILEAPP
 L10N_JSON = $(patsubst $(srcdir)/po/%.po,$(DIST_FOLDER)/l10n/%.json,$(L10N_PO))
+else
+L10N_IOS_ALL_JS = $(DIST_FOLDER)/l10n-all.js
+L10N_JSON = $(L10N_IOS_ALL_JS)
+
+$(L10N_IOS_ALL_JS) : $(wildcard $(srcdir)/po/ui-*.po) $(shell find $(srcdir)/l10n -name '*.*') $(srcdir)/util/create-l10n-all-js.pl
+	for F in $(wildcard $(srcdir)/po/ui-*.po); do \
+		$(srcdir)/util/po2json.py $$F -o $$F.json; \
+	done
+	@mkdir -p $(dir $@)
+	perl $(srcdir)/util/create-l10n-all-js.pl >$@
+	for F in $(wildcard $(srcdir)/po/ui-*.po); do \
+		rm $$F.json; \
+	done
+endif
 
 JQUERY_LIGHTNESS_IMAGE_PATH = $(srcdir)/images/jquery-ui-lightness
 JQUERY_LIGHTNESS_IMAGES = $(wildcard $(JQUERY_LIGHTNESS_IMAGE_PATH)/*.png)
@@ -86,7 +101,6 @@ OXOOL_ADMIN_JS =\
 	admin/src/AdminSocketSoftwareUpgrade.js \
 	admin/src/AdminSocketMacIp.js \
 	admin/src/AdminSocketMergeODF.js \
-	admin/src/AdminSocketTbl2sc.js \
 	admin/src/AdminSocketTemplateRepo.js
 
 NODE_MODULES_SRC =\
@@ -408,7 +422,7 @@ define bundle_all
 	$(if $(IS_SEPARATE),\
 		@touch $@,\
 		@echo "Uglify oxool js files..."
-		@m4 -PE \
+		@m4 -PE -DL10N_IOS_ALL_JS=$(L10N_IOS_ALL_JS) \
 			-DNODE_MODULES_JS=$(subst $(SPACE),$(COMMA),$(NODE_MODULES_JS)) \
 			-DOXOOL_LIBS_JS=$(subst $(SPACE),$(COMMA),$(OXOOL_LIBS_JS_SRC)) \
 			-DOXOOL_JS=$(INTERMEDIATE_DIR)/loleaflet-src.js \
