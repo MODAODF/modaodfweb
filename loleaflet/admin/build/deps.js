@@ -69,11 +69,6 @@ var deps = {
 		deps: ['AdminCore']
 	},
 
-	AdminSocketTbl2sc: {
-		src: ['src/AdminSocketTbl2sc.js'],
-		desc: 'Socket to tbl2sc admin page.',
-		deps: ['AdminCore']
-	},
 };
 
 if (typeof exports !== 'undefined') {
