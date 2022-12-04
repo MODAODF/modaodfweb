@@ -14,6 +14,7 @@
 #include <Poco/Net/HTTPResponse.h>
 #include <Poco/Net/HTMLForm.h>
 
+#include <Poco/Data/SessionPool.h>
 #include <Poco/Data/Session.h>
 #include <Poco/Data/RecordSet.h>
 #include <Poco/Data/SQLite/Connector.h>
@@ -53,11 +54,9 @@ public:
                 << "msg         TEXT NOT NULL)", now;
 
         // 刪除超過一年的舊紀錄
-        Poco::Data::Statement deleteRec(session);
-        deleteRec << "SELECT * FROM logging WHERE (strftime('%s', 'now') "
-                  << "- strftime('%s', timestamp)) > 86400 * 365", now;
+        session << "DELETE FROM logging WHERE (strftime('%s', 'now') "
+                << "- strftime('%s', timestamp)) > 86400 * 365", now;
 
-        session.close();
     }
 
     void handleRequest(const Poco::Net::HTTPRequest& request,
@@ -165,7 +164,7 @@ public:
         if (tokens.equals(0, "refreshLog"))
         {
             std::string recId = tokens[1];
-            Poco::Data::Session session = getDataSession();
+            auto session = getDataSession();
 
             // SQL query.
             Poco::Data::Statement select(session);
@@ -194,8 +193,6 @@ public:
 
             result.append("]");
 
-            session.close();
-
             return result;
 
         }
@@ -204,24 +201,26 @@ public:
     }
 
 private:
+    /// @brief 取得可用的 data session
+    /// @return Poco::Data::Session
     Poco::Data::Session getDataSession()
     {
-        const std::string dbName = getDocumentRoot() + "/log.db";
-        return Poco::Data::Session("SQLite", dbName);
+        static std::string dbName = getDocumentRoot() + "/log.db";
+        static Poco::Data::SessionPool sessionPool("SQLite", dbName);
+        return sessionPool.get();
     }
 
-    void addRecord(const int success,
+    void addRecord(int success,
                    const std::shared_ptr<StreamSocket>& socket,
                    std::string title,
                    const std::chrono::steady_clock::time_point startTime,
                    std::string msg)
     {
-        int status = success;
         // 現在時間
-        const std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+        const std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
         // 時間差
         const auto timeSinceStartMs =
-            std::chrono::duration_cast<std::chrono::milliseconds>(now - startTime).count();
+            std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
         std::string cost = std::to_string(timeSinceStartMs) + " ms.";
         // 來源 IP
         std::size_t pos = socket->clientAddress().rfind(":");
@@ -233,18 +232,9 @@ private:
 
         auto session = getDataSession();
 
-        Poco::Data::Statement insert(session);
-        insert << "INSERT INTO logging (status, source_ip, title, cost, msg) "
-               << "VALUES(?, ?, ?, ?, ?)",
-               use(status),
-               use(sourceIP),
-               use(title),
-               use(cost),
-               use(msg);
-
-        insert.execute();
-
-        session.close();
+        session << "INSERT INTO logging (status, source_ip, title, cost, msg) "
+                << "VALUES(?, ?, ?, ?, ?)",
+                use(success), use(sourceIP), use(title), use(cost), use(msg), now;
     }
 };
 
