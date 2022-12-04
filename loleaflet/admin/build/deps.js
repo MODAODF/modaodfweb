@@ -51,24 +51,6 @@ var deps = {
 		deps: ['AdminCore']
 	},
 
-	AdminSocketMacIp: {
-		src: ['src/AdminSocketMacIp.js'],
-		desc: 'Socket to templaterepo admin page.',
-		deps: ['AdminCore']
-	},
-
-	AdminSocketMergeODF: {
-		src: ['src/AdminSocketMergeODF.js'],
-		desc: 'Socket to mergeodf admin page.',
-		deps: ['AdminCore']
-	},
-
-	AdminSocketTemplateRepo: {
-		src: ['src/AdminSocketTemplateRepo.js'],
-		desc: 'Socket to templaterepo admin page.',
-		deps: ['AdminCore']
-	},
-
 };
 
 if (typeof exports !== 'undefined') {

@@ -98,10 +98,7 @@ OXOOL_ADMIN_JS =\
 	admin/src/AdminSocketBroker.js \
 	admin/src/AdminSocketGlobalFunction.js \
 	admin/src/AdminSocketFontManager.js \
-	admin/src/AdminSocketSoftwareUpgrade.js \
-	admin/src/AdminSocketMacIp.js \
-	admin/src/AdminSocketMergeODF.js \
-	admin/src/AdminSocketTemplateRepo.js
+	admin/src/AdminSocketSoftwareUpgrade.js
 
 NODE_MODULES_SRC =\
 	autolinker@3.14.1 \
