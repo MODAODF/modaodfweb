@@ -1,2 +1,2 @@
 
-SUBDIRS = Alive Table2SC
+SUBDIRS = Alive Table2SC TemplateRepo
