@@ -1,3 +1,9 @@
+modaodfweb (3.1.0-1) unstable; urgency=low
+
+  * Bump package version to 3.1.0-1
+
+ -- Firefly <firefly@ossii.com.tw>  Wed, 07 Dec 2022 16:08:31 +0800
+
 modaodfweb (3.0.0-1) unstable; urgency=low
 
   * Initial release
