@@ -159,9 +159,6 @@ modaodfweb-generate-proof-key >/dev/null 2>&1
 if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl start modaodfweb; fi
 %endif
 
-# create python3 link 
-test ! -e /usr/local/sbin/python3 && ln -sf %{loroot}/program/python /usr/local/sbin/python3
-
 echo "   Done."
 
 %preun
@@ -187,7 +184,5 @@ if [ $arg = 0 ] ; then
     rm -rf ${loolparent}/%{name}/*
 fi
 
-# unlink python3
-unlink /usr/local/sbin/python3
 
 %changelog
