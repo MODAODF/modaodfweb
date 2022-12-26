@@ -1,0 +1,3 @@
+usr/lib/modaodfweb/*.so
+usr/share/modaodfweb/modules/
+etc/modaodfweb/conf.d/

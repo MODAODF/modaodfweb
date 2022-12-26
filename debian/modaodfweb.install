@@ -1,0 +1,16 @@
+etc/fonts/conf.d/
+etc/modaodfweb/*.pem
+etc/modaodfweb/*.xcu
+etc/modaodfweb/*.xml
+etc/sudoers.d/
+etc/sysconfig/
+usr/bin/
+usr/lib/*.so*
+usr/lib/pkgconfig/
+usr/share/doc/modaodfweb/
+usr/share/fonts/modaodfweb/
+usr/share/man/
+usr/share/modaodfweb/discovery.xml
+usr/share/modaodfweb/extensions/
+usr/share/modaodfweb/favicon.ico
+usr/share/modaodfweb/loleaflet/
