@@ -317,7 +317,7 @@ public:
     virtual void configure(Poco::Util::LayeredConfiguration& /* config */);
 
     /// Main-loop reached, time for testing.
-    /// Invoked from coolwsd's main thread.
+    /// Invoked from modaodfweb's main thread.
     void invokeTest()
     {
         try
