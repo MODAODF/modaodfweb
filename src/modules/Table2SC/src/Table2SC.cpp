@@ -117,7 +117,7 @@ public:
         Poco::replaceInPlace(htmlTemplate, std::string("%CONTENT%"), content);
 
         // 製作暫存路徑
-        const Poco::Path tmpPath = Poco::Path::forDirectory(Poco::TemporaryFile::tempName("/tmp/convert-to"));
+        const Poco::Path tmpPath = Poco::Path::forDirectory(Poco::TemporaryFile::tempName());
         Poco::File(tmpPath).createDirectories();
         chmod(tmpPath.toString().c_str(), S_IXUSR | S_IWUSR | S_IRUSR);
 
