@@ -84,18 +84,18 @@ public:
 
         session << "CREATE TABLE IF NOT EXISTS maciplist ("
                 << "id          INTEGER PRIMARY KEY AUTOINCREMENT,"
-                << "type        VARCHAR(16) NOT NULL DEFAULT '',"
-                << "macip       VARCHAR(64) NOT NULL DEFAULT '',"
+                << "type        TEXT NOT NULL DEFAULT '',"
+                << "macip       TEXT NOT NULL DEFAULT '',"
                 << "description TEXT NOT NULL DEFAULT '');"
                 << "CREATE UNIQUE INDEX IF NOT EXISTS macip on maciplist(macip);", now;
 
         session << "CREATE TABLE IF NOT EXISTS repository ("
                 << "id      INTEGER PRIMARY KEY AUTOINCREMENT,"
-                << "cname   TEXT NOT NULL DEFAULT '',"          // 類別
-                << "endpt   VARCHAR(128) NOT NULL DEFAULT '' UNIQUE,"   // end point 名稱
+                << "cname   TEXT NOT NULL DEFAULT '',"
+                << "endpt   TEXT NOT NULL DEFAULT '' UNIQUE,"   // end point 名稱
                 << "docname TEXT NOT NULL DEFAULT '',"          // 主檔名
-                << "extname VARCHAR(16) NOT NULL DEFAULT '',"          // 副檔名
-                << "uptime  VARCHAR(32) NOT NULL DEFAULT '')", now;    // 上傳日期
+                << "extname TEXT NOT NULL DEFAULT '',"          // 副檔名
+                << "uptime  TEXT NOT NULL DEFAULT '')", now;    // 上傳日期
     }
 
     void handleRequest(const Poco::Net::HTTPRequest& request,
