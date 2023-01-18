@@ -28,3 +28,6 @@ MergeODF_la_LDFLAGS = -avoid-version -module -lPocoDataSQLite
 
 MergeODF_la_SOURCES = src/MergeODF.cpp \
 		      src/MergeODFParser.cpp
+
+noinst_HEADERS = src/MergeODF.h \
+                 src/MergeODFParser.h
