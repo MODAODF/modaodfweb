@@ -129,19 +129,14 @@ public:
         outputStream.close();
 
         // 取得轉檔用的 Broker
-        auto docBroker = OxOOL::ModuleManager::instance().createConvertBroker(tmpFile, toFormat);
+        auto docBroker = OxOOL::ConvertBroker::create(tmpFile, toFormat);
 
         // 檔案載入完畢後，觸發這理，執行後續處理
         docBroker->loadedCallback([=]() {
-            const std::string& sessionId = docBroker->getClientSession()->getId();
-
-            LOG_INF(logTitle() << sessionId << ": Set optimize column width.");
             // 全選
             docBroker->sendMessageToKit("uno .uno:SelectAll");
             // 最佳化欄位寬度，額外增加 0.2 公分
             docBroker->sendMessageToKit("uno .uno:SetOptimalColumnWidth?aExtraWidth:short=200");
-
-            LOG_INF(logTitle() << sessionId << ": Save as a new file and transfer the file to the client.");
             // 另存檔案，並傳給 client
             docBroker->saveAsDocument();
             addRecord(true, socket, title, startTime, "Convert to '" + toFormat + "' succeeded.");

@@ -315,7 +315,7 @@ void MergeODF::makeODFReportFile(const Poco::Net::HTTPRequest& request,
     {
         LOG_INF(logTitle() << "Convert " << zip2 << " to PDF.");
         // 取得轉檔用的 Broker
-        auto docBroker = OxOOL::ModuleManager::instance().createConvertBroker(zip2, "pdf");
+        auto docBroker = OxOOL::ConvertBroker::create(zip2, "pdf");
         // 以唯讀開啟
         if (!docBroker->loadDocumentReadonly(socket))
         {
