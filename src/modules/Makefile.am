@@ -1,2 +1,2 @@
 
-SUBDIRS = Alive Table2SC TemplateRepo MergeODF
+SUBDIRS = Alive Announce Table2SC TemplateRepo MergeODF
