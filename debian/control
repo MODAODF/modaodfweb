@@ -25,6 +25,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends},
  modaodfsyslib-extension-pdf-import,
  modaodfsyslib-ooolinguistic,
  modaodfsyslib-math
+Replaces: modaodfweb-modules
+Breaks: modaodfweb-modules
 Description: OxOffice Online WebSocket Daemon
  OXOOLWSD is a daemon that talks to web browser clients and provides OxOffice
  services.
@@ -34,9 +36,3 @@ Architecture: any
 Multi-Arch: same
 Depends: oxool
 Description: Files for build OxOffice Online Editor.
-
-Package: modaodfweb-modules
-Architecture: any
-Multi-Arch: same
-Depends: oxool
-Description: Expansion modules for OxOffice Online.
