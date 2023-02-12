@@ -1,6 +1,6 @@
 ETAGS=ctags -e
 
-SUBDIRS = src . loleaflet extensions fonts support
+SUBDIRS = . src loleaflet extensions fonts support
 
 export ENABLE_DEBUG
 
@@ -69,18 +69,21 @@ if !ENABLE_DEBUG
 AM_CPPFLAGS += -DNDEBUG
 endif
 
-AM_LDFLAGS = -pthread -Wl,-E,-rpath,/snap/modaodfweb/current/usr/lib -lpam $(ZLIB_LIBS) ${FONTCONFIG_LIBS}
+AM_LDFLAGS = -pthread -lpam $(ZLIB_LIBS) ${FONTCONFIG_LIBS}
+
+if ENABLE_DEBUG
+AM_LDFLAGS += -Wl,-E,-rpath,"@abs_top_builddir@"/.libs
+endif
 
 if ENABLE_SSL
 AM_LDFLAGS += -lssl -lcrypto
-else
-modaodfweb_LDADD = -lssl -lcrypto
 endif
 
 AM_ETAGSFLAGS = --c++-kinds=+p --fields=+iaS --extra=+q -R --totals=yes --exclude=loleaflet *
 AM_CTAGSFLAGS = $(AM_ETAGSFLAGS)
 
-shared_sources = common/FileUtil.cpp \
+shared_sources = common/Crypto.cpp \
+                 common/FileUtil.cpp \
                  common/JailUtil.cpp \
                  common/Log.cpp \
                  common/Protocol.cpp \
@@ -109,7 +112,7 @@ endif
 
 shared_json = $(patsubst %.cpp,%.cmd,$(shared_sources))
 
-modaodfweb_sources = common/Crypto.cpp \
+modaodfweb_sources = \
                   wsd/Admin.cpp \
                   wsd/AdminModel.cpp \
                   wsd/Auth.cpp \
@@ -129,10 +132,25 @@ modaodfweb_sources = common/Crypto.cpp \
 
 modaodfweb_json = $(patsubst %.cpp,%.cmd,$(modaodfweb_sources))
 
-modaodfweb_SOURCES = $(modaodfweb_sources) \
-                  $(shared_sources)
+oxoolextra_sources = \
+	src/lib/OxOOL/ModuleManager.cpp \
+	src/lib/OxOOL/HttpHelper.cpp \
+	src/lib/OxOOL/L10NTranslator.cpp \
+	src/lib/OxOOL/XMLConfig.cpp \
+	src/lib/OxOOL/ConvertBroker.cpp \
+	src/lib/OxOOL/Util.cpp \
+	src/lib/OxOOL/Module/Base.cpp
 
-modaodfweb_LDADD = $(top_builddir)/src/lib/libOxOOL.la
+lib_LTLIBRARIES = libOxOOL.la
+
+libOxOOL_la_SOURCES = \
+	$(shared_sources) \
+	$(modaodfweb_sources) \
+	$(oxoolextra_sources)
+
+modaodfweb_SOURCES = wsd/MainLOOLWSD.cpp
+
+modaodfweb_LDADD = libOxOOL.la
 
 noinst_PROGRAMS = clientnb \
                   #connect \
@@ -148,12 +166,10 @@ noinst_PROGRAMS = clientnb \
 #                  common/StringVector.cpp \
 #                  common/Util.cpp
 
-lokitclient_SOURCES = common/Log.cpp \
-                      common/DummyTraceEventEmitter.cpp \
-                      tools/KitClient.cpp \
-                      common/Protocol.cpp \
-                      common/StringVector.cpp \
-                      common/Util.cpp
+lokitclient_SOURCES = tools/KitClient.cpp \
+                      common/DummyTraceEventEmitter.cpp
+
+lokitclient_LDADD = libOxOOL.la
 
 modaodfwebforkit_sources = kit/ChildSession.cpp \
                      kit/ForKit.cpp \
@@ -161,16 +177,16 @@ modaodfwebforkit_sources = kit/ChildSession.cpp \
 
 modaodfwebforkit_json = $(patsubst %.cpp,%.cmd,$(modaodfwebforkit_sources))
 
-modaodfwebforkit_SOURCES = $(modaodfwebforkit_sources) \
-                     $(shared_sources)
+modaodfwebforkit_SOURCES = $(modaodfwebforkit_sources)
+
+modaodfwebforkit_LDADD = libOxOOL.la
 
 clientnb_SOURCES = net/clientnb.cpp \
-                   common/DummyTraceEventEmitter.cpp \
-                   common/Log.cpp \
-		   common/StringVector.cpp \
-                   common/Util.cpp
+                   common/DummyTraceEventEmitter.cpp
+clientnb_LDADD = libOxOOL.la
 
 modaodfwebmount_SOURCES = tools/mount.cpp
+modaodfwebmount_LDADD = libOxOOL.la
 
 modaodfwebmap_SOURCES = tools/map.cpp
 
@@ -185,11 +201,8 @@ modaodfwebconvert_SOURCES = tools/Tool.cpp
 #		     common/Util.cpp
 
 modaodfwebconfig_SOURCES = tools/Config.cpp \
-             common/DummyTraceEventEmitter.cpp \
-		     common/Crypto.cpp \
-		     common/Log.cpp \
-		     common/StringVector.cpp \
-		     common/Util.cpp
+             common/DummyTraceEventEmitter.cpp
+modaodfwebconfig_LDADD = libOxOOL.la
 
 #modaodfwebsocketdump_SOURCES = tools/WebSocketDump.cpp \
 #			 common/DummyTraceEventEmitter.cpp \
@@ -307,7 +320,6 @@ EXTRA_DIST = discovery.xml \
              $(man_MANS)
 
 CLEANUP_COMMAND=true
-#CLEANUP_COMMAND=if test -s ./modaodfweb; then echo "Cleaning up..." && ./modaodfweb --disable-lool-user-checking --cleanup --o:logging.file[@enable]=false --o:logging.level=trace; fi
 
 if HAVE_LO_PATH
 
@@ -316,7 +328,7 @@ CAPABILITIES = $(if @ENABLE_SETCAP@,true,false)
 RUN_GDB = $(if $(GDB_FRONTEND),$(GDB_FRONTEND),gdb --tui --args)
 
 if ENABLE_SETCAP
-SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep modaodfwebforkit && sudo @SETCAP@ cap_sys_admin=ep modaodfwebmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=+ep .libs/modaodfweb
+SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep .libs/modaodfwebforkit && sudo @SETCAP@ cap_sys_admin=ep .libs/modaodfwebmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=+ep .libs/modaodfweb
 else
 SET_CAPS_COMMAND=echo "Skipping capability setting"
 endif
@@ -328,7 +340,7 @@ CLEANUP_DEPS=modaodfweb modaodfwebmount modaodfwebforkit
 $(SYSTEM_STAMP): ${top_srcdir}/modaodfweb-systemplate-setup $(CLEANUP_DEPS)
 	$(SET_CAPS_COMMAND)
 	$(CLEANUP_COMMAND)
-	if test "z@SYSTEMPLATE_PATH@" != "z"; then rm -rf "@SYSTEMPLATE_PATH@" && \
+	if test "z@SYSTEMPLATE_PATH@" != "z"; then chmod u+w -R --silent "@SYSTEMPLATE_PATH@" ; rm -rf "@SYSTEMPLATE_PATH@" && \
 	${top_srcdir}/modaodfweb-systemplate-setup "@SYSTEMPLATE_PATH@" "@LO_PATH@" && touch $@; fi
 
 @JAILS_PATH@:
@@ -354,7 +366,7 @@ run: all @JAILS_PATH@
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	@echo
-	./modaodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
+	.libs/modaodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:security.capabilities="$(CAPABILITIES)" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
 			  --config-file="$(abs_top_srcdir)/modaodfweb.xml" \
@@ -373,7 +385,7 @@ run-one: all @JAILS_PATH@
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	@echo
-	./modaodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
+	.libs/modaodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:security.capabilities="$(CAPABILITIES)" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
 			  --o:ssl.cert_file_path="$(abs_top_srcdir)/etc/cert.pem" \
@@ -400,7 +412,7 @@ run-valgrind: all @JAILS_PATH@
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	valgrind --tool=memcheck --trace-children=no -v --read-var-info=yes \
-		./modaodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
+		.libs/modaodfweb --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
 			  --config-file="$(abs_top_srcdir)/modaodfweb.xml" \
 			  --o:file_server_root_path="$(abs_top_srcdir)" \
@@ -417,7 +429,7 @@ run-gdb: all @JAILS_PATH@
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	$(RUN_GDB) \
-		./modaodfweb --o:security.capabilities="false" \
+		.libs/modaodfweb --o:security.capabilities="false" \
 			  --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
 			  --config-file="$(abs_top_srcdir)/modaodfweb.xml" \
@@ -435,7 +447,7 @@ run-callgrind: all @JAILS_PATH@
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	valgrind --tool=callgrind --simulate-cache=yes --dump-instr=yes --num-callers=50 --error-limit=no --trace-children=yes \
-		./modaodfweb --o:security.capabilities="false" \
+		.libs/modaodfweb --o:security.capabilities="false" \
 			  --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
 			  --config-file="$(abs_top_srcdir)/modaodfweb.xml" \
@@ -453,7 +465,7 @@ run-strace: all @JAILS_PATH@
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
 	@cp $(abs_top_srcdir)/test/data/hello.odp $(abs_top_srcdir)/test/data/hello-world.odp
 	strace -o strace.log -f -tt -s 256 \
-		./modaodfweb --o:security.capabilities="false" \
+		.libs/modaodfweb --o:security.capabilities="false" \
 			  --o:sys_template_path="@SYSTEMPLATE_PATH@" \
 			  --o:child_root_path="@JAILS_PATH@" --o:storage.filesystem[@allow]=true \
 			  --config-file="$(abs_top_srcdir)/modaodfweb.xml" \
