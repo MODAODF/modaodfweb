@@ -306,6 +306,8 @@ EXTRA_DIST = discovery.xml \
              debian/compat \
              debian/control \
              debian/copyright \
+             debian/modaodfweb.install \
+             debian/modaodfweb-dev.install \
              debian/modaodfweb.postinst \
              debian/modaodfweb.postrm \
              debian/modaodfweb.preinst \
