@@ -9,7 +9,7 @@ Package: modaodfweb
 Section: web
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
- adduser, expat, fontconfig, cpio, libcap2-bin, openssh-client, systemd,
+ adduser, fontconfig, cpio, libcap2-bin, openssh-client, systemd,
  modaodfsyslib-calc,
  modaodfsyslib-core,
  modaodfsyslib-graphicfilter,
@@ -33,5 +33,5 @@ Description: OxOffice Online WebSocket Daemon
 Package: modaodfweb-dev
 Architecture: any
 Multi-Arch: same
-Depends: oxool, libpoco-dev
+Depends: modaodfweb, libpoco-dev
 Description: Files for build OxOffice Online Editor.
