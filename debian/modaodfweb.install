@@ -10,6 +10,7 @@ usr/bin/modaodfwebmount
 usr/bin/modaodfweb
 usr/bin/modaodfweb-generate-proof-key
 usr/bin/modaodfweb-systemplate-setup
+usr/bin/modaodfweb-xml-config
 usr/lib/*.so.*
 usr/lib/modaodfweb/*.so
 usr/share/modaodfweb/loleaflet

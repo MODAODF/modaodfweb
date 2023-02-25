@@ -87,6 +87,7 @@ echo "account    required     pam_unix.so" >>  %{buildroot}/etc/pam.d/%{name}
 %{_bindir}/modaodfweb
 %{_bindir}/modaodfweb-generate-proof-key
 %{_bindir}/modaodfweb-systemplate-setup
+%{_bindir}/modaodfweb-xml-config
 %{_libdir}/*.so.*
 %dir /usr/share/%{name}
 /usr/share/%{name}/loleaflet
