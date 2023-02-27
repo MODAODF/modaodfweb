@@ -2,7 +2,7 @@ Source: modaodfweb
 Section: web
 Priority: optional
 Maintainer: Firefly <firefly@ossii.com.tw>
-Build-Depends: debhelper (>= 9.20160709), libcap-dev, libcap2-bin, libpcre3-dev, libpng-dev, linux-libc-dev, nodejs, python3-polib, python3-lxml, fontconfig, libpam-dev, libcppunit-dev, pkg-config, devscripts, m4, libpoco-dev
+Build-Depends: debhelper (>= 9.20160709), libcap-dev, libcap2-bin, libpcre3-dev, libpng-dev, linux-libc-dev, nodejs, python3-polib, python3-lxml, fontconfig, libpam-dev, libcppunit-dev, pkg-config, devscripts, m4, libpoco-dev, libgit2-dev
 Standards-Version: 3.9.7
 
 Package: modaodfweb
@@ -33,5 +33,5 @@ Description: OxOffice Online WebSocket Daemon
 Package: modaodfweb-dev
 Architecture: any
 Multi-Arch: same
-Depends: modaodfweb, libpoco-dev
+Depends: modaodfweb, libpoco-dev, libgit2
 Description: Files for build OxOffice Online Editor.
