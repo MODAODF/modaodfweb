@@ -35,7 +35,6 @@ ltmain.sh
 missing
 stamp-h1
 m4
-debian/loolwsd.postinst
 common/support-public-key.hpp
 
 # Test stuff
@@ -105,4 +104,5 @@ fonts/00-modaodfweb.conf
 modaodfweb-*.tar.gz
 modaodfweb.pc
 src/include/OxOOL/OxOOL.h
-src/tools/oxool-module-maker
+src/tools/modaodfweb-xml-config
+src/development-tools/modaodfweb-module-maker
