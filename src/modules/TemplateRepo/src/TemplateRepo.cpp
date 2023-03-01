@@ -99,10 +99,9 @@ public:
     }
 
     void handleRequest(const Poco::Net::HTTPRequest& request,
-                       const RequestDetails& requestDetails,
                        const std::shared_ptr<StreamSocket>& socket) override
     {
-        const std::string requestAPI = parseRealURI(requestDetails);
+        const std::string requestAPI = parseRealURI(request);
 
         // 是否支援此 API
         if (auto it = mApiMap.find(requestAPI); it != mApiMap.end())

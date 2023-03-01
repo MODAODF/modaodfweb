@@ -60,7 +60,6 @@ public:
     }
 
     void handleRequest(const Poco::Net::HTTPRequest& request,
-                       const RequestDetails& requestDetails,
                        const std::shared_ptr<StreamSocket>& socket) override
     {
         // 紀錄開始時間點
@@ -68,8 +67,6 @@ public:
 
         // 紀錄來源 IP
         const std::string sourceIP = socket->isLocal() ? "127.0.0.1" : socket->clientAddress();
-
-        (void)requestDetails; // Avoid unused parameter.
 
         LOG_INF(logTitle() << "Received request with method '"
                            << request.getMethod() << "' from "

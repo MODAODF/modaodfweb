@@ -79,11 +79,10 @@ void MergeODF::initialize()
 }
 
 void MergeODF::handleRequest(const Poco::Net::HTTPRequest& request,
-                                const RequestDetails& requestDetails,
                                 const std::shared_ptr<StreamSocket>& socket)
 {
     const std::string requestMethod = request.getMethod();
-    const std::string requestAPI = parseRealURI(requestDetails);
+    const std::string requestAPI = parseRealURI(request);
 
     // 是否支援此 API(固定位址)
     if (auto it = mApiMap.find(requestAPI); it != mApiMap.end())
