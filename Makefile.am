@@ -135,6 +135,7 @@ modaodfweb_json = $(patsubst %.cpp,%.cmd,$(modaodfweb_sources))
 oxoolextra_sources = \
 	src/lib/OxOOL/Module/Base.cpp \
 	src/lib/OxOOL/Module/Map.cpp \
+	src/lib/OxOOL/Net/Util.cpp \
 	src/lib/OxOOL/ModuleManager.cpp \
 	src/lib/OxOOL/HttpHelper.cpp \
 	src/lib/OxOOL/L10NTranslator.cpp \
