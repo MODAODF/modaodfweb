@@ -13,5 +13,5 @@ module_data_dir=@LOOLWSD_MODULE_DATA_DIR@
 Name: oxool
 Description:
 Version: @VERSION@
-Libs: -L${libdir} -lOxOOL
+Libs: -L${libdir} -l@PACKAGE_NAME@
 Cflags: -I${includedir}/OxOOL -I${includedir}/OxOOL/common -I${includedir}/OxOOL/net -I${includedir}/OxOOL/wsd -I${includedir}/OxOOL/LibreOfficeKit

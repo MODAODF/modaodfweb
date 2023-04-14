@@ -146,16 +146,16 @@ oxoolextra_sources = \
 	src/lib/OxOOL/Util/OptionlValidator.cpp \
 	src/lib/OxOOL/Util/FileValidator.cpp
 
-lib_LTLIBRARIES = libOxOOL.la
+lib_LTLIBRARIES = @LIB_NAME@.la
 
-libOxOOL_la_SOURCES = \
+@LIB_NAME@_la_SOURCES = \
 	$(shared_sources) \
 	$(modaodfweb_sources) \
 	$(oxoolextra_sources)
 
 modaodfweb_SOURCES = wsd/MainLOOLWSD.cpp
 
-modaodfweb_LDADD = libOxOOL.la
+modaodfweb_LDADD = @LIB_NAME@.la
 
 noinst_PROGRAMS = clientnb \
                   #connect \
@@ -174,7 +174,7 @@ noinst_PROGRAMS = clientnb \
 lokitclient_SOURCES = tools/KitClient.cpp \
                       common/DummyTraceEventEmitter.cpp
 
-lokitclient_LDADD = libOxOOL.la
+lokitclient_LDADD = @LIB_NAME@.la
 
 modaodfwebforkit_sources = kit/ChildSession.cpp \
                      kit/ForKit.cpp \
@@ -184,14 +184,14 @@ modaodfwebforkit_json = $(patsubst %.cpp,%.cmd,$(modaodfwebforkit_sources))
 
 modaodfwebforkit_SOURCES = $(modaodfwebforkit_sources)
 
-modaodfwebforkit_LDADD = libOxOOL.la
+modaodfwebforkit_LDADD = @LIB_NAME@.la
 
 clientnb_SOURCES = net/clientnb.cpp \
                    common/DummyTraceEventEmitter.cpp
-clientnb_LDADD = libOxOOL.la
+clientnb_LDADD = @LIB_NAME@.la
 
 modaodfwebmount_SOURCES = tools/mount.cpp
-modaodfwebmount_LDADD = libOxOOL.la
+modaodfwebmount_LDADD = @LIB_NAME@.la
 
 modaodfwebmap_SOURCES = tools/map.cpp
 
@@ -207,7 +207,7 @@ modaodfwebconvert_SOURCES = tools/Tool.cpp
 
 modaodfwebconfig_SOURCES = tools/Config.cpp \
              common/DummyTraceEventEmitter.cpp
-modaodfwebconfig_LDADD = libOxOOL.la
+modaodfwebconfig_LDADD = @LIB_NAME@.la
 
 #modaodfwebsocketdump_SOURCES = tools/WebSocketDump.cpp \
 #			 common/DummyTraceEventEmitter.cpp \
