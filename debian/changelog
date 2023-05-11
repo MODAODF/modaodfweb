@@ -1,3 +1,9 @@
+modaodfweb (3.1.2-1) unstable; urgency=low
+
+  * Bump package version to 3.1.2-1
+
+ -- Jeff Huang <jeff.huang@ossii.com.tw>  Thu, 11 May 2023 13:54:44 +0800
+
 modaodfweb (3.1.1-1) unstable; urgency=low
 
   * Bump package version to 3.1.1-1
