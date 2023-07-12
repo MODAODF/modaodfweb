@@ -232,12 +232,12 @@ static bool haveCapability(cap_value_t capability)
     {
         if (cap_name)
         {
-            LOG_ERR("Capability " << cap_name << " is not set for the oxoolforkit program.");
+            LOG_ERR("Capability " << cap_name << " is not set for the modaodfwebforkit program.");
             cap_free(cap_name);
         }
         else
         {
-            LOG_ERR("Capability " << capability << " is not set for the oxoolforkit program.");
+            LOG_ERR("Capability " << capability << " is not set for the modaodfwebforkit program.");
         }
         return false;
     }
@@ -471,7 +471,7 @@ void forkLibreOfficeKit(const std::string& childRoot,
 #ifndef KIT_IN_PROCESS
 static void printArgumentHelp()
 {
-    std::cout << "Usage: oxoolforkit [OPTION]..." << std::endl;
+    std::cout << "Usage: modaodfwebforkit [OPTION]..." << std::endl;
     std::cout << "  Single-threaded process that spawns lok instances" << std::endl;
     std::cout << "  Note: Running this standalone is not possible. It is spawned by oxoolwsd" << std::endl;
     std::cout << "        and is controlled via a pipe." << std::endl;
@@ -492,7 +492,7 @@ int main(int argc, char** argv)
     /*WARNING*/         checkOxoolUser = false;
     /*WARNING*/ }
 
-    /*WARNING*/ if (!hasCorrectUID("oxoolforkit"))
+    /*WARNING*/ if (!hasCorrectUID("modaodfwebforkit"))
     /*WARNING*/ {
     /*WARNING*/     // don't allow if any capability is set (unless root; who runs this
     /*WARNING*/     // as root or runs this in a container and provides --disable-oxool-user-checking knows what they
@@ -508,7 +508,7 @@ int main(int argc, char** argv)
     /*WARNING*/     else if (hasAnyCapability())
     /*WARNING*/     {
     /*WARNING*/         if (!checkOxoolUser)
-    /*WARNING*/             LOG_FTL("Security: --disable-oxool-user-checking failed, oxoolforkit has some capabilities set.");
+    /*WARNING*/             LOG_FTL("Security: --disable-oxool-user-checking failed, modaodfwebforkit has some capabilities set.");
 
     /*WARNING*/         LOG_FTL("Aborting.");
     /*WARNING*/         return EX_SOFTWARE;
@@ -609,7 +609,7 @@ int main(int argc, char** argv)
         {
             std::string version, hash;
             Util::getVersionInfo(version, hash);
-            std::cout << "oxoolforkit version details: " << version << " - " << hash << std::endl;
+            std::cout << "modaodfwebforkit version details: " << version << " - " << hash << std::endl;
             DisplayVersion = true;
         }
         else if (std::strstr(cmd, "--rlimits") == cmd)
@@ -688,7 +688,7 @@ int main(int argc, char** argv)
 
     if (!NoCapsForKit && !haveCorrectCapabilities())
     {
-        LOG_FTL("Capabilities are not set for the oxoolforkit program.");
+        LOG_FTL("Capabilities are not set for the modaodfwebforkit program.");
         LOG_FTL("Please make sure that the current partition was *not* mounted with the 'nosuid' option.");
         LOG_FTL("If you are on SLES11, please set 'file_caps=1' as kernel boot option.");
         return EX_SOFTWARE;

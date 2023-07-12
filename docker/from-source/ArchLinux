@@ -12,16 +12,16 @@ RUN pacman -Syu --noconfirm && \
               wqy-zenhei wqy-microhei ttf-droid \
               noto-fonts-cjk perl
 
-# copy freshly built LOKit and OxOffice Online
+# copy freshly built LOKit and MODA ODF WEB
 COPY /instdir /
 
-# copy the shell script which can start OxOffice Online (oxoolwsd)
+# copy the shell script which can start MODA ODF WEB (oxoolwsd)
 COPY /start-collabora-online.sh /
 COPY /start-collabora-online.pl /
 
-# set up OxOffice Online (normally done by postinstall script of package)
+# set up MODA ODF WEB (normally done by postinstall script of package)
 # Fix permissions
-RUN setcap cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep /usr/bin/oxoolforkit && \
+RUN setcap cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep /usr/bin/modaodfwebforkit && \
     setcap cap_sys_admin=ep /usr/bin/oxoolmount && \
     useradd -r -U -d /opt/oxool -m oxool && \
     rm -rf /opt/oxool && \

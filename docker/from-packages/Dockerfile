@@ -12,9 +12,9 @@ MAINTAINER Andras Timar <andras.timar@collabora.com>
 ARG repo
 
 # type: can be
-# 'code' - OxOffice Online
-# 'oxool' - OxOffice Online, to build this you need to give your secret URL part from https://support.collaboraoffice.com, i.e. you have to be Collabora partner or customer
-# 'key'  - OxOffice Online, the license key enabled version.
+# 'code' - MODA ODF WEB
+# 'oxool' - MODA ODF WEB, to build this you need to give your secret URL part from https://support.collaboraoffice.com, i.e. you have to be Collabora partner or customer
+# 'key'  - MODA ODF WEB, the license key enabled version.
 # Optional. The default is 'code'.
 ARG type
 
@@ -31,19 +31,19 @@ ENV LC_CTYPE C.UTF-8
 RUN --mount=type=secret,id=secret_key \
 # Update repos before installing packages
     apt-get update && \
-# Install dependencies of installer of OxOffice Online
+# Install dependencies of installer of MODA ODF WEB
     apt-get -y install cpio tzdata libcap2-bin apt-transport-https gnupg2 ca-certificates curl && \
 # Setup Collabora repo
     repourl="https://collaboraoffice.com/${repo:-repos}/CollaboraOnline/"; \
     secret_key=$(cat /run/secrets/secret_key); \
     if [ "$type" = "oxool" ] && [ -n ${secret_key+set} ]; then \
-        echo "Based on the provided build arguments OxOffice Online from customer repo will be used."; \
+        echo "Based on the provided build arguments MODA ODF WEB from customer repo will be used."; \
         repourl="${repourl}23.05/customer-deb-${secret_key}/"; \
     elif [ "$type" = "key" ]; then \
-        echo "Based on the provided build arguments license key enabled OxOffice Online will be used."; \
+        echo "Based on the provided build arguments license key enabled MODA ODF WEB will be used."; \
         repourl="${repourl}23.05-key/"; \
     else \
-        echo "Based on the provided build arguments OxOffice Online will be used."; \
+        echo "Based on the provided build arguments MODA ODF WEB will be used."; \
         repourl="${repourl}23.05-CODE/CODE-deb/"; \
     fi && \
     echo "deb [signed-by=/usr/share/keyrings/collaboraonline-release-keyring.gpg] ${repourl} /" > /etc/apt/sources.list.d/collabora.list && \
@@ -56,7 +56,7 @@ RUN --mount=type=secret,id=secret_key \
     fi && \
 # Update repos again
     apt-get update && \
-# Install OxOffice Online (OxOffice is a dependency)
+# Install MODA ODF WEB (OxOffice is a dependency)
     apt-get -y install oxoolwsd \
 # Install all dictionaries
                        collaboraoffice-dict-* \

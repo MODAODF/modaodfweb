@@ -12,7 +12,7 @@
  *     enabled: false
  * }
  *
- * Copyright the OxOffice Online contributors.
+ * Copyright the MODA ODF WEB contributors.
  *
  * SPDX-License-Identifier: MPL-2.0
  */

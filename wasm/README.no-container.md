@@ -1,11 +1,11 @@
 <!---
-NOTE: This file describes how to build OxOffice Online as WASM
+NOTE: This file describes how to build MODA ODF WEB as WASM
 without using the Allotropia container.
 -->
 
-# OxOffice Online as WASM (COWASM)
+# MODA ODF WEB as WASM (COWASM)
 
-Before building OxOffice Online as WASM you need to build three
+Before building MODA ODF WEB as WASM you need to build three
 dependencies: LibreOffice core, Poco, and zstd.
 
 The toolchain used is Emscripten. Versions 2.0.31 and 3.1.30 are known

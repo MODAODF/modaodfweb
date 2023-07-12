@@ -2,7 +2,7 @@
 # Martin Srebotnjak <miles@filmsi.net>, 2016, 2019.
 msgid ""
 msgstr ""
-"Project-Id-Version: OxOffice Online UI\n"
+"Project-Id-Version: MODA ODF WEB UI\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-30 12:09+0200\n"
 "PO-Revision-Date: 2023-06-12 08:54+0000\n"
@@ -1782,10 +1782,10 @@ msgstr "Posodabljanje citatov"
 
 #: src/control/Control.Zotero.js:1437
 msgid ""
-"Unlinking citations will prevent OxOffice Online from updating citations "
+"Unlinking citations will prevent MODA ODF WEB from updating citations "
 "and bibliography in this document."
 msgstr ""
-"Odstranjevanje povezav citatov prepreči OxOffice Online, da posodobi citate "
+"Odstranjevanje povezav citatov prepreči MODA ODF WEB, da posodobi citate "
 "in bibliografijo v tem dokumentu."
 
 #: src/control/Permission.js:72
@@ -2470,8 +2470,8 @@ msgid "Creating copy..."
 msgstr "Ustvarjanje kopije ..."
 
 #: welcome/welcome.html%2Bhtml.head.title:9-3
-msgid "OxOffice Online Welcome"
-msgstr "Dobrodošli v OxOffice Online"
+msgid "MODA ODF WEB Welcome"
+msgstr "Dobrodošli v MODA ODF WEB"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:26-7
 msgid "Explore The New %oxoolVersion"
@@ -2479,9 +2479,9 @@ msgstr "Odkrijte novo različico %oxoolVersion"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:27-7
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:38-7
-msgid "OxOffice Online"
+msgid "MODA ODF WEB"
 msgstr ""
-"Razvojna različica OxOffice Online (angl. OxOffice Online Development "
+"Razvojna različica MODA ODF WEB (angl. MODA ODF WEB Development "
 "Edition oz. CODE)"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.p:28-7
@@ -2505,12 +2505,12 @@ msgstr "Odkrijte vse spremembe"
 msgid ""
 "Check the <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">release notes</a> and learn all about: The "
-"latest OxOffice Online, aimed at home users and small "
+"latest MODA ODF WEB, aimed at home users and small "
 "teams."
 msgstr ""
 "Oglejte si <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">opombe ob izdaji</a> in izvejte vse o najnovejši "
-"razvojni izdaji OxOffice Online, namenjeni domačim "
+"razvojni izdaji MODA ODF WEB, namenjeni domačim "
 "uporabnikom in manjšim ekipam."
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:48-7
@@ -2798,8 +2798,8 @@ msgstr ""
 #~ "avatarjev, asinhronem shranjevanju, hitrejšem preverjanju črkovanja in "
 #~ "drugem."
 
-#~ msgid "Integrate OxOffice Online into your webapp"
-#~ msgstr "Integrirajte OxOffice Online v svojo spletno aplikacijo"
+#~ msgid "Integrate MODA ODF WEB into your webapp"
+#~ msgstr "Integrirajte MODA ODF WEB v svojo spletno aplikacijo"
 
 #~ msgid "Or get involved in the development"
 #~ msgstr "Ali pa se pridružite razvoju"
@@ -2807,7 +2807,7 @@ msgstr ""
 #, javascript-format
 #~ msgid ""
 #~ "Learn more about integrating into your web application in the <a href="
-#~ "\"%oxoolSdkURL\" target=\"_blank\">OxOffice Online SDK</a>. Or head over to "
+#~ "\"%oxoolSdkURL\" target=\"_blank\">MODA ODF WEB SDK</a>. Or head over to "
 #~ "the <a href=\"%oxoolStepByStepURL\" target=\"_blank\">step-by-step "
 #~ "instructions</a> and build CODE from scratch. You can also help out with <a "
 #~ "href=\"%oxoolTranslationsURL\" target=\"_blank\">translations</a> or by <a "
@@ -2815,7 +2815,7 @@ msgstr ""
 #~ "all the essential steps on how to reproduce it."
 #~ msgstr ""
 #~ "Pozanimajte se o integraciji v svojo spletno aplikacijo v <a href=\"%"
-#~ "oxoolSdkURL\" target=\"_blank\">OxOffice Online SDK</a>. Ali pa se namenite "
+#~ "oxoolSdkURL\" target=\"_blank\">MODA ODF WEB SDK</a>. Ali pa se namenite "
 #~ "k <a href=\"%oxoolStepByStepURL\" target=\"_blank\">napotkom korak za "
 #~ "korakom</a> ter zgradite CODE od začetka. Pomagate lahko tudi s <a href=\"%"
 #~ "oxoolTranslationsURL\" target=\"_blank\">prevajanjem</a> ali <a href=\"%"
@@ -2902,8 +2902,8 @@ msgstr ""
 #~ msgid "Server is recycling and will be available shortly"
 #~ msgstr "Strežnik se ponovno zaganja in bo na voljo v kratkem."
 
-#~ msgid "Oops, there is a problem connecting to OxOffice Online : "
-#~ msgstr "Pri povezovanju z OxOffice Online je prišlo do težave: "
+#~ msgid "Oops, there is a problem connecting to MODA ODF WEB : "
+#~ msgstr "Pri povezovanju z MODA ODF WEB je prišlo do težave: "
 
 #~ msgid "Number of views"
 #~ msgstr "Število ogledov"

@@ -1,6 +1,6 @@
 .TH OXOOLCONFIG "1" "Nov 2021" "oxoolconfig" "User Commands"
 .SH NAME
-oxoolconfig \- Configuration tool for OxOffice Online.
+oxoolconfig \- Configuration tool for MODA ODF WEB.
 .SH SYNOPSIS
 oxoolconfig COMMAND [OPTIONS]
 .SH COMMANDS AND OPTIONS
@@ -17,7 +17,7 @@ anonymize [string\-1]...[string\-n]
 \fB\-\-anonymization\-salt\fR=\fIsalt\fR Anonymize strings with the given 64-bit salt instead of the one in the config file.
 .PP
 .SS "migrateconfig"
-The \fBmigrateconfig\fR command migrates config file of OxOffice Online 6.4 or older to the new format.
+The \fBmigrateconfig\fR command migrates config file of MODA ODF WEB 6.4 or older to the new format.
 .PP
 migrateconfig [\-\-old\-config\-file=<path>] [\-\-config\-file=<path>] [\-\-write]
 .PP
@@ -35,7 +35,7 @@ set <key> <value>
 \fBExample:\fR oxoolconfig set logging.level trace
 .PP
 .SS "set\-admin\-password"
-The \fBset\-admin\-password\fR command sets the user name and password of the administrator who can access OxOffice Online's admin console.
+The \fBset\-admin\-password\fR command sets the user name and password of the administrator who can access MODA ODF WEB's admin console.
 .PP
 set\-admin\-password
 .PP
@@ -46,9 +46,9 @@ set\-admin\-password
 \fB\-\-pwd\-hash\-length\fR=\fInumber\fR  Length of password hash to generate.
 .PP
 .SS "update\-system\-template"
-The \fBupdate\-system\-template\fR command updates OxOffice Online's system template. It is used typically when new fonts are added to the system, that need to be used with OxOffice Online.
+The \fBupdate\-system\-template\fR command updates MODA ODF WEB's system template. It is used typically when new fonts are added to the system, that need to be used with MODA ODF WEB.
 .PP
 update\-system\-template
 .PP
 .SH "SEE ALSO"
-oxoolforkit(1), oxoolconvert(1), oxoolwsd(1), oxoolwsd-systemplate-setup(1), oxoolwsd-generate-proof-key(1), oxoolmount(1)
+modaodfwebforkit(1), oxoolconvert(1), oxoolwsd(1), oxoolwsd-systemplate-setup(1), oxoolwsd-generate-proof-key(1), oxoolmount(1)

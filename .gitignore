@@ -14,7 +14,7 @@
 **/.cache
 Makefile
 Makefile.in
-oxoolkitconfig.xcu
+modaodfwebkitconfig.xcu
 oxoolwsd.spec
 oxoolwsd.xml
 aclocal.m4
@@ -87,7 +87,7 @@ connect
 lokitclient
 oxoolwsd
 loolwsd
-oxoolforkit
+modaodfwebforkit
 oxoolmount
 oxoolmap
 oxoolconvert
@@ -95,7 +95,7 @@ oxoolsocketdump
 oxoolstress
 oxoolconfig
 loolconfig
-oxoolforkit-nocaps
+modaodfwebforkit-nocaps
 loadtest
 unittest
 clientnb

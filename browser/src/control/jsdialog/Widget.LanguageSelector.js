@@ -2,7 +2,7 @@
 /*
  * JSDialog.LanguageSelector - widgets for selecting spell/grammar checking language
  *
- * Copyright the OxOffice Online contributors.
+ * Copyright the MODA ODF WEB contributors.
  *
  * SPDX-License-Identifier: MPL-2.0
  */

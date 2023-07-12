@@ -4,15 +4,15 @@
 AC_PREREQ([2.63])
 
 # Package name and tarname
-m4_define([package_NAME], [oxool])
+m4_define([package_NAME], [modaodfweb])
 # Daemon name(若非 oxool，請和 package_NAME 同)
-m4_define([wsd_NAME], [oxoolwsd])
+m4_define([wsd_NAME], [modaodfweb])
 # Package Version
-m4_define([package_VERSION], [5.0.0])
+m4_define([package_VERSION], [3.8.0])
 # Bug Report URL(Report Bugs)
-m4_define([bug_REPORT], [https://github.com/OSSII/oxool-community/issues])
+m4_define([bug_REPORT], [https://github.com/MODAODF/modaodfweb/issues])
 # Package URL(Homepage)
-m4_define([package_URL], [https://www.ossii.com.tw/online])
+m4_define([package_URL], [https://moda.gov.tw/])
 
 AC_INIT([package_NAME], [package_VERSION], [bug_REPORT], [package_NAME], [package_URL])
 LT_INIT([shared, disable-static, dlopen])
@@ -90,7 +90,7 @@ AC_SUBST([PRODUCTNAME])
 
 WSD_NAME="wsd_NAME"
 AC_SUBST([WSD_NAME])
-LIB_LINK_NAME="OxOOL"
+LIB_LINK_NAME="MODAODFWEB"
 AC_SUBST([LIB_LINK_NAME])
 LIB_NAME="lib${LIB_LINK_NAME}"
 AC_SUBST([LIB_NAME])
@@ -835,7 +835,7 @@ AC_SUBST(ENABLE_ANDROIDAPP)
 AM_CONDITIONAL([ENABLE_ANDROIDAPP], [test "$ENABLE_ANDROIDAPP" = "true"])
 AC_SUBST(ANDROID_PACKAGE_NAME)
 
-APP_NAME="OxOffice Online"
+APP_NAME="MODA ODF WEB"
 if test -n "$with_app_name"; then
    APP_NAME="$with_app_name"
 fi
@@ -848,8 +848,8 @@ if test "$enable_iosapp" = yes -a -z "$with_vendor"; then
     AC_MSG_ERROR([You must use --with-vendor when configuring for the iOS app])
 fi
 if test -z "$with_vendor" -o "$with_vendor" = "no"; then
-    # 未設定供應商時，預設為 OSS Integral Institute Co., Ltd
-    VENDOR="OSS Integral Institute Co., Ltd"
+    # 未設定供應商時，預設為 Ministry of Digital Affairs
+    VENDOR="Ministry of Digital Affairs"
 
     if test -z "$VENDOR"; then
         VENDOR="$USER"

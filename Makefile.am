@@ -21,27 +21,27 @@ SUBDIRS = . browser cypress_test
 export ENABLE_DEBUG
 
 bin_PROGRAMS = \
-	oxoolforkit \
-	oxoolmount \
-  oxoolstress \
-	oxoolconvert oxoolconfig
+	modaodfwebforkit \
+	modaodfwebmount \
+  modaodfwebstress \
+	modaodfwebconvert modaodfwebconfig
 
 if ENABLE_LIBFUZZER
 else
-bin_PROGRAMS += oxoolwsd
+bin_PROGRAMS += modaodfweb
 endif
 
-dist_bin_SCRIPTS = oxoolwsd-systemplate-setup \
-                   oxoolwsd-generate-proof-key
+dist_bin_SCRIPTS = modaodfweb-systemplate-setup \
+                   modaodfweb-generate-proof-key
 
-man_MANS = man/oxoolwsd.1 \
-           man/oxoolforkit.1 \
-           man/oxoolconvert.1 \
-           man/oxoolconfig.1 \
-           man/oxoolstress.1 \
-           man/oxoolwsd-systemplate-setup.1 \
-           man/oxoolwsd-generate-proof-key.1 \
-           man/oxoolmount.1
+man_MANS = man/modaodfweb.1 \
+           man/modaodfwebforkit.1 \
+           man/modaodfwebconvert.1 \
+           man/modaodfwebconfig.1 \
+           man/modaodfwebstress.1 \
+           man/modaodfweb-systemplate-setup.1 \
+           man/modaodfweb-generate-proof-key.1 \
+           man/modaodfwebmount.1
 
 
 dist_doc_DATA = wsd/README \
@@ -88,8 +88,8 @@ endif
 if ENABLE_SSL
 AM_LDFLAGS += ${OPENSSL_LIBS}
 else
-oxoolwsd_LDADD = ${OPENSSL_LIBS}
-oxoolconfig_LDADD = ${OPENSSL_LIBS}
+modaodfweb_LDADD = ${OPENSSL_LIBS}
+modaodfwebconfig_LDADD = ${OPENSSL_LIBS}
 endif
 
 AM_ETAGSFLAGS = --c++-kinds=+p --fields=+iaS --extra=+q -R --totals=yes --exclude=browser *
@@ -140,10 +140,10 @@ oxoolwsd_sources = common/Crypto.cpp \
                   wsd/ProofKey.cpp \
                   wsd/QuarantineUtil.cpp
 
-oxoolwsd_SOURCES = $(oxoolwsd_sources) \
+modaodfweb_SOURCES = $(oxoolwsd_sources) \
                   $(shared_sources)
 
-EXTRA_oxoolwsd_DEPENDENCIES = browser/node_modules
+EXTRA_modaodfweb_DEPENDENCIES = browser/node_modules
 
 noinst_PROGRAMS = clientnb \
                   connect \
@@ -174,21 +174,21 @@ lokitclient_SOURCES = common/Log.cpp \
                       common/TraceEvent.cpp \
                       common/Util.cpp
 
-oxoolforkit_sources = kit/ChildSession.cpp \
+modaodfwebforkit_sources = kit/ChildSession.cpp \
                      kit/ForKit.cpp \
                      kit/Kit.cpp
 
-oxoolforkit_SOURCES = $(oxoolforkit_sources) \
+modaodfwebforkit_SOURCES = $(modaodfwebforkit_sources) \
                      $(shared_sources)
 
 if ENABLE_LIBFUZZER
-oxoolforkit_SOURCES += \
+modaodfwebforkit_SOURCES += \
 		       common/DummyTraceEventEmitter.cpp
 
 common_fuzzer_sources = \
 		       common/DummyTraceEventEmitter.cpp \
 		       $(oxoolwsd_sources) \
-		       $(oxoolforkit_sources) \
+		       $(modaodfwebforkit_sources) \
 		       $(shared_sources)
 
 admin_fuzzer_CPPFLAGS = \
@@ -232,18 +232,18 @@ clientnb_SOURCES = net/clientnb.cpp \
                    common/StringVector.cpp \
                    common/Util.cpp
 
-oxoolmount_SOURCES = tools/mount.cpp
+modaodfwebmount_SOURCES = tools/mount.cpp
 
 oxoolmap_SOURCES = tools/map.cpp
 
-oxoolconvert_SOURCES = tools/Tool.cpp
+modaodfwebconvert_SOURCES = tools/Tool.cpp
 
-oxoolstress_CPPFLAGS = -DTDOC=\"$(abs_top_srcdir)/test/data\" ${include_paths}
-oxoolstress_SOURCES = tools/Stress.cpp \
+modaodfwebstress_CPPFLAGS = -DTDOC=\"$(abs_top_srcdir)/test/data\" ${include_paths}
+modaodfwebstress_SOURCES = tools/Stress.cpp \
                      common/DummyTraceEventEmitter.cpp \
                      $(shared_sources)
 
-oxoolconfig_SOURCES = tools/Config.cpp \
+modaodfwebconfig_SOURCES = tools/Config.cpp \
 		     tools/ConfigMigrationAssistant.cpp \
 		     common/DummyTraceEventEmitter.cpp \
 		     common/Crypto.cpp \
@@ -383,7 +383,7 @@ else
 # Use oxoolwsd to cleanup jails, if any. If it fails, we may have a broken/old oxoolwsd binary, remove it to rebuild.
 # A CI box may switch branches without cleaning up the binaries, if oxoolwsd from a broken branch is used here
 # it will fail all subsequent builds, until it's rebuilt from the new branch. So removing oxoolwsd after failing is needed.
-CLEANUP_COMMAND=if test -s ./oxoolwsd; then echo "Cleaning up..." && ./oxoolwsd --disable-oxool-user-checking --cleanup --o:logging.level=trace || rm ./oxoolwsd; fi
+CLEANUP_COMMAND=if test -s ./modaodfweb; then echo "Cleaning up..." && ./modaodfweb --disable-oxool-user-checking --cleanup --o:logging.level=trace || rm ./modaodfweb; fi
 endif
 
 if HAVE_LO_PATH
@@ -393,7 +393,7 @@ CAPABILITIES = $(if @ENABLE_SETCAP@,true,false)
 RUN_GDB = $(if $(GDB_FRONTEND),$(GDB_FRONTEND),gdb --tui --args)
 
 if ENABLE_SETCAP
-SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep oxoolforkit && sudo @SETCAP@ cap_sys_admin=ep oxoolmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=ep oxoolwsd
+SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep modaodfwebforkit && sudo @SETCAP@ cap_sys_admin=ep modaodfwebmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=ep modaodfweb
 else
 SET_CAPS_COMMAND=echo "Skipping capability setting"
 endif
@@ -401,16 +401,16 @@ endif
 if ENABLE_LIBFUZZER
 CLEANUP_DEPS=
 else
-CLEANUP_DEPS=oxoolwsd oxoolmount oxoolforkit
+CLEANUP_DEPS=modaodfweb modaodfwebmount modaodfwebforkit
 endif
 
-# Build oxoolwsd and oxoolmount first, so we can cleanup before updating
+# Build oxoolwsd and modaodfwebmount first, so we can cleanup before updating
 # the systemplate directory, which we can't rm if it's mounted.
-$(SYSTEM_STAMP): ${top_srcdir}/oxoolwsd-systemplate-setup $(CLEANUP_DEPS)
+$(SYSTEM_STAMP): ${top_srcdir}/modaodfweb-systemplate-setup $(CLEANUP_DEPS)
 	$(SET_CAPS_COMMAND)
 	$(CLEANUP_COMMAND)
 	if test "z@SYSTEMPLATE_PATH@" != "z"; then chmod u+w -R --silent "@SYSTEMPLATE_PATH@" ; rm -rf "@SYSTEMPLATE_PATH@" && \
-	${top_srcdir}/oxoolwsd-systemplate-setup "@SYSTEMPLATE_PATH@" "@LO_PATH@" && touch $@; fi
+	${top_srcdir}/modaodfweb-systemplate-setup "@SYSTEMPLATE_PATH@" "@LO_PATH@" && touch $@; fi
 
 @JAILS_PATH@:
 	@$(CLEANUP_COMMAND)
@@ -431,15 +431,15 @@ clean-local:
 	find . -iname "*.gc??" -delete
 
 if ENABLE_DEBUG
-# can write to /tmp/oxoolwsd.log
+# can write to /tmp/modaodfweb.log
   OUTPUT_TO_FILE=true
 else
-# can't write to /var/log/oxoolwsd.log
+# can't write to /var/log/modaodfweb.log
   OUTPUT_TO_FILE=false
 endif
 
 setup-wsd: all @JAILS_PATH@
-	@echo "Launching oxoolwsd"
+	@echo "Launching modaodfweb"
 	@fc-cache "@LO_PATH@"/share/fonts/truetype
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(abs_top_srcdir)/test/data/hello-world.odt
 	@cp $(abs_top_srcdir)/test/data/hello.ods $(abs_top_srcdir)/test/data/hello-world.ods
@@ -456,14 +456,14 @@ COMMON_PARAMS = \
 	--o:admin_console.username=admin --o:admin_console.password=admin
 
 run: setup-wsd
-	./oxoolwsd $(COMMON_PARAMS) \
+	./modaodfweb $(COMMON_PARAMS) \
 			--o:security.capabilities="$(CAPABILITIES)" \
 			--o:logging.file[@enable]=${OUTPUT_TO_FILE} --o:logging.level=trace \
 			--o:trace_event[@enable]=true
 
 if ENABLE_DEBUG
 run-one: setup-wsd
-	./oxoolwsd $(COMMON_PARAMS) \
+	./modaodfweb $(COMMON_PARAMS) \
 			--o:security.capabilities="$(CAPABILITIES)" \
 			--o:logging.file[@enable]=true --o:logging.level=trace \
 			--singlekit
@@ -479,35 +479,35 @@ sync-impress:
 	browser-sync start --config browsersync-config.js --startPath "browser/96c23f663/loleaflet.html?file_path=file://$(abs_top_srcdir)/test/data/hello-world.odp"
 
 run-trace: setup-wsd
-	./oxoolwsd $(COMMON_PARAMS) \
+	./modaodfweb $(COMMON_PARAMS) \
 			--o:logging.file[@enable]=false --o:logging.level=trace \
 			--o:trace[@enable]=true --o:trace.path=${builddir}/trace.txt.gz \
 			--o:trace.outgoing.record=false
 
 run-valgrind: setup-wsd
-	@echo "Launching oxoolwsd under valgrind (but not forkit/oxoolkit, yet)"
+	@echo "Launching modaodfweb under valgrind (but not forkit/oxoolkit, yet)"
 	valgrind --tool=memcheck --trace-children=no -v --read-var-info=yes \
-		./oxoolwsd $(COMMON_PARAMS) \
+		./modaodfweb $(COMMON_PARAMS) \
 			--o:logging.file[@enable]=false --o:logging.level=trace
 
 run-gdb: setup-wsd
-	@echo "Launching oxoolwsd under gdb"
+	@echo "Launching modaodfweb under gdb"
 	$(RUN_GDB) \
-		./oxoolwsd $(COMMON_PARAMS) \
+		./modaodfweb $(COMMON_PARAMS) \
 			--o:security.capabilities="false" \
 			--o:logging.file[@enable]=false --o:logging.level=error
 
 run-callgrind: setup-wsd
-	@echo "Launching oxoolwsd under valgrind's callgrind"
+	@echo "Launching modaodfweb under valgrind's callgrind"
 	valgrind --tool=callgrind --simulate-cache=yes --dump-instr=yes --num-callers=50 --error-limit=no --trace-children=yes \
-		./oxoolwsd $(COMMON_PARAMS) \
+		./modaodfweb $(COMMON_PARAMS) \
 			--o:security.capabilities="false" \
 			--o:logging.file[@enable]=false --o:logging.level=error
 
 run-strace: setup-wsd
-	@echo "Launching oxoolwsd under strace"
+	@echo "Launching modaodfweb under strace"
 	strace -o strace.log -f -tt -s 256 \
-		./oxoolwsd $(COMMON_PARAMS) \
+		./modaodfweb $(COMMON_PARAMS) \
 			--o:security.capabilities="false" \
 			--o:logging.file[@enable]=false --o:logging.level=error
 
@@ -522,10 +522,10 @@ endif
 if ENABLE_LIBFUZZER
 ALL_LOCAL_DEPS=
 else
-ALL_LOCAL_DEPS=oxoolwsd
+ALL_LOCAL_DEPS=modaodfweb
 endif
 
-# After building oxoolforkit, set its capabilities as required. Do it
+# After building modaodfwebforkit, set its capabilities as required. Do it
 # already after a plain 'make' to allow for testing without
 # installing. When building for packaging, no need for this, as the
 # capabilities won't survive packaging anyway. Instead, handle it when
@@ -582,7 +582,7 @@ trace_dir=$(abs_top_srcdir)/test/traces
 stress:
 	@cp $(abs_top_srcdir)/test/data/hello.odt $(stress_file)
 	@echo "Watch at: https://localhost:9980/browser/12345/loleaflet.html?file_path=$(stress_file)"
-	./oxoolstress wss://localhost:9980 \
+	./modaodfwebstress wss://localhost:9980 \
 		$(stress_file) $(trace_dir)/writer-quick.txt \
 		$(stress_file) $(trace_dir)/writer-add-bullet.txt \
 		$(stress_file) $(trace_dir)/writer-mash-text-table.txt \

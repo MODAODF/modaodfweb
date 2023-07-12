@@ -14,7 +14,7 @@
  * 'cursor' specifies if user can type into the field or it is readonly
  * 'enabled' editable field can be temporarily disabled
  *
- * Copyright the OxOffice Online contributors.
+ * Copyright the MODA ODF WEB contributors.
  *
  * SPDX-License-Identifier: MPL-2.0
  */

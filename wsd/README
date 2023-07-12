@@ -1,10 +1,10 @@
-OxOffice Online WebSocket server
+MODA ODF WEB WebSocket server
 =================================
 
 Dependencies
 ------------
 
-OxOffice Online WebSocket server has the following dependencies:
+MODA ODF WEB WebSocket server has the following dependencies:
 
 * libpng
 * Poco library: https://pocoproject.org/
@@ -43,7 +43,7 @@ When building from a tarball less magic is needed.
 
 Run 'make check' after each commit.
 
-Note that the oxoolforkit program needs the CAP_SYS_CHROOT capability,
+Note that the modaodfwebforkit program needs the CAP_SYS_CHROOT capability,
 thus you will be asked the root password when running make as it
 invokes sudo to run /sbin/setcap.
 
@@ -184,12 +184,12 @@ Unless you want to test SSL itself, it is easier to go for the non-SSL option.
 
 Setup Nextcloud or ownCloud on localhost, and install the richdocuments app.
 Good tutorials exist how to install ownCloud or Nextcloud, we don't repeat
-them here. richdocuments is called OxOffice Online in the respective app
+them here. richdocuments is called MODA ODF WEB in the respective app
 stores / marketplaces / whatever.
 
 When you have a running Nextcloud or ownCloud instance at
 http://localhost/nextcloud or at http://localhost/owncloud
-go to OxOffice Online settings, and set the WOPI URL to
+go to MODA ODF WEB settings, and set the WOPI URL to
 http://localhost:9980
 
 Then in the build tree, edit the generated oxoolwsd.xml and set ssl setting to
@@ -230,7 +230,7 @@ or
 so that you have time to attach to the process.
 
 Then run oxoolwsd, and attach your debugger to the process you are
-interested in. Note that as the oxoolforkit executable file has
+interested in. Note that as the modaodfwebforkit executable file has
 capabilities set, so when debugging that you need to run the debugger
 with super-user privilege.
 

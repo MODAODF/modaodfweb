@@ -1,6 +1,6 @@
 /* -*- js-indent-level: 8; fill-column: 100 -*- */
 /*
- * OxOffice Online toolbar
+ * MODA ODF WEB toolbar
  */
 
 /* global app $ w2ui _ */

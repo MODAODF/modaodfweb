@@ -85,7 +85,7 @@ function checkSecondOxoolFrameGlobal() {
 }
 
 /*
-Loading the test document directly in OxOffice Online.
+Loading the test document directly in MODA ODF WEB.
 Parameters:
 	fileName - test document file name (without path)
 	subFolder - sub folder inside data folder (e.g. writer, calc, impress)
@@ -283,7 +283,7 @@ function waitForInterferingUser() {
 	cy.wait(10000);
 }
 
-// Loading the test document inside OxOffice Online (directly or via some integration).
+// Loading the test document inside MODA ODF WEB (directly or via some integration).
 // Parameters:
 // fileName - test document file name (without path)
 // subFolder - sub folder inside data folder (e.g. writer, calc, impress)

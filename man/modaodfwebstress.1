@@ -1,6 +1,6 @@
 .TH OXOOLSTRESS "1" "Aug 2022" "oxoolstress" "User Commands"
 .SH NAME
-oxoolstress \- stress testing tool for OxOffice Online.
+oxoolstress \- stress testing tool for MODA ODF WEB.
 .SH SYNOPSIS
 oxoolstress [OPTIONS] SERVER PATH1 TRACE1 ...
 .SH DESCRIPTION
@@ -17,7 +17,7 @@ both executed against the same document.
 \fB\-h\fR, \fB\-\-help\fR                Show this usage information.
 .SS "SERVER"
 The server parameter points to a websocket end-point that would be
-used by OxOffice Online to drive a document editing session.
+used by MODA ODF WEB to drive a document editing session.
 .PP
 \fBExample:\fR oxoolstress wss://localhost:9980 /tmp/test.odt test/traces/hello-world.txt
 .SS "Generating traces"
@@ -36,4 +36,4 @@ in terms of keys-per-second, as well as creating unusual documents from a spell/
 perspective.
 
 .SH "SEE ALSO"
-oxoolforkit(1), oxoolconvert(1), oxoolwsd(1)
+modaodfwebforkit(1), oxoolconvert(1), oxoolwsd(1)

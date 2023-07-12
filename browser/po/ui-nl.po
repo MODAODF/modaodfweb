@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -1782,10 +1782,10 @@ msgstr "Citaten actualiseren"
 
 #: src/control/Control.Zotero.js:1437
 msgid ""
-"Unlinking citations will prevent OxOffice Online from updating citations "
+"Unlinking citations will prevent MODA ODF WEB from updating citations "
 "and bibliography in this document."
 msgstr ""
-"Door het ontkoppelen van citaten wordt voorkomen dat OxOffice Online de "
+"Door het ontkoppelen van citaten wordt voorkomen dat MODA ODF WEB de "
 "citaten en bibliografie in dit document bijwerkt."
 
 #: src/control/Permission.js:72
@@ -2480,8 +2480,8 @@ msgid "Creating copy..."
 msgstr "Kopie maken..."
 
 #: welcome/welcome.html%2Bhtml.head.title:9-3
-msgid "OxOffice Online Welcome"
-msgstr "OxOffice Online Welkom"
+msgid "MODA ODF WEB Welcome"
+msgstr "MODA ODF WEB Welkom"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:26-7
 msgid "Explore The New %oxoolVersion"
@@ -2489,8 +2489,8 @@ msgstr "Maak kennis met versie %oxoolVersion"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:27-7
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:38-7
-msgid "OxOffice Online"
-msgstr "OxOffice Online Ontwikkel Versie"
+msgid "MODA ODF WEB"
+msgstr "MODA ODF WEB Ontwikkel Versie"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.p:28-7
 msgid ""
@@ -2513,12 +2513,12 @@ msgstr "Kennis nemen van veranderingen"
 msgid ""
 "Check the <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">release notes</a> and learn all about: The "
-"latest OxOffice Online, aimed at home users and small "
+"latest MODA ODF WEB, aimed at home users and small "
 "teams."
 msgstr ""
 "Lees de <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">uitgavenotities van deze versie</a> en kom meer "
-"te weten over de meest recente OxOffice Online Ontwikkel Versie, gericht op "
+"te weten over de meest recente MODA ODF WEB Ontwikkel Versie, gericht op "
 "thuisgebruikers en kleine teams."
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:48-7
@@ -2807,8 +2807,8 @@ msgstr ""
 #~ "aan documenten, de nieuwe zijbalk, de vernieuwde avatar lijst, asynchroon "
 #~ "opslaan en de snellere spellingcontrole."
 
-#~ msgid "Integrate OxOffice Online into your webapp"
-#~ msgstr "Integreer OxOffice Online in jouw webapplicatie"
+#~ msgid "Integrate MODA ODF WEB into your webapp"
+#~ msgstr "Integreer MODA ODF WEB in jouw webapplicatie"
 
 #~ msgid "Or get involved in the development"
 #~ msgstr "Of doe mee aan de ontwikkeling"
@@ -2816,7 +2816,7 @@ msgstr ""
 #, javascript-format
 #~ msgid ""
 #~ "Learn more about integrating into your web application in the <a href="
-#~ "\"%oxoolSdkURL\" target=\"_blank\">OxOffice Online SDK</a>. Or head over to "
+#~ "\"%oxoolSdkURL\" target=\"_blank\">MODA ODF WEB SDK</a>. Or head over to "
 #~ "the <a href=\"%oxoolStepByStepURL\" target=\"_blank\">step-by-step "
 #~ "instructions</a> and build CODE from scratch. You can also help out with <a "
 #~ "href=\"%oxoolTranslationsURL\" target=\"_blank\">translations</a> or by <a "
@@ -2824,7 +2824,7 @@ msgstr ""
 #~ "all the essential steps on how to reproduce it."
 #~ msgstr ""
 #~ "Leer meer over het integreren in jouw web applicatie met behulp van de <a "
-#~ "href=\"%oxoolSdkURL\" target=\"_blank\">OxOffice Online SDK</a>. Of ga naar "
+#~ "href=\"%oxoolSdkURL\" target=\"_blank\">MODA ODF WEB SDK</a>. Of ga naar "
 #~ "de <a href=\"%oxoolStepByStepURL\" target=\"_blank\">stapsgewijze "
 #~ "instructies</a> en bouw CODE vanuit het niets. Je kunt ons ook helpen met <a "
 #~ "href=\"%oxoolTranslationsURL\" target=\"_blank\">vertalen</a> of met het <a "
@@ -2907,8 +2907,8 @@ msgstr ""
 #~ msgid "Server is recycling and will be available shortly"
 #~ msgstr "De server wordt opnieuw opgestart en is snel weer beschikbaar"
 
-#~ msgid "Oops, there is a problem connecting to OxOffice Online : "
-#~ msgstr "Oops, er is een probleem bij het verbinden met OxOffice Online : "
+#~ msgid "Oops, there is a problem connecting to MODA ODF WEB : "
+#~ msgstr "Oops, er is een probleem bij het verbinden met MODA ODF WEB : "
 
 #~ msgid "Number of views"
 #~ msgstr "Aantal weergaven"

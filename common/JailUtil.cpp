@@ -31,9 +31,9 @@ bool oxoolmount(const std::string& arg, std::string source, std::string target)
 {
     source = Util::trim(source, '/');
     target = Util::trim(target, '/');
-    const std::string cmd = Poco::Path(Util::getApplicationPath(), "oxoolmount").toString() + ' '
+    const std::string cmd = Poco::Path(Util::getApplicationPath(), "modaodfwebmount").toString() + ' '
                             + arg + ' ' + source + ' ' + target;
-    LOG_TRC("Executing oxoolmount command: " << cmd);
+    LOG_TRC("Executing modaodfwebmount command: " << cmd);
     return !system(cmd.c_str());
 }
 

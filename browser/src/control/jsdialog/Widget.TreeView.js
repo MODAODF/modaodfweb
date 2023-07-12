@@ -30,7 +30,7 @@
  * 'collapsed' property means, this entry have childrens, but they are not visible, because
  *             this branch is collapsed.
  *
- * Copyright the OxOffice Online contributors.
+ * Copyright the MODA ODF WEB contributors.
  *
  * SPDX-License-Identifier: MPL-2.0
  */

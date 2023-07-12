@@ -109,7 +109,7 @@ void Config::displayHelp()
     HelpFormatter helpFormatter(options());
     helpFormatter.setCommand(commandName());
     helpFormatter.setUsage("COMMAND [OPTIONS]");
-    helpFormatter.setHeader("oxoolconfig - Configuration tool for OxOffice Online.\n"
+    helpFormatter.setHeader("oxoolconfig - Configuration tool for MODA ODF WEB.\n"
                             "\n"
                             "Some options make sense only with a specific command.\n\n"
                             "Options:");

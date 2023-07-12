@@ -79,10 +79,10 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #define HAVE_UNISTD_H 1
 
-/* OxOffice Online WebSocket server version */
+/* MODA ODF WEB WebSocket server version */
 #define OXOOLWSD_VERSION "@OXOOLWSD_VERSION@"
 
-/* OxOffice Online git hash if present */
+/* MODA ODF WEB git hash if present */
 #define OXOOLWSD_VERSION_HASH "@OXOOLWSD_VERSION_HASH@"
 
 /* Path to LibreOffice installation */

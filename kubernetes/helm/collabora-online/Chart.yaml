@@ -1,7 +1,7 @@
 apiVersion: v2
 type: "application"
 name: collabora-online
-description: OxOffice Online helm chart
+description: MODA ODF WEB helm chart
 
 version: 1.0.1
 appVersion: "23.05.1.2.1"

@@ -1,5 +1,5 @@
 
-OxOffice Online API
+MODA ODF WEB API
 ======================
 
 Documentation has been moved to https://sdk.collaboraonline.com

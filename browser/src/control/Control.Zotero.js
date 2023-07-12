@@ -1434,7 +1434,7 @@ L.Control.Zotero = L.Control.extend({
 
 	unlinkCitations: function() {
 		this.map.uiManager.showInfoModal('zoterounlinkwarn', _('Unlink Citations'),
-			_('Unlinking citations will prevent OxOffice Online from updating citations and bibliography in this document.'),
+			_('Unlinking citations will prevent MODA ODF WEB from updating citations and bibliography in this document.'),
 			null, _('Confirm'), this.handleUnlinkCitations.bind(this));
 	},
 

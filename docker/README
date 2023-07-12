@@ -1,7 +1,7 @@
-OxOffice Online docker
+MODA ODF WEB docker
 
 This directory contains everything needed to compile a
-working docker container with OxOffice Online.
+working docker container with MODA ODF WEB.
 
 Docker image can be built from packages or from source code.
 
@@ -9,7 +9,7 @@ All docker images built from this directory can be run with a TZ environment var
 to set the server timezone to something other than UTC.
 
 The Dockerfile uses the --mount parameter of RUN command. Actually it is used for
-building  OxOffice Online images for Collabora Partners/Customers, who have the secret
+building  MODA ODF WEB images for Collabora Partners/Customers, who have the secret
 URL of supported packages. The --mount parameter requires BuildKit.
 
    export DOCKER_BUILDKIT=1
@@ -28,7 +28,7 @@ The brand package of CODE is not open source. To build an image without it:
    cd from-packages
    docker build --no-cache --build-arg nobrand=yes -t mydomain/code .
 
-3. Build OxOffice Online
+3. Build MODA ODF WEB
 
    cd from-packages
    # Get your secret URL key from https://support.collaboraoffice.com/ (Collabora Partners/Customers)
@@ -36,12 +36,12 @@ The brand package of CODE is not open source. To build an image without it:
    echo Example-413539ece39485afc35b4a469adfde0a279d2fd2 > secret_key
    docker build --no-cache --secret id=secret_key,src=secret_key --build-arg type=oxool -t mydomain/oxool .
 
-4. Build OxOffice Online license key enabled version
+4. Build MODA ODF WEB license key enabled version
 
    cd from-packages
    docker build --no-cache --build-arg type=key -t mydomain/oxool .
 
-5. Build OxOffice Online from master branch (from source code)
+5. Build MODA ODF WEB from master branch (from source code)
 
    cd from-source
    ./build.sh

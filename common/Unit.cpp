@@ -689,7 +689,7 @@ UnitKit& UnitKit::get()
 
 void UnitKit::onExitTest(TestResult, const std::string&)
 {
-    // oxoolforkit doesn't link with CPPUnit.
+    // modaodfwebforkit doesn't link with CPPUnit.
     // LOK_ASSERT_MESSAGE("UnitKit doesn't yet support multiple tests", !haveMoreTests());
 
     // // We are done with all the tests.

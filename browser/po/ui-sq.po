@@ -2,7 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -1783,10 +1783,10 @@ msgstr "Po përditësohen citime"
 
 #: src/control/Control.Zotero.js:1437
 msgid ""
-"Unlinking citations will prevent OxOffice Online from updating citations "
+"Unlinking citations will prevent MODA ODF WEB from updating citations "
 "and bibliography in this document."
 msgstr ""
-"Heqja e lidhjeve për te citime do të pengojë OxOffice Online të përditësojë "
+"Heqja e lidhjeve për te citime do të pengojë MODA ODF WEB të përditësojë "
 "citime dhe bibliografi në këtë dokument."
 
 #: src/control/Permission.js:72
@@ -2476,8 +2476,8 @@ msgid "Creating copy..."
 msgstr "Po krijohet kopje…"
 
 #: welcome/welcome.html%2Bhtml.head.title:9-3
-msgid "OxOffice Online Welcome"
-msgstr "Mirëseardhje në OxOffice Online"
+msgid "MODA ODF WEB Welcome"
+msgstr "Mirëseardhje në MODA ODF WEB"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:26-7
 msgid "Explore The New %oxoolVersion"
@@ -2485,8 +2485,8 @@ msgstr "Eksploroni %oxoolVersion e Ri"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:27-7
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:38-7
-msgid "OxOffice Online"
-msgstr "Edicioni Zhvillim i OxOffice Online"
+msgid "MODA ODF WEB"
+msgstr "Edicioni Zhvillim i MODA ODF WEB"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.p:28-7
 msgid ""
@@ -2509,12 +2509,12 @@ msgstr "Shfletoni Krejt Ndryshimet"
 msgid ""
 "Check the <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">release notes</a> and learn all about: The "
-"latest OxOffice Online, aimed at home users and small "
+"latest MODA ODF WEB, aimed at home users and small "
 "teams."
 msgstr ""
 "Shihni <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">shënime hedhjeje në qarkullim</a> dhe mësoni "
-"gjithçka mbi: Edicionin më të ri Zhvillim të OxOffice Online, i menduar për "
+"gjithçka mbi: Edicionin më të ri Zhvillim të MODA ODF WEB, i menduar për "
 "përdorues të thjeshtë dhe ekipe të vegjël."
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:48-7

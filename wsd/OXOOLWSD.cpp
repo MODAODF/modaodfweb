@@ -910,7 +910,7 @@ std::string OXOOLWSD::FileServerRoot;
 std::string OXOOLWSD::ServiceRoot;
 std::string OXOOLWSD::TmpFontDir;
 std::string OXOOLWSD::LOKitVersion;
-std::string OXOOLWSD::ConfigFile = OXOOLWSD_CONFIGDIR "/oxoolwsd.xml";
+std::string OXOOLWSD::ConfigFile = OXOOLWSD_CONFIGDIR "/modaodfweb.xml";
 std::string OXOOLWSD::ConfigDir = OXOOLWSD_CONFIGDIR "/conf.d";
 bool OXOOLWSD::EnableTraceEventLogging = false;
 bool OXOOLWSD::EnableAccessibility = false;
@@ -1099,7 +1099,7 @@ public:
         {
             if (remoteServerURI.empty())
             {
-                LOG_INF("Remote " << _expectedKind << " is not specified in oxoolwsd.xml");
+                LOG_INF("Remote " << _expectedKind << " is not specified in modaodfweb.xml");
                 return; // no remote config server setup.
             }
 #if !ENABLE_DEBUG
@@ -1277,7 +1277,7 @@ public:
                 return;
             }
 
-            //use feature_lock.locked_hosts[@allow] entry from oxoolwsd.xml if feature_lock.locked_hosts.allow key doesnot exist in json
+            //use feature_lock.locked_hosts[@allow] entry from modaodfweb.xml if feature_lock.locked_hosts.allow key doesnot exist in json
             Poco::Dynamic::Var allow = false;
             if (!lockedHost->has("allow"))
             {
@@ -1312,7 +1312,7 @@ public:
                                                    booleanToString(disabledCommands)));
             }
 
-            //if number of locked wopi host patterns defined in oxoolwsd.xml are greater than number of host
+            //if number of locked wopi host patterns defined in modaodfweb.xml are greater than number of host
             //fetched from json, overwrite the remaining host from config file to empty strings and
             //set read_only and disabled_commands to false
             for (;; ++i)
@@ -1949,9 +1949,9 @@ void OXOOLWSD::innerInitialize(Application& self)
     // update their config files, and we are backward compatible.
     // These defaults should be the same
     // 1) here
-    // 2) in the 'default' attribute in oxoolwsd.xml, which is for documentation
+    // 2) in the 'default' attribute in modaodfweb.xml, which is for documentation
     // 3) the default parameter of getConfigValue() call. That is used when the
-    //    setting is present in oxoolwsd.xml, but empty (i.e. use the default).
+    //    setting is present in modaodfweb.xml, but empty (i.e. use the default).
     static const std::map<std::string, std::string> DefAppConfig = {
         { "accessibility.enable", "false"},
         { "allowed_languages", "de_DE en_GB en_US es_ES fr_FR it nl pt_BR pt_PT ru" },
@@ -2301,11 +2301,11 @@ void OXOOLWSD::innerInitialize(Application& self)
         else
         {
             static const char failure[] = "Anonymization and trace-level logging are incompatible. "
-                "Please reduce logging level to debug or lower in oxoolwsd.xml to prevent leaking sensitive user data.";
+                "Please reduce logging level to debug or lower in modaodfweb.xml to prevent leaking sensitive user data.";
             LOG_FTL(failure);
             std::cerr << '\n' << failure << std::endl;
 #if ENABLE_DEBUG
-            std::cerr << "\nIf you have used 'make run', edit oxoolwsd.xml and make sure you have removed "
+            std::cerr << "\nIf you have used 'make run', edit modaodfweb.xml and make sure you have removed "
                          "'--o:logging.level=trace' from the command line in Makefile.am.\n" << std::endl;
 #endif
             Util::forcedExit(EX_SOFTWARE);
@@ -2999,7 +2999,7 @@ void OXOOLWSD::displayHelp()
     HelpFormatter helpFormatter(options());
     helpFormatter.setCommand(commandName());
     helpFormatter.setUsage("OPTIONS");
-    helpFormatter.setHeader("OxOffice Online WebSocket server.");
+    helpFormatter.setHeader("MODA ODF WEB WebSocket server.");
     helpFormatter.format(std::cout);
 }
 
@@ -3024,7 +3024,7 @@ bool OXOOLWSD::checkAndRestoreForKit()
         if (!SigUtil::getShutdownRequestFlag() && !SigUtil::getTerminationFlag() && !createForKit())
         {
             // Should never fail.
-            LOG_FTL("Setting ShutdownRequestFlag: Failed to spawn oxoolforkit.");
+            LOG_FTL("Setting ShutdownRequestFlag: Failed to spawn modaodfwebforkit.");
             SigUtil::requestShutdown();
         }
     }
@@ -3201,7 +3201,7 @@ bool OXOOLWSD::createForKit()
     args.push_back("-tt");
     args.push_back("-s");
     args.push_back("256");
-    args.push_back(parentPath + "oxoolforkit");
+    args.push_back(parentPath + "modaodfwebforkit");
 #elif VALGRIND_OXOOLFORKIT
     NoCapsForKit = true;
     NoSeccomp = true;
@@ -3217,8 +3217,8 @@ bool OXOOLWSD::createForKit()
     args.push_back("--trace-children=yes");
     args.push_back("--error-limit=no");
     args.push_back("--num-callers=128");
-    std::string nocapsCopy = parentPath + "oxoolforkit-nocaps";
-    FileUtil::copy(parentPath + "oxoolforkit", nocapsCopy, true, true);
+    std::string nocapsCopy = parentPath + "modaodfwebforkit-nocaps";
+    FileUtil::copy(parentPath + "modaodfwebforkit", nocapsCopy, true, true);
     args.push_back(nocapsCopy);
 #endif
     args.push_back("--systemplate=" + SysTemplate);
@@ -3264,7 +3264,7 @@ bool OXOOLWSD::createForKit()
 #elif VALGRIND_OXOOLFORKIT
     std::string forKitPath = "/usr/bin/valgrind";
 #else
-    std::string forKitPath = parentPath + "oxoolforkit";
+    std::string forKitPath = parentPath + "modaodfwebforkit";
 #endif
 
     // Always reap first, in case we haven't done so yet.

@@ -96,6 +96,6 @@ Replaces: loolwsd,
  collaboraofficebasis-sr-latn,
  collaboraofficebasis-ta,
  collaboraofficebasis-te
-Description: OxOffice Online WebSocket Daemon
+Description: MODA ODF WEB WebSocket Daemon
  OXOOLWSD is a daemon that talks to web browser clients and provides LibreOffice
  services.

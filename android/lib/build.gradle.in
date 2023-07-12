@@ -94,8 +94,8 @@ task copyUnpackAssets(type: Copy) {
         }
     }
     into('etc/oxoolwsd') {
-        from('/android/oxoolkitconfig.xcu')
-            includes = [ 'oxoolkitconfig.xcu' ]
+        from('/android/modaodfwebkitconfig.xcu')
+            includes = [ 'modaodfwebkitconfig.xcu' ]
     }
     into('user/fonts') {
         from "${liboInstdir}/share/fonts/truetype"
@@ -191,7 +191,7 @@ task copyDocTemplates(type: Copy) {
 task copyKitConfig(type: Copy) {
         from "${file(rootProject.getRootDir()).getParent()}/oxoolkitconfig-mobile.xcu"
         into "src/main/assets/etc/oxoolwsd"
-        rename { "oxoolkitconfig.xcu" }
+        rename { "modaodfwebkitconfig.xcu" }
 }
 
 task createStrippedConfig {

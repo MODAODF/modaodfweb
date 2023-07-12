@@ -1,3 +1,3 @@
 # FIXME
 
-This folder needs to be updated for OxOffice Online 23.05.
+This folder needs to be updated for MODA ODF WEB 23.05.

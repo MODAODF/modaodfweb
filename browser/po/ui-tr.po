@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 # Translators:
 # Andras Timar <andras.timar@collabora.com>, 2020
 # Muhammet Kara <muhammetk@gmail.com>, 2020
 # Açıkkaynak Yazılım <bilgi@acikkaynak.com.tr>, 2020
 # Dr. Ayhan YALÇINSOY <ayhanyalcinsoy@pisilinux.org>, 2020
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -1782,10 +1782,10 @@ msgstr "Alıntıları güncelleniyor"
 
 #: src/control/Control.Zotero.js:1437
 msgid ""
-"Unlinking citations will prevent OxOffice Online from updating citations "
+"Unlinking citations will prevent MODA ODF WEB from updating citations "
 "and bibliography in this document."
 msgstr ""
-"Atıfların bağlantısını kaldırmak OxOffice Online'ın bu belgedeki atıfları "
+"Atıfların bağlantısını kaldırmak MODA ODF WEB'ın bu belgedeki atıfları "
 "ve kaynakçayı güncellemesini engelleyecektir."
 
 #: src/control/Permission.js:72
@@ -2465,8 +2465,8 @@ msgid "Creating copy..."
 msgstr "Kopya oluşturuluyor..."
 
 #: welcome/welcome.html%2Bhtml.head.title:9-3
-msgid "OxOffice Online Welcome"
-msgstr "OxOffice Online'a Hoş Geldiniz"
+msgid "MODA ODF WEB Welcome"
+msgstr "MODA ODF WEB'a Hoş Geldiniz"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:26-7
 msgid "Explore The New %oxoolVersion"
@@ -2474,8 +2474,8 @@ msgstr "Yeni %oxoolVersion sürümünü keşfedin"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:27-7
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:38-7
-msgid "OxOffice Online"
-msgstr "OxOffice Online"
+msgid "MODA ODF WEB"
+msgstr "MODA ODF WEB"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.p:28-7
 msgid ""
@@ -2498,7 +2498,7 @@ msgstr "Tüm Değişiklikleri Keşfedin"
 msgid ""
 "Check the <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">release notes</a> and learn all about: The "
-"latest OxOffice Online, aimed at home users and small "
+"latest MODA ODF WEB, aimed at home users and small "
 "teams."
 msgstr ""
 "<a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
@@ -2792,8 +2792,8 @@ msgstr ""
 #~ "hızlı yazım denetimi ve daha fazlası için performanstaki en son dönüm "
 #~ "noktası hakkında her şeyi öğrenin."
 
-#~ msgid "Integrate OxOffice Online into your webapp"
-#~ msgstr "OxOffice Online'ı web uygulamanızla bütünleştirin"
+#~ msgid "Integrate MODA ODF WEB into your webapp"
+#~ msgstr "MODA ODF WEB'ı web uygulamanızla bütünleştirin"
 
 #~ msgid "Or get involved in the development"
 #~ msgstr "Veya geliştirmeye dahil olun"
@@ -2801,14 +2801,14 @@ msgstr ""
 #, javascript-format
 #~ msgid ""
 #~ "Learn more about integrating into your web application in the <a href="
-#~ "\"%oxoolSdkURL\" target=\"_blank\">OxOffice Online SDK</a>. Or head over to "
+#~ "\"%oxoolSdkURL\" target=\"_blank\">MODA ODF WEB SDK</a>. Or head over to "
 #~ "the <a href=\"%oxoolStepByStepURL\" target=\"_blank\">step-by-step "
 #~ "instructions</a> and build CODE from scratch. You can also help out with <a "
 #~ "href=\"%oxoolTranslationsURL\" target=\"_blank\">translations</a> or by <a "
 #~ "href=\"%oxoolBugreportURL\" target=\"_blank\">filing a bug report</a> with "
 #~ "all the essential steps on how to reproduce it."
 #~ msgstr ""
-#~ "<a href=\"%oxoolSdkURL\" target=\"_blank\">OxOffice Online SDK</a>'da web "
+#~ "<a href=\"%oxoolSdkURL\" target=\"_blank\">MODA ODF WEB SDK</a>'da web "
 #~ "uygulamanızla bütünleştirme hakkında daha fazla bilgi edinin. Veya <a href=\""
 #~ "%oxoolStepByStepURL\" target=\"_blank\">adım adım talimatlara</a> gidin ve "
 #~ "CODE'yi sıfırdan oluşturun. Ayrıca, <a href=\"%oxoolTranslationsURL\" target="
@@ -2898,5 +2898,5 @@ msgstr ""
 #~ msgid "Server is recycling and will be available shortly"
 #~ msgstr "Sunucu yeniden başlatılıyor ve kısa süre sonra kullanılabilir olacak"
 
-#~ msgid "Oops, there is a problem connecting to OxOffice Online : "
-#~ msgstr "OxOffice Online'a bağlanırken bir sorunla karşılaşıldı: "
+#~ msgid "Oops, there is a problem connecting to MODA ODF WEB : "
+#~ msgstr "MODA ODF WEB'a bağlanırken bir sorunla karşılaşıldı: "
