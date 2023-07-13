@@ -83,9 +83,9 @@ AC_SUBST([CUSTOM_PACKAGE])
 
 
 AC_ARG_WITH([product-name],
-    AS_HELP_STRING([--with-product-name='My Online Editor'], [Set product name (default: AC_PACKAGE_NAME)]),
+    AS_HELP_STRING([--with-product-name='My Online Editor'], [Set product name (default: "MODA ODF WEB")]),
     [PRODUCTNAME="$withval"],
-    [PRODUCTNAME="AC_PACKAGE_NAME"])
+    [PRODUCTNAME="MODA ODF WEB"])
 AC_SUBST([PRODUCTNAME])
 
 WSD_NAME="wsd_NAME"
