@@ -1,0 +1,7 @@
+Format-Specification: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=135
+Name: @PACKAGE@
+Maintainer: Firefly <firefly@ossoo.com.tw>
+Source: https://github.com/MODAODF/modaodfweb
+
+Copyright: 2023 Ministry of Digital Affairs. <service@moda.gov.tw>
+License: MPL-2
