@@ -168,7 +168,8 @@ dist_git_branch
 /*.pc
 /*.service
 /*.tar.gz
-debian/*.service
+debian/modaodfweb*
+debian/copyright
 /*-generate-proof-key
 /*-systemplate-setup
 /*.spec
