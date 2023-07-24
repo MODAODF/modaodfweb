@@ -1769,8 +1769,6 @@ AC_OUTPUT
 
 # Generate the systemplate setup script
 chmod +x ${WSD_NAME}-systemplate-setup
-# Generate the proof key generation script
-chmod +x ${WSD_NAME}-generate-proof-key
 
 AC_LANG_POP
 
