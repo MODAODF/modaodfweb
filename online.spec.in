@@ -90,7 +90,6 @@ echo "account    required     pam_unix.so" >>  %{buildroot}/etc/pam.d/%{name}
 %{_bindir}/@PACKAGE@mount
 %{_bindir}/@WSD_NAME@
 %{_bindir}/@PACKAGE@stress
-%{_bindir}/@WSD_NAME@-generate-proof-key
 %{_bindir}/@WSD_NAME@-systemplate-setup
 
 %dir /usr/share/%{name}
@@ -168,7 +167,7 @@ chown @OXOOL_USER_ID@:@OXOOL_USER_ID@ ${loolparent}/%{name}/child-roots
 
 fc-cache ${loroot}/share/fonts/truetype
 su @OXOOL_USER_ID@ -c "@WSD_NAME@-systemplate-setup ${loolparent}/%{name}/systemplate ${loroot} >/dev/null 2>&1"
-@WSD_NAME@-generate-proof-key >/dev/null 2>&1
+@WSD_NAME@config generate-proof-key >/dev/null 2>&1
 
 %if 0%{?rhel} || 0%{?suse_version}
 if [ $OXOOLWSD_IS_ACTIVE == "1" ]; then systemctl start @WSD_NAME@; fi

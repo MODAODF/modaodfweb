@@ -9,7 +9,7 @@ Package: modaodfweb
 Section: web
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
- adduser, fontconfig, cpio, libcap2-bin, openssh-client,
+ adduser, fontconfig, cpio, libcap2-bin,
  modaodfsyslib-calc,
  modaodfsyslib-core,
  modaodfsyslib-graphicfilter,

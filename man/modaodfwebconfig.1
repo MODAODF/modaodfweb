@@ -1,14 +1,14 @@
-.TH OXOOLCONFIG "1" "Nov 2021" "oxoolconfig" "User Commands"
+.TH MODAODFWEBCONFIG "1" "Jul 2023" "modaodfwebconfig" "User Commands"
 .SH NAME
-oxoolconfig \- Configuration tool for MODA ODF WEB.
+modaodfwebconfig \- Configuration tool for MODA ODF WEB.
 .SH SYNOPSIS
-oxoolconfig COMMAND [OPTIONS]
+modaodfwebconfig COMMAND [OPTIONS]
 .SH COMMANDS AND OPTIONS
 .PP
 .SS "General options:"
 \fB\-h\fR, \fB\-\-help\fR                Show this usage information.
 .PP
-\fB\-\-config\-file\fR=\fIpath\fR        Specify configuration file path manually. The default is usually \fI/etc/oxoolwsd/oxoolwsd.xml\fR.
+\fB\-\-config\-file\fR=\fIpath\fR        Specify configuration file path manually. The default is usually \fI/etc/modaodfweb/modaodfweb.xml\fR.
 .SS "anonymize"
 The \fBanonymize\fR command helps to read anonymized logs. If you know a document and/or a user had an issue, you can find their session in the logs by running this command with the username and/or document name and get the anonymized hash, which you use to search the logs with.
 .PP
@@ -25,14 +25,14 @@ migrateconfig [\-\-old\-config\-file=<path>] [\-\-config\-file=<path>] [\-\-writ
 .PP
 \fB\-\-write\fR                   Write migrated configuration. Without this option no changes are written to the config file, only information about differences between old and new config is printed.
 .PP
-\fBExample:\fR oxoolconfig migrateconfig \-\-old\-config\-file=/etc/loolwsd/loolwsd.xml \-\-config\-file=/etc/oxoolwsd/oxoolwsd.xml \-\-write
+\fBExample:\fR modaodfwebconfig migrateconfig \-\-old\-config\-file=/etc/loolwsd/loolwsd.xml \-\-config\-file=/etc/modaodfweb/modaodfweb.xml \-\-write
 .PP
 .SS "set"
-The \fBset\fR command changes an existing configuration setting in the config file. The <key> is the XPath expression of the config item in the config XML file (oxoolwsd.xml).
+The \fBset\fR command changes an existing configuration setting in the config file. The <key> is the XPath expression of the config item in the config XML file (modaodfweb.xml).
 .PP
 set <key> <value>
 .PP
-\fBExample:\fR oxoolconfig set logging.level trace
+\fBExample:\fR modaodfwebconfig set logging.level trace
 .PP
 .SS "set\-admin\-password"
 The \fBset\-admin\-password\fR command sets the user name and password of the administrator who can access MODA ODF WEB's admin console.
@@ -50,5 +50,7 @@ The \fBupdate\-system\-template\fR command updates MODA ODF WEB's system templat
 .PP
 update\-system\-template
 .PP
+.SS "generate\-proof\-key"
+The \fBgenerate\-proof\-key\fR command creates an RSA key pair in /etc/modaodfweb for the WOPI Proof headers. The postinstall script of modaodfweb package usually creates this RSA key pair in case of new installation.
 .SH "SEE ALSO"
-modaodfwebforkit(1), oxoolconvert(1), oxoolwsd(1), oxoolwsd-systemplate-setup(1), oxoolwsd-generate-proof-key(1), oxoolmount(1)
+modaodfwebforkit(1), modaodfwebconvert(1), modaodfweb(1), modaodfweb-systemplate-setup(1), modaodfwebmount(1)

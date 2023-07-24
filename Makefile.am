@@ -31,8 +31,7 @@ else
 bin_PROGRAMS += modaodfweb
 endif
 
-dist_bin_SCRIPTS = modaodfweb-systemplate-setup \
-                   modaodfweb-generate-proof-key
+dist_bin_SCRIPTS = modaodfweb-systemplate-setup
 
 man_MANS = man/modaodfweb.1 \
            man/modaodfwebforkit.1 \
@@ -40,7 +39,6 @@ man_MANS = man/modaodfweb.1 \
            man/modaodfwebconfig.1 \
            man/modaodfwebstress.1 \
            man/modaodfweb-systemplate-setup.1 \
-           man/modaodfweb-generate-proof-key.1 \
            man/modaodfwebmount.1
 
 
