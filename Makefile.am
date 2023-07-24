@@ -146,8 +146,8 @@ EXTRA_modaodfweb_DEPENDENCIES = browser/node_modules
 noinst_PROGRAMS = clientnb \
                   connect \
                   lokitclient \
-                  oxoolmap \
-                  oxoolsocketdump
+                  modaodfwebmap \
+                  modaodfwebsocketdump
 
 if ENABLE_LIBFUZZER
 noinst_PROGRAMS += \
@@ -232,7 +232,7 @@ clientnb_SOURCES = net/clientnb.cpp \
 
 modaodfwebmount_SOURCES = tools/mount.cpp
 
-oxoolmap_SOURCES = tools/map.cpp
+modaodfwebmap_SOURCES = tools/map.cpp
 
 modaodfwebconvert_SOURCES = tools/Tool.cpp
 
@@ -249,7 +249,7 @@ modaodfwebconfig_SOURCES = tools/Config.cpp \
 		     common/StringVector.cpp \
 		     common/Util.cpp
 
-oxoolsocketdump_SOURCES = tools/WebSocketDump.cpp \
+modaodfwebsocketdump_SOURCES = tools/WebSocketDump.cpp \
 			 common/DummyTraceEventEmitter.cpp \
 			 $(shared_sources)
 
