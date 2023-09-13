@@ -1851,7 +1851,7 @@ msgstr "Hivatkozások frissítése"
 
 #: src/control/Control.Zotero.js:1437
 msgid ""
-"Unlinking citations will prevent MODA ODF WEB from updating citations "
+"Unlinking citations will prevent OxOffice Online from updating citations "
 "and bibliography in this document."
 msgstr ""
 "A hivatkozások véglegesítése azt jeleni, hogy megszűnik a kapcsolat a "
@@ -2555,8 +2555,8 @@ msgid "Creating copy..."
 msgstr "Másolat létrehozása..."
 
 #: welcome/welcome.html%2Bhtml.head.title:9-3
-msgid "MODA ODF WEB Welcome"
-msgstr "Üdvözli a MODA ODF WEB"
+msgid "OxOffice Online Welcome"
+msgstr "Üdvözli a OxOffice Online"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:26-7
 msgid "Explore The New %oxoolVersion"
@@ -2564,8 +2564,8 @@ msgstr "Fedezze fel az új %oxoolVersion-t"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:27-7
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:38-7
-msgid "MODA ODF WEB"
-msgstr "MODA ODF WEB"
+msgid "OxOffice Online"
+msgstr "OxOffice Online"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.p:28-7
 msgid ""
@@ -2587,7 +2587,7 @@ msgstr "Fedezze fel az összes újdonságot"
 msgid ""
 "Check the <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">release notes</a> and learn all about: The "
-"latest MODA ODF WEB, aimed at home users and small "
+"latest OxOffice Online, aimed at home users and small "
 "teams."
 msgstr ""
 "Olvassa el az <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
@@ -2886,8 +2886,8 @@ msgstr ""
 #~ "teljesítménynövekedése, az új natív oldalsáv, az újratervezett avatárlista, "
 #~ "az aszinkron mentés, a gyorsabb helyesírás-ellenőrzés stb."
 
-#~ msgid "Integrate MODA ODF WEB into your webapp"
-#~ msgstr "Integrálja a MODA ODF WEB-t saját webalkalmazásába"
+#~ msgid "Integrate OxOffice Online into your webapp"
+#~ msgstr "Integrálja a OxOffice Online-t saját webalkalmazásába"
 
 #~ msgid "Or get involved in the development"
 #~ msgstr "Vagy vegyen részt a fejlesztésben"
@@ -2895,16 +2895,16 @@ msgstr ""
 #, javascript-format
 #~ msgid ""
 #~ "Learn more about integrating into your web application in the <a href="
-#~ "\"%coolSdkURL\" target=\"_blank\">MODA ODF WEB SDK</a>. Or head over to "
+#~ "\"%coolSdkURL\" target=\"_blank\">OxOffice Online SDK</a>. Or head over to "
 #~ "the <a href=\"%coolStepByStepURL\" target=\"_blank\">step-by-step "
 #~ "instructions</a> and build CODE from scratch. You can also help out with <a "
 #~ "href=\"%coolTranslationsURL\" target=\"_blank\">translations</a> or by <a "
 #~ "href=\"%coolBugreportURL\" target=\"_blank\">filing a bug report</a> with "
 #~ "all the essential steps on how to reproduce it."
 #~ msgstr ""
-#~ "Ha szeretné megtudni, hogyan integrálja a MODA ODF WEB-t saját "
+#~ "Ha szeretné megtudni, hogyan integrálja a OxOffice Online-t saját "
 #~ "webalkalmazásába, látogasson el a <a href=\"%coolSdkURL\" target=\"_blank\">"
-#~ "MODA ODF WEB SDK</a> weboldalra. Vagy nézze meg a CODE forráskódból való "
+#~ "OxOffice Online SDK</a> weboldalra. Vagy nézze meg a CODE forráskódból való "
 #~ "lefordításának <a href=\"%coolStepByStepURL\" target=\"_blank\">részletes "
 #~ "utasításait</a>. Segíthet a <a href=\"%coolTranslationsURL\" target=\""
 #~ "_blank\">fordításban</a> is, vagy ha hibát talál, <a href=\"%"
@@ -3001,8 +3001,8 @@ msgstr ""
 #~ msgid "Server is recycling and will be available shortly"
 #~ msgstr "A kiszolgáló éppen újraindul, hamarosan elérhető lesz."
 
-#~ msgid "Oops, there is a problem connecting to MODA ODF WEB : "
-#~ msgstr "Probléma történt a MODA ODF WEB-hoz kapcsolódáskor: "
+#~ msgid "Oops, there is a problem connecting to OxOffice Online : "
+#~ msgstr "Probléma történt a OxOffice Online-hoz kapcsolódáskor: "
 
 #~ msgid "Number of views"
 #~ msgstr "Nézetek száma"

@@ -1860,7 +1860,7 @@ msgstr ""
 
 #: src/control/Control.Zotero.js:1437
 msgid ""
-"Unlinking citations will prevent MODA ODF WEB from updating citations "
+"Unlinking citations will prevent OxOffice Online from updating citations "
 "and bibliography in this document."
 msgstr ""
 
@@ -2541,7 +2541,7 @@ msgid "Creating copy..."
 msgstr "Vytváranie kópie..."
 
 #: welcome/welcome.html%2Bhtml.head.title:9-3
-msgid "MODA ODF WEB Welcome"
+msgid "OxOffice Online Welcome"
 msgstr ""
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:26-7
@@ -2551,8 +2551,8 @@ msgstr "Zoznámte sa s novou verziou %oxoolVersion"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:27-7
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:38-7
-msgid "MODA ODF WEB"
-msgstr "MODA ODF WEB"
+msgid "OxOffice Online"
+msgstr "OxOffice Online"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.p:28-7
 msgid ""
@@ -2571,7 +2571,7 @@ msgstr "Zoznámte sa so všetkými zmenami"
 msgid ""
 "Check the <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">release notes</a> and learn all about: The "
-"latest MODA ODF WEB, aimed at home users and small "
+"latest OxOffice Online, aimed at home users and small "
 "teams."
 msgstr ""
 
@@ -2825,8 +2825,8 @@ msgstr ""
 #~ "paneli, prepracovanom zozname avatarov používateľov, asynchrónnom ukladaní, "
 #~ "rýchlejšej kontrole pravopisu a ďalších zmenách."
 
-#~ msgid "Integrate MODA ODF WEB into your webapp"
-#~ msgstr "Integrujte aplikáciu MODA ODF WEB do svojej webovej aplikácie"
+#~ msgid "Integrate OxOffice Online into your webapp"
+#~ msgstr "Integrujte aplikáciu OxOffice Online do svojej webovej aplikácie"
 
 #~ msgid "Or get involved in the development"
 #~ msgstr "Alebo sa zapojte do vývoja"
@@ -2834,7 +2834,7 @@ msgstr ""
 #, javascript-format
 #~ msgid ""
 #~ "Learn more about integrating into your web application in the <a href="
-#~ "\"%coolSdkURL\" target=\"_blank\">MODA ODF WEB SDK</a>. Or head over to "
+#~ "\"%coolSdkURL\" target=\"_blank\">OxOffice Online SDK</a>. Or head over to "
 #~ "the <a href=\"%coolStepByStepURL\" target=\"_blank\">step-by-step "
 #~ "instructions</a> and build CODE from scratch. You can also help out with <a "
 #~ "href=\"%coolTranslationsURL\" target=\"_blank\">translations</a> or by <a "
@@ -2842,7 +2842,7 @@ msgstr ""
 #~ "all the essential steps on how to reproduce it."
 #~ msgstr ""
 #~ "Informácie o integrácii webovej aplikácie nájdete na stránke <a href=\"%"
-#~ "coolSdkURL\" target=\"_blank\">MODA ODF WEB SDK</a>. Prostredníctvom <a "
+#~ "coolSdkURL\" target=\"_blank\">OxOffice Online SDK</a>. Prostredníctvom <a "
 #~ "href=\"%coolStepByStepURL\" target=\"_blank\">názorných postupov</a> možno "
 #~ "CODE zostaviť od nuly. Pomôcť môžete aj s <a href=\"%coolTranslationsURL\" "
 #~ "target=\"_blank\">prekladmi</a> alebo <a href=\"%coolBugreportURL\" target=\""
@@ -2925,8 +2925,8 @@ msgstr ""
 #~ msgid "Server is recycling and will be available shortly"
 #~ msgstr "Server bude reštartovaný a o chvíľu bude opäť dostupný"
 
-#~ msgid "Oops, there is a problem connecting to MODA ODF WEB : "
-#~ msgstr "Vyskytol sa problém s pripojením k MODA ODF WEB: "
+#~ msgid "Oops, there is a problem connecting to OxOffice Online : "
+#~ msgstr "Vyskytol sa problém s pripojením k OxOffice Online: "
 
 #~ msgid "Number of views"
 #~ msgstr "Počet zobrazení"

@@ -1865,7 +1865,7 @@ msgstr ""
 
 #: src/control/Control.Zotero.js:1437
 msgid ""
-"Unlinking citations will prevent MODA ODF WEB from updating citations "
+"Unlinking citations will prevent OxOffice Online from updating citations "
 "and bibliography in this document."
 msgstr ""
 
@@ -2534,7 +2534,7 @@ msgid "Creating copy..."
 msgstr "Създава се копие..."
 
 #: welcome/welcome.html%2Bhtml.head.title:9-3
-msgid "MODA ODF WEB Welcome"
+msgid "OxOffice Online Welcome"
 msgstr ""
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:26-7
@@ -2543,7 +2543,7 @@ msgstr ""
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:27-7
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:38-7
-msgid "MODA ODF WEB"
+msgid "OxOffice Online"
 msgstr ""
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.p:28-7
@@ -2562,7 +2562,7 @@ msgstr ""
 msgid ""
 "Check the <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">release notes</a> and learn all about: The "
-"latest MODA ODF WEB, aimed at home users and small "
+"latest OxOffice Online, aimed at home users and small "
 "teams."
 msgstr ""
 
@@ -2817,8 +2817,8 @@ msgstr ""
 #~ msgid "Server is recycling and will be available shortly"
 #~ msgstr "Сървърът се рестартира и ще бъде достъпен скоро"
 
-#~ msgid "Oops, there is a problem connecting to MODA ODF WEB : "
-#~ msgstr "Възникна проблем при свързване с MODA ODF WEB: "
+#~ msgid "Oops, there is a problem connecting to OxOffice Online : "
+#~ msgstr "Възникна проблем при свързване с OxOffice Online: "
 
 #~ msgid "Number of views"
 #~ msgstr "Брой разглеждания"

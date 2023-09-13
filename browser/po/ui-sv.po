@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-24 09:25+0200\n"
-"PO-Revision-Date: 2023-08-28 09:54+0000\n"
+"PO-Revision-Date: 2023-09-02 09:16+0000\n"
 "Last-Translator: Leif-Jöran Olsson <info@friprogramvarusyndikatet.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/collabora-online/"
 "ui/sv/>\n"
@@ -506,7 +506,7 @@ msgstr "Radiell"
 
 #: src/control/Control.JSDialogBuilder.js:563
 msgid "Ellipsoid"
-msgstr "Ellipsoid"
+msgstr "Elliptisk"
 
 #: src/control/Control.JSDialogBuilder.js:567
 msgid "Quadratic"
@@ -1846,10 +1846,10 @@ msgstr "Uppdaterar citat"
 
 #: src/control/Control.Zotero.js:1437
 msgid ""
-"Unlinking citations will prevent MODA ODF WEB from updating citations "
+"Unlinking citations will prevent OxOffice Online from updating citations "
 "and bibliography in this document."
 msgstr ""
-"Att ta bort länken till citat kommer att förhindra MODA ODF WEB från att "
+"Att ta bort länken till citat kommer att förhindra OxOffice Online från att "
 "uppdatera citat och bibliografi i detta dokument."
 
 #: src/control/Permission.js:18 src/control/Permission.js:19
@@ -2540,8 +2540,8 @@ msgid "Creating copy..."
 msgstr "Skapar kopia ..."
 
 #: welcome/welcome.html%2Bhtml.head.title:9-3
-msgid "MODA ODF WEB Welcome"
-msgstr "MODA ODF WEB Välkommen"
+msgid "OxOffice Online Welcome"
+msgstr "OxOffice Online Välkommen"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:26-7
 msgid "Explore The New %oxoolVersion"
@@ -2549,8 +2549,8 @@ msgstr "Utforska den nya %oxoolVersion"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:27-7
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:38-7
-msgid "MODA ODF WEB"
-msgstr "MODA ODF WEB-utvecklingsversion"
+msgid "OxOffice Online"
+msgstr "OxOffice Online-utvecklingsversion"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.p:28-7
 msgid ""
@@ -2572,12 +2572,12 @@ msgstr "Upptäck alla förändringar"
 msgid ""
 "Check the <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">release notes</a> and learn all about: The "
-"latest MODA ODF WEB, aimed at home users and small "
+"latest OxOffice Online, aimed at home users and small "
 "teams."
 msgstr ""
 "Kolla <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">släppanteckningarna</a> och ta del av senaste "
-"MODA ODF WEB, för hemanvändare och små arbetsgrupper."
+"OxOffice Online, för hemanvändare och små arbetsgrupper."
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:48-7
 msgid "Get Involved"
@@ -2865,8 +2865,8 @@ msgstr ""
 #~ "ny omarbetad avatarlista, asynkront sparande, snabbare stavningskontroll och "
 #~ "mycket mer."
 
-#~ msgid "Integrate MODA ODF WEB into your webapp"
-#~ msgstr "Integrera MODA ODF WEB i din webbapp"
+#~ msgid "Integrate OxOffice Online into your webapp"
+#~ msgstr "Integrera OxOffice Online i din webbapp"
 
 #~ msgid "Or get involved in the development"
 #~ msgstr "Eller delta i utvecklingen"
@@ -2874,7 +2874,7 @@ msgstr ""
 #, javascript-format
 #~ msgid ""
 #~ "Learn more about integrating into your web application in the <a href="
-#~ "\"%coolSdkURL\" target=\"_blank\">MODA ODF WEB SDK</a>. Or head over to "
+#~ "\"%coolSdkURL\" target=\"_blank\">OxOffice Online SDK</a>. Or head over to "
 #~ "the <a href=\"%coolStepByStepURL\" target=\"_blank\">step-by-step "
 #~ "instructions</a> and build CODE from scratch. You can also help out with <a "
 #~ "href=\"%coolTranslationsURL\" target=\"_blank\">translations</a> or by <a "
@@ -2882,7 +2882,7 @@ msgstr ""
 #~ "all the essential steps on how to reproduce it."
 #~ msgstr ""
 #~ "Läs mer om integrering i din webbapplikation i <a href=\"%coolSdkURL\" "
-#~ "target=\"_blank\">MODA ODF WEB SDK</a>. Eller följ <a href=\"%"
+#~ "target=\"_blank\">OxOffice Online SDK</a>. Eller följ <a href=\"%"
 #~ "coolStepByStepURL\" target=\"_blank\">steg-för-steg-instruktionerna</a> och "
 #~ "bygg CODE från grunden. Du kan också bidra med <a href=\"%"
 #~ "coolTranslationsURL\" target=\"_blank\">översättningar</a> eller genom att <"
@@ -2964,8 +2964,8 @@ msgstr ""
 #~ msgid "Server is recycling and will be available shortly"
 #~ msgstr "Servern startar om och är snart tillgänglig."
 
-#~ msgid "Oops, there is a problem connecting to MODA ODF WEB : "
-#~ msgstr "Aj då, ett problem uppstod vid anslutning till MODA ODF WEB: "
+#~ msgid "Oops, there is a problem connecting to OxOffice Online : "
+#~ msgstr "Aj då, ett problem uppstod vid anslutning till OxOffice Online: "
 
 #~ msgid "Number of views"
 #~ msgstr "Antal visningar"

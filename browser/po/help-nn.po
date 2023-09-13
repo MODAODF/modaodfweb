@@ -2602,77 +2602,77 @@ msgid ""
 "an empty paragraph."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:600-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:600-11
 msgid ""
 "Choose <span class=\"ui\">Format</span> → <span class=\"ui\">Paragraph</span>"
 ", <span class=\"ui\">Text Flow </span> tab"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:601-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:601-11
 msgid ""
 "In the <span class=\"ui\">Breaks</span> area, mark Insert, Type: Page Break, "
 "Position: Before."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:602-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:602-11
 msgid "Select Landscape in “With Page Style”"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:603-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:603-11
 msgid "Select if you want to change page numbering."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.p:605-5
+#: html/oxool-help.html%2Bdiv.div.p:605-5
 msgid ""
 "To return to portrait orientation, repeat the procedure, choosing Portrait "
 "in “With page style”."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.h4:606-5
+#: html/oxool-help.html%2Bdiv.div.h4:606-5
 msgid "How can I make the new text look like other existing text?"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.p:607-5
+#: html/oxool-help.html%2Bdiv.div.p:607-5
 msgid "Directly:"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:609-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:609-11
 msgid "Select the text with the existing format"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p.img:610-11
-#: html/cool-help.html%2Bdiv.div.ol.li.p.img:641-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p.img:610-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p.img:641-11
 msgid ""
 "Click on the clone formatting icon <img style=\"height:0.6cm;width:0.6cm;\" "
 "alt=\"\" src=\"images/lc_formatpaintbrush.svg\">. The mouse pointer turns to "
 "a paint bucket."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:611-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:611-11
 msgid "Select the text you want to apply the new format."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.p:613-5
+#: html/oxool-help.html%2Bdiv.div.p:613-5
 #, fuzzy
 msgid "Applying a paragraph style:"
 msgstr "Bruk avsnittsstilen «Overskrift 1»"
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:615-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:615-11
 msgid "Place the cursor at the paragraph to be formatted"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:616-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:616-11
 msgid ""
 "Select the style to apply in the style dropdown list. The paragraph displays "
 "the styles attributes."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.h4:618-5
+#: html/oxool-help.html%2Bdiv.div.h4:618-5
 msgid ""
 "Why did the text I just typed change automatically? How can I revert it?"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.p:619-5
+#: html/oxool-help.html%2Bdiv.div.p:619-5
 msgid ""
 "You have the AutoCorrection enabled. AutoCorrection changes the text just "
 "typed into an internal table of corresponding text. In most cases, "
@@ -2681,34 +2681,34 @@ msgid ""
 ">AutoCorrection</span> → <span class=\"ui\">While typing</span>."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.h4:624-5
+#: html/oxool-help.html%2Bdiv.div.h4:624-5
 msgid "How can I select data to print?"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.p:625-5
+#: html/oxool-help.html%2Bdiv.div.p:625-5
 msgid ""
 "Insert column and row breaks in the spreadsheet to narrow the print range "
 "and print the document to download. On printing the PDF, select the pages of "
 "interest."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.h4:626-5
+#: html/oxool-help.html%2Bdiv.div.h4:626-5
 msgid "How can I import CSV data?"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:628-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:628-11
 msgid ""
 "Load your CSV data in some native tool to your platform, select and copy it "
 "to the clipboard"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:629-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:629-11
 msgid ""
 "Activate the <span class=\"productname\">%productName</span> spreadsheet "
 "window."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:631-9
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:631-9
 msgid ""
 "Paste from the browser <span class=\"ui\">Edit</span> → <span class=\"ui\""
 ">Paste</span> or press <kbd>Ctrl</kbd><span class=\"kbd--plus\""
@@ -2716,38 +2716,38 @@ msgid ""
 "opens to let you describe the precise format of the CSV data."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:634-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:634-11
 msgid ""
 "Select the character set, language and separator options for the CSV file."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.p:636-5
+#: html/oxool-help.html%2Bdiv.div.p:636-5
 msgid ""
 "The CSV data is loaded into the selected cell where you pasted, according to "
 "these settings."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.h4:637-5
+#: html/oxool-help.html%2Bdiv.div.h4:637-5
 msgid "How can I copy the formatting of existing cells to new ones?"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.p:638-5
+#: html/oxool-help.html%2Bdiv.div.p:638-5
 msgid "This is easy to do using the Paintbrush tool in the toolbar."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:640-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:640-11
 msgid "Format the source cell with the font, color background and more."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:642-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:642-11
 msgid "Select the cells you want to format. Release the mouse button."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.h4:644-5
+#: html/oxool-help.html%2Bdiv.div.h4:644-5
 msgid "What is “Clear Direct Formatting” icon?"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.p:645-5
+#: html/oxool-help.html%2Bdiv.div.p:645-5
 msgid ""
 "Direct formatting is formatting applied directly to the selected contents of "
 "a paragraph or a spreadsheet cell, and overlaps its assigned style "
@@ -2756,27 +2756,27 @@ msgid ""
 "class=\"ui\">Clear Direct Formatting</span> or use the button in the toolbar."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.h4:646-5
+#: html/oxool-help.html%2Bdiv.div.h4:646-5
 msgid "How do I rename a sheet?"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.p:647-5
+#: html/oxool-help.html%2Bdiv.div.p:647-5
 msgid ""
 "Rename a sheet in the spreadsheet document using the context menu (using the "
 "right mouse button) over the sheet tab in the bottom. Enter the new sheet "
 "name in the dialog that follows."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.h4:652-5
+#: html/oxool-help.html%2Bdiv.div.h4:652-5
 msgid "How can I run my slide show?"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:654-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:654-11
 msgid ""
 "Open the presentation in <span class=\"productname\">%productName</span>"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p.img:655-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p.img:655-11
 msgid ""
 "Either choose <span class=\"ui\">Slide Show</span> → <span class=\"ui\">Full "
 "Screen Presentation</span> or click on the left-most icon in the bottom of "
@@ -2784,22 +2784,22 @@ msgid ""
 "images/lc_dia.svg\">"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.h4:657-5
+#: html/oxool-help.html%2Bdiv.div.h4:657-5
 msgid "How can I change the line, area and position of a shape in my slides?"
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:659-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:659-11
 msgid "Select the shape in your slide. A set of handles shows."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:661-9
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:661-9
 msgid ""
 "Choose <span class=\"ui\">Format</span> → <span class=\"ui\">Line</span> (or "
 "<span class=\"ui\">Area</span>, or <span class=\"ui\">Position and "
 "Size</span>). A dialog opens."
 msgstr ""
 
-#: html/cool-help.html%2Bdiv.div.ol.li.p:664-11
+#: html/oxool-help.html%2Bdiv.div.ol.li.p:664-11
 msgid "Set the properties of the element of the object."
 msgstr ""
 

@@ -1859,10 +1859,10 @@ msgstr "Uppfæri tilvitnanir"
 
 #: src/control/Control.Zotero.js:1437
 msgid ""
-"Unlinking citations will prevent MODA ODF WEB from updating citations "
+"Unlinking citations will prevent OxOffice Online from updating citations "
 "and bibliography in this document."
 msgstr ""
-"Aftenging tilvitnana mun koma í veg fyrir að MODA ODF WEB geti uppfært "
+"Aftenging tilvitnana mun koma í veg fyrir að OxOffice Online geti uppfært "
 "tilvitnanir og heimildaskrár í þessu skjali."
 
 #: src/control/Permission.js:18 src/control/Permission.js:19
@@ -2555,8 +2555,8 @@ msgid "Creating copy..."
 msgstr "Bý til afrit..."
 
 #: welcome/welcome.html%2Bhtml.head.title:9-3
-msgid "MODA ODF WEB Welcome"
-msgstr "Velkomin í MODA ODF WEB"
+msgid "OxOffice Online Welcome"
+msgstr "Velkomin í OxOffice Online"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:26-7
 msgid "Explore The New %oxoolVersion"
@@ -2564,8 +2564,8 @@ msgstr "Kynntu þér nýju útgáfuna af %oxoolVersion"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:27-7
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h2:38-7
-msgid "MODA ODF WEB"
-msgstr "þróunarútgáfu MODA ODF WEB"
+msgid "OxOffice Online"
+msgstr "þróunarútgáfu OxOffice Online"
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.p:28-7
 msgid ""
@@ -2588,12 +2588,12 @@ msgstr "Sjá allar breytingarnar"
 msgid ""
 "Check the <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">release notes</a> and learn all about: The "
-"latest MODA ODF WEB, aimed at home users and small "
+"latest OxOffice Online, aimed at home users and small "
 "teams."
 msgstr ""
 "Skoðaðu <a target=\"_blank\" href=\"https://www.collaboraoffice.com/"
 "code-23-05-release-notes/\">útgáfuupplýsingarnar</a> og lærðu allt um: "
-"nýjustu þróunarútgáfu MODA ODF WEB, sem hönnuð er fyrir heimanotendur og "
+"nýjustu þróunarútgáfu OxOffice Online, sem hönnuð er fyrir heimanotendur og "
 "smærri teymi."
 
 #: welcome/welcome.html%2Bhtml.body.div.div.div.div.h1:48-7
@@ -2858,8 +2858,8 @@ msgstr ""
 #~ msgid "Explore the new %oxoolVersion"
 #~ msgstr "Kanna nýju %oxoolVersion"
 
-#~ msgid "Integrate MODA ODF WEB into your webapp"
-#~ msgstr "Samþættu MODA ODF WEB við vefhugbúnaðinn þinn"
+#~ msgid "Integrate OxOffice Online into your webapp"
+#~ msgstr "Samþættu OxOffice Online við vefhugbúnaðinn þinn"
 
 #~ msgid "Or get involved in the development"
 #~ msgstr "Eða taktu þátt í þróuninni"
@@ -2940,8 +2940,8 @@ msgstr ""
 #~ msgid "Server is recycling and will be available shortly"
 #~ msgstr "Þjónninn er að keyra sig upp og verður tiltækur innan skamms"
 
-#~ msgid "Oops, there is a problem connecting to MODA ODF WEB : "
-#~ msgstr "Úbbs, það kom upp villa við að tengjast MODA ODF WEB : "
+#~ msgid "Oops, there is a problem connecting to OxOffice Online : "
+#~ msgstr "Úbbs, það kom upp villa við að tengjast OxOffice Online : "
 
 #~ msgid "Number of views"
 #~ msgstr "Fjöldi skoðana"
