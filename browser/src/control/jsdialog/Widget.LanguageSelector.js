@@ -1,10 +1,12 @@
 /* -*- js-indent-level: 8 -*- */
 /*
- * JSDialog.LanguageSelector - widgets for selecting spell/grammar checking language
- *
  * Copyright the MODA ODF WEB contributors.
  *
  * SPDX-License-Identifier: MPL-2.0
+ */
+
+/*
+ * JSDialog.LanguageSelector - widgets for selecting spell/grammar checking language
  */
 
 /* global _UNO JSDialog $ */
