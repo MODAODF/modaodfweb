@@ -1,6 +1,6 @@
-oxool (5.0.0-1) unstable; urgency=medium
+modaodfweb (3.8.0-1) unstable; urgency=medium
 
-  * Initialize the oxool 5.0.0 project.
+  * Initialize the modaodfweb 3.8.0 project.
 
- -- Firefly <ifirefly@ossii.com.tw>  Mon, 17 Jul 2023 11:24:18 +0800
+ -- Firefly <ifirefly@ossii.com.tw>  Mon, 13 Nov 2023 16:07:39 +0800
 
