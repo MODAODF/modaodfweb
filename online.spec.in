@@ -7,7 +7,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 %define config_options --with-product-name="MODA ODF WEB" --disable-debug --enable-ssl -with-max-documents=10240 --with-max-connections=10240
-%define loroot /opt/oxoffice
+%define loroot /opt/modaodfsys
 %define HAVE_DEVEL 0
 
 Name:           @PACKAGE@
@@ -30,7 +30,7 @@ BuildRequires:  libpcap kernel-headers python36-polib python36-lxml
 BuildRequires:  libpcap kernel-headers python3-polib python3-lxml
 %endif
 
-Requires:       oxoffice oxoffice-ure oxofficelib-core oxofficelib-writer oxofficelib-impress oxofficelib-graphicfilter oxofficelib-en-US oxofficelib-calc oxofficelib-ooofonts oxofficelib-images oxofficelib-draw oxofficelib-extension-pdf-import oxofficelib-ooolinguistic oxofficelib-math
+Requires:       modaodfsys modaodfsys-ure modaodfsyslib-core modaodfsyslib-writer modaodfsyslib-impress modaodfsyslib-graphicfilter modaodfsyslib-en-US modaodfsyslib-calc modaodfsyslib-ooofonts modaodfsyslib-images modaodfsyslib-draw modaodfsyslib-extension-pdf-import modaodfsyslib-ooolinguistic modaodfsyslib-math
 Requires(post): coreutils grep sed cpio
 # @PACGAKE@ dependencies
 Requires:       systemd expat keyutils-libs krb5-libs libattr libcap libcom_err libgcc libpng libselinux openssh-clients openssl-libs pcre xz-libs zlib unzip sudo fontconfig freetype libuuid bzip2-libs
