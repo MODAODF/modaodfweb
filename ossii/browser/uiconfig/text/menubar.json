@@ -65,6 +65,11 @@
 						"icon": "res:downloadas-rtf",
 						"name": "Rich Text (.rtf)",
 						"id": "downloadas-rtf"
+					},
+					{
+						"icon": "res:downloadas-epub",
+						"name": "EPUB Document (.epub)",
+						"id": "downloadas-epub"
 					}
 				]
 			},
