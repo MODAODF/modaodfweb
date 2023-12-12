@@ -16,7 +16,7 @@ endif
 
 else
 
-SUBDIRS = . browser cypress_test
+SUBDIRS = ossii/src . browser cypress_test
 
 SUBDIRS += ossii
 
@@ -80,13 +80,21 @@ endif
 
 AM_LDFLAGS = -Wl,-E -lpam $(ZLIB_LIBS) $(ZSTD_LIBS) ${PNG_LIBS} ${FONTCONFIG_LIBS}
 
+if ENABLE_DEBUG
+AM_LDFLAGS += -Wl,-E,-rpath,"@abs_top_builddir@/ossii/src/lib/.libs"
+endif
+
 # Clang's linker doesn't like -pthread.
 if !HAVE_CLANG
 AM_LDFLAGS += -pthread
 endif
 
+OSSII_LIBS = ossii/src/lib/@LIB_NAME@.la
+
 if ENABLE_SSL
 AM_LDFLAGS += ${OPENSSL_LIBS}
+modaodfweb_LDADD = ${OSSII_LIBS}
+modaodfwebconfig_LDADD = ${OSSII_LIBS}
 else
 modaodfweb_LDADD = ${OPENSSL_LIBS}
 modaodfwebconfig_LDADD = ${OPENSSL_LIBS}
@@ -129,7 +137,6 @@ oxoolwsd_sources = common/Crypto.cpp \
                   wsd/Auth.cpp \
                   wsd/DocumentBroker.cpp \
                   wsd/ProxyProtocol.cpp \
-                  wsd/MainOXOOLWSD.cpp \
                   wsd/OXOOLWSD.cpp \
                   wsd/ClientSession.cpp \
                   wsd/FileServer.cpp \
@@ -142,8 +149,7 @@ oxoolwsd_sources = common/Crypto.cpp \
                   wsd/ProofKey.cpp \
                   wsd/QuarantineUtil.cpp
 
-modaodfweb_SOURCES = $(oxoolwsd_sources) \
-                  $(shared_sources)
+modaodfweb_SOURCES = wsd/MainOXOOLWSD.cpp
 
 EXTRA_modaodfweb_DEPENDENCIES = browser/node_modules
 
@@ -162,19 +168,13 @@ noinst_PROGRAMS += \
 endif
 
 connect_SOURCES = tools/Connect.cpp \
-                  common/DummyTraceEventEmitter.cpp \
-                  common/Log.cpp \
-                  common/Protocol.cpp \
-                  common/StringVector.cpp \
-                  common/Util.cpp
+                  common/DummyTraceEventEmitter.cpp
+connect_LDADD = ${OSSII_LIBS}
 
 lokitclient_SOURCES = common/Log.cpp \
                       common/DummyTraceEventEmitter.cpp \
-                      tools/KitClient.cpp \
-                      common/Protocol.cpp \
-                      common/StringVector.cpp \
-                      common/TraceEvent.cpp \
-                      common/Util.cpp
+                      tools/KitClient.cpp
+lokitclient_LDADD = ${OSSII_LIBS}
 
 noinst_LIBRARIES = libsimd.a
 libsimd_a_SOURCES = kit/DeltaSimd.c
@@ -184,10 +184,8 @@ modaodfwebforkit_sources = kit/ChildSession.cpp \
                      kit/ForKit.cpp \
                      kit/Kit.cpp
 
-modaodfwebforkit_SOURCES = $(modaodfwebforkit_sources) \
-                     $(shared_sources)
-
-modaodfwebforkit_LDADD = libsimd.a
+modaodfwebforkit_SOURCES = $(modaodfwebforkit_sources)
+modaodfwebforkit_LDADD = libsimd.a ${OSSII_LIBS}
 
 if ENABLE_LIBFUZZER
 modaodfwebforkit_SOURCES += \
@@ -239,12 +237,13 @@ httpecho_fuzzer_LDADD = libsimd.a
 endif # ENABLE_LIBFUZZER
 
 clientnb_SOURCES = net/clientnb.cpp \
-                   common/DummyTraceEventEmitter.cpp \
-                   common/Log.cpp \
-                   common/StringVector.cpp \
-                   common/Util.cpp
+                   common/DummyTraceEventEmitter.cpp
+clientnb_LDADD = ${OSSII_LIBS}
 
 modaodfwebmount_SOURCES = tools/mount.cpp
+if ENABLE_DEBUG
+modaodfwebmount_LDADD = ${OSSII_LIBS}
+endif
 
 modaodfwebmap_SOURCES = tools/map.cpp
 
@@ -252,20 +251,17 @@ modaodfwebconvert_SOURCES = tools/Tool.cpp
 
 modaodfwebstress_CPPFLAGS = -DTDOC=\"$(abs_top_srcdir)/test/data\" ${include_paths}
 modaodfwebstress_SOURCES = tools/Stress.cpp \
-                     common/DummyTraceEventEmitter.cpp \
-                     $(shared_sources)
+                     common/DummyTraceEventEmitter.cpp
+modaodfwebstress_LDADD = ${OSSII_LIBS}
 
 modaodfwebconfig_SOURCES = tools/Config.cpp \
 		     tools/ConfigMigrationAssistant.cpp \
-		     common/DummyTraceEventEmitter.cpp \
-		     common/Crypto.cpp \
-		     common/Log.cpp \
-		     common/StringVector.cpp \
-		     common/Util.cpp
+		     common/DummyTraceEventEmitter.cpp
+
 
 modaodfwebsocketdump_SOURCES = tools/WebSocketDump.cpp \
-			 common/DummyTraceEventEmitter.cpp \
-			 $(shared_sources)
+			 common/DummyTraceEventEmitter.cpp
+modaodfwebsocketdump_LDADD = ${OSSII_LIBS}
 
 wsd_headers = wsd/Admin.hpp \
               wsd/AdminModel.hpp \
@@ -397,7 +393,7 @@ else
 # Use oxoolwsd to cleanup jails, if any. If it fails, we may have a broken/old oxoolwsd binary, remove it to rebuild.
 # A CI box may switch branches without cleaning up the binaries, if oxoolwsd from a broken branch is used here
 # it will fail all subsequent builds, until it's rebuilt from the new branch. So removing oxoolwsd after failing is needed.
-CLEANUP_COMMAND=if test -s ./modaodfweb; then echo "Cleaning up..." && ./modaodfweb --disable-oxool-user-checking --cleanup --o:logging.level=trace || rm ./modaodfweb; fi
+CLEANUP_COMMAND=true
 endif
 
 CLEANUP_COVERAGE=rm -rf ${abs_top_srcdir}/gcov; find . -iname "*.gc??" -delete
@@ -409,7 +405,7 @@ CAPABILITIES = $(if @ENABLE_SETCAP@,true,false)
 RUN_GDB = $(if $(GDB_FRONTEND),$(GDB_FRONTEND),gdb --tui --args)
 
 if ENABLE_SETCAP
-SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep modaodfwebforkit && sudo @SETCAP@ cap_sys_admin=ep modaodfwebmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=ep modaodfweb
+SET_CAPS_COMMAND=sudo @SETCAP@ cap_fowner,cap_chown,cap_mknod,cap_sys_chroot=ep .libs/modaodfwebforkit && sudo @SETCAP@ cap_sys_admin=ep .libs/modaodfwebmount && sudo @SETCAP@ cap_dac_override,cap_net_bind_service=ep .libs/modaodfweb
 else
 SET_CAPS_COMMAND=echo "Skipping capability setting"
 endif
@@ -471,7 +467,7 @@ COMMON_PARAMS = \
 	--o:admin_console.username=admin --o:admin_console.password=admin
 
 run: setup-wsd
-	./modaodfweb $(COMMON_PARAMS) \
+	.libs/modaodfweb $(COMMON_PARAMS) \
 			--config-file="$(abs_top_srcdir)/@PACKAGE@.xml" \
 			--o:security.capabilities="$(CAPABILITIES)" \
 			--o:logging.file[@enable]=${OUTPUT_TO_FILE} --o:logging.level=trace \
