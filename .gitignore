@@ -175,3 +175,4 @@ debian/copyright
 /*-systemplate-setup
 /*.spec
 /modaodfweb*
+/.libs
