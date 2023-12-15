@@ -64,7 +64,7 @@ oxoolwsdconfig_DATA = $(WSD_NAME).xml \
 ACLOCAL_AMFLAGS = -I m4
 
 # quick and easy for now.
-include_paths = -I${top_srcdir}/common -I${top_srcdir}/net -I${top_srcdir}/wsd -I${top_srcdir}/kit ${ZLIB_CFLAGS} ${ZSTD_CFLAGS} ${PNG_CFLAGS} ${FONTCONFIG_CFLAGS}
+include_paths = -I${top_srcdir}/common -I${top_srcdir}/net -I${top_srcdir}/wsd -I${top_srcdir}/kit ${ZLIB_CFLAGS} ${ZSTD_CFLAGS} ${PNG_CFLAGS} ${FONTCONFIG_CFLAGS} ${OSSII_CFLAGS}
 if ENABLE_SSL
 include_paths += ${OPENSSL_CFLAGS}
 endif
@@ -78,7 +78,7 @@ if !ENABLE_DEBUG
 AM_CPPFLAGS += -DNDEBUG
 endif
 
-AM_LDFLAGS = -Wl,-E -lpam $(ZLIB_LIBS) $(ZSTD_LIBS) ${PNG_LIBS} ${FONTCONFIG_LIBS}
+AM_LDFLAGS = -Wl,-E -lpam $(ZLIB_LIBS) $(ZSTD_LIBS) ${PNG_LIBS} ${FONTCONFIG_LIBS} ${OSSII_LIBS}
 
 if ENABLE_DEBUG
 AM_LDFLAGS += -Wl,-E,-rpath,"@abs_top_builddir@/ossii/src/lib/.libs"
@@ -89,12 +89,8 @@ if !HAVE_CLANG
 AM_LDFLAGS += -pthread
 endif
 
-OSSII_LIBS = ossii/src/lib/@LIB_NAME@.la
-
 if ENABLE_SSL
 AM_LDFLAGS += ${OPENSSL_LIBS}
-modaodfweb_LDADD = ${OSSII_LIBS}
-modaodfwebconfig_LDADD = ${OSSII_LIBS}
 else
 modaodfweb_LDADD = ${OPENSSL_LIBS}
 modaodfwebconfig_LDADD = ${OPENSSL_LIBS}
@@ -169,12 +165,10 @@ endif
 
 connect_SOURCES = tools/Connect.cpp \
                   common/DummyTraceEventEmitter.cpp
-connect_LDADD = ${OSSII_LIBS}
 
 lokitclient_SOURCES = common/Log.cpp \
                       common/DummyTraceEventEmitter.cpp \
                       tools/KitClient.cpp
-lokitclient_LDADD = ${OSSII_LIBS}
 
 noinst_LIBRARIES = libsimd.a
 libsimd_a_SOURCES = kit/DeltaSimd.c
@@ -185,7 +179,7 @@ modaodfwebforkit_sources = kit/ChildSession.cpp \
                      kit/Kit.cpp
 
 modaodfwebforkit_SOURCES = $(modaodfwebforkit_sources)
-modaodfwebforkit_LDADD = libsimd.a ${OSSII_LIBS}
+modaodfwebforkit_LDADD = libsimd.a
 
 if ENABLE_LIBFUZZER
 modaodfwebforkit_SOURCES += \
@@ -238,12 +232,8 @@ endif # ENABLE_LIBFUZZER
 
 clientnb_SOURCES = net/clientnb.cpp \
                    common/DummyTraceEventEmitter.cpp
-clientnb_LDADD = ${OSSII_LIBS}
 
 modaodfwebmount_SOURCES = tools/mount.cpp
-if ENABLE_DEBUG
-modaodfwebmount_LDADD = ${OSSII_LIBS}
-endif
 
 modaodfwebmap_SOURCES = tools/map.cpp
 
@@ -252,7 +242,6 @@ modaodfwebconvert_SOURCES = tools/Tool.cpp
 modaodfwebstress_CPPFLAGS = -DTDOC=\"$(abs_top_srcdir)/test/data\" ${include_paths}
 modaodfwebstress_SOURCES = tools/Stress.cpp \
                      common/DummyTraceEventEmitter.cpp
-modaodfwebstress_LDADD = ${OSSII_LIBS}
 
 modaodfwebconfig_SOURCES = tools/Config.cpp \
 		     tools/ConfigMigrationAssistant.cpp \
@@ -261,7 +250,6 @@ modaodfwebconfig_SOURCES = tools/Config.cpp \
 
 modaodfwebsocketdump_SOURCES = tools/WebSocketDump.cpp \
 			 common/DummyTraceEventEmitter.cpp
-modaodfwebsocketdump_LDADD = ${OSSII_LIBS}
 
 wsd_headers = wsd/Admin.hpp \
               wsd/AdminModel.hpp \
