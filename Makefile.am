@@ -31,6 +31,9 @@ bin_PROGRAMS = \
 if ENABLE_LIBFUZZER
 else
 bin_PROGRAMS += modaodfweb
+if ENABLE_DEBUG
+bin_PROGRAMS += oxoolwsd-inproc
+endif
 endif
 
 dist_bin_SCRIPTS = modaodfweb-systemplate-setup
@@ -133,6 +136,7 @@ oxoolwsd_sources = common/Crypto.cpp \
                   wsd/Auth.cpp \
                   wsd/DocumentBroker.cpp \
                   wsd/ProxyProtocol.cpp \
+		  wsd/MainOXOOLWSD.cpp \
                   wsd/OXOOLWSD.cpp \
                   wsd/ClientSession.cpp \
                   wsd/FileServer.cpp \
@@ -185,6 +189,16 @@ modaodfwebforkit_SOURCES = $(modaodfwebforkit_sources) \
 
 modaodfwebforkit_LDADD = libsimd.a ${OSSII_LIBS}
 
+if ENABLE_DEBUG
+oxoolwsd_inproc_SOURCES = $(oxoolwsd_sources) \
+                         $(shared_sources) \
+                         $(modaodfwebforkit_sources) \
+                         wsd/oxoolwsd-inproc.cpp
+
+oxoolwsd_inproc_LDADD = ${modaodfweb_LDADD} \
+                       ${modaodfwebforkit_LDADD}
+endif
+
 if ENABLE_LIBFUZZER
 modaodfwebforkit_SOURCES += \
 		       common/DummyTraceEventEmitter.cpp
@@ -197,7 +211,6 @@ common_fuzzer_sources = \
 		       $(shared_sources)
 
 admin_fuzzer_CPPFLAGS = \
-			-DKIT_IN_PROCESS=1 \
 			$(AM_CPPFLAGS)
 admin_fuzzer_SOURCES = \
 		       $(common_fuzzer_sources) \
@@ -206,7 +219,6 @@ admin_fuzzer_LDFLAGS = -fsanitize=fuzzer $(AM_LDFLAGS)
 admin_fuzzer_LDADD = libsimd.a
 
 clientsession_fuzzer_CPPFLAGS = \
-				-DKIT_IN_PROCESS=1 \
 				$(AM_CPPFLAGS)
 clientsession_fuzzer_SOURCES = \
 			       $(common_fuzzer_sources) \
@@ -215,7 +227,6 @@ clientsession_fuzzer_LDFLAGS = -fsanitize=fuzzer $(AM_LDFLAGS)
 clientsession_fuzzer_LDADD = libsimd.a
 
 httpresponse_fuzzer_CPPFLAGS = \
-				-DKIT_IN_PROCESS=1 \
 				$(AM_CPPFLAGS)
 httpresponse_fuzzer_SOURCES = \
 			       $(common_fuzzer_sources) \
@@ -224,7 +235,6 @@ httpresponse_fuzzer_LDFLAGS = -fsanitize=fuzzer $(AM_LDFLAGS)
 httpresponse_fuzzer_LDADD = libsimd.a
 
 httpecho_fuzzer_CPPFLAGS = \
-				-DKIT_IN_PROCESS=1 \
 				$(AM_CPPFLAGS) \
         -I${top_srcdir}/test
 httpecho_fuzzer_SOURCES = \
@@ -474,6 +484,21 @@ run-one: setup-wsd
 			--o:security.capabilities="$(CAPABILITIES)" \
 			--o:logging.file[@enable]=true --o:logging.level=trace \
 			--singlekit
+
+run-inproc: setup-wsd
+	@echo "Launching oxoolwsd-inproc"
+	.libs/oxoolwsd-inproc $(COMMON_PARAMS) \
+			--config-file="$(abs_top_srcdir)/@PACKAGE@.xml" \
+			--o:security.capabilities="$(CAPABILITIES)" \
+			--o:logging.file[@enable]=true --o:logging.level=trace
+
+run-massif-inproc: setup-wsd
+	@echo "Launching oxoolwsd under valgrind for single process"
+	valgrind --tool=massif --num-callers=64 --trace-children=no -v \
+		.libs/oxoolwsd-inproc $(COMMON_PARAMS) \
+      --config-file="$(abs_top_srcdir)/@PACKAGE@.xml" \
+      --o:security.capabilities="$(CAPABILITIES)" \
+			--o:logging.file[@enable]=false --o:logging.level=trace
 endif
 
 sync-writer:
