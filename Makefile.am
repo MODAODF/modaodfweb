@@ -180,8 +180,10 @@ modaodfwebforkit_sources = kit/ChildSession.cpp \
                      kit/ForKit.cpp \
                      kit/Kit.cpp
 
-modaodfwebforkit_SOURCES = $(modaodfwebforkit_sources)
-modaodfwebforkit_LDADD = libsimd.a
+modaodfwebforkit_SOURCES = $(modaodfwebforkit_sources) \
+                           kit/forkit-main.cpp
+
+modaodfwebforkit_LDADD = libsimd.a ${OSSII_LIBS}
 
 if ENABLE_LIBFUZZER
 modaodfwebforkit_SOURCES += \
@@ -190,6 +192,7 @@ modaodfwebforkit_SOURCES += \
 common_fuzzer_sources = \
 		       common/DummyTraceEventEmitter.cpp \
 		       $(oxoolwsd_sources) \
+		       wsd/oxoolwsd-inproc.cpp \
 		       $(modaodfwebforkit_sources) \
 		       $(shared_sources)
 
