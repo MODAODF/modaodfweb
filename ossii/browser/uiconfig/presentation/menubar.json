@@ -1152,6 +1152,12 @@
 				"comment": "替代指令"
 			},
 			{
+				"id": "presentinwindow",
+				"icon": "res:presentinwindow",
+				"name": "Present in Window",
+				"comment": "替代指令"
+			},
+			{
 				"id": ".uno:PresentationCurrentSlide",
 				"hotkey": "Shift+F5",
 				"comment": "替代指令"
