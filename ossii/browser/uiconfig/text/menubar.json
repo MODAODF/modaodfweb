@@ -207,11 +207,29 @@
 				"type": "--"
 			},
 			{
+				"id": "toggleuimode",
+				"name": "Tabbed view",
+				"commit": "替代指令"
+			},
+			{
 				"id": ".uno:Ruler",
 				"hotkey": "Ctrl+Shift+R"
 			},
 			{
 				"id": ".uno:StatusBarVisible"
+			},
+			{
+				"id": "togglemenubar",
+				"name": "Menu Bar",
+				"comment": "替代指令"
+			},
+			{
+				"id": "toggledarktheme",
+				"name": "Dark mode",
+				"commit": "替代指令"
+			},
+			{
+				"type": "--"
 			},
 			{
 				"id": ".uno:GridMenu",
