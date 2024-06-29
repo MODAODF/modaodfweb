@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-30 00:04+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin/admin.js:16
+msgid "ODF report template"
+msgstr "ODF 報表管理"
+
+#: admin/admin.js:18
+msgid "Module overview"
+msgstr "模組概覽"
+
+#: admin/admin.js:19
+msgid "How to use the Reporting API"
+msgstr "如何使用報表 API"
+
+#: admin/admin.js:20
+msgid ""
+"On the ODF report management website, upload the template file, and obtain "
+"the API address to convert the file."
+msgstr "在 ODF 報表管理網站上，上傳報表範本檔案，取得轉檔 API 位址"
+
+#: admin/admin.js:21
+msgid "API list"
+msgstr "API 列表"
+
+#: admin/admin.js:22
+msgid ""
+"(Note: The {doc_id} of the API needs to be obtained from the ODF report "
+"management website.)"
+msgstr "(註：API 的 {doc_id} 需要從 ODF 報表管理網站取得)"
+
+#: admin/admin.js:23
+msgid "API URL"
+msgstr "API 位址"
+
+#: admin/admin.js:24
+msgid "Explain"
+msgstr "說明"
+
+#: admin/admin.js:25
+msgid "Get the detailed structure of all reports (JSON format)"
+msgstr "取得所有報表的詳細結構（JSON 格式）"
+
+#: admin/admin.js:26
+msgid "Get the detailed structure of all reports (YAML format)"
+msgstr " 取得所有報表的詳細結構（YAML 格式）"
+
+#: admin/admin.js:27
+msgid "Get the detailed structure of individual report (JSON format)"
+msgstr "取得單一報表的詳細結構（JSON 格式）"
+
+#: admin/admin.js:28
+msgid "Get the detailed structure of individual report (YAML format)"
+msgstr "取得單一報表的詳細結構（YAML 格式）"
+
+#: admin/admin.js:29
+msgid "Get an example JSON data source for individual report."
+msgstr "取得單一報表的 JSON 格式範例"
+
+#: admin/admin.js:30
+msgid "Get the number of times an individual report was executed."
+msgstr "取得單一報表的轉檔次數"
+
+#: admin/admin.js:31
+msgid "Using a JSON data source, Make ODF report file.(If add ?outputPDF after {doc_id}, it will output PDF file)"
+msgstr "傳送 JSON 資料，製作 ODF 報表檔案。（若在 {doc_id} 後加上 \"?outputPDF\"，則會輸出 PDF 檔案）"
+
+
+#: admin/admin.js:33
+msgid "Convert log"
+msgstr "轉檔紀錄"
+
+#: admin/admin.js:34
+msgid "Refresh log"
+msgstr "重整紀錄"
+
+#: admin/admin.js:35
+msgid "State"
+msgstr "狀態"
+
+#: admin/admin.js:36
+msgid "Date"
+msgstr "日期"
+
+#: admin/admin.js:37
+msgid "Source IP"
+msgstr "來源 IP"
+
+#: admin/admin.js:38
+msgid "File name"
+msgstr "檔案名稱"
+
+#: admin/admin.js:39
+msgid "File type"
+msgstr "檔案類型"
+
+#: admin/admin.js:40
+msgid "To PDF"
+msgstr "轉為 PDF"
+
+#: admin/admin.js:98
+msgid "Success"
+msgstr "成功"
+
+#: admin/admin.js:99
+msgid "Fail"
+msgstr "失敗"
+
+#: admin/admin.js:111
+msgid "Yes"
+msgstr "是"
