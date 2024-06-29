@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-29 20:07+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin/admin.js:19
+msgid "Table conversion spreadsheet"
+msgstr ""
+
+#: admin/admin.js:21
+msgid "Module overview"
+msgstr ""
+
+#: admin/admin.js:22
+msgid "API Server address"
+msgstr ""
+
+#: admin/admin.js:23
+msgid "Usage"
+msgstr ""
+
+#: admin/admin.js:24
+msgid ""
+"Use Javascript to obtain more than one HTML table in a web page and treat "
+"it as text content. The content can also contain other types of HTML tags."
+msgstr ""
+
+#: admin/admin.js:25
+msgid ""
+"Use the HTTP POST method to send the text to the API server address as the "
+"form content."
+msgstr ""
+
+#: admin/admin.js:26
+msgid "The form has three fields:"
+msgstr ""
+
+#: admin/admin.js:27
+msgid "Title (optional), used for records, blank is not recommended."
+msgstr ""
+
+#: admin/admin.js:28
+msgid ""
+"Conversion format (optional), the default is \"ods\", you can also specify "
+"\"xls\", \"xlsx\" or \"pdf\"."
+msgstr ""
+
+#: admin/admin.js:29
+msgid "Table content (required field)."
+msgstr ""
+
+#: admin/admin.js:30
+msgid "Form example"
+msgstr ""
+
+#: admin/admin.js:32
+msgid "View log"
+msgstr ""
+
+#: admin/admin.js:33
+msgid "Refresh Log"
+msgstr ""
+
+#: admin/admin.js:35
+msgid "API testing"
+msgstr ""
+
+#: admin/admin.js:36
+msgid "HTML Table"
+msgstr ""
+
+#: admin/admin.js:37
+msgid "Download as ODF"
+msgstr ""
+
+#: admin/admin.js:38
+msgid "Download as XLSX"
+msgstr ""
+
+#: admin/admin.js:39
+msgid "Download as PDF"
+msgstr ""
