@@ -113,12 +113,14 @@ sed -i "/^ReadWritePaths/d;/^ProtectControlGroups/d;/^ProtectSystem/d" %{buildro
 %{_sysconfdir}/%{name}/conf.d/SoftwareUpgrade.xml
 %{_sysconfdir}/%{name}/conf.d/Table2SC.xml
 %{_sysconfdir}/%{name}/conf.d/MergeODF.xml
+%{_sysconfdir}/%{name}/conf.d/TemplateRepo.xml
 %{_libdir}/%{name}/alive.so
 %{_libdir}/%{name}/announce.so
 %{_libdir}/%{name}/FontManager.so
 %{_libdir}/%{name}/SoftwareUpgrade.so
 %{_libdir}/%{name}/Table2SC.so
 %{_libdir}/%{name}/MergeODF.so
+%{_libdir}/%{name}/TemplateRepo.so
 %{_libdir}/*.so.*
 %endif
 
