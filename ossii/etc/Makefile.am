@@ -6,6 +6,6 @@
 #
 
 pamdir = ${sysconfdir}/pam.d
-dist_pam_DATA = pam.d/oxool
+dist_pam_DATA = pam.d/modaodfweb
 
 ## vim: set noet sw=4 ts=4:
