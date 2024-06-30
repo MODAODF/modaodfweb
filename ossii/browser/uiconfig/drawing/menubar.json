@@ -16,6 +16,11 @@
 				"id": "savecomments"
 			},
 			{
+				"id": "renamedocument",
+				"name": "Rename Document",
+				"comment": "替代指令"
+			},
+			{
 				"name": "Share...",
 				"id": "shareas"
 			},

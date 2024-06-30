@@ -12,6 +12,11 @@
 				"comment": "替代指令"
 			},
 			{
+				"id": "renamedocument",
+				"name": "Rename Document",
+				"comment": "替代指令"
+			},
+			{
 				"icon": ".uno:ShareDocument",
 				"name": "Share",
 				"id": "ShareAs"
@@ -1523,7 +1528,6 @@
 				"iosapp": false
 			},
 			{
-				"icon": ".uno:ReportIssue",
 				"name": "Report an issue",
 				"id": "report-an-issue",
 				"iosapp": false
