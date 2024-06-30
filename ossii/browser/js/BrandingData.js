@@ -10,6 +10,7 @@
 	global.brandProductName = 'MODA ODF Web';
 	global.brandProductURL = 'https://moda.gov.tw';
 	global.brandProductFAQURL = 'https://moda.gov.tw/digital-affairs/digital-service/app-services/252';
+	global.brandReportIssueURL = 'https://odf.moda.gov.tw/QA/public/reportform';
 })(window);
 
 /* vim: set ts=8 sts=8 sw=8 tw=100: */
