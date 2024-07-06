@@ -6,12 +6,12 @@ dnl -*- Mode: Autoconf; tab-width: 4; indent-tabs-mode: nil; fill-column: 102 -*
 #
 
 # define the name of the vendor
-m4_define([ossii_VENDOR], ['Ministry of Digital Affairs'])
+m4_define([ossii_VENDOR], ["Ministry of Digital Affairs"])
 
 # define the product name
-m4_define([ossii_PRODUCT_NAME], ['MODA ODF Web'])
+m4_define([ossii_PRODUCT_NAME], ["MODA ODF Web"])
 # define the core office name
-m4_define([ossii_CORE_OFFICE], ['modaodfsys'])
+m4_define([ossii_CORE_OFFICE], ["modaodfsys"])
 
 # define the name of the WSD (Web Socket Daemon)
 m4_define([ossii_WSD_NAME], [modaodfweb])
