@@ -188,3 +188,6 @@ debian/tmp
 debian/.debhelper
 debian/debhelper-build-stamp
 debian/autoreconf.*
+
+# Ignore Vagrant state files
+/.vagrant/
