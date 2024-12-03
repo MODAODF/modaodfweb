@@ -1,3 +1,9 @@
+modaodfweb (3.8.3-1) unstable; urgency=medium
+
+  * Bump version to 3.8.3
+
+ -- Firefly <ifirefly@ossii.com.tw>  Tue, 03 Dec 2024 14:31:07 +0800
+
 modaodfweb (3.8.1-1) unstable; urgency=medium
 
   * Bump version to 3.8.1
