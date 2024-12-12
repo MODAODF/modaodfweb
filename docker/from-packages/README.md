@@ -294,7 +294,7 @@ docker_compose_logs_opts=(
     --tail=100
 
     # Follow and print new log entries to the stdout
-    --follow
+    #--follow
 )
 docker compose logs "${docker_logs_opts[@]}" modaodfweb
 ```
