@@ -21,7 +21,7 @@ services:
       # Fix time presentation
       #- TZ=CST-8
     ports:
-      - "127.0.0.1:9980:9980"
+      - 127.0.0.1:9980:9980
     cap_add:
       - CHOWN
       - DAC_OVERRIDE
