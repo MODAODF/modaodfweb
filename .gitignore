@@ -188,6 +188,11 @@ debian/tmp
 debian/.debhelper
 debian/debhelper-build-stamp
 debian/autoreconf.*
+debian/oxool*
+*.rpm
 
 # Ignore Vagrant state files
 /.vagrant/
+
+# Ignore Git worktrees in development environments
+/.worktree/
