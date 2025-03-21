@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Deploy testing environment for development
 #
-# Copyright 2024 Buo-ren Lin <buoren.lin@ossii.com.tw>
+# Copyright 2025 Buo-ren Lin (OSSII) <buoren.lin@ossii.com.tw>
 # SPDX-License-Identifier: LicenseRef-Proprietary
 
 # Whether to disable SELinux for convenience
@@ -127,14 +127,14 @@ if ! dnf install -y "${runtime_dependency_pkgs[@]}"; then
 fi
 
 printf \
-    'Info: Configuring the Yum repository of OxOffice Online v4...\n'
+    'Info: Configuring the Yum repository of MODAODFWEB v3.8...\n'
 wget_opts=(
     --directory-prefix /etc/yum.repos.d
 )
 if ! wget "${wget_opts[@]}" \
-    http://www.oxoffice.com.tw/rpm/el/oxool-community-v4-el8.repo; then
+    https://free.nchc.org.tw/odfrepo/online/modaodfweb-v3.8-el8.repo; then
     printf \
-        'Error: Unable to configure the Yum repository of OxOffice Online v4.\n' \
+        'Error: Unable to configure the Yum repository of MODAODFWEB v3.8.\n' \
         1>&2
     exit 2
 fi
