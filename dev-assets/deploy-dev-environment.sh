@@ -2,7 +2,7 @@
 # Deploy testing environment for development
 #
 # Copyright 2025 Buo-ren Lin (OSSII) <buoren.lin@ossii.com.tw>
-# SPDX-License-Identifier: LicenseRef-Proprietary
+# SPDX-License-Identifier: MPL-2.0+
 
 # Whether to disable SELinux for convenience
 DISABLE_SELINUX="${DISABLE_SELINUX:-true}"
