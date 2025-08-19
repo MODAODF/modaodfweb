@@ -1,3 +1,9 @@
+modaodfweb (3.8.4-1) UNRELEASED; urgency=medium
+
+  * Bump version to 3.8.4
+
+ -- Buo-ren Lin (OSSII) <buoren.lin@ossii.com.tw>  Tue, 19 Aug 2025 15:00:39 +0800
+
 modaodfweb (3.8.3-1) unstable; urgency=medium
 
   * Bump version to 3.8.3

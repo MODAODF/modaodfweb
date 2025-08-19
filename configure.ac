@@ -8,7 +8,7 @@ m4_define([package_NAME], [modaodfweb])
 # Daemon name(若非 oxool，請和 package_NAME 同)
 m4_define([wsd_NAME], [modaodfweb])
 # Package Version
-m4_define([package_VERSION], [3.8.3])
+m4_define([package_VERSION], [3.8.4])
 # Bug Report URL(Report Bugs)
 m4_define([bug_REPORT], [https://github.com/MODAODF/modaodfweb/issues])
 # Package URL(Homepage)
