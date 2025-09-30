@@ -48,3 +48,5 @@ services:
       #- TZ=CST-8
     init: true
     command: sleep infinity
+    ports:
+      - '9980:9980'
