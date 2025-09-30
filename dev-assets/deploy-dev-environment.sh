@@ -7,6 +7,9 @@
 # Whether to disable SELinux for convenience
 DISABLE_SELINUX="${DISABLE_SELINUX:-true}"
 
+# Whether to do full system update
+DO_FULL_SYSTEM_UPDATE="${DO_FULL_SYSTEM_UPDATE:-false}"
+
 printf \
     'Info: Configuring the defensive interpreter behaviors...\n'
 set_opts=(
@@ -92,13 +95,15 @@ if ! operation_timestamp="$(date +%Y%m%d-%H%M%S)"; then
     exit 2
 fi
 
-printf \
-    'Info: Applying full system upgrade to apply possible OS bug fixes...\n'
-if ! dnf upgrade -y; then
+if test "${DO_FULL_SYSTEM_UPDATE}" == true; then
     printf \
-        'Error: Unable to apply full system upgrade to apply possible OS bug fixes.\n' \
+        'Info: Applying full system upgrade to apply possible OS bug fixes...\n'
+    if ! dnf upgrade -y; then
+        printf \
+            'Error: Unable to apply full system upgrade to apply possible OS bug fixes.\n' \
         1>&2
-    exit 2
+        exit 2
+    fi
 fi
 
 printf \
