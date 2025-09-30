@@ -149,15 +149,6 @@ if ! dnf install epel-release -y; then
 fi
 
 printf \
-    'Info: Upgrading all packages...\n'
-if ! dnf upgrade -y; then
-    printf \
-        'Error: Unable to upgrade all packages.\n' \
-        1>&2
-    exit 2
-fi
-
-printf \
     'Info: Enabling the nodejs:18 dnf module...\n'
 if ! dnf module enable nodejs:18 -y; then
     printf \
