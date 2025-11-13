@@ -19,15 +19,19 @@ LABEL org.opencontainers.image.version=${version:-"3.8-dev"}
 # UTF-8 locale is needed to handle file names with non-ASCII characters
 ENV LC_CTYPE=C.UTF-8
 
-RUN \
+RUN --mount=type=bind,source=.,target=/build-context \
+# Expand unmatched filename expansion expression to null
+    shopt -s nullglob; \
 # Install dependencies for setting up external repositories
     dnf install -y curl && \
 # Setup MODAODFWEB v3.8 repo
     curl --output /etc/yum.repos.d/modaodfweb-v3.8-el8.repo https://free.nchc.org.tw/odfrepo/online/modaodfweb-v3.8-el8.repo && \
 # Setup EPEL repository, which provides dependency package for the poco-odbc package
     dnf install -y epel-release && \
-# Install pre-built MODAODFWEB and its runtime dependencies
+# Install pre-built MODAODFWEB and its runtime dependencies from the repo
     dnf groupinstall -y "MODAODFWEB Group" && \
+# Install pre-built MODAODFWEB and its runtime dependencies from local packages
+    #dnf install -y /build-context/modaodfsys-new/*.rpm /build-context/modaodfweb-3.8.*.el*.*.rpm /build-context/poco-libs/*.rpm && \
 # Install dependency for the start script
     dnf install -y openssl && \
 # Fix ownership of config directory that will be modified on start of the container by lool user
