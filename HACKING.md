@@ -59,20 +59,6 @@ Execute the following instructions to provision the virtual machine used for tes
     vagrant snapshot save v5-clean-updated
     ```
 
-1. Run the following command to export and install the OpenSSH client configuration:
-
-    ```bash
-    vagrant ssh-config > ~/.ssh/config
-    ```
-
-   **WARNING:** If you maintain your own OpenSSH client configuration the aforementioned command will _overwrite your configuration file_, you need to instead manually merge the configuration from the `vagrant ssh-config` command's output.
-
-   You should now be able to acquire a remote shell of the test VM by running the following command:
-
-    ```bash
-    ssh default
-    ```
-
 ## Deploy Nextcloud
 
 1. Run the following command to automatically provision a Nextcloud 24 service instance in your test VM:
@@ -91,29 +77,13 @@ Execute the following instructions to provision the virtual machine used for tes
 
 ## Build product
 
-1. Deploy the product's source tree by running the following commands:
+1. Run the following command to sync the project files to the test VM:
 
     ```bash
-    rsync_opts=(
-        # Synchronize file modification time to support incremental synchronization
-        --times
-
-        # Synchronize Unix file permissions
-        --perms
-
-        # Synchronize symbolic links
-        --links
-
-        # Synchronize subdirs as well
-        --recursive
-
-        # Report progress
-        --verbose
-    )
-    rsync "${rsync_opts[@]}" ./ default:oxool/
+    vagrant rsync
     ```
 
-   **NOTE:** DO NOT exclude the Git repository directory(.git) as it will be used during the build.
+   You should run this command again after making changes to the project files to sync the changes as well.
 1. Acquire guest VM shell by running the following command:
 
     ```bash
@@ -123,7 +93,7 @@ Execute the following instructions to provision the virtual machine used for tes
 1. Change the working directory to the source tree directory by running the following command:
 
     ```bash
-    cd ~/oxool
+    cd /vagrant
     ```
 
 1. Run the following command to build the build configuration program:

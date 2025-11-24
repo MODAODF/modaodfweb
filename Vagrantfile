@@ -27,7 +27,13 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", ip: "192.168.56.10"
 
   # Shared folder does not work at the moment, use Rsync to sync files instead
-  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder ".", "/vagrant",
+    type: "rsync",
+    rsync__exclude: [
+      ".vagrant/",
+      "jails/",
+      "systemplate/"
+    ]
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
