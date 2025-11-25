@@ -430,6 +430,35 @@ if ! systemctl restart php-fpm; then
     exit 2
 fi
 
+printf \
+    'Info: Running Nextcloud initial configuration...\n'
+curl_opts=(
+    # We don't care the response body nor the header itself
+    --head
+    --output /dev/null
+
+    # Don't print progress
+    --silent
+
+    # Return error exit status when receiving an error response
+    --fail
+)
+if ! curl "${curl_opts[@]}" http://192.168.56.10/nextcloud/index.php; then
+    printf \
+        'Error: Unable to run Nextcloud initial configuration.\n' \
+        1>&2
+    exit 2
+fi
+
+printf \
+    'Info: Working around missing database migration after Nextcloud deployment...\n'
+if ! sudo -u apache php -f /var/www/html/nextcloud/occ maintenance:repair --include-expensive; then
+    printf \
+        'Error: Unable to workaround database migration missing after Nextcloud deployment.\n' \
+        1>&2
+    exit 2
+fi
+
 # NOTE: In Docker container there's no FirewallD
 if command -v firewall-cmd >/dev/null; then
     printf \
