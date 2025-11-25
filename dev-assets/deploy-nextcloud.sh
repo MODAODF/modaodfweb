@@ -403,6 +403,33 @@ if ! systemctl restart httpd; then
     exit 2
 fi
 
+printf \
+    'Info: Patching PHP configuration for Nextcloud server...\n'
+php_ini_file=/etc/php.ini
+sed_opts=(
+    --in-place
+
+    # Use extended regular expressions
+    --regexp-extended
+
+    --expression='s@^memory_limit = [^\n]*@memory_limit = 512M@'
+)
+if ! sed "${sed_opts[@]}" "${php_ini_file}"; then
+    printf \
+        'Error: Unable to patch PHP configuration for Nextcloud server.\n' \
+        1>&2
+    exit 2
+fi
+
+printf \
+    'Info: Restart PHP-FPM to apply PHP configuration changes...\n'
+if ! systemctl restart php-fpm; then
+    printf \
+        'Error: Unable to restart PHP-FPM to apply PHP configuration changes.\n' \
+        1>&2
+    exit 2
+fi
+
 # NOTE: In Docker container there's no FirewallD
 if command -v firewall-cmd >/dev/null; then
     printf \
