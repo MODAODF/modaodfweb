@@ -8,7 +8,7 @@
 NEXTCLOUD_SERVER_RELEASES_BASEURL="${NEXTCLOUD_SERVER_RELEASES_BASEURL:-https://download.nextcloud.com/server/releases/}"
 
 # The Nextcloud server version to install
-NEXTCLOUD_VERSION="${NEXTCLOUD_VERSION:-30.0.4}"
+NEXTCLOUD_VERSION="${NEXTCLOUD_VERSION:-31.0.11}"
 
 # The type of the release package to download: [tarball|zip]
 NEXTCLOUD_RELEASE_PACKAGE_TYPE="${NEXTCLOUD_RELEASE_PACKAGE_TYPE:-zip}"
@@ -189,10 +189,10 @@ if ! dnf module reset -y php; then
 fi
 
 printf \
-    'Info: Installing the php:remi-8.1 dnf module...\n'
-if ! dnf module install -y php:remi-8.1; then
+    'Info: Installing the php:remi-8.2 dnf module...\n'
+if ! dnf module install -y php:remi-8.2; then
     printf \
-        'Error: Unable to install the php:remi-8.1 dnf module.\n' \
+        'Error: Unable to install the php:remi-8.2 dnf module.\n' \
         1>&2
     exit 2
 fi
