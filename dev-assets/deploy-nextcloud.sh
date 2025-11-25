@@ -372,6 +372,29 @@ if ! chown "${chown_opts[@]}" apache.apache "${installed_nextcloud_dir}"; then
 fi
 
 printf \
+    'Info: Installing the Nextcloud server httpd site configuration...\n'
+httpd_companion_config=/etc/httpd/conf.d/nextcloud.conf
+if ! cat >"${httpd_companion_config}" <<"EOF"
+Alias /nextcloud "/var/www/html/nextcloud/"
+
+<Directory /var/www/html/nextcloud/>
+  Require all granted
+  AllowOverride All
+  Options FollowSymLinks MultiViews
+
+  <IfModule mod_dav.c>
+    Dav off
+  </IfModule>
+</Directory>
+EOF
+    then
+    printf \
+        'Error: Unable to install the Nextcloud companion httpd configuration file.\n' \
+        1>&2
+    exit 2
+fi
+
+printf \
     'Info: Restarting the Apache httpd service to apply Nextcloud server site configuration...\n'
 if ! systemctl restart httpd; then
     printf \
