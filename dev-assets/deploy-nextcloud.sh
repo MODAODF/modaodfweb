@@ -490,24 +490,4 @@ if command -v firewall-cmd >/dev/null; then
 fi
 
 printf \
-    'Info: Workarounding Nextcloud bug causing browser to redirect to invalid URL after initialization...\n'
-curl_opts=(
-    # We don't care the response body nor the header itself
-    --head
-    --output /dev/null
-
-    # Don't print progress
-    --silent
-
-    # Return error exit status when receiving an error response
-    --fail
-)
-if ! curl "${curl_opts[@]}" http://192.168.56.10/nextcloud/index.php; then
-    printf \
-        'Error: Unable to workaround Nextcloud bug causing browser to redirect to invalid URL after initialization.\n' \
-        1>&2
-    exit 2
-fi
-
-printf \
     'Info: Operation completed without errors, use the http://192.168.56.10/nextcloud/ URL to access the Nextcloud service, the admin username/password is test/test.\n'
