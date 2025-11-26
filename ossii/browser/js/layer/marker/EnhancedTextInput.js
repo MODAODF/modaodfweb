@@ -417,6 +417,7 @@ L.EnhancedTextInput = L.Layer.extend({
 				break;
 
 			case 'insertParagraph': // Enter
+			case 'insertLineBreak': // Shift + Enter
 			case 'deleteContentBackward': // Backspace
 			case 'deleteContentForward': // Delete
 				// handle by _onKeyDown()
@@ -631,6 +632,13 @@ L.EnhancedTextInput = L.Layer.extend({
 
 		if (app.UI.notebookbarAccessibility)
 			app.UI.notebookbarAccessibility.onDocumentKeyDown(ev);
+
+		// Handle Shift+Enter for line break
+		if (ev.key === 'Enter' && ev.shiftKey && !ev.ctrlKey && !ev.altKey && !ev.metaKey) {
+			var unoKeyCode = this._map['keyboard']._toUNOKeyCode(ev.keyCode);
+			this._sendKeyEvent(ev.charCode, unoKeyCode);
+			return;
+		}
 
 		if (!ev.shiftKey && !ev.ctrlKey && !ev.altKey && !ev.metaKey) {
 			switch (ev.key) {
