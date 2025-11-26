@@ -459,6 +459,35 @@ if ! sudo -u apache php -f /var/www/html/nextcloud/occ maintenance:repair --incl
     exit 2
 fi
 
+printf \
+    'Info: Installing the Nextcloud Office application...\n'
+if ! sudo -u apache php -f /var/www/html/nextcloud/occ \
+    app:install richdocuments; then
+    printf \
+        'Error: Unable to install the Nextcloud Office application.\n' \
+        1>&2
+    exit 2
+fi
+
+printf \
+    'Info: Enabling the Nextcloud Office application...\n'
+if ! sudo -u apache php -f /var/www/html/nextcloud/occ \
+    app:enable richdocuments; then
+    printf \
+        'Error: Unable to enable the Nextcloud Office application.\n' \
+        1>&2
+    exit 2
+fi
+
+printf \
+    'Info: Configuring the WOPI URL of the Online service for the Nextcloud Office application...\n'
+if ! sudo -u apache php -f /var/www/html/nextcloud/occ \
+    config:app:set richdocuments wopi_url \
+    --value "http://192.168.56.10:9980"; then
+    printf 'Error: Unable to configure the WOPI URL of the Online service.\n' >&2
+    exit 2
+fi
+
 # NOTE: In Docker container there's no FirewallD
 if command -v firewall-cmd >/dev/null; then
     printf \
