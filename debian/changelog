@@ -1,3 +1,9 @@
+modaodfweb (3.8.5-1) UNRELEASED; urgency=medium
+
+  * Fix broken manual linebreak keybinding in the web interface
+
+ -- Buo-ren Lin (OSSII) <buoren.lin@ossii.com.tw>  Wed, 26 Nov 2025 10:42:17 +0800
+
 modaodfweb (3.8.4-1) UNRELEASED; urgency=medium
 
   * Bump version to 3.8.4
