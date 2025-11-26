@@ -95,7 +95,7 @@ Execute the following instructions to provision the virtual machine used for tes
     cd /vagrant
     ```
 
-1. Run the following command to build the build configuration program:
+1. Run the following command to build the build configuration program and configure the build:
 
     ```bash
     ./autogen.sh
@@ -113,7 +113,10 @@ Execute the following instructions to provision the virtual machine used for tes
     make run
     ```
 
-   **NOTE:** The build must be configured with the `--with-debug` command option for this to work.
+   **NOTE:** This make target will only be available when:
+
+    + The build is configured with the `--with-debug` command option
+    + The LibreOffice-like service backend is available(check the value of the `LO path` field of the build configuration summary output!)
 
 1. Run the following command from the development host to verify whether the service has functioned properly:
 
