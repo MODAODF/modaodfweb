@@ -204,6 +204,24 @@ if ! dnf install -y "${oxool_build_dep_pkgs[@]}"; then
     exit 2
 fi
 
+printf \
+    'Info: Installing the MODAODFSYS build dependency...\n'
+if ! dnf groupinstall -y 'MODAODFWEB Group'; then
+    printf \
+        'Error: Unable to install the MODAODFSYS build dependency.\n' \
+        1>&2
+    exit 2
+fi
+
+printf \
+    'Info: Workaround: Removing unused packaged MODAODFWEB...\n'
+if ! dnf remove -y modaodfweb; then
+    printf \
+        'Error: Unable to remove unused packaged MODAODFWEB.\n' \
+        1>&2
+    exit 2
+fi
+
 if getent passwd vagrant >/dev/null; then
     printf \
         'Info: Allowing the vagrant user to access service logs...\n'

@@ -52,7 +52,6 @@ Execute the following instructions to provision the virtual machine used for tes
     vagrant provision
     ```
 
-1. Install externally acquired 10.0.1-dev OxOffice RPM packages that is compatible with OxOffice V5.
 1. (Optional) Run the following command to create a snapshot to reduce time required for reprovision:
 
     ```bash
